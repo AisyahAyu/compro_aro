@@ -96,7 +96,7 @@
                             </a>
                         </li>
                         <li class="mb-2">
-                            <a href="#faq" style="color: rgba(255,255,255,0.9); text-decoration: none; transition: color 0.3s ease; display: flex; align-items: center;" onmouseover="this.style.color='var(--primary-orange)'" onmouseout="this.style.color='rgba(255,255,255,0.9)'">
+                            <a href="{{ route('faq.page') }}" style="color: rgba(255,255,255,0.9); text-decoration: none; transition: color 0.3s ease; display: flex; align-items: center;" onmouseover="this.style.color='var(--primary-orange)'" onmouseout="this.style.color='rgba(255,255,255,0.9)'">
                                 <i class="fas fa-chevron-right me-2" style="font-size: 0.8rem;"></i>
                                 FAQ
                             </a>
