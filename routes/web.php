@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\FooterController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/produk', [HomeController::class, 'products'])->name('products.page');
 Route::get('/produk/detail/{index}', [HomeController::class, 'productDetail'])->whereNumber('index')->name('products.detail');
+Route::get('/faq', [HomeController::class, 'faq'])->name('faq.page');
 
 // Admin Routes
 Route::prefix('admin')->name('admin.')->group(function () {
