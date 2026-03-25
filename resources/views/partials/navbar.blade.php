@@ -36,7 +36,7 @@
                     <a class="nav-link" href="{{ route('faq.page') }}">FAQ</a>
                 </li>
                 <li class="nav-item ms-4">
-                    <a href="#hubungi" class="btn btn-contact text-decoration-none">Hubungi Kami</a>
+                    <a href="{{ route('contact.page') }}" class="btn btn-contact text-decoration-none">Hubungi Kami</a>
                 </li>
             </ul>
         </div>

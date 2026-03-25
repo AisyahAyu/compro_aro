@@ -17,6 +17,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/produk', [HomeController::class, 'products'])->name('products.page');
 Route::get('/produk/detail/{index}', [HomeController::class, 'productDetail'])->whereNumber('index')->name('products.detail');
 Route::get('/faq', [HomeController::class, 'faq'])->name('faq.page');
+Route::get('/hubungi-kami', [HomeController::class, 'contact'])->name('contact.page');
+Route::post('/hubungi-kami', [HomeController::class, 'submitContact'])->name('contact.submit');
 
 // Admin Routes
 Route::prefix('admin')->name('admin.')->group(function () {

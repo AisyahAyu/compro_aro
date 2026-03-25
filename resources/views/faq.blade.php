@@ -224,6 +224,7 @@
         border-radius: 8px;
         padding: 26px 34px;
         animation: faqFadeUp 0.55s ease 0.34s both;
+        text-align: center;
     }
 
     .faq-cta-title {
@@ -241,7 +242,9 @@
     }
 
     .faq-cta-btn {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         background: #0a0055;
         color: #fff;
         text-decoration: none;
@@ -398,7 +401,7 @@
         <section class="faq-cta">
             <h2 class="faq-cta-title">Masih Memiliki Pertanyaan ?</h2>
             <p class="faq-cta-text">Silahkan hubungi Tim kami untuk mendapatkan informasi lebih lanjut</p>
-            <a href="#hubungi" class="faq-cta-btn">Hubungi Kami</a>
+            <a href="{{ route('contact.page') }}" class="faq-cta-btn">Hubungi Kami</a>
         </section>
     </div>
 </div>

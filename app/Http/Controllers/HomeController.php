@@ -338,4 +338,29 @@ class HomeController extends Controller
 
         return view('faq', compact('companyProfile', 'faqs', 'searchKeyword'));
     }
+
+    public function contact()
+    {
+        $companyProfile = CompanyProfile::first();
+
+        return view('contact', compact('companyProfile'));
+    }
+
+    public function submitContact(Request $request)
+    {
+        $validated = $request->validate([
+            'full_name' => ['required', 'string', 'max:100'],
+            'company_name' => ['nullable', 'string', 'max:120'],
+            'email' => ['required', 'email', 'max:120'],
+            'phone' => ['required', 'string', 'max:30'],
+            'product_category' => ['required', 'string', 'max:100'],
+            'estimated_units' => ['required', 'string', 'max:50'],
+            'message' => ['required', 'string', 'max:1000'],
+        ]);
+
+        return redirect()
+            ->route('contact.page')
+            ->with('contact_success', true)
+            ->with('contact_payload', $validated);
+    }
 }
