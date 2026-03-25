@@ -24,7 +24,7 @@
                     <a class="nav-link" href="#karir">Karir</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#produk">Produk</a>
+                    <a class="nav-link" href="{{ route('products.page') }}">Produk</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#aktivitas">Aktivitas</a>
