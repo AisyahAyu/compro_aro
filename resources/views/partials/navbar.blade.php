@@ -21,13 +21,15 @@
                     <a class="nav-link" href="#tentang">Tentang</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#karir">Karir</a>
+                    <a class="nav-link {{ request()->is('karir*') ? 'active' : '' }}" href="{{ route('career') }}">Karir</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#produk">Produk</a>
+                    <a class="nav-link " href="#produk">Produk</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#aktivitas">Aktivitas</a>
+                    <a class="nav-link {{ request()->is('aktivitas*') ? 'active' : '' }}" href="{{ route('aktivitas') }}">
+                        Aktivitas
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#e-belanja">E-Belanja</a>
