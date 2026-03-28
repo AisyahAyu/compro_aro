@@ -16,4 +16,11 @@ class Partner extends Model
     protected $casts = [
         'is_active' => 'boolean',
     ];
+
+    public function getLogoUrlAttribute()
+    {
+        return $this->logo 
+            ? asset($this->logo) 
+            : asset('uploads/default.png');
+    }
 }

@@ -6,25 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::table('banners', function (Blueprint $table) {
-            $table->text('description')->nullable()->after('title');
-            $table->string('button_text')->nullable()->after('description');
-            $table->string('button_link')->nullable()->after('button_text');
+            $table->string('page')->nullable()->after('title');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::table('banners', function (Blueprint $table) {
-            $table->dropColumn(['description', 'button_text', 'button_link']);
+            $table->dropColumn('page');
         });
     }
 };

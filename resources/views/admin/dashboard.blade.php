@@ -99,6 +99,19 @@
             </div>
         </div>
     </div>
+    <div class="col-12 col-sm-6 col-md-3">
+    <div class="info-box mb-3 bg-purple">
+        <span class="info-box-icon elevation-1">
+            <i class="fas fa-info-circle"></i>
+        </span>
+        <div class="info-box-content">
+            <span class="info-box-text text-white">Team</span>
+<span class="info-box-number text-white">
+    {{ App\Models\TeamMember::count() }}
+</span>
+        </div>
+    </div>
+</div>
 </div>
 
 <!-- Main content -->
@@ -231,6 +244,16 @@
                                     </a>
                                 </td>
                             </tr>
+                            <tr>
+    <td><i class="fas fa-users text-primary"></i> Team</td>
+<td>{{ App\Models\TeamMember::count() }} items</td>
+<td><span class="badge badge-success">Active</span></td>
+<td>
+    <a href="{{ route('admin.team-members.index') }}" class="btn btn-sm btn-primary">
+        <i class="fas fa-edit"></i> Manage
+    </a>
+</td>
+</tr>
                         </tbody>
                     </table>
                 </div>
