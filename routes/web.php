@@ -1,7 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
+// Frontend Controllers
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AboutController;
+
+// Admin Controllers
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CompanyProfileController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -11,40 +16,51 @@ use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\PlatformController;
 use App\Http\Controllers\Admin\FooterController;
-use App\Http\Controllers\AktivitasController;
-use App\Http\Controllers\Admin\JobCategoryController;
-use App\Http\Controllers\Admin\JobVacancyController;
-use App\Http\Controllers\Admin\BenefitController;
-use App\Http\Controllers\CareerController;
-use App\Http\Controllers\JobApplicationController;
-use App\Http\Controllers\Admin\AktivitasController as AdminAktivitasController;
-use App\Http\Controllers\Admin\JobApplicationController as AdminJobApplicationController;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\StatisticsController;
+use App\Http\Controllers\Admin\VisiMisiController;
+use App\Http\Controllers\Admin\TeamMemberController;
+use App\Http\Controllers\Admin\ContactSectionController;
 
-// Frontend Routes
+
+// ======================
+// FRONTEND
+// ======================
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/aktivitas', [AktivitasController::class, 'index'])->name('aktivitas');
-Route::get('/aktivitas/{id}', [AktivitasController::class, 'show'])->name('detail-aktivitas');
-Route::get('/Career', [CareerController::class, 'index'])->name('career');
-Route::post('/apply', [JobApplicationController::class, 'store'])->name('apply');
+Route::get('/tentang', [AboutController::class, 'index'])->name('tentang');
 
-// Admin Routes
+
+// ======================
+// ADMIN
+// ======================
 Route::prefix('admin')->name('admin.')->group(function () {
+
+    // Dashboard
+    Route::get('/', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
+
+    // ======================
+    // CRUD
+    // ======================
     Route::resource('banners', BannerController::class);
     Route::resource('company-profiles', CompanyProfileController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('legalities', LegalityController::class);
     Route::resource('work-processes', WorkProcessController::class);
-    Route::resource('partners', PartnerController::class);
+    Route::resource('partners', PartnerController::class); // ✅ MITRA TEKNOLOGI
     Route::resource('products', ProductController::class);
     Route::resource('platforms', PlatformController::class);
     Route::resource('footers', FooterController::class);
-    Route::resource('aktivitas', AdminAktivitasController::class);
-    Route::resource('job_categories', JobCategoryController::class);
-    Route::resource('job_vacancies', JobVacancyController::class);
-    Route::resource('benefits', BenefitController::class);
-    Route::resource('applications', AdminJobApplicationController::class);
+    Route::resource('team-members', TeamMemberController::class);
+    Route::resource('statistics', StatisticsController::class);
+    Route::resource('visi-misi', VisiMisiController::class);
+    Route::resource('brands', BrandController::class);
 
-    Route::get('/', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+    // ======================
+    // CONTACT SECTION (SINGLE)
+    // ======================
+    Route::get('contact-section', [ContactSectionController::class, 'index'])->name('contact-section.index');
+    Route::post('contact-section/update', [ContactSectionController::class, 'update'])->name('contact-section.update');
+
 });

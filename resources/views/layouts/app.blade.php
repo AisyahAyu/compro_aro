@@ -70,13 +70,24 @@
         
         /* Tombol Hubungi Kami saat transparan */
         .transparent-navbar .btn-contact {
-            background: var(--primary-orange) !important;
+            background: #FE9800 !important;
             color: white !important;
-            border: 2px solid var(--primary-orange) !important;
+            border: none !important;
+            border-radius: 25px !important;
+            padding: 8px 20px !important;
+            font-weight: 500 !important;
+            transition: all 0.3s ease !important;
+            text-decoration: none !important;
+            display: inline-block !important;
+            cursor: pointer !important;
+            margin-left: 8px !important;
+            white-space: nowrap !important;
         }
         
         .transparent-navbar .btn-contact:hover {
-            background: transparent !important;
+            background: #e68900 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(254, 152, 0, 0.3);
             color: white !important;
         }
         

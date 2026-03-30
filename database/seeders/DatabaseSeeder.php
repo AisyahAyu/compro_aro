@@ -12,6 +12,10 @@ use App\Models\Partner;
 use App\Models\Product;
 use App\Models\Platform;
 use App\Models\Footer;
+use App\Models\Statistic;
+use App\Models\VisiMisi;
+use App\Models\Brand;
+use App\Models\TeamMember;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -50,6 +54,15 @@ class DatabaseSeeder extends Seeder
             'title' => 'Platform Digital Terintegrasi',
             'image' => 'uploads/banners/banner2.jpg',
             'order' => 2,
+            'is_active' => true
+        ]);
+
+        Banner::create([
+            'title'     => 'Mengenal PT Aro Baskara Esa',
+            'subtitle'  => 'Solusi pengadaan barang dan jasa yang profesional',
+            'image'     => 'uploads/banners/banner tentang.png',
+            'page'      => 'tentang',
+            'order'     => 3,
             'is_active' => true
         ]);
 
@@ -259,5 +272,54 @@ class DatabaseSeeder extends Seeder
             'order' => 3,
             'is_active' => true
         ]);
+        // SECTION 15 — STATISTIK
+        $statistics = [
+            ['label'=>'Klien',            'value'=>150, 'suffix'=>'+', 'icon'=>'users',     'order'=>1],
+            ['label'=>'Produk',           'value'=>30,  'suffix'=>'+', 'icon'=>'box',        'order'=>2],
+            ['label'=>'Mitra',            'value'=>20,  'suffix'=>'+', 'icon'=>'handshake',  'order'=>3],
+            ['label'=>'Tahun Pengalaman', 'value'=>10,  'suffix'=>'+', 'icon'=>'calendar',   'order'=>4],
+        ];
+        foreach ($statistics as $item) {
+            Statistic::create(array_merge($item, ['is_active' => true]));
+        }
+        // SECTION 16 — VISI & MISI
+        VisiMisi::create([
+            'type'    => 'visi',
+            'title'   => 'Visi Kami',
+            'content' => 'Menjadi perusahaan teknologi terdepan yang memberikan solusi inovatif dan berdampak nyata bagi perkembangan bisnis di Indonesia.',
+            'order'   => 0, 'is_active' => true,
+        ]);
+        $misi = [
+            ['content'=>'Menghadirkan produk dan layanan teknologi berkualitas tinggi.',            'order'=>1],
+            ['content'=>'Membangun ekosistem kemitraan yang kuat bersama klien dan mitra bisnis.', 'order'=>2],
+            ['content'=>'Mendorong inovasi berkelanjutan melalui riset dan pengembangan.',          'order'=>3],
+            ['content'=>'Memberikan dampak positif bagi masyarakat melalui program CSR.',           'order'=>4],
+        ];
+        foreach ($misi as $item) {
+            VisiMisi::create(array_merge($item, ['type'=>'misi', 'is_active'=>true]));
+        }
+        // SECTION 17 — BRAND
+        $brands = [
+            ['name'=>'Brand Alpha',   'logo'=>'brands/brand-alpha.png',   'order'=>1],
+            ['name'=>'Brand Beta',    'logo'=>'brands/brand-beta.png',    'order'=>2],
+            ['name'=>'Brand Gamma',   'logo'=>'brands/brand-gamma.png',   'order'=>3],
+            ['name'=>'Brand Delta',   'logo'=>'brands/brand-delta.png',   'order'=>4],
+            ['name'=>'Brand Epsilon', 'logo'=>'brands/brand-epsilon.png', 'order'=>5],
+        ];
+        foreach ($brands as $item) {
+            Brand::create(array_merge($item, ['is_active' => true]));
+        }
+        // SECTION 19 — TIM
+        $team = [
+            ['name'=>'Ahmad Fauzi',  'position'=>'Chief Executive Officer', 'division'=>'Management', 'order'=>1],
+            ['name'=>'Siti Rahayu',  'position'=>'Chief Technology Officer','division'=>'Engineering','order'=>2],
+            ['name'=>'Budi Santoso', 'position'=>'Head of Marketing',       'division'=>'Marketing',  'order'=>3],
+            ['name'=>'Dewi Kusuma',  'position'=>'Lead UI/UX Designer',     'division'=>'Design',     'order'=>4],
+            ['name'=>'Rizky Pratama','position'=>'Backend Developer',       'division'=>'Engineering','order'=>5],
+            ['name'=>'Nadia Putri',  'position'=>'Business Development',    'division'=>'Marketing',  'order'=>6],
+        ];
+        foreach ($team as $item) {
+            TeamMember::create(array_merge($item, ['is_active' => true]));
+        }
     }
 }

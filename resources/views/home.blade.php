@@ -49,7 +49,7 @@
                 <h2 class="section-title">{{ $companyProfile->company_name }}</h2>
                 <div class="divider-line mb-3"></div>
                 <p class="lead">{{ Str::limit($companyProfile->description, 200) }}</p>
-                <a href="#tentang" class="btn btn-contact">Lihat Selengkapnya</a>
+                <a href="{{ route('tentang') }}" class="btn btn-contact">Lihat Selengkapnya</a>
             </div>
         </div>
     </div>
