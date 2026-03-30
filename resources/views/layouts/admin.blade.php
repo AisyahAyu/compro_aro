@@ -280,6 +280,7 @@
             </ul>
           </li>
           
+
           <li class="nav-item">
             <a href="#" class="nav-link {{ request()->is('admin/platforms*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-laptop"></i>
@@ -302,6 +303,37 @@
                 </a>
               </li>
             </ul>
+              <li class="nav-item">
+              <a href="{{ route('admin.job_vacancies.index') }}" class="nav-link {{ request()->is('admin/job-vacancies*') ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-briefcase"></i>
+                  <p>Lowongan Pekerjaan</p>
+              </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.job_categories.index') }}" class="nav-link {{ request()->is('admin/job-categories*') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Kategori Pekerjaan</p>
+            </a>
+        </li>
+                  <li class="nav-item">
+            <a href="{{ route('admin.benefits.index') }}" class="nav-link {{ request()->is('admin/benefits*') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-gift"></i>
+                <p>Benefit</p>
+            </a>
+        </li>
+
+           <li class="nav-item">
+              <a href="{{ route('admin.aktivitas.index') }}" class="nav-link {{ request()->is('admin/aktivitas*') ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-tasks"></i>
+                  <p>Aktivitas</p>
+              </a>
+          </li>
+
+           <li class="nav-item">
+              <a href="{{ route('admin.applications.index') }}" class="nav-link {{ request()->is('admin/applications*') ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-file-alt"></i>
+                  <p>Lamaran Kerja</p>
+              </a>
           </li>
         </ul>
       </nav>
