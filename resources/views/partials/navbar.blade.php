@@ -35,7 +35,7 @@
                     <a class="nav-link" href="#e-belanja">E-Belanja</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#faq">FAQ</a>
+                    <a class="nav-link" href="{{ route('faq.page') }}">FAQ</a>
                 </li>
                 <li class="nav-item ms-4">
                     <a href="#hubungi" class="btn btn-contact text-decoration-none">Hubungi Kami</a>

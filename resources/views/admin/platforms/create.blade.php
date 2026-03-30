@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Create Platform')
+@section('title', 'Create formPlat')
 @section('page-title', 'Create New Platform')
 @section('breadcrumb', 'Platforms / Create')
 
