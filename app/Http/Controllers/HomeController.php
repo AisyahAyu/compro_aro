@@ -15,6 +15,206 @@ use App\Models\Footer;
 
 class HomeController extends Controller
 {
+    private function getFaqData(): array
+    {
+        return [
+            [
+                'question' => 'Apa saja layanan yang disediakan oleh perusahaan?',
+                'answer' => 'Perusahaan menyediakan berbagai layanan seperti instalasi sistem, pengembangan software, konsultasi teknologi, serta pelatihan di bidang teknologi informasi untuk mendukung kebutuhan klien.',
+            ],
+            [
+                'question' => 'Bagaimana cara melakukan pemesanan produk atau layanan?',
+                'answer' => 'Anda dapat melakukan pemesanan melalui tim sales kami via email, telepon, atau WhatsApp. Tim kami akan membantu proses kebutuhan, penawaran, hingga tahap pengadaan.',
+            ],
+            [
+                'question' => 'Bagaimana cara menghubungi tim perusahaan?',
+                'answer' => 'Silakan hubungi kami melalui email arobaskara@gmail.com, telepon (021) 38835187, atau WhatsApp +62 822-8888-6009 pada jam kerja.',
+            ],
+            [
+                'question' => 'Apakah perusahaan menyediakan layanan pelatihan atau workshop?',
+                'answer' => 'Ya, kami menyediakan pelatihan dan workshop sesuai kebutuhan implementasi sistem agar tim Anda dapat menggunakan solusi secara maksimal.',
+            ],
+            [
+                'question' => 'Apakah perusahaan menyediakan layanan konsultasi teknologi?',
+                'answer' => 'Ya, kami menyediakan layanan konsultasi teknologi untuk membantu perencanaan, pemilihan solusi, hingga strategi implementasi yang tepat.',
+            ],
+        ];
+    }
+
+    private function getCatalogData(): array
+    {
+        $banner = [
+            'greeting' => 'Halo, Selamat Datang',
+            'title_main' => 'Produk &',
+            'title_highlight' => 'Solusi Pengadaan',
+            'title_suffix' => 'Untuk Kebutuhan Bisnis Anda',
+            'description' => 'Menyediakan berbagai produk berkualitas untuk industri perkantoran, pendidikan, dan instansi pemerintah.',
+            'image' => 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=1200&q=80',
+            'primary_button' => 'Lihat Produk Unggulan',
+            'secondary_button' => 'Kunjungi E-Commerce',
+        ];
+
+        $categories = [
+            'Semua',
+            'Furniture Kantor',
+            'Furniture Pendidikan',
+            'Peralatan Dapur',
+            'Peralatan IDT IK',
+            'Mesin dan Perkakas',
+        ];
+
+        $brands = ['ABE edu', 'ABE living', 'Acer', 'APC', 'Ferro', 'Umalo'];
+
+        $products = [
+            [
+                'name' => 'Meja Kerja Konfigurasi PT-03B uk. 3200',
+                'location' => 'Indonesia',
+                'rating' => '0.0',
+                'type' => 'WB0-01',
+                'brand' => 'ABE edu',
+                'category' => 'Furniture Kantor',
+                'material' => 'Kayu MDF',
+                'size' => '120 × 60 × 75 cm',
+                'color' => 'Coklat / Putih',
+                'weight' => '25 kg',
+                'description' => 'Meja kerja modern merupakan meja kerja dengan desain minimalis yang cocok digunakan di ruang kerja kantor, ruang meeting, maupun workspace pribadi.',
+                'highlights' => [
+                    'Material kayu solid',
+                    'Desain minimalis',
+                    'Cocok untuk kantor dan workspace',
+                ],
+                'image' => 'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=800&q=80',
+                'gallery' => [
+                    'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=900&q=80',
+                    'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80',
+                    'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=900&q=80',
+                ],
+            ],
+            [
+                'name' => 'Meja Rapat CT-04 uk. 4000',
+                'location' => 'Indonesia',
+                'rating' => '0.0',
+                'type' => 'WB0-01',
+                'brand' => 'ABE living',
+                'category' => 'Furniture Kantor',
+                'material' => 'Kayu MDF',
+                'size' => '400 × 120 × 75 cm',
+                'color' => 'Putih',
+                'weight' => '40 kg',
+                'description' => 'Meja rapat berukuran besar untuk ruang meeting formal dengan konstruksi kokoh dan tampilan modern.',
+                'highlights' => [
+                    'Permukaan lebar untuk meeting tim',
+                    'Konstruksi kuat untuk penggunaan intensif',
+                    'Mudah dipadukan dengan kursi kantor',
+                ],
+                'image' => 'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?auto=format&fit=crop&w=800&q=80',
+                'gallery' => [
+                    'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?auto=format&fit=crop&w=900&q=80',
+                    'https://images.unsplash.com/photo-1497215842964-222b430dc094?auto=format&fit=crop&w=900&q=80',
+                    'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80',
+                ],
+            ],
+            [
+                'name' => 'Meja Rapat CT-09B uk. 6400',
+                'location' => 'Indonesia',
+                'rating' => '0.0',
+                'type' => 'WB0-01',
+                'brand' => 'Acer',
+                'category' => 'Furniture Kantor',
+                'material' => 'Kayu Laminasi',
+                'size' => '640 × 140 × 75 cm',
+                'color' => 'Oak Natural',
+                'weight' => '55 kg',
+                'description' => 'Pilihan meja rapat premium untuk kapasitas peserta yang lebih besar dengan finishing elegan.',
+                'highlights' => [
+                    'Desain premium untuk ruang direksi',
+                    'Kapasitas besar',
+                    'Finishing rapi dan tahan lama',
+                ],
+                'image' => 'https://images.unsplash.com/photo-1497215842964-222b430dc094?auto=format&fit=crop&w=800&q=80',
+                'gallery' => [
+                    'https://images.unsplash.com/photo-1497215842964-222b430dc094?auto=format&fit=crop&w=900&q=80',
+                    'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=80',
+                    'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=900&q=80',
+                ],
+            ],
+            [
+                'name' => 'Meja Staff WS-01 uk. 3200',
+                'location' => 'Indonesia',
+                'rating' => '0.0',
+                'type' => 'WB0-01',
+                'brand' => 'APC',
+                'category' => 'Furniture Kantor',
+                'material' => 'Partikel Board',
+                'size' => '320 × 60 × 75 cm',
+                'color' => 'Putih / Hijau',
+                'weight' => '28 kg',
+                'description' => 'Meja staff modular untuk area kerja tim dengan konfigurasi fleksibel dan tampilan bersih.',
+                'highlights' => [
+                    'Konfigurasi fleksibel',
+                    'Cocok untuk area staff',
+                    'Mudah dirakit',
+                ],
+                'image' => 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=800&q=80',
+                'gallery' => [
+                    'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=900&q=80',
+                    'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80',
+                    'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80',
+                ],
+            ],
+            [
+                'name' => 'Meja Kerja Kubikal CWD-05C uk. 3600',
+                'location' => 'Indonesia',
+                'rating' => '0.0',
+                'type' => 'WB0-01',
+                'brand' => 'Ferro',
+                'category' => 'Furniture Kantor',
+                'material' => 'Kayu MDF + Metal',
+                'size' => '360 × 120 × 75 cm',
+                'color' => 'Abu / Coklat',
+                'weight' => '38 kg',
+                'description' => 'Meja kubikal untuk kebutuhan kantor modern dengan partisi yang mendukung fokus kerja.',
+                'highlights' => [
+                    'Partisi kerja ergonomis',
+                    'Ideal untuk open space office',
+                    'Material kokoh',
+                ],
+                'image' => 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80',
+                'gallery' => [
+                    'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=80',
+                    'https://images.unsplash.com/photo-1497215842964-222b430dc094?auto=format&fit=crop&w=900&q=80',
+                    'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80',
+                ],
+            ],
+            [
+                'name' => 'Meja Kerja Kubikal CWD-05D uk. 4200',
+                'location' => 'Indonesia',
+                'rating' => '0.0',
+                'type' => 'WB0-01',
+                'brand' => 'Umalo',
+                'category' => 'Furniture Kantor',
+                'material' => 'Kayu MDF + Metal',
+                'size' => '420 × 120 × 75 cm',
+                'color' => 'Abu Muda',
+                'weight' => '42 kg',
+                'description' => 'Varian kubikal dengan area kerja lebih luas untuk tim operasional dan administrasi.',
+                'highlights' => [
+                    'Area kerja ekstra luas',
+                    'Konstruksi stabil',
+                    'Desain modern minimalis',
+                ],
+                'image' => 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=80',
+                'gallery' => [
+                    'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80',
+                    'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=80',
+                    'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=900&q=80',
+                ],
+            ],
+        ];
+
+        return compact('banner', 'categories', 'brands', 'products');
+    }
+
     public function index()
     {
         $banners = Banner::where('is_active', true)->orderBy('order')->get();
@@ -49,5 +249,93 @@ class HomeController extends Controller
             'platform',
             'footers'
         ));
+    }
+
+    public function products()
+    {
+        $companyProfile = CompanyProfile::first();
+
+        ['banner' => $banner, 'categories' => $categories, 'brands' => $brands, 'products' => $products] = $this->getCatalogData();
+
+        $searchKeyword = trim((string) request()->query('q', ''));
+        $selectedCategory = (string) request()->query('category', 'Semua');
+        $selectedBrands = request()->query('brands', []);
+
+        if (! is_array($selectedBrands)) {
+            $selectedBrands = [$selectedBrands];
+        }
+
+        if (! in_array($selectedCategory, $categories, true)) {
+            $selectedCategory = 'Semua';
+        }
+
+        $selectedBrands = array_values(array_intersect($brands, $selectedBrands));
+
+        $products = collect($products)
+            ->map(function ($product, $index) {
+                $product['original_index'] = $index;
+
+                return $product;
+            })
+            ->filter(function ($product) use ($searchKeyword, $selectedCategory, $selectedBrands) {
+                $matchesKeyword = true;
+                if ($searchKeyword !== '') {
+                    $haystack = strtolower($product['name'] . ' ' . $product['type'] . ' ' . $product['category'] . ' ' . $product['brand']);
+                    $matchesKeyword = str_contains($haystack, strtolower($searchKeyword));
+                }
+
+                $matchesCategory = $selectedCategory === 'Semua' || $product['category'] === $selectedCategory;
+                $matchesBrand = empty($selectedBrands) || in_array($product['brand'], $selectedBrands, true);
+
+                return $matchesKeyword && $matchesCategory && $matchesBrand;
+            })
+            ->values()
+            ->all();
+
+        return view('products', compact('companyProfile', 'banner', 'categories', 'brands', 'products', 'searchKeyword', 'selectedCategory', 'selectedBrands'));
+    }
+
+    public function productDetail(int $index)
+    {
+        $companyProfile = CompanyProfile::first();
+        ['products' => $products] = $this->getCatalogData();
+
+        if (! isset($products[$index])) {
+            abort(404);
+        }
+
+        $product = $products[$index];
+        $relatedProducts = collect($products)
+            ->map(function ($item, $itemIndex) {
+                $item['original_index'] = $itemIndex;
+
+                return $item;
+            })
+            ->except($index)
+            ->values()
+            ->take(3)
+            ->all();
+
+        return view('product-detail', compact('companyProfile', 'product', 'relatedProducts', 'index'));
+    }
+
+    public function faq()
+    {
+        $companyProfile = CompanyProfile::first();
+        $searchKeyword = trim((string) request()->query('q', ''));
+
+        $faqs = collect($this->getFaqData());
+
+        if ($searchKeyword !== '') {
+            $needle = strtolower($searchKeyword);
+            $faqs = $faqs->filter(function ($faq) use ($needle) {
+                return str_contains(strtolower($faq['question']), $needle)
+                    || str_contains(strtolower($faq['answer']), $needle);
+            });
+        }
+
+        $faqs = $faqs->values()->all();
+
+        return view('faq', compact('companyProfile', 'faqs', 'searchKeyword'));
     }
 }

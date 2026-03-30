@@ -245,6 +245,7 @@
         }
         
         /* Ensure navbar is visible */
+        /*  */
         .navbar, .navbar * {
             visibility: visible !important;
             opacity: 1 !important;

@@ -21,19 +21,21 @@
                     <a class="nav-link" href="{{ route('tentang') }}">Tentang</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#karir">Karir</a>
+                    <a class="nav-link {{ request()->is('karir*') ? 'active' : '' }}" href="{{ route('career') }}">Karir</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#produk">Produk</a>
+                    <a class="nav-link " href="#produk">Produk</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#aktivitas">Aktivitas</a>
+                    <a class="nav-link {{ request()->is('aktivitas*') ? 'active' : '' }}" href="{{ route('aktivitas') }}">
+                        Aktivitas
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#e-belanja">E-Belanja</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#faq">FAQ</a>
+                    <a class="nav-link" href="{{ route('faq.page') }}">FAQ</a>
                 </li>
                 <li class="nav-item ms-4">
                     <a href="#hubungi" class="btn btn-contact text-decoration-none">Hubungi Kami</a>
