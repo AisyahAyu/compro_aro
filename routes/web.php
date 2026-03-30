@@ -30,6 +30,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('platforms', PlatformController::class);
     Route::resource('footers', FooterController::class);
     
+    
     Route::get('/', function () {
         return view('admin.dashboard');
     })->name('dashboard');
