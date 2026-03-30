@@ -4,7 +4,7 @@
             @if($companyProfile && getCompanyLogo($companyProfile, 'light'))
                 <img src="{{ getCompanyLogoUrl($companyProfile, 'light') }}" alt="{{ $companyProfile->company_name ?? 'Company' }}" class="navbar-logo logo-light-bg" style="height: 60px;">
             @else
-                <span style="font-weight: bold; color: var(--primary-orange); font-size: 1.5rem;">Company</span>
+                <span style="font-weight: bold; color: var(--primary-orange); font-size: 1.2rem;">PT. ARO BASKARA ESA</span>
             @endif
         </a>
         
@@ -18,16 +18,18 @@
                     <a class="nav-link" href="{{ route('home') }}">Beranda</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#tentang">Tentang</a>
+                    <a class="nav-link" href="{{ route('tentang') }}">Tentang</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#karir">Karir</a>
+                    <a class="nav-link {{ request()->is('karir*') ? 'active' : '' }}" href="{{ route('career') }}">Karir</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('products.page') }}">Produk</a>
+                    <a class="nav-link " href="#produk">Produk</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#aktivitas">Aktivitas</a>
+                    <a class="nav-link {{ request()->is('aktivitas*') ? 'active' : '' }}" href="{{ route('aktivitas') }}">
+                        Aktivitas
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#e-belanja">E-Belanja</a>

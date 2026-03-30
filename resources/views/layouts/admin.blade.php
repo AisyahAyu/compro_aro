@@ -58,10 +58,7 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{ route('home') }}" class="nav-link" target="_blank">Lihat Website</a>
-      </li>
-    </ul>
+
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -117,7 +114,58 @@
               <p>Dashboard</p>
             </a>
           </li>
-          
+          <li class="nav-item has-treeview {{ request()->is('admin/statistics*') || request()->is('admin/visi-misi*') || request()->is('admin/team-members*') || request()->is('admin/brands*') ? 'menu-open' : '' }}">
+
+    <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-info-circle"></i>
+        <p>
+            Tentang
+            <i class="right fas fa-angle-left"></i>
+        </p>
+    </a>
+
+    <ul class="nav nav-treeview">
+
+        <li class="nav-item">
+            <a href="/admin/statistics" class="nav-link {{ request()->is('admin/statistics*') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Statistik</p>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="/admin/visi-misi" class="nav-link {{ request()->is('admin/visi-misi*') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Visi & Misi</p>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="{{ route('admin.brands.index') }}" 
+              class="nav-link {{ request()->is('admin/brands*') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Brands</p>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="{{ route('admin.partners.index') }}" 
+              class="nav-link {{ request()->is('admin/partners*') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Mitra Teknologi</p>
+            </a>
+        </li>
+
+
+        <li class="nav-item">
+            <a href="/admin/team-members" class="nav-link {{ request()->is('admin/team-members*') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Team</p>
+            </a>
+        </li>
+
+    </ul>
+</li>
           <li class="nav-item">
             <a href="#" class="nav-link {{ request()->is('admin/banners*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-image"></i>
@@ -280,6 +328,7 @@
             </ul>
           </li>
           
+
           <li class="nav-item">
             <a href="#" class="nav-link {{ request()->is('admin/platforms*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-laptop"></i>
@@ -302,6 +351,37 @@
                 </a>
               </li>
             </ul>
+              <li class="nav-item">
+              <a href="{{ route('admin.job_vacancies.index') }}" class="nav-link {{ request()->is('admin/job-vacancies*') ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-briefcase"></i>
+                  <p>Lowongan Pekerjaan</p>
+              </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.job_categories.index') }}" class="nav-link {{ request()->is('admin/job-categories*') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Kategori Pekerjaan</p>
+            </a>
+        </li>
+                  <li class="nav-item">
+            <a href="{{ route('admin.benefits.index') }}" class="nav-link {{ request()->is('admin/benefits*') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-gift"></i>
+                <p>Benefit</p>
+            </a>
+        </li>
+
+           <li class="nav-item">
+              <a href="{{ route('admin.aktivitas.index') }}" class="nav-link {{ request()->is('admin/aktivitas*') ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-tasks"></i>
+                  <p>Aktivitas</p>
+              </a>
+          </li>
+
+           <li class="nav-item">
+              <a href="{{ route('admin.applications.index') }}" class="nav-link {{ request()->is('admin/applications*') ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-file-alt"></i>
+                  <p>Lamaran Kerja</p>
+              </a>
           </li>
         </ul>
       </nav>
@@ -321,13 +401,14 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-              <li class="breadcrumb-item active">@yield('breadcrumb', 'Dashboard')</li>
+              <li class="breadcrumb-item active">@yield('breadcrumb')</li>
             </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
+    
 
     <!-- Main content -->
     <section class="content">
@@ -370,12 +451,9 @@
     </div>
   </footer>
 </div>
-<!-- ./wrapper -->
-
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Bootstrap 4 -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
 <!-- DataTables -->
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
@@ -387,8 +465,10 @@
 <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.colVis.min.js"></script>
+
 <!-- bs-custom-file-input -->
 <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
+
 <!-- AdminLTE App -->
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
 
