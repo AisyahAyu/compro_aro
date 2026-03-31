@@ -136,8 +136,101 @@
     
     /* Responsive adjustments */
     @media (max-width: 767.98px) {
+        .product-card-link {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
         .product-card {
             min-height: 320px;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+        
+        .product-card-img-wrap {
+            height: 180px;
+        }
+        
+        .product-card-body {
+            padding: 1rem !important;
+        }
+        
+        .product-name {
+            font-size: 0.95rem;
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-price {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-location {
+            font-size: 0.8rem;
+        }
+        
+        .product-type {
+            font-size: 0.75rem;
+        }
+        
+        /* Category cards mobile responsiveness */
+        .category-card-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            width: 100%;
+        }
+        
+        .category-card {
+            margin-bottom: 1rem;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .category-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+        
+        .category-card .p-4 {
+            padding: 1rem !important;
+        }
+        
+        .category-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+        
+        .category-card p {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin-bottom: 0;
+        }
+        
+        /* "Lihat Semua" button mobile */
+        .btn-outline-primary {
+            width: 100%;
+            padding: 12px 20px;
+            font-size: 0.95rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+        
+        /* Section title mobile */
+        .section-title {
+            font-size: 1.5rem !important;
+            margin-bottom: 0.5rem;
+        }
+        
+        .lead {
+            font-size: 1rem !important;
+            margin-bottom: 1rem;
         }
     }
     </style>
