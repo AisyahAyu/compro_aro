@@ -35,6 +35,21 @@
         width: 200px;
     }
 
+    .category-card-link {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .category-card-link:hover {
+        transform: translateY(-5px);
+    }
+
+    .category-card-link:hover .category-card {
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
     .product-card {
         width: 200px;
         min-height: 350px;
@@ -189,7 +204,7 @@
                 <p class="lead">Solusi lengkap kebutuhan operasional bisnis dan instansi.</p>
             </div>
             <div class="col-lg-4 text-end">
-                <a href="#produk" class="btn btn-outline-primary">
+                <a href="{{ route('products.page') }}" class="btn btn-outline-primary">
                     <i class="fas fa-arrow-right me-2"></i>Lihat Semua
                 </a>
             </div>
@@ -198,15 +213,17 @@
         <div class="row">
             @foreach($categories as $category)
                 <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="category-card">
-                        @if($category->image)
-                            <img src="{{ asset($category->image) }}" alt="{{ $category->name }}">
-                        @endif
-                        <div class="p-4">
-                            <h4 class="fw-bold">{{ $category->name }}</h4>
-                            <p class="text-muted">{{ $category->description }}</p>
+                    <a href="{{ route('products.page') }}" class="category-card-link">
+                        <div class="category-card">
+                            @if($category->image)
+                                <img src="{{ asset($category->image) }}" alt="{{ $category->name }}">
+                            @endif
+                            <div class="p-4">
+                                <h4 class="fw-bold">{{ $category->name }}</h4>
+                                <p class="text-muted">{{ $category->description }}</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             @endforeach
         </div>
