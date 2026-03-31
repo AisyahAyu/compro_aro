@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('partners', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('logo')->nullable();
-            $table->timestamps();
-        });
+        if (! Schema::hasTable('partners')) {
+            Schema::create('partners', function (Blueprint $table) {
+                $table->id();
+                $table->string('name');
+                $table->string('logo')->nullable();
+                $table->timestamps();
+            });
+        }
     }
 
     /**
@@ -24,6 +26,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('partners');
+        // No-op: this migration is a duplicate create-table migration.
+        // Avoid dropping partners table that is created by an earlier migration.
     }
 };

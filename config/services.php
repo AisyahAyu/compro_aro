@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    // E-commerce API
+    'ecommerce' => [
+        'base_url' => env('ECOMMERCE_API_BASE'),
+        'token' => env('ECOMMERCE_API_TOKEN'),
+    ],
 ];

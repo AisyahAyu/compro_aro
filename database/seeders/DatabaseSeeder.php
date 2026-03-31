@@ -25,6 +25,49 @@ class DatabaseSeeder extends Seeder
 
     public function run(): void
     {
+        // FAQ Default
+        \App\Models\Faq::insert([
+            [
+                'question' => 'Apa saja layanan yang disediakan oleh perusahaan?',
+                'answer' => 'Perusahaan menyediakan berbagai layanan seperti instalasi sistem, pengembangan software, konsultasi teknologi, serta pelatihan di bidang teknologi informasi untuk mendukung kebutuhan klien.',
+                'order' => 1,
+                'is_active' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'question' => 'Bagaimana cara melakukan pemesanan produk atau layanan?',
+                'answer' => 'Anda dapat melakukan pemesanan melalui tim sales kami via email, telepon, atau WhatsApp. Tim kami akan membantu proses kebutuhan, penawaran, hingga tahap pengadaan.',
+                'order' => 2,
+                'is_active' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'question' => 'Bagaimana cara menghubungi tim perusahaan?',
+                'answer' => 'Silakan hubungi kami melalui email arobaskara@gmail.com, telepon (021) 38835187, atau WhatsApp +62 822-8888-6009 pada jam kerja.',
+                'order' => 3,
+                'is_active' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'question' => 'Apakah perusahaan menyediakan layanan pelatihan atau workshop?',
+                'answer' => 'Ya, kami menyediakan pelatihan dan workshop sesuai kebutuhan implementasi sistem agar tim Anda dapat menggunakan solusi secara maksimal.',
+                'order' => 4,
+                'is_active' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'question' => 'Apakah perusahaan menyediakan layanan konsultasi teknologi?',
+                'answer' => 'Ya, kami menyediakan layanan konsultasi teknologi untuk membantu perencanaan, pemilihan solusi, hingga strategi implementasi yang tepat.',
+                'order' => 5,
+                'is_active' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
         // Company Profile
         CompanyProfile::create([
             'company_name' => 'PT. Solusi Bisnis Indonesia',

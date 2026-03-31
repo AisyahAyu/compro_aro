@@ -1,8 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use App\Models\Banner;
 use App\Models\CompanyProfile;
 use App\Models\Category;
@@ -12,6 +11,7 @@ use App\Models\Partner;
 use App\Models\Product;
 use App\Models\Platform;
 use App\Models\Footer;
+use App\Models\Faq;
 
 class HomeController extends Controller
 {
@@ -251,48 +251,74 @@ class HomeController extends Controller
         ));
     }
 
+
     public function products()
     {
         $companyProfile = CompanyProfile::first();
+        $banner = [
+            'greeting'          => 'Halo, Selamat Datang',
+            'title_main'        => 'Produk &',
+            'title_highlight'   => 'Solusi Pengadaan',
+            'title_suffix'      => 'Untuk Kebutuhan Bisnis Anda',
+            'description'       => 'Menyediakan berbagai produk berkualitas untuk industri perkantoran, pendidikan, dan instansi pemerintah.',
+            'image'             => 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=1200&q=80',
+            'primary_button'    => 'Lihat Produk Unggulan',
+            'secondary_button'  => 'Kunjungi E-Commerce',
+        ];
 
-        ['banner' => $banner, 'categories' => $categories, 'brands' => $brands, 'products' => $products] = $this->getCatalogData();
-
-        $searchKeyword = trim((string) request()->query('q', ''));
-        $selectedCategory = (string) request()->query('category', 'Semua');
-        $selectedBrands = request()->query('brands', []);
-
+        $searchKeyword   = trim((string) request()->query('q', ''));
+        $selectedCategory = request()->query('category', '');
+        $selectedBrands  = request()->query('brands', []);
         if (! is_array($selectedBrands)) {
             $selectedBrands = [$selectedBrands];
         }
+        $selectedBrands = array_map('intval', array_filter($selectedBrands));
 
-        if (! in_array($selectedCategory, $categories, true)) {
-            $selectedCategory = 'Semua';
+        $apiBase  = rtrim(config('services.ecommerce.base_url'), '/');
+        $apiToken = config('services.ecommerce.token');
+
+        // Cache kategori & brand selama 30 menit
+        $categories = Cache::remember('ecommerce_categories', 1800, function () use ($apiBase, $apiToken) {
+            $resp = \Illuminate\Support\Facades\Http::withToken($apiToken)
+                ->withHeaders(['Accept' => 'application/json'])
+                ->get("{$apiBase}/categories");
+            return $resp->successful() ? $resp->json() : [];
+        });
+
+        $brands = Cache::remember('ecommerce_brands', 1800, function () use ($apiBase, $apiToken) {
+            $resp = \Illuminate\Support\Facades\Http::withToken($apiToken)
+                ->withHeaders(['Accept' => 'application/json'])
+                ->get("{$apiBase}/filters");
+            return $resp->successful() ? ($resp->json()['brands'] ?? []) : [];
+        });
+
+        // Produk tidak di-cache karena ada filter dinamis
+        $productParams = ['page' => request()->query('page', 1)];
+        if ($selectedCategory !== '') {
+            $productParams['category'] = (int) $selectedCategory;
+        }
+        if (! empty($selectedBrands)) {
+            $productParams['brands'] = $selectedBrands;
+        }
+        if ($searchKeyword !== '') {
+            $productParams['q'] = $searchKeyword;
         }
 
-        $selectedBrands = array_values(array_intersect($brands, $selectedBrands));
+        $products   = [];
+        $pagination = null;
+        $prodResp = \Illuminate\Support\Facades\Http::withToken($apiToken)
+            ->withHeaders(['Accept' => 'application/json'])
+            ->get("{$apiBase}/products", $productParams);
+        if ($prodResp->successful()) {
+            $json       = $prodResp->json();
+            $products   = $json['data'] ?? $json;
+            $pagination = isset($json['data']) ? collect($json)->except('data')->toArray() : null;
+        }
 
-        $products = collect($products)
-            ->map(function ($product, $index) {
-                $product['original_index'] = $index;
-
-                return $product;
-            })
-            ->filter(function ($product) use ($searchKeyword, $selectedCategory, $selectedBrands) {
-                $matchesKeyword = true;
-                if ($searchKeyword !== '') {
-                    $haystack = strtolower($product['name'] . ' ' . $product['type'] . ' ' . $product['category'] . ' ' . $product['brand']);
-                    $matchesKeyword = str_contains($haystack, strtolower($searchKeyword));
-                }
-
-                $matchesCategory = $selectedCategory === 'Semua' || $product['category'] === $selectedCategory;
-                $matchesBrand = empty($selectedBrands) || in_array($product['brand'], $selectedBrands, true);
-
-                return $matchesKeyword && $matchesCategory && $matchesBrand;
-            })
-            ->values()
-            ->all();
-
-        return view('products', compact('companyProfile', 'banner', 'categories', 'brands', 'products', 'searchKeyword', 'selectedCategory', 'selectedBrands'));
+        return view('products', compact(
+            'companyProfile', 'banner', 'categories', 'brands',
+            'products', 'pagination', 'searchKeyword', 'selectedCategory', 'selectedBrands'
+        ));
     }
 
     public function productDetail(int $index)
@@ -324,14 +350,34 @@ class HomeController extends Controller
         $companyProfile = CompanyProfile::first();
         $searchKeyword = trim((string) request()->query('q', ''));
 
-        $faqs = collect($this->getFaqData());
-
-        if ($searchKeyword !== '') {
-            $needle = strtolower($searchKeyword);
-            $faqs = $faqs->filter(function ($faq) use ($needle) {
-                return str_contains(strtolower($faq['question']), $needle)
-                    || str_contains(strtolower($faq['answer']), $needle);
+        $faqs = Faq::query()
+            ->where('is_active', true)
+            ->when($searchKeyword !== '', function ($query) use ($searchKeyword) {
+                $query->where(function ($builder) use ($searchKeyword) {
+                    $builder->where('question', 'like', '%' . $searchKeyword . '%')
+                        ->orWhere('answer', 'like', '%' . $searchKeyword . '%');
+                });
+            })
+            ->orderBy('order')
+            ->orderByDesc('id')
+            ->get(['question', 'answer'])
+            ->map(function ($faq) {
+                return [
+                    'question' => $faq->question,
+                    'answer' => $faq->answer,
+                ];
             });
+
+        if ($faqs->isEmpty()) {
+            $faqs = collect($this->getFaqData());
+
+            if ($searchKeyword !== '') {
+                $needle = strtolower($searchKeyword);
+                $faqs = $faqs->filter(function ($faq) use ($needle) {
+                    return str_contains(strtolower($faq['question']), $needle)
+                        || str_contains(strtolower($faq['answer']), $needle);
+                });
+            }
         }
 
         $faqs = $faqs->values()->all();
