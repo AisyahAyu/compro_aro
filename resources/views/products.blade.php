@@ -4,6 +4,29 @@
 
 @section('content')
 <style>
+@media (max-width: 767.98px) {
+    .pp-hero-inner {
+        display: block !important;
+    }
+    .pp-title {
+        font-size: 1.3rem !important;
+    }
+    .pp-description {
+        font-size: 1rem !important;
+    }
+    .pp-hero-image {
+        max-width: 100% !important;
+        margin-top: 1rem;
+    }
+    .pp-search {
+        grid-template-columns: 1fr !important;
+        padding: 0.5rem !important;
+    }
+    .pp-btn-main, .pp-btn-alt {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+}
     .products-page {
         background: #f0f0f0;
         color: #1f1f1f;
@@ -180,63 +203,101 @@
     }
 
     .pp-products {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
     }
 
-    .pp-card {
-        background: #fff;
-        border-radius: 12px;
-        border: 1px solid #dadada;
-        overflow: hidden;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
+    /* ── Product Card ── */
     .pp-card-link {
         display: block;
         text-decoration: none;
         color: inherit;
+        width: 200px;
+    }
+
+    .pp-card {
+        width: 200px;
+        min-height: 350px;
+        background-color: #ffffff;
+        border: 1px solid #e5e7eb;
+        display: flex;
+        flex-direction: column;
+        transition: box-shadow 0.2s ease, transform 0.2s ease;
     }
 
     .pp-card-link:hover .pp-card {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+        transform: translateY(-2px);
+    }
+
+    /* Image area */
+    .pp-card-img-wrap {
+        width: 100%;
+        height: 200px;
+        position: relative;
+        background-color: #fff;
+        border-bottom: 3px solid #000000;
     }
 
     .pp-card-img {
         width: 100%;
-        height: 165px;
-        object-fit: cover;
+        height: 100%;
+        object-fit: contain;
         display: block;
-        background: #fafafa;
     }
 
+    /* Content area */
     .pp-card-body {
-        padding: 14px 14px 12px;
+        padding: 12px 16px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
     }
 
     .pp-card-name {
-        font-size: 1rem;
-        margin-bottom: 9px;
-        line-height: 1.35;
-        font-weight: 600;
-        min-height: 44px;
+        font-size: 13px;
+        font-weight: 500;
+        color: #333;
+        line-height: 1.4;
+        margin-bottom: 8px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
 
-    .pp-meta {
+    .pp-card-label {
+        font-size: 11px;
+        color: #888;
+        margin-bottom: 2px;
+    }
+
+    .pp-price {
+        font-size: 15px;
+        font-weight: 700;
+        color: #E5A800;
+        margin-bottom: 8px;
+    }
+
+    .pp-card-meta {
+        margin-top: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .pp-card-location {
+        font-size: 11px;
+        color: #1a5fa8;
         display: flex;
         align-items: center;
-        gap: 14px;
-        color: #7a7a7a;
-        font-size: 0.84rem;
-        margin-bottom: 4px;
+        gap: 4px;
     }
 
     .pp-type {
-        color: #9b9b9b;
-        font-size: 0.8rem;
+        font-size: 11px;
+        color: #888;
     }
 
     .pp-more {
@@ -276,10 +337,6 @@
         .pp-hero-image-wrap {
             text-align: left;
         }
-
-        .pp-products {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
     }
 
     @media (max-width: 767px) {
@@ -291,8 +348,9 @@
             grid-template-columns: 1fr;
         }
 
-        .pp-products {
-            grid-template-columns: 1fr;
+        .pp-card-link,
+        .pp-card {
+            width: calc(50% - 8px);
         }
 
         .pp-cta-box {
@@ -302,6 +360,13 @@
 
         .pp-cta-title {
             font-size: 1.8rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .pp-card-link,
+        .pp-card {
+            width: 100%;
         }
     }
 </style>
@@ -333,8 +398,9 @@
         <div class="container">
             <form class="pp-search" method="GET" action="{{ route('products.page') }}">
                 <select aria-label="Kategori produk" name="category">
+                    <option value="">Semua Kategori</option>
                     @foreach($categories as $category)
-                        <option value="{{ $category }}" {{ $selectedCategory === $category ? 'selected' : '' }}>{{ $category }}</option>
+                        <option value="{{ $category['id_kategori'] }}" {{ $selectedCategory == $category['id_kategori'] ? 'selected' : '' }}>{{ $category['nama_kategori'] }}</option>
                     @endforeach
                 </select>
                 <input type="text" name="q" value="{{ $searchKeyword }}" placeholder="Cari Produk yang Anda butuhkan" aria-label="Cari produk">
@@ -346,10 +412,14 @@
                     <div class="pp-sidebar-card">
                         <h3 class="pp-sidebar-title">Kategori</h3>
                         <ul class="pp-category-list">
+                            <li>
+                                <a href="{{ route('products.page', ['q' => $searchKeyword, 'brands' => $selectedBrands]) }}" class="text-decoration-none {{ $selectedCategory === '' ? 'fw-bold text-dark' : 'text-secondary' }}">Semua Kategori</a>
+                                <span class="pp-arrow">{{ $selectedCategory === '' ? '•' : '›' }}</span>
+                            </li>
                             @foreach($categories as $category)
                                 <li>
-                                    <a href="{{ route('products.page', ['category' => $category, 'q' => $searchKeyword, 'brands' => $selectedBrands]) }}" class="text-decoration-none {{ $selectedCategory === $category ? 'fw-bold text-dark' : 'text-secondary' }}">{{ $category }}</a>
-                                    <span class="pp-arrow">{{ $selectedCategory === $category ? '•' : '›' }}</span>
+                                    <a href="{{ route('products.page', ['category' => $category['id_kategori'], 'q' => $searchKeyword, 'brands' => $selectedBrands]) }}" class="text-decoration-none {{ $selectedCategory == $category['id_kategori'] ? 'fw-bold text-dark' : 'text-secondary' }}">{{ $category['nama_kategori'] }}</a>
+                                    <span class="pp-arrow">{{ $selectedCategory == $category['id_kategori'] ? '•' : '›' }}</span>
                                 </li>
                             @endforeach
                         </ul>
@@ -365,8 +435,8 @@
                                 @foreach($brands as $brand)
                                     <li>
                                         <label>
-                                            <input type="checkbox" name="brands[]" value="{{ $brand }}" {{ in_array($brand, $selectedBrands, true) ? 'checked' : '' }}>
-                                            {{ $brand }}
+                                            <input type="checkbox" name="brands[]" value="{{ $brand['id_brand'] }}" {{ in_array($brand['id_brand'], $selectedBrands, false) ? 'checked' : '' }}>
+                                            {{ $brand['nama_brand'] }}
                                         </label>
                                     </li>
                                 @endforeach
@@ -380,16 +450,26 @@
                 <div class="col-lg-9">
                     <div class="pp-products">
                         @forelse($products as $product)
-                            <a href="{{ route('products.detail', ['index' => $product['original_index']]) }}" class="pp-card-link">
+                            <a href="https://ayobelanja.co.id/products/{{ $product['slug'] }}" target="_blank" rel="noopener noreferrer" class="pp-card-link">
                                 <article class="pp-card">
-                                    <img src="{{ $product['image'] }}" alt="{{ $product['name'] }}" class="pp-card-img">
+                                    <div class="pp-card-img-wrap">
+                                        <img src="{{ $product['image_url'] ?? '' }}" alt="{{ $product['nama_produk'] }}" class="pp-card-img" loading="lazy">
+                                    </div>
                                     <div class="pp-card-body">
-                                        <h4 class="pp-card-name">{{ $product['name'] }}</h4>
-                                        <div class="pp-meta">
-                                            <span><i class="fas fa-map-marker-alt me-1"></i>{{ $product['location'] }}</span>
-                                            <span><i class="fas fa-star me-1" style="color:#f0b300"></i>{{ $product['rating'] }}</span>
+                                        <h4 class="pp-card-name">{{ $product['nama_produk'] }}</h4>
+                                        @if(!empty($product['harga_produk']))
+                                            <div class="pp-card-label">Mulai dari</div>
+                                            <div class="pp-price">Rp {{ number_format((float)$product['harga_produk'], 2, ',', '.') }}</div>
+                                        @endif
+                                        <div class="pp-card-meta">
+                                            <div class="pp-card-location">
+                                                <i class="fas fa-map-marker-alt"></i>
+                                                {{ $product['asal_produk'] ?? 'Indonesia' }}
+                                            </div>
+                                            @if(!empty($product['tipe_produk']))
+                                                <div class="pp-type">Tipe: {{ $product['tipe_produk'] }}</div>
+                                            @endif
                                         </div>
-                                        <div class="pp-type">Tipe : {{ $product['type'] }}</div>
                                     </div>
                                 </article>
                             </a>

@@ -383,6 +383,13 @@
                   <p>Lamaran Kerja</p>
               </a>
           </li>
+
+            <li class="nav-item">
+              <a href="{{ route('admin.faqs.index') }}" class="nav-link {{ request()->is('admin/faqs*') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-question-circle"></i>
+                <p>FAQ</p>
+              </a>
+            </li>
         </ul>
       </nav>
     </div>

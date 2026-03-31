@@ -12,6 +12,34 @@
         overflow: hidden;
     }
 
+    @media (max-width: 767.98px) {
+        .faq-page {
+            padding: 24px 0 18px;
+        }
+        .faq-title {
+            font-size: 1.5rem;
+            margin-bottom: 14px;
+        }
+        .faq-subtitle {
+            font-size: 1rem;
+            margin-bottom: 14px;
+        }
+        .faq-list-wrap {
+            padding: 0 4px;
+        }
+        .faq-cta {
+            padding: 12px 8px;
+        }
+        .faq-cta-title, .faq-cta-text {
+            font-size: 1.2rem;
+        }
+        .faq-cta-btn {
+            font-size: 1rem;
+            padding: 10px 18px;
+        }
+    }
+    }
+
     .faq-title {
         text-align: center;
         color: #f78b00;
@@ -20,6 +48,7 @@
         line-height: 1.25;
         margin-bottom: 22px;
         animation: faqFadeUp 0.5s ease both;
+        display: inline-block;
     }
 
     .faq-subtitle {
@@ -370,7 +399,9 @@
 
 <div class="faq-page">
     <div class="container">
-        <h1 class="faq-title">Frequently Asked<br>Questions</h1>
+        <div class="d-flex justify-content-center">
+            <h1 class="faq-title">Frequently Asked<br>Questions</h1>
+        </div>
         <p class="faq-subtitle">Temukan jawaban atas pertanyaan yang sering diajukan mengenai layanan dan produk kami</p>
 
         <form class="faq-search" method="GET" action="{{ route('faq.page') }}">

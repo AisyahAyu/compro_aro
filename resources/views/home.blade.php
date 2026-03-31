@@ -6,6 +6,27 @@
 <!-- Hero Banner/Slider -->
 @if($banners->count() > 0)
 <section class="hero-slider">
+    <style>
+    @media (max-width: 767.98px) {
+        .hero-title {
+            font-size: 1.3rem !important;
+        }
+        .hero-description {
+            font-size: 1rem !important;
+        }
+        .hero-content {
+            padding: 1.2rem 0.5rem !important;
+        }
+        .section-title {
+            font-size: 1.2rem !important;
+        }
+        .img-fluid.rounded {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+    }
+    </style>
     @foreach($banners as $index => $banner)
         <div class="hero-slide {{ $index == 0 ? 'active' : '' }}" style="background-image: url({{ asset($banner->image) }})">
             <div class="hero-overlay"></div>
@@ -49,7 +70,7 @@
                 <h2 class="section-title">{{ $companyProfile->company_name }}</h2>
                 <div class="divider-line mb-3"></div>
                 <p class="lead">{{ Str::limit($companyProfile->description, 200) }}</p>
-                <a href="{{ route('tentang') }}" class="btn btn-contact">Lihat Selengkapnya</a>
+                <a href="{{ route('about.index') }}" class="btn btn-contact">Lihat Selengkapnya</a>
             </div>
         </div>
     </div>

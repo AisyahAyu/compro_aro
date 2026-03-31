@@ -16,7 +16,7 @@ class VisiMisiController extends Controller
         $visi = VisiMisi::visi()->first();
         $misi = VisiMisi::misi()->get();
 
-        return view('admin.visi_misi.index', compact('visi', 'misi'));
+        return view('admin.Visi_Misi.index', compact('visi', 'misi'));
     }
 
     // ======================
@@ -24,7 +24,7 @@ class VisiMisiController extends Controller
     // ======================
     public function create()
     {
-        return view('admin.visi_misi.create');
+        return view('admin.Visi_Misi.create');
     }
 
     // ======================
@@ -33,7 +33,7 @@ class VisiMisiController extends Controller
     public function edit($id)
     {
         $visiMisi = VisiMisi::findOrFail($id);
-        return view('admin.visi_misi.edit', compact('visiMisi'));
+        return view('admin.Visi_Misi.edit', compact('visiMisi'));
     }
 
     // ======================

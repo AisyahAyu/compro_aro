@@ -8,23 +8,23 @@
             @endif
         </a>
         
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="display: none !important;">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav" style="display: flex; align-items: center; justify-content: flex-end; width: 100%;">
+            <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('home') }}">Beranda</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('tentang') }}">Tentang</a>
+                    <a class="nav-link" href="{{ route('about.index') }}">Tentang</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('karir*') ? 'active' : '' }}" href="{{ route('career') }}">Karir</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="#produk">Produk</a>
+                    <a class="nav-link {{ request()->is('product') || request()->is('produk*') ? 'active' : '' }}" href="{{ route('product.page') }}">Produk</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('aktivitas*') ? 'active' : '' }}" href="{{ route('aktivitas') }}">

@@ -125,14 +125,42 @@
         }
         
         .navbar-collapse {
-            display: flex !important;
             align-items: center;
             justify-content: flex-end !important;
             margin-left: 60px !important;
         }
+
+        @media (max-width: 991.98px) {
+            .navbar-collapse {
+                margin-left: 0 !important;
+                justify-content: flex-start !important;
+                background: #fff;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+                padding: 1rem 0.5rem;
+                /* Hapus display agar Bootstrap bisa collapse/expand */
+                /* display: flex !important; */
+            }
+            .navbar-nav {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                width: 100% !important;
+            }
+            .navbar-nav .nav-item {
+                margin: 0.5rem 0 !important;
+            }
+            .navbar-nav .nav-link {
+                font-size: 1.1rem;
+                padding: 0.6rem 0.5rem !important;
+            }
+            .btn-contact {
+                width: 100%;
+                margin: 1rem 0 0 0 !important;
+                text-align: center;
+            }
+        }
+        }
         
         .navbar-nav {
-            display: flex !important;
             list-style: none;
             margin: 0 !important;
             padding: 0 !important;
@@ -252,7 +280,7 @@
         }
         
         .navbar .navbar-nav {
-            display: flex !important;
+            /* display: flex !important; */
         }
         
         .navbar .navbar-nav .nav-item {
