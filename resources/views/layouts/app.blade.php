@@ -1010,9 +1010,85 @@
             }
         }
         
+        // Enable hover dropdown for desktop
+        function enableHoverDropdown() {
+            const dropdowns = document.querySelectorAll('.navbar-nav .dropdown');
+            
+            dropdowns.forEach(function(dropdown) {
+                const dropdownToggle = dropdown.querySelector('.dropdown-toggle');
+                const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+                
+                if (dropdownToggle && dropdownMenu) {
+                    // Show dropdown on hover
+                    dropdown.addEventListener('mouseenter', function(e) {
+                        if (window.innerWidth >= 992) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            dropdownToggle.classList.add('show');
+                            dropdownMenu.classList.add('show');
+                            dropdownToggle.setAttribute('aria-expanded', 'true');
+                            dropdownMenu.style.position = 'absolute';
+                            dropdownMenu.style.inset = 'auto auto 0px 0px';
+                            dropdownMenu.style.margin = '0px';
+                            dropdownMenu.style.transform = 'translateY(-100%)';
+                        }
+                    });
+                    
+                    // Hide dropdown on mouse leave
+                    dropdown.addEventListener('mouseleave', function(e) {
+                        if (window.innerWidth >= 992) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            dropdownToggle.classList.remove('show');
+                            dropdownMenu.classList.remove('show');
+                            dropdownToggle.setAttribute('aria-expanded', 'false');
+                        }
+                    });
+                    
+                    // Handle click for mobile
+                    dropdownToggle.addEventListener('click', function(e) {
+                        if (window.innerWidth < 992) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            
+                            // Close other dropdowns
+                            document.querySelectorAll('.navbar-nav .dropdown .dropdown-menu.show').forEach(function(menu) {
+                                if (menu !== dropdownMenu) {
+                                    menu.classList.remove('show');
+                                    menu.previousElementSibling.classList.remove('show');
+                                    menu.previousElementSibling.setAttribute('aria-expanded', 'false');
+                                }
+                            });
+                            
+                            // Toggle current dropdown
+                            const isShowing = dropdownMenu.classList.contains('show');
+                            if (isShowing) {
+                                dropdownToggle.classList.remove('show');
+                                dropdownMenu.classList.remove('show');
+                                dropdownToggle.setAttribute('aria-expanded', 'false');
+                            } else {
+                                dropdownToggle.classList.add('show');
+                                dropdownMenu.classList.add('show');
+                                dropdownToggle.setAttribute('aria-expanded', 'true');
+                            }
+                        } else {
+                            e.preventDefault();
+                            e.stopPropagation();
+                        }
+                    });
+                }
+            });
+        }
+        
         // Run on load and resize
-        document.addEventListener('DOMContentLoaded', handleHamburgerMenu);
-        window.addEventListener('resize', handleHamburgerMenu);
+        document.addEventListener('DOMContentLoaded', function() {
+            handleHamburgerMenu();
+            enableHoverDropdown();
+        });
+        window.addEventListener('resize', function() {
+            handleHamburgerMenu();
+            enableHoverDropdown();
+        });
     </script>
     @yield('scripts')
 </body>

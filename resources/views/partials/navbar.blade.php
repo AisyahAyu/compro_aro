@@ -31,8 +31,17 @@
                         Aktivitas
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#e-belanja">E-Belanja</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="eBelanjaDropdown" role="button" aria-expanded="false">
+                        E-Belanja
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="eBelanjaDropdown">
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center justify-content-center" href="https://ayobelanja.co.id/" target="_blank">
+                                <img src="{{ asset('uploads/logo ayobelanja fix.png') }}" alt="AyoBelanja" style="height: 30px;">
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('faq.page') }}">FAQ</a>
