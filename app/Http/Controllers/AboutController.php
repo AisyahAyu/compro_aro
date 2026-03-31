@@ -23,7 +23,7 @@ class AboutController extends Controller
         $company = CompanyProfile::first();
 
         // Section 15 — Statistik
-        $statistics = AboutStatistic::active()->get();
+        $statistics = AboutStatistic::active()->latest()->get();
 
         // Section 16 — Visi & Misi
         $visi = VisiMisi::where('name', 'visi')->first();

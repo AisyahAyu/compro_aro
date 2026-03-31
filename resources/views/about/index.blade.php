@@ -92,23 +92,24 @@
                     <div class="stat-icon mb-3">
                         @if($stat->icon)
                             <img src="{{ asset('storage/' . $stat->icon) }}"
-                                 style="width:60px; height:60px; object-fit:contain;"
+                                 style="width:100px; height:100px; object-fit:contain;"
                                  alt="{{ $stat->title }}">
                         @else
                             <i class="fas fa-chart-line"
-                               style="font-size: 2.5rem; color: white;"></i>
+                               style="font-size: 4rem; color: white;"></i>
                         @endif
                     </div>
 
                     {{-- TITLE (1 Klien, 1 Produk, dll) --}}
-                    <h2 style="font-size: 2.5rem; font-weight: bold; margin-bottom: 5px;">
+                    <h2 style="font-size: 2.5rem; font-weight: bold; margin-bottom: 0;">
                         {{ $stat->title }}
                     </h2>
-
-                    {{-- ANGKA (HANYA SEKALI DI BAWAH) --}}
-                    <p style="font-size: 1rem; margin-bottom: 0;">
-                        {{ $stat->formatted_value }}
+                    
+                    @if($stat->suffix)
+                    <p style="font-size: 1.2rem; margin-top: 5px; margin-bottom: 0;">
+                        {{ $stat->suffix }}
                     </p>
+                    @endif
 
                 </div>
 
@@ -523,16 +524,26 @@
             background: #ddd;
             border: 2px solid #EE8E0F;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
         .partner-dot.active {
-            background: #EE8E0F;
+            background: linear-gradient(135deg, #EE8E0F, #FF8C00);
             transform: scale(1.2);
+            box-shadow: 0 4px 15px rgba(238, 142, 15, 0.4), 0 0 20px rgba(255, 165, 0, 0.2);
+            border-color: #FF8C00;
+        }
+
+        .partner-dot:not(.active) {
+            background: #ddd;
+            transform: scale(1);
+            box-shadow: none;
         }
 
         .partner-dot:hover {
             background: #FFA500;
+            transform: scale(1.1);
         }
 
         /* Team Card Styles */
@@ -628,6 +639,7 @@
     <div class="container">
         <div class="text-center mb-5">
             <h2 class="section-title" style="color: #EE8E0F;">Brand Kami</h2>
+            <div class="divider-line mx-auto" style="background: linear-gradient(90deg, #FFA500, #FF8C00, #FFA500); width: 50px; height: 3px; margin: 12px auto 30px; border-radius: 2px; box-shadow: 0 2px 8px rgba(255, 165, 0, 0.3); animation: shimmer-divider 3s ease-in-out infinite;"></div>
             <p class="mt-3" style="color: #555; max-width: 600px; margin: 0 auto;">
                 Berbagai brand terpercaya yang telah bekerja sama dengan kami untuk memberikan solusi terbaik.
             </p>
@@ -652,7 +664,6 @@
                 <button class="dot active" onclick="scrollToBrand(0)"></button>
                 <button class="dot" onclick="scrollToBrand(1)"></button>
                 <button class="dot" onclick="scrollToBrand(2)"></button>
-                <button class="dot" onclick="scrollToBrand(3)"></button>
             </div>
             @endif
         </div>
@@ -686,7 +697,6 @@
                 <button class="partner-dot active" onclick="scrollToPartner(0)"></button>
                 <button class="partner-dot" onclick="scrollToPartner(1)"></button>
                 <button class="partner-dot" onclick="scrollToPartner(2)"></button>
-                <button class="partner-dot" onclick="scrollToPartner(3)"></button>
             </div>
             @endif
         </div>
@@ -772,7 +782,7 @@
 
             {{-- BUTTON --}}
             <div class="col-md-4 text-md-end text-center mt-3 mt-md-0">
-                <a href="{{ $contact->whatsapp_link ?? '#' }}" 
+                <a href="{{ route('contact.page') }}" 
                    class="btn btn-light px-4 py-2 fw-semibold"
                    style="border-radius:30px;">
                     Hubungi Kami
@@ -788,8 +798,26 @@
 <script>
 function scrollToBrand(index) {
     const container = document.querySelector('.brand-scroll-container');
+    const brands = document.querySelectorAll('.brand-card');
+    const totalBrands = brands.length;
+    const cardsPerView = 4;
+    const totalPages = Math.ceil(totalBrands / cardsPerView);
+    
+    // Calculate which page to scroll to based on dot index (0, 1, 2)
+    let targetPage;
+    if (index === 0) {
+        targetPage = 0;
+    } else if (index === 1) {
+        // Middle dot goes to the middle page
+        targetPage = Math.floor(totalPages / 2);
+    } else if (index === 2) {
+        // Last dot goes to the last page
+        targetPage = totalPages - 1;
+    }
+    
     const cardWidth = 268; // card width + gap
-    const scrollPosition = index * cardWidth * 4; // 4 cards per view
+    const scrollPosition = targetPage * cardWidth * cardsPerView;
+    
     container.scrollTo({
         left: scrollPosition,
         behavior: 'smooth'
@@ -804,19 +832,52 @@ function scrollToBrand(index) {
 // Auto-update dots on scroll
 document.querySelector('.brand-scroll-container')?.addEventListener('scroll', function() {
     const container = this;
+    const brands = document.querySelectorAll('.brand-card');
+    const totalBrands = brands.length;
+    const cardsPerView = 4;
+    const totalPages = Math.ceil(totalBrands / cardsPerView);
     const cardWidth = 268;
     const currentScroll = container.scrollLeft;
-    const activeIndex = Math.round(currentScroll / (cardWidth * 4));
+    const currentPage = Math.round(currentScroll / (cardWidth * cardsPerView));
+    
+    // Determine which dot should be active based on current page
+    let activeDotIndex;
+    if (currentPage <= 0) {
+        activeDotIndex = 0;
+    } else if (currentPage >= totalPages - 1) {
+        activeDotIndex = 2;
+    } else {
+        // Middle section - use middle dot
+        activeDotIndex = 1;
+    }
     
     document.querySelectorAll('.dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === activeIndex);
+        dot.classList.toggle('active', i === activeDotIndex);
     });
 });
 
 function scrollToPartner(index) {
     const container = document.querySelector('.partner-scroll-container');
+    const partners = document.querySelectorAll('.partner-card');
+    const totalPartners = partners.length;
+    const cardsPerView = 4;
+    const totalPages = Math.ceil(totalPartners / cardsPerView);
+    
+    // Calculate which page to scroll to based on dot index (0, 1, 2)
+    let targetPage;
+    if (index === 0) {
+        targetPage = 0;
+    } else if (index === 1) {
+        // Middle dot goes to the middle page
+        targetPage = Math.floor(totalPages / 2);
+    } else if (index === 2) {
+        // Last dot goes to the last page
+        targetPage = totalPages - 1;
+    }
+    
     const cardWidth = 268; // card width + gap
-    const scrollPosition = index * cardWidth * 4; // 4 cards per view
+    const scrollPosition = targetPage * cardWidth * cardsPerView;
+    
     container.scrollTo({
         left: scrollPosition,
         behavior: 'smooth'
@@ -831,12 +892,27 @@ function scrollToPartner(index) {
 // Auto-update dots on scroll
 document.querySelector('.partner-scroll-container')?.addEventListener('scroll', function() {
     const container = this;
+    const partners = document.querySelectorAll('.partner-card');
+    const totalPartners = partners.length;
+    const cardsPerView = 4;
+    const totalPages = Math.ceil(totalPartners / cardsPerView);
     const cardWidth = 268;
     const currentScroll = container.scrollLeft;
-    const activeIndex = Math.round(currentScroll / (cardWidth * 4));
+    const currentPage = Math.round(currentScroll / (cardWidth * cardsPerView));
+    
+    // Determine which dot should be active based on current page
+    let activeDotIndex;
+    if (currentPage <= 0) {
+        activeDotIndex = 0;
+    } else if (currentPage >= totalPages - 1) {
+        activeDotIndex = 2;
+    } else {
+        // Middle section - use middle dot
+        activeDotIndex = 1;
+    }
     
     document.querySelectorAll('.partner-dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === activeIndex);
+        dot.classList.toggle('active', i === activeDotIndex);
     });
 });
 </script>
