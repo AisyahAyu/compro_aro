@@ -1,5 +1,7 @@
 <?php
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use App\Models\Banner;
@@ -49,7 +51,7 @@ class HomeController extends Controller
             'title_highlight' => 'Solusi Pengadaan',
             'title_suffix' => 'Untuk Kebutuhan Bisnis Anda',
             'description' => 'Menyediakan berbagai produk berkualitas untuk industri perkantoran, pendidikan, dan instansi pemerintah.',
-            'image' => 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=1200&q=80',
+            'image' => asset('uploads/banners/bannerproduk.png'),
             'primary_button' => 'Lihat Produk Unggulan',
             'secondary_button' => 'Kunjungi E-Commerce',
         ];
@@ -403,6 +405,20 @@ class HomeController extends Controller
             'estimated_units' => ['required', 'string', 'max:50'],
             'message' => ['required', 'string', 'max:1000'],
         ]);
+
+        // Kirim email HTML yang rapi
+        try {
+            $html = view('emails.contact', [
+                'data' => $validated
+            ])->render();
+            Mail::send([], [], function ($message) use ($html) {
+                $message->to('testing100204@gmail.com')
+                    ->subject('Pesan Baru dari Formulir Hubungi Kami')
+                    ->html($html);
+            });
+        } catch (\Exception $e) {
+            Log::error('Gagal mengirim email kontak: ' . $e->getMessage());
+        }
 
         return redirect()
             ->route('contact.page')

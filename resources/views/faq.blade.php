@@ -3,13 +3,15 @@
 @section('title', 'FAQ - Company Profile')
 
 @section('content')
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
     .faq-page {
         margin-top: 90px;
         background: #f1f1f1;
-        padding: 56px 0 34px;
+        padding: 40px 0 34px;
         min-height: 70vh;
         overflow: hidden;
+        font-family: 'Poppins', Arial, sans-serif;
     }
 
     @media (max-width: 767.98px) {
@@ -43,20 +45,23 @@
     .faq-title {
         text-align: center;
         color: #f78b00;
-        font-weight: 500;
-        font-size: 2.6rem;
-        line-height: 1.25;
-        margin-bottom: 22px;
+        font-weight: 700;
+        font-size: 2.3rem;
+        line-height: 1.1;
+        margin-bottom: 18px;
         animation: faqFadeUp 0.5s ease both;
-        display: inline-block;
+        display: block;
+        letter-spacing: -1px;
+        font-family: 'Poppins', Arial, sans-serif;
     }
 
     .faq-subtitle {
         text-align: center;
         color: #4f4f4f;
-        font-size: 1.15rem;
-        margin-bottom: 24px;
+        font-size: 1.08rem;
+        margin-bottom: 22px;
         animation: faqFadeUp 0.5s ease 0.08s both;
+        font-family: 'Poppins', Arial, sans-serif;
     }
 
     .faq-search {
@@ -400,7 +405,7 @@
 <div class="faq-page">
     <div class="container">
         <div class="d-flex justify-content-center">
-            <h1 class="faq-title">Frequently Asked<br>Questions</h1>
+            <h1 class="faq-title">Frequently Asked Questions</h1>
         </div>
         <p class="faq-subtitle">Temukan jawaban atas pertanyaan yang sering diajukan mengenai layanan dan produk kami</p>
 
