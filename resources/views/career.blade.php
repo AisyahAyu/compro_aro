@@ -7,22 +7,41 @@
 {{-- CSS UNTUK BANNER ORANYE & PENCARIAN OVERLAP --}}
 <style>
     /* Reset & Background Global */
-    body { background-color: #f8f9fa; color: #333; font-family: 'Segoe UI', sans-serif; }
-    
-    /* 1. HERO BANNER - FULL ORANGE STYLE (Sesuai Referensi) */
-    .hero-career {
-        background: linear-gradient(rgba(243, 112, 33, 0.9), rgba(229, 93, 10, 0.8)), 
-                    url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1350&q=80'); 
-        background-size: cover;
-        background-position: center;
-        padding: 120px 0 100px; /* Padding bawah disesuaikan untuk overlap */
-        color: white;
-        margin-top: 0;
-        text-align: center;
-    }
-    .hero-career h1 { font-size: 3.2rem; font-weight: 800; margin-bottom: 15px; text-shadow: 2px 2px 10px rgba(0,0,0,0.2); }
-    .hero-career p { font-size: 1.15rem; max-width: 700px; margin: 0 auto; opacity: 0.95; }
+   .hero-career {
+    background: linear-gradient(rgba(243, 112, 33, 0.9), rgba(229, 93, 10, 0.8)), 
+                url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1350&q=80'); 
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply; /* Menjaga warna oranye tetap solid */
 
+    /* --- PERUBAHAN UTAMA UNTUK BESARKAN KE BAWAH --- */
+    min-height: 85vh;           /* Mengambil 85% tinggi layar agar sangat besar */
+    display: flex;              /* Agar konten tetap di tengah walau banner besar */
+    align-items: center;        /* Konten tetap center secara vertikal */
+    padding-top: 150px;         /* Ruang atas untuk navbar */
+    padding-bottom: 150px;      /* Ruang bawah agar lebih panjang ke bawah */
+    /* ---------------------------------------------- */
+
+    color: white;
+    margin-top: 0;
+    text-align: center;
+}
+
+/* Ukuran Font diperbesar sedikit agar seimbang dengan bannernya */
+.hero-career h1 { 
+    font-size: 4rem; 
+    font-weight: 800; 
+    margin-bottom: 20px; 
+    line-height: 1.1;
+    text-shadow: 2px 2px 15px rgba(0,0,0,0.2); 
+}
+
+.hero-career p { 
+    font-size: 1.3rem; 
+    max-width: 850px; 
+    margin: 0 auto; 
+    opacity: 1; 
+}
     /* 2. SEARCH SECTION - EFEK OVERLAP (Masuk ke Banner) */
     .search-overlap {
         margin-top: -50px; /* Kunci biar masuk ke banner */

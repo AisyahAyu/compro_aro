@@ -7,14 +7,14 @@
 {{-- HERO SECTION --}}
 <section class="hero-section d-flex align-items-center text-white">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-9">
+        <div class="row justify-content-center"> {{-- Menambah justify-content-center --}}
+            <div class="col-lg-10 text-center"> {{-- Mengubah ke text-center --}}
                 <h1 class="fw-bold mb-3 judul-banner">
-                    Bersama Menciptakan Inovasi
+                    Bangun Karier Anda<br>Bersama Kami
                 </h1>
                 <p class="deskripsi-banner">
-                    Ikuti berbagai kegiatan, kolaborasi, dan perjalanan PT Aro Baskara Esa <br class="d-none d-md-block">
-                    dalam menghadirkan solusi bagi mitra, pelanggan, dan berbagai sektor.
+                    Jadilah bagian dari tim yang berkembang bersama dan menciptakan solusi yang <br class="d-none d-md-block">
+                    berdampak bagi industri teknologi di Indonesia.
                 </p>
             </div>
         </div>
@@ -155,30 +155,41 @@ $(document).ready(function() {
 
 <style>
 .hero-section {
-        background: linear-gradient(rgba(243, 112, 33, 0.9), rgba(229, 93, 10, 0.8)), 
-                    url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1350&q=80');
-        
-        height: 400px; 
-        background-size: cover;
-        background-position: center;
-        background-blend-mode: multiply;
-        margin-top: 70px;
-        display: flex;
-        align-items: center;
-    }
+    /* Gaya Warna & Background Tetap Sama */
+    background: linear-gradient(rgba(243, 112, 33, 0.85), rgba(229, 93, 10, 0.85)), 
+                url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
 
-    .judul-banner {
-        font-size: 3rem;
-        letter-spacing: -1px;
-        line-height: 1.2;
-    }
+    /* --- PERUBAHAN UTAMA UNTUK BESARKAN KE BAWAH --- */
+    min-height: 100vh;       /* Full 1 layar penuh, atau ganti misal 800px jika ingin spesifik */
+    padding-top: 120px;      /* Ruang lebih untuk navbar di atas */
+    padding-bottom: 100px;   /* Memberi ruang nafas di bagian bawah banner */
+    /* ----------------------------------------------- */
 
-    .deskripsi-banner {
-        max-width: 800px;
-        font-size: 1.1rem;
-        line-height: 1.6;
-        opacity: 0.95;
-    }
+    margin-top: 0;          
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;     
+}
+
+.judul-banner {
+    font-size: 4rem;        
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    text-transform: none;
+}
+
+.deskripsi-banner {
+    margin: 0 auto;
+    max-width: 900px;
+    font-size: 1.25rem;
+    line-height: 1.6;
+    opacity: 1;
+}
 
     @media (max-width: 768px) {
         .hero-section {

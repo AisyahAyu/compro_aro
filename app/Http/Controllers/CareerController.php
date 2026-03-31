@@ -14,7 +14,7 @@ class CareerController extends Controller
     {
         // 1. Ambil Banner, Benefit, dan Kategori
         $banners = Banner::orderBy('order')->get();
-        $benefits = Benefits::all();
+        $benefits = Benefits::where('status', 'active')->orderBy('order', 'asc')->get();
         $jobCategories = JobCategory::all();
 
         // 2. Query Lowongan Pekerjaan Aktif
