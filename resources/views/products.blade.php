@@ -212,8 +212,8 @@
     }
 
     .pp-products {
-        display: flex;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
         gap: 16px;
     }
 
@@ -222,11 +222,10 @@
         display: block;
         text-decoration: none;
         color: inherit;
-        width: 200px;
     }
 
     .pp-card {
-        width: 200px;
+        width: 100%;
         min-height: 350px;
         background-color: #ffffff;
         border: 1px solid #e5e7eb;
@@ -357,9 +356,9 @@
             grid-template-columns: 1fr;
         }
 
-        .pp-card-link,
-        .pp-card {
-            width: calc(50% - 8px);
+        .pp-products {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
         }
 
         .pp-cta-box {
@@ -369,13 +368,6 @@
 
         .pp-cta-title {
             font-size: 1.8rem;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .pp-card-link,
-        .pp-card {
-            width: 100%;
         }
     }
 </style>

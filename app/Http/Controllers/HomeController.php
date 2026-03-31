@@ -318,7 +318,7 @@ class HomeController extends Controller
         // Produk tidak di-cache karena ada filter dinamis
         $productParams = ['page' => request()->query('page', 1)];
         if ($selectedCategory !== '') {
-            $productParams['category'] = (int) $selectedCategory;
+            $productParams['category'] = $selectedCategory;
         }
         if (! empty($selectedBrands)) {
             $productParams['brands'] = $selectedBrands;
