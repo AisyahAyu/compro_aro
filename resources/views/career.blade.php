@@ -43,8 +43,9 @@
     opacity: 1; 
 }
     /* 2. SEARCH SECTION - EFEK OVERLAP (Masuk ke Banner) */
-    .search-overlap {
-        margin-top: -50px; /* Kunci biar masuk ke banner */
+    
+  .search-overlap {
+        margin-top: -50px;
         position: relative;
         z-index: 10;
         margin-bottom: 40px;
@@ -60,14 +61,12 @@
         display: flex;
         background: #fff;
         border: 1px solid #ddd;
-        border-radius: 50px; /* Bentuk lonjong rapi */
+        border-radius: 50px;
         overflow: hidden;
         transition: 0.3s;
         padding: 5px;
     }
-    .search-wrapper:focus-within { border-color: #f37021; box-shadow: 0 0 0 4px rgba(243, 112, 33, 0.1); }
     .search-input-area { flex: 1; display: flex; align-items: center; padding-left: 20px; }
-    .search-input-area i { color: #888; }
     .search-input-area input {
         border: none;
         outline: none;
@@ -84,7 +83,32 @@
         font-weight: 600;
         transition: 0.2s;
     }
-    .search-btn:hover { background: #e55d0a; }
+
+    /* 2. KODE RESPONSIVE (MOBILE) - WAJIB DI PALING BAWAH */
+    @media (max-width: 768px) {
+        .search-overlap {
+            margin-top: -30px !important;
+            padding: 0 15px !important;
+        }
+
+        .search-wrapper {
+            flex-direction: column !important; /* Paksa tumpuk ke bawah */
+            border-radius: 20px !important;
+            padding: 10px !important;
+            gap: 10px !important;
+        }
+
+        .search-input-area {
+            padding-left: 10px !important;
+            width: 100% !important;
+        }
+
+        .search-btn {
+            width: 100% !important;
+            padding: 12px 0 !important;
+            border-radius: 15px !important;
+        }
+    }
 
     /* 3. JOB LIST & SIDEBAR (Tetap Sesuai Kodemu) */
     .job-card { 
@@ -404,16 +428,15 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="search-card">
-                    {{-- Form action tetap ada sebagai fallback, tapi kita cegah reload pakai JS --}}
-                    <form action="{{ route('career') }}" method="GET" id="search-form" onsubmit="return false;">
+                    {{-- Hapus onsubmit="return false;" agar form bisa mengirim data --}}
+                    <form action="{{ route('career') }}" method="GET" id="search-form">
                         <div class="search-wrapper">
                             <div class="search-input-area">
                                 <i class="fas fa-search"></i>
-                                {{-- Tambahkan id="search-input" --}}
                                 <input type="text" name="search" id="search-input" placeholder="Cari posisi pekerjaan impianmu..." value="{{ request('search') }}" autocomplete="off">
                             </div>
-                            {{-- Tombol ini opsional jika sudah pakai auto-search --}}
-                            <button type="button" class="search-btn">Cari Lowongan</button>
+                            {{-- Ubah type="button" menjadi type="submit" --}}
+                            <button type="submit" class="search-btn">Cari Lowongan</button>
                         </div>
                     </form>
                 </div>
@@ -421,7 +444,6 @@
         </div>
     </div>
 </section>
-
 
 
 {{-- MAIN CONTENT --}}
@@ -683,7 +705,17 @@ function setVacancyData(id, name) {
     document.getElementById('vacancy_name_text').innerText = name;
 }
 
+document.querySelector('.search-btn').addEventListener('click', function(e) {
+        document.getElementById('search-form').submit();
+    });
 
+    // Fitur tambahan: Menekan 'Enter' di keyboard akan otomatis mencari
+    document.getElementById('search-input').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault(); // Mencegah perilaku default browser
+            document.getElementById('search-form').submit();
+        }
+    });
 
 </script>
 

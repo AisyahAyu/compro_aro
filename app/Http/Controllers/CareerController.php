@@ -21,8 +21,9 @@ class CareerController extends Controller
         $query = JobVacancy::where('status', 'Active');
 
         // Logic Search (disesuaikan dengan key 'q' dari script AJAX)
-        if ($request->filled('q')) {
-            $search = $request->q;
+// Logic Search - Ubah dari 'q' menjadi 'search'
+        if ($request->filled('search')) {
+            $search = $request->search; // Ambil dari name="search"
             $query->where('name', 'like', '%' . $search . '%');
         }
 
