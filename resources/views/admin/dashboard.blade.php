@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
-@section('title', 'Admin Dashboard')
-@section('page-title', 'Dashboard')
-@section('breadcrumb', 'Dashboard')
+@section('title', 'Admin Statistik')
+@section('page-title', 'Statistik')
+@section('breadcrumb', 'Statistik')
 
 @section('content')
 <!-- Info boxes -->
@@ -130,6 +130,11 @@
                         <li class="nav-item">
                             <a class="nav-link active" href="#revenue-chart" data-toggle="pill">Data Overview</a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.statistics.index') }}" class="nav-link">
+                                <i class="fas fa-cog mr-1"></i>Manage Statistics
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div><!-- /.card-header -->
@@ -204,6 +209,16 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <tr>
+                                <td><i class="fas fa-chart-bar text-info"></i> Statistics</td>
+                                <td>{{ App\Models\AboutStatistic::count() }} items</td>
+                                <td><span class="badge badge-success">Active</span></td>
+                                <td>
+                                    <a href="{{ route('admin.statistics.index') }}" class="btn btn-sm btn-primary">
+                                        <i class="fas fa-edit"></i> Manage
+                                    </a>
+                                </td>
+                            </tr>
                             <tr>
                                 <td><i class="fas fa-image text-info"></i> Banners</td>
                                 <td>{{ App\Models\Banner::count() }} items</td>
@@ -346,6 +361,20 @@
             </div>
             <div class="card-body">
                 <div class="row">
+                    <div class="col-6 text-center">
+                        <a href="{{ route('admin.statistics.create') }}" class="btn btn-block btn-outline-light">
+                            <i class="fas fa-plus fa-2x mb-2"></i><br>
+                            Add Statistics
+                        </a>
+                    </div>
+                    <div class="col-6 text-center">
+                        <a href="{{ route('admin.statistics.index') }}" class="btn btn-block btn-outline-light">
+                            <i class="fas fa-chart-bar fa-2x mb-2"></i><br>
+                            Manage Statistics
+                        </a>
+                    </div>
+                </div>
+                <div class="row mt-3">
                     <div class="col-6 text-center">
                         <a href="{{ route('admin.banners.create') }}" class="btn btn-block btn-outline-light">
                             <i class="fas fa-plus fa-2x mb-2"></i><br>

@@ -27,9 +27,8 @@
                 <tr>
                     <th>No</th>
                     <th>Title</th>
-                    <th>Value</th>
+                    <th>Suffix</th>
                     <th>Icon (Gambar)</th>
-                    <th>Order</th>
                     <th>Status</th>
                     <th>Aksi</th>
                 </tr>
@@ -40,7 +39,7 @@
                 <tr>
                     <td>{{ $key + 1 }}</td>
                     <td>{{ $item->title }}</td>
-                    <td>{{ $item->formatted_value }}</td>
+                    <td>{{ $item->suffix ?? '-' }}</td>
 
                     {{-- ✅ FIX AMAN (CEK FILE ADA / TIDAK) --}}
                     <td>
@@ -52,8 +51,6 @@
                             <span>-</span>
                         @endif
                     </td>
-
-                    <td>{{ $item->order }}</td>
 
                     <td>
                         @if($item->is_active)
@@ -83,7 +80,7 @@
 
                 @empty
                 <tr>
-                    <td colspan="7" class="text-center">
+                    <td colspan="6" class="text-center">
                         Belum ada data
                     </td>
                 </tr>

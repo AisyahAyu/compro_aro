@@ -13,7 +13,7 @@ class StatisticsController extends Controller
      */
     public function index()
     {
-        $statistics = AboutStatistic::orderBy('order')->get();
+        $statistics = AboutStatistic::latest()->get();
         return view('admin.statistics.index', compact('statistics'));
     }
 
@@ -32,19 +32,15 @@ class StatisticsController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'value' => 'required|integer',
             'suffix' => 'nullable|string|max:10',
-            'icon' => 'nullable|image|mimes:jpg,jpeg,png|max:2048', // 🔥 sekarang gambar
-            'order' => 'nullable|integer',
+            'icon' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'is_active' => 'nullable|boolean',
         ]);
 
         $data = [
             'title'     => $request->title,
-            'value'     => $request->value,
             'suffix'    => $request->suffix,
-            'order'     => $request->order ?? 0,
-            'is_active' => $request->has('is_active'),
+            'is_active' => $request->is_active == 1,
         ];
 
         // 🔥 upload gambar ke kolom icon
@@ -75,19 +71,15 @@ class StatisticsController extends Controller
 
         $request->validate([
             'title' => 'required|string|max:255',
-            'value' => 'required|integer',
             'suffix' => 'nullable|string|max:10',
             'icon' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'order' => 'nullable|integer',
             'is_active' => 'nullable|boolean',
         ]);
 
         $data = [
             'title'     => $request->title,
-            'value'     => $request->value,
             'suffix'    => $request->suffix,
-            'order'     => $request->order ?? 0,
-            'is_active' => $request->has('is_active'),
+            'is_active' => $request->is_active == 1,
         ];
 
         // 🔥 upload gambar baru jika ada

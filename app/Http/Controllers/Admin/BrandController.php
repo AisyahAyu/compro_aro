@@ -13,7 +13,7 @@ class BrandController extends Controller
     // ======================
     public function index()
     {
-        $data = Brand::orderBy('order')->get();
+        $data = Brand::latest()->get();
         return view('admin.brands.index', compact('data'));
     }
 
@@ -33,14 +33,12 @@ class BrandController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'logo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'order' => 'nullable|integer',
             'is_active' => 'nullable|boolean'
         ]);
 
         $data = $request->except('logo');
 
         // DEFAULT VALUE
-        $data['order'] = $request->order ?? 0;
         $data['is_active'] = $request->is_active ?? 0;
 
         // UPLOAD GAMBAR TANPA RESIZE
@@ -74,14 +72,12 @@ class BrandController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'order' => 'nullable|integer',
             'is_active' => 'nullable|boolean'
         ]);
 
         $brand = Brand::findOrFail($id);
         $data = $request->except('logo');
 
-        $data['order'] = $request->order ?? 0;
         $data['is_active'] = $request->is_active ?? 0;
 
         if ($request->hasFile('logo')) {
