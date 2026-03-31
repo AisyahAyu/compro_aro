@@ -1,26 +1,40 @@
 @extends('layouts.admin')
 
+@section('page-title', 'Edit Statistik')
+@section('breadcrumb', 'Data Statistik')
+
 @section('content')
 
 <div class="card">
     <div class="card-header">
-        <h3>Edit Statistik</h3>
+        <h3>Data Statistik</h3>
     </div>
 
     <div class="card-body">
 
-        <form action="{{ route('admin.statistics.update', $statistic->id) }}" method="POST">
+        {{-- Show validation errors --}}
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                @foreach ($errors->all() as $error)
+                    <div>{{ $error }}</div>
+                @endforeach
+            </div>
+        @endif
+
+        {{-- Show success message --}}
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <form action="{{ route('admin.statistics.update', $statistic->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
             <div class="form-group">
                 <label>Title</label>
                 <input type="text" name="title" class="form-control" value="{{ $statistic->title }}" required>
-            </div>
-
-            <div class="form-group">
-                <label>Value</label>
-                <input type="number" name="value" class="form-control" value="{{ $statistic->value }}" required>
             </div>
 
             <div class="form-group">
@@ -39,13 +53,9 @@
             </div>
 
             <div class="form-group">
-                <label>Order</label>
-                <input type="number" name="order" class="form-control" value="{{ $statistic->order }}">
-            </div>
-
-            <div class="form-group">
                 <label>
-                    <input type="checkbox" name="is_active" {{ $statistic->is_active ? 'checked' : '' }}>
+                    <input type="hidden" name="is_active" value="0">
+                    <input type="checkbox" name="is_active" value="1" {{ $statistic->is_active ? 'checked' : '' }}>
                     Aktif
                 </label>
             </div>
