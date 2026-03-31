@@ -167,6 +167,15 @@
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
     }
 
+        /* Sticky sidebar for category and brand */
+        @media (min-width: 992px) {
+            .pp-sticky-sidebar {
+                position: sticky;
+                top: 110px; /* adjust if needed for header/navbar */
+                z-index: 2;
+            }
+        }
+
     .pp-sidebar-title {
         font-size: 1.1rem;
         font-weight: 700;
@@ -409,7 +418,8 @@
 
             <div class="row g-4">
                 <div class="col-lg-3">
-                    <div class="pp-sidebar-card">
+                        <div class="pp-sticky-sidebar">
+                            <div class="pp-sidebar-card">
                         <h3 class="pp-sidebar-title">Kategori</h3>
                         <ul class="pp-category-list">
                             <li>
@@ -425,7 +435,7 @@
                         </ul>
                     </div>
 
-                    <div class="pp-sidebar-card">
+                        <div class="pp-sidebar-card">
                         <h3 class="pp-sidebar-title">Brand</h3>
                         <form method="GET" action="{{ route('products.page') }}">
                             <input type="hidden" name="q" value="{{ $searchKeyword }}">
@@ -444,6 +454,7 @@
 
                             <button type="submit" class="pp-btn-main mt-2 w-100">Terapkan</button>
                         </form>
+                        </div>
                     </div>
                 </div>
 
