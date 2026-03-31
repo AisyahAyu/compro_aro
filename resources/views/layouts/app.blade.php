@@ -1028,9 +1028,11 @@
                             dropdownMenu.classList.add('show');
                             dropdownToggle.setAttribute('aria-expanded', 'true');
                             dropdownMenu.style.position = 'absolute';
-                            dropdownMenu.style.inset = 'auto auto 0px 0px';
-                            dropdownMenu.style.margin = '0px';
-                            dropdownMenu.style.transform = 'translateY(-100%)';
+                            dropdownMenu.style.top = '100%';
+                            dropdownMenu.style.left = '0';
+                            dropdownMenu.style.margin = '0';
+                            dropdownMenu.style.minWidth = '150px';
+                            dropdownMenu.style.transform = 'translateY(0)';
                         }
                     });
                     

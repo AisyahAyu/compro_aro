@@ -26,6 +26,105 @@
             margin-bottom: 1rem;
         }
     }
+    
+    /* Product card styling - exact copy from products page */
+    .product-card-link {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        width: 200px;
+    }
+
+    .product-card {
+        width: 200px;
+        min-height: 350px;
+        background-color: #ffffff;
+        border: 1px solid #e5e7eb;
+        display: flex;
+        flex-direction: column;
+        transition: box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    .product-card-link:hover .product-card {
+        box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+        transform: translateY(-2px);
+    }
+
+    /* Image area */
+    .product-card-img-wrap {
+        width: 100%;
+        height: 200px;
+        position: relative;
+        background-color: #fff;
+        border-bottom: 3px solid #000000;
+    }
+
+    .product-card-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+    }
+
+    /* Content area */
+    .product-card-body {
+        padding: 12px 16px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    .product-name {
+        font-size: 13px;
+        font-weight: 500;
+        color: #333;
+        line-height: 1.4;
+        margin-bottom: 8px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .product-label {
+        font-size: 11px;
+        color: #888;
+        margin-bottom: 2px;
+    }
+
+    .product-price {
+        font-size: 15px;
+        font-weight: 700;
+        color: #E5A800;
+        margin-bottom: 8px;
+    }
+
+    .product-meta {
+        margin-top: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .product-location {
+        font-size: 11px;
+        color: #1a5fa8;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .product-type {
+        font-size: 11px;
+        color: #888;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 767.98px) {
+        .product-card {
+            min-height: 320px;
+        }
+    }
     </style>
     @foreach($banners as $index => $banner)
         <div class="hero-slide {{ $index == 0 ? 'active' : '' }}" style="background-image: url({{ asset($banner->image) }})">
@@ -224,31 +323,53 @@
         </div>
         
         <div class="row mb-4">
-            @foreach($products as $product)
+            @forelse($products as $product)
                 <div class="col-lg-3 col-md-6 mb-4">
+                    @if(isset($product['slug']))
+                        <a href="https://ayobelanja.co.id/products/{{ $product['slug'] }}" target="_blank" rel="noopener noreferrer" class="product-card-link">
+                    @endif
                     <div class="product-card">
-                        @if($product->image)
-                            <img src="{{ asset($product->image) }}" alt="{{ $product->name }}">
-                        @endif
-                        <div class="product-info">
-                            <h5 class="product-name">{{ $product->name }}</h5>
+                        <div class="product-card-img-wrap">
+                            @if($product['image_url'] ?? $product->image ?? null)
+                                <img src="{{ $product['image_url'] ?? asset($product->image) }}" alt="{{ $product['nama_produk'] ?? $product->name }}" class="product-card-img">
+                            @endif
+                        </div>
+                        <div class="product-card-body">
+                            <h5 class="product-name">{{ $product['nama_produk'] ?? $product->name }}</h5>
+                            @if(isset($product['harga_produk']) || isset($product->price))
+                                <div class="product-label">Mulai dari</div>
+                                <div class="product-price">Rp {{ number_format($product['harga_produk'] ?? $product->price, 0, ',', '.') }}</div>
+                            @endif
                             <div class="product-meta">
-                                <span class="product-location">
-                                    <i class="fas fa-map-marker-alt me-1"></i>{{ $product->location }}
-                                </span>
-                                <span class="product-rating">
-                                    <i class="fas fa-star me-1"></i>{{ $product->rating }}
-                                </span>
+                                <div class="product-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    {{ $product['asal_produk'] ?? $product->location ?? 'Indonesia' }}
+                                </div>
+                                @if($product['rating'] ?? $product->rating ?? null)
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        {{ $product['rating'] ?? $product->rating }}
+                                    </div>
+                                @endif
+                                @if($product['tipe_produk'] ?? $product->type ?? null)
+                                    <div class="product-type">Tipe: {{ $product['tipe_produk'] ?? $product->type }}</div>
+                                @endif
                             </div>
-                            <p class="product-type">Tipe: {{ $product->type }}</p>
                         </div>
                     </div>
+                    @if(isset($product['slug']))
+                        </a>
+                    @endif
                 </div>
-            @endforeach
+            @empty
+                <div class="col-12 text-center">
+                    <p class="text-muted">Produk tidak tersedia saat ini.</p>
+                </div>
+            @endforelse
         </div>
         
         <div class="text-center">
-            <a href="#produk" class="btn btn-contact">Lihat Selengkapnya</a>
+            <a href="{{ route('products.page') }}" class="btn btn-contact">Lihat Selengkapnya</a>
         </div>
     </div>
 </section>

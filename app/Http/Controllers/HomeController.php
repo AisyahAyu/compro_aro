@@ -223,7 +223,28 @@ class HomeController extends Controller
         $legalities = Legality::where('is_active', true)->orderBy('order')->limit(3)->get();
         $workProcesses = WorkProcess::where('is_active', true)->orderBy('step_number')->get();
         $partners = Partner::where('is_active', true)->orderBy('order')->get();
-        $products = Product::where('is_active', true)->inRandomOrder()->limit(4)->get();
+        
+        // Fetch products from e-commerce API for "Produk Terbaik"
+        $products = collect([]);
+        $apiBase = rtrim(config('services.ecommerce.base_url'), '/');
+        $apiToken = config('services.ecommerce.token');
+        
+        if ($apiBase && $apiToken) {
+            $productResp = \Illuminate\Support\Facades\Http::withToken($apiToken)
+                ->withHeaders(['Accept' => 'application/json'])
+                ->get("{$apiBase}/products", ['limit' => 4]);
+            
+            if ($productResp->successful()) {
+                $apiProducts = $productResp->json();
+                $products = collect($apiProducts['data'] ?? $apiProducts)->take(4);
+            }
+        }
+        
+        // Fallback to database if API fails
+        if ($products->isEmpty()) {
+            $products = Product::where('is_active', true)->inRandomOrder()->limit(4)->get();
+        }
+        
         $platform = Platform::where('is_active', true)->first();
         
         // Process platform URL safely
