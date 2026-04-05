@@ -226,26 +226,28 @@
 
     .pp-card {
         width: 100%;
-        min-height: 350px;
         background-color: #ffffff;
-        border: 1px solid #e5e7eb;
+        border: 1px solid #e8e8e8;
+        border-radius: 8px;
         display: flex;
         flex-direction: column;
+        overflow: hidden;
         transition: box-shadow 0.2s ease, transform 0.2s ease;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.07);
     }
 
     .pp-card-link:hover .pp-card {
-        box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.13);
+        transform: translateY(-3px);
     }
 
     /* Image area */
     .pp-card-img-wrap {
         width: 100%;
-        height: 200px;
+        aspect-ratio: 1 / 1;
         position: relative;
         background-color: #fff;
-        border-bottom: 3px solid #000000;
+        overflow: hidden;
     }
 
     .pp-card-img {
@@ -253,22 +255,24 @@
         height: 100%;
         object-fit: contain;
         display: block;
+        padding: 8px;
     }
 
     /* Content area */
     .pp-card-body {
-        padding: 12px 16px;
+        padding: 10px 12px 12px;
         display: flex;
         flex-direction: column;
         flex: 1;
+        border-top: 1px solid #f0f0f0;
     }
 
     .pp-card-name {
         font-size: 13px;
-        font-weight: 500;
-        color: #333;
+        font-weight: 600;
+        color: #222;
         line-height: 1.4;
-        margin-bottom: 8px;
+        margin-bottom: 6px;
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
@@ -277,14 +281,14 @@
 
     .pp-card-label {
         font-size: 11px;
-        color: #888;
+        color: #999;
         margin-bottom: 2px;
     }
 
     .pp-price {
-        font-size: 15px;
+        font-size: 14px;
         font-weight: 700;
-        color: #E5A800;
+        color: #f78b00;
         margin-bottom: 8px;
     }
 
@@ -305,7 +309,7 @@
 
     .pp-type {
         font-size: 11px;
-        color: #888;
+        color: #aaa;
     }
 
     .pp-more {
