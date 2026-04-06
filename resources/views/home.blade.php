@@ -495,7 +495,7 @@
 @endif
 
 <!-- Produk Terbaik -->
-@if($products->count() > 0)
+@if(count($products) > 0)
 <section class="section-padding">
     <div class="container">
         <div class="text-center mb-5">
