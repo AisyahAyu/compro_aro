@@ -27,7 +27,7 @@ class BannerController extends Controller
             'button_text' => 'nullable|string|max:255',
             'button_link' => 'nullable|string|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'order' => 'integer|default:0',
+            'order' => 'integer',
             'is_active' => 'boolean'
         ]);
 

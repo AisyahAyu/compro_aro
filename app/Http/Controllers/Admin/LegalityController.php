@@ -34,7 +34,7 @@ class LegalityController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'icon' => 'nullable|string|max:255',
-            'order' => 'integer|default:0',
+            'order' => 'integer',
             'is_active' => 'boolean'
         ]);
 

@@ -27,15 +27,7 @@
         }
     }
     
-    /* Product card styling - exact copy from products page */
-    .product-card-link {
-        display: block;
-        text-decoration: none;
-        color: inherit;
-        width: 100%;
-        max-width: 100%;
-    }
-
+    /* Category card styling */
     .category-card-link {
         display: block;
         text-decoration: none;
@@ -51,31 +43,51 @@
         box-shadow: 0 8px 25px rgba(0,0,0,0.15);
     }
 
+    /* Product Grid - Fixed centering and premium width */
+    .home-product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 24px;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        justify-content: center;
+    }
+
+    /* Product card styling - refined ecommerce look */
+    .product-card-link {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        width: 100%;
+    }
+
     .product-card {
         width: 100% !important;
         max-width: 100% !important;
-        min-height: 350px;
         background-color: #ffffff;
         border: 1px solid #e5e7eb;
         display: flex;
         flex-direction: column;
         transition: box-shadow 0.2s ease, transform 0.2s ease;
-        border-radius: 12px;
+        border-radius: 8px; /* Refined roundness */
         overflow: hidden;
+        height: 100%;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Base shadow */
     }
 
     .product-card-link:hover .product-card {
-        box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        transform: translateY(-4px);
     }
 
     /* Image area */
     .product-card-img-wrap {
         width: 100%;
-        height: 350px;
+        aspect-ratio: 1 / 1;
         position: relative;
         background-color: #fff;
-        border-bottom: 3px solid #000000;
+        overflow: hidden;
     }
 
     .product-card-img {
@@ -83,19 +95,50 @@
         height: 100%;
         object-fit: contain;
         display: block;
+        transition: transform 0.3s ease;
+    }
+
+    .product-card-link:hover .product-card-img {
+        transform: scale(1.05);
+    }
+
+    /* Refined Overlay for Ecommerce Look */
+    .product-card-img-wrap::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: #000;
+    }
+
+    .product-card-badge {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: linear-gradient(135deg, #f78b00 0%, #f76f00 100%);
+        color: white;
+        padding: 4px 12px;
+        font-size: 10px;
+        font-weight: bold;
+        text-transform: uppercase;
+        border-bottom-left-radius: 8px;
+        z-index: 2;
+        box-shadow: -2px 2px 5px rgba(0,0,0,0.1);
     }
 
     /* Content area */
     .product-card-body {
-        padding: 12px 16px;
+        padding: 14px 16px;
         display: flex;
         flex-direction: column;
         flex: 1;
     }
 
     .product-name {
-        font-size: 13px;
-        font-weight: 500;
+        font-size: 14px;
+        font-weight: 600;
         color: #333;
         line-height: 1.4;
         margin-bottom: 8px;
@@ -103,26 +146,30 @@
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
+        height: 40px; /* Refined height */
     }
 
     .product-label {
         font-size: 11px;
-        color: #888;
+        color: #999;
         margin-bottom: 2px;
     }
 
     .product-price {
-        font-size: 15px;
+        font-size: 16px;
         font-weight: 700;
-        color: #E5A800;
-        margin-bottom: 8px;
+        color: #f78b00;
+        margin-bottom: 12px;
     }
 
     .product-meta {
         margin-top: auto;
         display: flex;
-        flex-direction: column;
-        gap: 2px;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px solid #f2f2f2;
+        padding-top: 8px;
+        gap: 8px;
     }
 
     .product-location {
@@ -131,11 +178,15 @@
         display: flex;
         align-items: center;
         gap: 4px;
+        font-weight: 500;
     }
 
     .product-type {
         font-size: 11px;
         color: #888;
+        background: #f4f4f4;
+        padding: 2px 6px;
+        border-radius: 4px;
     }
     
     /* Responsive adjustments */
@@ -160,16 +211,17 @@
         
         /* Product cards mobile responsiveness */
         .product-card {
-            min-height: 480px;
             margin-bottom: 1rem;
         }
         
         .product-card-img-wrap {
-            height: 320px !important;
+            aspect-ratio: 1 / 1;
+            height: auto !important;
         }
         
         .product-card-img {
-            height: 320px !important;
+            aspect-ratio: 1 / 1;
+            height: auto !important;
         }
         
         .product-card-body {
@@ -265,15 +317,17 @@
     /* Tablet responsive adjustments */
     @media (max-width: 991.98px) and (min-width: 768px) {
         .product-card {
-            min-height: 500px;
+            margin-bottom: 1rem;
         }
         
         .product-card-img-wrap {
-            height: 330px !important;
+            aspect-ratio: 1 / 1;
+            height: auto !important;
         }
         
         .product-card-img {
-            height: 330px !important;
+            aspect-ratio: 1 / 1;
+            height: auto !important;
         }
         
         .product-name {
@@ -292,15 +346,17 @@
     /* Small mobile adjustments */
     @media (max-width: 575.98px) {
         .product-card {
-            min-height: 460px;
+            margin-bottom: 1rem;
         }
         
         .product-card-img-wrap {
-            height: 300px !important;
+            aspect-ratio: 1 / 1;
+            height: auto !important;
         }
         
         .product-card-img {
-            height: 300px !important;
+            aspect-ratio: 1 / 1;
+            height: auto !important;
         }
         
         .product-card-body {
@@ -505,47 +561,39 @@
             </div>
         </div>
         
-        <div class="row g-3">
+        <div class="home-product-grid">
             @forelse($products as $product)
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-3">
-                    @if(isset($product['slug']))
-                        <a href="https://ayobelanja.co.id/products/{{ $product['slug'] }}" target="_blank" rel="noopener noreferrer" class="product-card-link">
-                    @endif
-                    <div class="product-card">
-                        <div class="product-card-img-wrap">
-                            @if($product['image_url'] ?? $product->image ?? null)
-                                <img src="{{ $product['image_url'] ?? asset($product->image) }}" alt="{{ $product['nama_produk'] ?? $product->name }}" class="product-card-img">
-                            @endif
-                        </div>
-                        <div class="product-card-body">
-                            <h5 class="product-name">{{ $product['nama_produk'] ?? $product->name }}</h5>
-                            @if(isset($product['harga_produk']) || isset($product->price))
-                                <div class="product-label">Mulai dari</div>
-                                <div class="product-price">Rp {{ number_format($product['harga_produk'] ?? $product->price, 0, ',', '.') }}</div>
-                            @endif
-                            <div class="product-meta">
-                                <div class="product-location">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    {{ $product['asal_produk'] ?? $product->location ?? 'Indonesia' }}
-                                </div>
-                                @if($product['rating'] ?? $product->rating ?? null)
-                                    <div class="product-rating">
-                                        <i class="fas fa-star"></i>
-                                        {{ $product['rating'] ?? $product->rating }}
-                                    </div>
-                                @endif
-                                @if($product['tipe_produk'] ?? $product->type ?? null)
-                                    <div class="product-type">Tipe: {{ $product['tipe_produk'] ?? $product->type }}</div>
-                                @endif
+                @if(isset($product['slug']))
+                    <a href="https://ayobelanja.co.id/products/{{ $product['slug'] }}" target="_blank" rel="noopener noreferrer" class="product-card-link">
+                @endif
+                <div class="product-card">
+                    <div class="product-card-img-wrap">
+                        @if($product['image_url'] ?? $product->image ?? null)
+                            <img src="{{ $product['image_url'] ?? asset($product->image) }}" alt="{{ $product['nama_produk'] ?? $product->name }}" class="product-card-img">
+                        @endif
+                    </div>
+                    <div class="product-card-body">
+                        <h5 class="product-name">{{ $product['nama_produk'] ?? $product->name }}</h5>
+                        @if(isset($product['harga_produk']) || isset($product->price))
+                            <div class="product-label">Mulai dari</div>
+                            <div class="product-price">Rp {{ number_format($product['harga_produk'] ?? $product->price, 0, ',', '.') }}</div>
+                        @endif
+                        <div class="product-meta">
+                            <div class="product-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>{{ $product['asal_produk'] ?? $product->location ?? 'Indonesia' }}</span>
                             </div>
+                            @if($product['tipe_produk'] ?? $product->type ?? null)
+                                <div class="product-type">{{ $product['tipe_produk'] ?? $product->type }}</div>
+                            @endif
                         </div>
                     </div>
-                    @if(isset($product['slug']))
-                        </a>
-                    @endif
                 </div>
+                @if(isset($product['slug']))
+                    </a>
+                @endif
             @empty
-                <div class="col-12 text-center">
+                <div class="text-center w-100">
                     <p class="text-muted">Produk tidak tersedia saat ini.</p>
                 </div>
             @endforelse

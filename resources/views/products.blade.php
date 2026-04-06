@@ -221,8 +221,8 @@
 
         .pp-products {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 15px;
         }
 
         /* ── Product Card ── */
@@ -230,6 +230,7 @@
             display: block;
             text-decoration: none;
             color: inherit;
+            height: 100%;
         }
 
         .pp-card {
@@ -241,12 +242,13 @@
             flex-direction: column;
             overflow: hidden;
             transition: box-shadow 0.2s ease, transform 0.2s ease;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            height: 100%;
         }
 
         .pp-card-link:hover .pp-card {
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.13);
-            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
         }
 
         /* Image area */
@@ -263,12 +265,42 @@
             height: 100%;
             object-fit: contain;
             display: block;
-            padding: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .pp-card-link:hover .pp-card-img {
+            transform: scale(1.05);
+        }
+
+        /* Black bar overlay like ayobelanja */
+        .pp-card-img-wrap::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #000;
+            z-index: 1;
+        }
+
+        .pp-card-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: linear-gradient(135deg, #f78b00 0%, #f76f00 100%);
+            color: white;
+            padding: 4px 10px;
+            font-size: 9px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-bottom-left-radius: 8px;
+            z-index: 2;
         }
 
         /* Content area */
         .pp-card-body {
-            padding: 10px 12px 12px;
+            padding: 10px;
             display: flex;
             flex-direction: column;
             flex: 1;
@@ -279,12 +311,13 @@
             font-size: 13px;
             font-weight: 600;
             color: #222;
-            line-height: 1.4;
+            line-height: 1.3;
             margin-bottom: 6px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
+            height: 34px;
         }
 
         .pp-card-label {
@@ -294,17 +327,20 @@
         }
 
         .pp-price {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 700;
             color: #f78b00;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .pp-card-meta {
             margin-top: auto;
             display: flex;
-            flex-direction: column;
-            gap: 2px;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #f5f5f5;
+            padding-top: 8px;
+            gap: 8px;
         }
 
         .pp-card-location {
@@ -313,11 +349,15 @@
             display: flex;
             align-items: center;
             gap: 4px;
+            font-weight: 500;
         }
 
         .pp-type {
             font-size: 11px;
-            color: #aaa;
+            color: #888;
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 4px;
         }
 
         .pp-more {
@@ -483,15 +523,15 @@
                                             @if(!empty($product['harga_produk']))
                                                 <div class="pp-card-label">Mulai dari</div>
                                                 <div class="pp-price">Rp
-                                                    {{ number_format((float) $product['harga_produk'], 2, ',', '.') }}</div>
+                                                    {{ number_format((float) $product['harga_produk'], 0, ',', '.') }}</div>
                                             @endif
                                             <div class="pp-card-meta">
                                                 <div class="pp-card-location">
                                                     <i class="fas fa-map-marker-alt"></i>
-                                                    {{ $product['asal_produk'] ?? 'Indonesia' }}
+                                                    <span>{{ $product['asal_produk'] ?? 'Indonesia' }}</span>
                                                 </div>
                                                 @if(!empty($product['tipe_produk']))
-                                                    <div class="pp-type">Tipe: {{ $product['tipe_produk'] }}</div>
+                                                    <div class="pp-type">{{ $product['tipe_produk'] }}</div>
                                                 @endif
                                             </div>
                                         </div>
