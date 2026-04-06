@@ -1,9 +1,8 @@
 <?php
+
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Log;
+
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use App\Models\Banner;
 use App\Models\CompanyProfile;
 use App\Models\Category;
@@ -13,7 +12,8 @@ use App\Models\Partner;
 use App\Models\Product;
 use App\Models\Platform;
 use App\Models\Footer;
-use App\Models\Faq;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {
@@ -43,179 +43,6 @@ class HomeController extends Controller
         ];
     }
 
-    private function getCatalogData(): array
-    {
-        $banner = [
-            'greeting' => 'Halo, Selamat Datang',
-            'title_main' => 'Produk &',
-            'title_highlight' => 'Solusi Pengadaan',
-            'title_suffix' => 'Untuk Kebutuhan Bisnis Anda',
-            'description' => 'Menyediakan berbagai produk berkualitas untuk industri perkantoran, pendidikan, dan instansi pemerintah.',
-            'image' => asset('uploads/banners/bannerproduk.png'),
-            'primary_button' => 'Lihat Produk Unggulan',
-            'secondary_button' => 'Kunjungi E-Commerce',
-        ];
-
-        $categories = [
-            'Semua',
-            'Furniture Kantor',
-            'Furniture Pendidikan',
-            'Peralatan Dapur',
-            'Peralatan IDT IK',
-            'Mesin dan Perkakas',
-        ];
-
-        $brands = ['ABE edu', 'ABE living', 'Acer', 'APC', 'Ferro', 'Umalo'];
-
-        $products = [
-            [
-                'name' => 'Meja Kerja Konfigurasi PT-03B uk. 3200',
-                'location' => 'Indonesia',
-                'rating' => '0.0',
-                'type' => 'WB0-01',
-                'brand' => 'ABE edu',
-                'category' => 'Furniture Kantor',
-                'material' => 'Kayu MDF',
-                'size' => '120 × 60 × 75 cm',
-                'color' => 'Coklat / Putih',
-                'weight' => '25 kg',
-                'description' => 'Meja kerja modern merupakan meja kerja dengan desain minimalis yang cocok digunakan di ruang kerja kantor, ruang meeting, maupun workspace pribadi.',
-                'highlights' => [
-                    'Material kayu solid',
-                    'Desain minimalis',
-                    'Cocok untuk kantor dan workspace',
-                ],
-                'image' => 'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=800&q=80',
-                'gallery' => [
-                    'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=900&q=80',
-                    'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80',
-                    'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=900&q=80',
-                ],
-            ],
-            [
-                'name' => 'Meja Rapat CT-04 uk. 4000',
-                'location' => 'Indonesia',
-                'rating' => '0.0',
-                'type' => 'WB0-01',
-                'brand' => 'ABE living',
-                'category' => 'Furniture Kantor',
-                'material' => 'Kayu MDF',
-                'size' => '400 × 120 × 75 cm',
-                'color' => 'Putih',
-                'weight' => '40 kg',
-                'description' => 'Meja rapat berukuran besar untuk ruang meeting formal dengan konstruksi kokoh dan tampilan modern.',
-                'highlights' => [
-                    'Permukaan lebar untuk meeting tim',
-                    'Konstruksi kuat untuk penggunaan intensif',
-                    'Mudah dipadukan dengan kursi kantor',
-                ],
-                'image' => 'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?auto=format&fit=crop&w=800&q=80',
-                'gallery' => [
-                    'https://images.unsplash.com/photo-1505843513577-22bb7d21e455?auto=format&fit=crop&w=900&q=80',
-                    'https://images.unsplash.com/photo-1497215842964-222b430dc094?auto=format&fit=crop&w=900&q=80',
-                    'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80',
-                ],
-            ],
-            [
-                'name' => 'Meja Rapat CT-09B uk. 6400',
-                'location' => 'Indonesia',
-                'rating' => '0.0',
-                'type' => 'WB0-01',
-                'brand' => 'Acer',
-                'category' => 'Furniture Kantor',
-                'material' => 'Kayu Laminasi',
-                'size' => '640 × 140 × 75 cm',
-                'color' => 'Oak Natural',
-                'weight' => '55 kg',
-                'description' => 'Pilihan meja rapat premium untuk kapasitas peserta yang lebih besar dengan finishing elegan.',
-                'highlights' => [
-                    'Desain premium untuk ruang direksi',
-                    'Kapasitas besar',
-                    'Finishing rapi dan tahan lama',
-                ],
-                'image' => 'https://images.unsplash.com/photo-1497215842964-222b430dc094?auto=format&fit=crop&w=800&q=80',
-                'gallery' => [
-                    'https://images.unsplash.com/photo-1497215842964-222b430dc094?auto=format&fit=crop&w=900&q=80',
-                    'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=80',
-                    'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=900&q=80',
-                ],
-            ],
-            [
-                'name' => 'Meja Staff WS-01 uk. 3200',
-                'location' => 'Indonesia',
-                'rating' => '0.0',
-                'type' => 'WB0-01',
-                'brand' => 'APC',
-                'category' => 'Furniture Kantor',
-                'material' => 'Partikel Board',
-                'size' => '320 × 60 × 75 cm',
-                'color' => 'Putih / Hijau',
-                'weight' => '28 kg',
-                'description' => 'Meja staff modular untuk area kerja tim dengan konfigurasi fleksibel dan tampilan bersih.',
-                'highlights' => [
-                    'Konfigurasi fleksibel',
-                    'Cocok untuk area staff',
-                    'Mudah dirakit',
-                ],
-                'image' => 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=800&q=80',
-                'gallery' => [
-                    'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=900&q=80',
-                    'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80',
-                    'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80',
-                ],
-            ],
-            [
-                'name' => 'Meja Kerja Kubikal CWD-05C uk. 3600',
-                'location' => 'Indonesia',
-                'rating' => '0.0',
-                'type' => 'WB0-01',
-                'brand' => 'Ferro',
-                'category' => 'Furniture Kantor',
-                'material' => 'Kayu MDF + Metal',
-                'size' => '360 × 120 × 75 cm',
-                'color' => 'Abu / Coklat',
-                'weight' => '38 kg',
-                'description' => 'Meja kubikal untuk kebutuhan kantor modern dengan partisi yang mendukung fokus kerja.',
-                'highlights' => [
-                    'Partisi kerja ergonomis',
-                    'Ideal untuk open space office',
-                    'Material kokoh',
-                ],
-                'image' => 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80',
-                'gallery' => [
-                    'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=80',
-                    'https://images.unsplash.com/photo-1497215842964-222b430dc094?auto=format&fit=crop&w=900&q=80',
-                    'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80',
-                ],
-            ],
-            [
-                'name' => 'Meja Kerja Kubikal CWD-05D uk. 4200',
-                'location' => 'Indonesia',
-                'rating' => '0.0',
-                'type' => 'WB0-01',
-                'brand' => 'Umalo',
-                'category' => 'Furniture Kantor',
-                'material' => 'Kayu MDF + Metal',
-                'size' => '420 × 120 × 75 cm',
-                'color' => 'Abu Muda',
-                'weight' => '42 kg',
-                'description' => 'Varian kubikal dengan area kerja lebih luas untuk tim operasional dan administrasi.',
-                'highlights' => [
-                    'Area kerja ekstra luas',
-                    'Konstruksi stabil',
-                    'Desain modern minimalis',
-                ],
-                'image' => 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=80',
-                'gallery' => [
-                    'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80',
-                    'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=80',
-                    'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=900&q=80',
-                ],
-            ],
-        ];
-
-        return compact('banner', 'categories', 'brands', 'products');
-    }
 
     public function index()
     {
@@ -225,30 +52,19 @@ class HomeController extends Controller
         $legalities = Legality::where('is_active', true)->orderBy('order')->limit(3)->get();
         $workProcesses = WorkProcess::where('is_active', true)->orderBy('step_number')->get();
         $partners = Partner::where('is_active', true)->orderBy('order')->get();
-        
-        // Fetch products from e-commerce API for "Produk Terbaik"
-        $products = collect([]);
-        $apiBase = rtrim(config('services.ecommerce.base_url'), '/');
-        $apiToken = config('services.ecommerce.token');
-        
-        if ($apiBase && $apiToken) {
-            $productResp = \Illuminate\Support\Facades\Http::withToken($apiToken)
-                ->withHeaders(['Accept' => 'application/json'])
-                ->get("{$apiBase}/products", ['limit' => 4]);
-            
-            if ($productResp->successful()) {
-                $apiProducts = $productResp->json();
-                $products = collect($apiProducts['data'] ?? $apiProducts)->take(4);
-            }
-        }
-        
-        // Fallback to database if API fails
-        if ($products->isEmpty()) {
+        $platform = Platform::where('is_active', true)->first();
+
+        // Fetch products from API instead of local DB
+        $products = Cache::remember('featured_products', 3600, function () {
+            $data = $this->fetchFromEcommerceApi('products', ['limit' => 4]);
+            return is_array($data) ? array_slice($data, 0, 4) : [];
+        });
+
+        // Fallback to local if API fails or returns nothing
+        if (empty($products)) {
             $products = Product::where('is_active', true)->inRandomOrder()->limit(4)->get();
         }
-        
-        $platform = Platform::where('is_active', true)->first();
-        
+
         // Process platform URL safely
         if ($platform && $platform->platform_url) {
             $url = $platform->platform_url;
@@ -274,98 +90,105 @@ class HomeController extends Controller
         ));
     }
 
-
-    public function products()
+    public function products(Request $request)
     {
         $companyProfile = CompanyProfile::first();
+        $searchKeyword = trim((string) $request->query('q', ''));
+        $selectedCategory = (string) $request->query('category', '');
+        $selectedBrands = (array) $request->query('brands', []);
+
+        // Fetch Categories (Cached)
+        $categories = Cache::remember('api_categories', 3600, function () {
+            return $this->fetchFromEcommerceApi('categories');
+        });
+
+        // To extract brands, we fetch all products once and cache them
+        $allProductsForBrands = Cache::remember('all_api_products', 3600, function () {
+            return $this->fetchFromEcommerceApi('products');
+        });
+
+        $brands = collect($allProductsForBrands ?? [])
+            ->map(fn($p) => $p['brand'] ?? null)
+            ->filter()
+            ->unique('id_brand')
+            ->values()
+            ->all();
+
+        // Filter products
+        $params = [];
+        if (!empty($searchKeyword)) $params['q'] = $searchKeyword;
+        if (!empty($selectedCategory)) $params['category'] = $selectedCategory;
+        if (!empty($selectedBrands)) $params['brands'] = $selectedBrands;
+
+        $products = $this->fetchFromEcommerceApi('products', $params);
+
         $banner = [
-            'greeting'          => 'Halo, Selamat Datang',
-            'title_main'        => 'Produk &',
-            'title_highlight'   => 'Solusi Pengadaan',
-            'title_suffix'      => 'Untuk Kebutuhan Bisnis Anda',
-            'description'       => 'Menyediakan berbagai produk berkualitas untuk industri perkantoran, pendidikan, dan instansi pemerintah.',
-            'image'             => 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=1200&q=80',
-            'primary_button'    => 'Lihat Produk Unggulan',
-            'secondary_button'  => 'Kunjungi E-Commerce',
+            'greeting' => 'Selamat Datang di Katalog Kami',
+            'title_main' => 'Temukan Produk',
+            'title_highlight' => 'Terbaik',
+            'title_suffix' => 'untuk Kebutuhan Anda',
+            'description' => 'Kami menyediakan berbagai macam furniture kantor, pendidikan, dan peralatan lainnya dengan kualitas premium dan harga kompetitif.',
+            'primary_button' => 'Lihat Produk',
+            'secondary_button' => 'Beli Sekarang',
+            'image' => asset('uploads/banners/banner1.jpg'),
         ];
 
-        $searchKeyword   = trim((string) request()->query('q', ''));
-        $selectedCategory = request()->query('category', '');
-        $selectedBrands  = request()->query('brands', []);
-        if (! is_array($selectedBrands)) {
-            $selectedBrands = [$selectedBrands];
-        }
-        $selectedBrands = array_map('intval', array_filter($selectedBrands));
-
-        $apiBase  = rtrim(config('services.ecommerce.base_url'), '/');
-        $apiToken = config('services.ecommerce.token');
-
-        // Cache kategori & brand selama 30 menit
-        $categories = Cache::remember('ecommerce_categories', 1800, function () use ($apiBase, $apiToken) {
-            $resp = \Illuminate\Support\Facades\Http::withToken($apiToken)
-                ->withHeaders(['Accept' => 'application/json'])
-                ->get("{$apiBase}/categories");
-            return $resp->successful() ? $resp->json() : [];
-        });
-
-        $brands = Cache::remember('ecommerce_brands', 1800, function () use ($apiBase, $apiToken) {
-            $resp = \Illuminate\Support\Facades\Http::withToken($apiToken)
-                ->withHeaders(['Accept' => 'application/json'])
-                ->get("{$apiBase}/filters");
-            return $resp->successful() ? ($resp->json()['brands'] ?? []) : [];
-        });
-
-        // Produk tidak di-cache karena ada filter dinamis
-        $productParams = ['page' => request()->query('page', 1)];
-        if ($selectedCategory !== '') {
-            $productParams['category'] = $selectedCategory;
-        }
-        if (! empty($selectedBrands)) {
-            $productParams['brands'] = $selectedBrands;
-        }
-        if ($searchKeyword !== '') {
-            $productParams['q'] = $searchKeyword;
-        }
-
-        $products   = [];
-        $pagination = null;
-        $prodResp = \Illuminate\Support\Facades\Http::withToken($apiToken)
-            ->withHeaders(['Accept' => 'application/json'])
-            ->get("{$apiBase}/products", $productParams);
-        if ($prodResp->successful()) {
-            $json       = $prodResp->json();
-            $products   = $json['data'] ?? $json;
-            $pagination = isset($json['data']) ? collect($json)->except('data')->toArray() : null;
-        }
-
         return view('products', compact(
-            'companyProfile', 'banner', 'categories', 'brands',
-            'products', 'pagination', 'searchKeyword', 'selectedCategory', 'selectedBrands'
+            'companyProfile',
+            'banner',
+            'categories',
+            'brands',
+            'products',
+            'searchKeyword',
+            'selectedCategory',
+            'selectedBrands'
         ));
     }
 
-    public function productDetail(int $index)
+    public function productDetail(string $slug)
     {
         $companyProfile = CompanyProfile::first();
-        ['products' => $products] = $this->getCatalogData();
+        
+        $product = Cache::remember("product_detail_{$slug}", 3600, function () use ($slug) {
+            return $this->fetchFromEcommerceApi("products/{$slug}");
+        });
 
-        if (! isset($products[$index])) {
+        if (empty($product)) {
             abort(404);
         }
 
-        $product = $products[$index];
-        $relatedProducts = collect($products)
-            ->map(function ($item, $itemIndex) {
-                $item['original_index'] = $itemIndex;
-
-                return $item;
-            })
-            ->except($index)
-            ->values()
+        $relatedProducts = Cache::remember('all_api_products', 3600, function () {
+            return $this->fetchFromEcommerceApi('products');
+        });
+        
+        $relatedProducts = collect($relatedProducts ?? [])
+            ->filter(fn($item) => $item['slug'] !== $slug)
             ->take(3)
             ->all();
 
-        return view('product-detail', compact('companyProfile', 'product', 'relatedProducts', 'index'));
+        return view('product-detail', compact('companyProfile', 'product', 'relatedProducts'));
+    }
+
+    private function fetchFromEcommerceApi($endpoint, $params = [])
+    {
+        $baseUrl = config('services.ecommerce.base_url') ?? 'https://ayobelanja.co.id/api';
+        $token = config('services.ecommerce.token');
+
+        try {
+            $response = Http::withToken($token)
+                ->timeout(10)
+                ->get("{$baseUrl}/{$endpoint}", $params);
+
+            if ($response->successful()) {
+                return $response->json();
+            }
+            
+            \Log::warning("eCommerce API Warning ({$endpoint}): Status " . $response->status());
+        } catch (\Exception $e) {
+            \Log::error("eCommerce API Error ({$endpoint}): " . $e->getMessage());
+        }
+
+        return [];
     }
 
     public function faq()
@@ -373,34 +196,14 @@ class HomeController extends Controller
         $companyProfile = CompanyProfile::first();
         $searchKeyword = trim((string) request()->query('q', ''));
 
-        $faqs = Faq::query()
-            ->where('is_active', true)
-            ->when($searchKeyword !== '', function ($query) use ($searchKeyword) {
-                $query->where(function ($builder) use ($searchKeyword) {
-                    $builder->where('question', 'like', '%' . $searchKeyword . '%')
-                        ->orWhere('answer', 'like', '%' . $searchKeyword . '%');
-                });
-            })
-            ->orderBy('order')
-            ->orderByDesc('id')
-            ->get(['question', 'answer'])
-            ->map(function ($faq) {
-                return [
-                    'question' => $faq->question,
-                    'answer' => $faq->answer,
-                ];
+        $faqs = collect($this->getFaqData());
+
+        if ($searchKeyword !== '') {
+            $needle = strtolower($searchKeyword);
+            $faqs = $faqs->filter(function ($faq) use ($needle) {
+                return str_contains(strtolower($faq['question']), $needle)
+                    || str_contains(strtolower($faq['answer']), $needle);
             });
-
-        if ($faqs->isEmpty()) {
-            $faqs = collect($this->getFaqData());
-
-            if ($searchKeyword !== '') {
-                $needle = strtolower($searchKeyword);
-                $faqs = $faqs->filter(function ($faq) use ($needle) {
-                    return str_contains(strtolower($faq['question']), $needle)
-                        || str_contains(strtolower($faq['answer']), $needle);
-                });
-            }
         }
 
         $faqs = $faqs->values()->all();
@@ -426,20 +229,6 @@ class HomeController extends Controller
             'estimated_units' => ['required', 'string', 'max:50'],
             'message' => ['required', 'string', 'max:1000'],
         ]);
-
-        // Kirim email HTML yang rapi
-        try {
-            $html = view('emails.contact', [
-                'data' => $validated
-            ])->render();
-            Mail::send([], [], function ($message) use ($html) {
-                $message->to('testing100204@gmail.com')
-                    ->subject('Pesan Baru dari Formulir Hubungi Kami')
-                    ->html($html);
-            });
-        } catch (\Exception $e) {
-            Log::error('Gagal mengirim email kontak: ' . $e->getMessage());
-        }
 
         return redirect()
             ->route('contact.page')

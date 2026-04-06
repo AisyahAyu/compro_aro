@@ -3,7 +3,7 @@
     <div class="col-4">
         {{-- UBAH DI SINI: ganti 'detail-aktivitas' menjadi 'detail-aktivitas' --}}
         <a href="{{ route('detail-aktivitas', $item->id) }}">
-            <img src="{{ asset('storage/' . $item->gambar) }}" class="img-fluid rounded shadow-sm" style="height: 85px; width: 100%; object-fit: cover;" alt="thumb">
+            <img src="{{ $item->gambar_url }}" class="img-fluid rounded shadow-sm" style="height: 85px; width: 100%; object-fit: cover;" alt="thumb">
         </a>
     </div>
     <div class="col-8 pl-3">

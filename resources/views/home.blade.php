@@ -32,7 +32,8 @@
         display: block;
         text-decoration: none;
         color: inherit;
-        width: 200px;
+        width: 100%;
+        max-width: 100%;
     }
 
     .category-card-link {
@@ -51,13 +52,16 @@
     }
 
     .product-card {
-        width: 200px;
+        width: 100% !important;
+        max-width: 100% !important;
         min-height: 350px;
         background-color: #ffffff;
         border: 1px solid #e5e7eb;
         display: flex;
         flex-direction: column;
         transition: box-shadow 0.2s ease, transform 0.2s ease;
+        border-radius: 12px;
+        overflow: hidden;
     }
 
     .product-card-link:hover .product-card {
@@ -68,7 +72,7 @@
     /* Image area */
     .product-card-img-wrap {
         width: 100%;
-        height: 200px;
+        height: 350px;
         position: relative;
         background-color: #fff;
         border-bottom: 3px solid #000000;
@@ -136,19 +140,36 @@
     
     /* Responsive adjustments */
     @media (max-width: 767.98px) {
-        .product-card-link {
-            width: 100%;
+        .hero-title {
+            font-size: 1.3rem !important;
+        }
+        .hero-description {
+            font-size: 1rem !important;
+        }
+        .hero-content {
+            padding: 1.2rem 0.5rem !important;
+        }
+        .section-title {
+            font-size: 1.2rem !important;
+        }
+        .img-fluid.rounded {
+            max-width: 100%;
+            height: auto;
             margin-bottom: 1rem;
         }
-
+        
+        /* Product cards mobile responsiveness */
         .product-card {
-            min-height: 320px;
-            width: 100%;
+            min-height: 480px;
             margin-bottom: 1rem;
         }
         
         .product-card-img-wrap {
-            height: 180px;
+            height: 320px !important;
+        }
+        
+        .product-card-img {
+            height: 320px !important;
         }
         
         .product-card-body {
@@ -156,22 +177,29 @@
         }
         
         .product-name {
-            font-size: 0.95rem;
-            line-height: 1.3;
-            margin-bottom: 0.5rem;
+            font-size: 1rem !important;
+            line-height: 1.3 !important;
         }
         
         .product-price {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.1rem !important;
         }
         
         .product-location {
-            font-size: 0.8rem;
+            font-size: 0.8rem !important;
         }
         
         .product-type {
-            font-size: 0.75rem;
+            font-size: 0.8rem !important;
+        }
+        
+        /* Product grid mobile adjustments */
+        .row.g-3 .col-sm-6 {
+            margin-bottom: 1rem;
+        }
+        
+        .row.g-3 .col-12 {
+            margin-bottom: 1rem;
         }
         
         /* Category cards mobile responsiveness */
@@ -233,21 +261,82 @@
             margin-bottom: 1rem;
         }
     }
+    
+    /* Tablet responsive adjustments */
+    @media (max-width: 991.98px) and (min-width: 768px) {
+        .product-card {
+            min-height: 500px;
+        }
+        
+        .product-card-img-wrap {
+            height: 330px !important;
+        }
+        
+        .product-card-img {
+            height: 330px !important;
+        }
+        
+        .product-name {
+            font-size: 0.95rem !important;
+        }
+        
+        .product-price {
+            font-size: 1.05rem !important;
+        }
+        
+        .product-location, .product-type {
+            font-size: 0.85rem !important;
+        }
+    }
+    
+    /* Small mobile adjustments */
+    @media (max-width: 575.98px) {
+        .product-card {
+            min-height: 460px;
+        }
+        
+        .product-card-img-wrap {
+            height: 300px !important;
+        }
+        
+        .product-card-img {
+            height: 300px !important;
+        }
+        
+        .product-card-body {
+            padding: 0.8rem !important;
+        }
+        
+        .product-name {
+            font-size: 0.9rem !important;
+            line-height: 1.2 !important;
+        }
+        
+        .product-price {
+            font-size: 1rem !important;
+        }
+        
+        .product-location, .product-type {
+            font-size: 0.75rem !important;
+        }
+    }
     </style>
     @foreach($banners as $index => $banner)
         <div class="hero-slide {{ $index == 0 ? 'active' : '' }}" style="background-image: url({{ asset($banner->image) }})">
             <div class="hero-overlay"></div>
             <div class="hero-content-wrapper">
-                <div class="hero-content">
-                    @if($banner->title)
-                        <h1 class="hero-title">{{ $banner->title }}</h1>
-                    @endif
-                    @if($banner->description)
-                        <p class="hero-description">{{ $banner->description }}</p>
-                    @endif
-                    @if($banner->button_text && $banner->button_link)
-                        <a href="{{ $banner->button_link }}" class="hero-button">{{ $banner->button_text }}</a>
-                    @endif
+                <div class="container">
+                    <div class="hero-content">
+                        @if($banner->title)
+                            <h1 class="hero-title">{{ $banner->title }}</h1>
+                        @endif
+                        @if($banner->description)
+                            <p class="hero-description">{{ $banner->description }}</p>
+                        @endif
+                        @if($banner->button_text && $banner->button_link)
+                            <a href="{{ $banner->button_link }}" class="hero-button">{{ $banner->button_text }}</a>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
@@ -265,23 +354,7 @@
 
 <!-- Tentang Perusahaan -->
 @if($companyProfile)
-<section id="tentang" class="section-padding">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6 mb-4">
-                @if($companyProfile->image)
-                    <img src="{{ asset($companyProfile->image) }}" alt="{{ $companyProfile->company_name }}" class="img-fluid rounded">
-                @endif
-            </div>
-            <div class="col-lg-6 mb-4">
-                <h2 class="section-title">{{ $companyProfile->company_name }}</h2>
-                <div class="divider-line mb-3"></div>
-                <p class="lead">{{ Str::limit($companyProfile->description, 200) }}</p>
-                <a href="{{ route('about.index') }}" class="btn btn-contact">Lihat Selengkapnya</a>
-            </div>
-        </div>
-    </div>
-</section>
+    @include('partials.about-section', ['company' => $companyProfile, 'showButton' => true, 'limitDescription' => true])
 @endif
 
 <!-- Solusi Terbaik -->
@@ -422,7 +495,7 @@
 @endif
 
 <!-- Produk Terbaik -->
-@if($products->count() > 0)
+@if(count($products) > 0)
 <section class="section-padding">
     <div class="container">
         <div class="text-center mb-5">
@@ -432,9 +505,9 @@
             </div>
         </div>
         
-        <div class="row mb-4">
+        <div class="row g-3">
             @forelse($products as $product)
-                <div class="col-lg-3 col-md-6 mb-4">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-3">
                     @if(isset($product['slug']))
                         <a href="https://ayobelanja.co.id/products/{{ $product['slug'] }}" target="_blank" rel="noopener noreferrer" class="product-card-link">
                     @endif

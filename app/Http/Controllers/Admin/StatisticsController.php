@@ -32,14 +32,18 @@ class StatisticsController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
+            'value' => 'required|integer',  // 🔥 Tambahkan value
             'suffix' => 'nullable|string|max:10',
             'icon' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'order' => 'nullable|integer',  // 🔥 Tambahkan order
             'is_active' => 'nullable|boolean',
         ]);
 
         $data = [
             'title'     => $request->title,
+            'value'     => $request->value,    // 🔥 Simpan value
             'suffix'    => $request->suffix,
+            'order'     => $request->order ?? 0, // 🔥 Simpan order
             'is_active' => $request->is_active == 1,
         ];
 
@@ -71,14 +75,18 @@ class StatisticsController extends Controller
 
         $request->validate([
             'title' => 'required|string|max:255',
+            'value' => 'required|integer', // 🔥 Update value
             'suffix' => 'nullable|string|max:10',
             'icon' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'order' => 'nullable|integer', // 🔥 Update order
             'is_active' => 'nullable|boolean',
         ]);
 
         $data = [
             'title'     => $request->title,
+            'value'     => $request->value,    // 🔥 Update value
             'suffix'    => $request->suffix,
+            'order'     => $request->order ?? 0, // 🔥 Update order
             'is_active' => $request->is_active == 1,
         ];
 

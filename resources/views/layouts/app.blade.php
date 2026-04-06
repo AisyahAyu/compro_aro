@@ -408,7 +408,6 @@
         
         .hero-content {
             max-width: 500px;
-            padding-left: 60px;
             color: white;
             text-align: left;
         }
@@ -967,6 +966,11 @@
             background: linear-gradient(90deg, var(--primary-orange), var(--primary-blue));
             margin: 0.5rem 0;
             border-radius: 2px;
+        }
+
+        @keyframes shimmer-divider {
+            0% { background-position: -100% 0; }
+            100% { background-position: 100% 0; }
         }
     </style>
 </head>

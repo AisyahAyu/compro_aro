@@ -3,78 +3,80 @@
 @section('title', 'FAQ - Company Profile')
 
 @section('content')
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
     .faq-page {
         margin-top: 90px;
-        background: #f1f1f1;
-        padding: 40px 0 34px;
+        background: #f5f5f7;
+        padding: 60px 0 50px;
         min-height: 70vh;
-        overflow: hidden;
         font-family: 'Poppins', Arial, sans-serif;
     }
 
-    @media (max-width: 767.98px) {
-        .faq-page {
-            padding: 24px 0 18px;
-        }
-        .faq-title {
-            font-size: 1.5rem;
-            margin-bottom: 14px;
-        }
-        .faq-subtitle {
-            font-size: 1rem;
-            margin-bottom: 14px;
-        }
-        .faq-list-wrap {
-            padding: 0 4px;
-        }
-        .faq-cta {
-            padding: 12px 8px;
-        }
-        .faq-cta-title, .faq-cta-text {
-            font-size: 1.2rem;
-        }
-        .faq-cta-btn {
-            font-size: 1rem;
-            padding: 10px 18px;
-        }
+    /* Hero header */
+    .faq-hero {
+        text-align: center;
+        margin-bottom: 40px;
     }
+
+    .faq-badge {
+        display: inline-block;
+        background: rgba(247, 139, 0, 0.12);
+        color: #f78b00;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        padding: 5px 14px;
+        border-radius: 999px;
+        margin-bottom: 14px;
     }
 
     .faq-title {
-        text-align: center;
-        color: #f78b00;
+        color: #1a1a2e;
         font-weight: 700;
-        font-size: 2.3rem;
-        line-height: 1.1;
-        margin-bottom: 18px;
-        animation: faqFadeUp 0.5s ease both;
-        display: block;
-        letter-spacing: -1px;
-        font-family: 'Poppins', Arial, sans-serif;
+        font-size: 2.4rem;
+        line-height: 1.2;
+        margin-bottom: 12px;
+        letter-spacing: -0.5px;
+    }
+
+    .faq-title span {
+        color: #f78b00;
     }
 
     .faq-subtitle {
-        text-align: center;
-        color: #4f4f4f;
-        font-size: 1.08rem;
-        margin-bottom: 22px;
-        animation: faqFadeUp 0.5s ease 0.08s both;
-        font-family: 'Poppins', Arial, sans-serif;
+        color: #6b7280;
+        font-size: 1rem;
+        max-width: 520px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
+    /* Search */
+    .faq-search-wrap {
+        max-width: 600px;
+        margin: 0 auto 48px;
     }
 
     .faq-search {
-        max-width: 760px;
-        margin: 0 auto 40px;
-        display: grid;
-        grid-template-columns: 1fr 110px;
-        gap: 12px;
-        animation: faqFadeUp 0.5s ease 0.16s both;
+        display: flex;
+        background: #fff;
+        border: 1.5px solid #e5e7eb;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .faq-search:focus-within {
+        border-color: #f78b00;
+        box-shadow: 0 0 0 4px rgba(247, 139, 0, 0.1);
     }
 
     .faq-input-wrap {
         position: relative;
+        flex: 1;
     }
 
     .faq-input-wrap i {
@@ -82,363 +84,302 @@
         left: 16px;
         top: 50%;
         transform: translateY(-50%);
-        color: #a3a3a3;
+        color: #9ca3af;
+        font-size: 0.9rem;
     }
 
     .faq-search input {
         width: 100%;
-        border: 1px solid #d5d5d5;
-        border-radius: 999px;
-        padding: 11px 16px 11px 42px;
+        border:
+ none;
         outline: none;
-        background: #fff;
-        font-size: 0.96rem;
-        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        background: transparent;
+        padding: 13px 16px 13px 42px;
+        font-size: 0.95rem;
+        font-family: 'Poppins', Arial, sans-serif;
+        color: #1a1a2e;
     }
 
-    .faq-search input:focus {
-        border-color: #f78b00;
-        box-shadow: 0 0 0 3px rgba(247, 139, 0, 0.12);
+    .faq-search input::placeholder {
+        color: #9ca3af;
     }
 
     .faq-search button {
-        border: 0;
-        border-radius: 999px;
+        border: none;
         background: #f78b00;
         color: #fff;
         font-weight: 600;
-        transition: transform 0.2s ease, background 0.2s ease;
+        font-size: 0.9rem;
+        padding: 0 24px;
+        cursor: pointer;
+        font-family: 'Poppins', Arial, sans-serif;
+        transition: background 0.2s;
+        white-space: nowrap;
     }
 
     .faq-search button:hover {
-        background: #e67f00;
-        transform: translateY(-1px);
+        background: #e07a00;
     }
 
+    /* Accordion */
     .faq-list-wrap {
-        position: relative;
-        max-width: 1020px;
+        max-width: 780px;
         margin: 0 auto;
-        padding-right: 0;
-        animation: faqFadeUp 0.55s ease 0.24s both;
-    }
-
-    .faq-list-wrap.is-empty {
-        min-height: 120px;
-    }
-
-    .faq-list-wrap::before,
-    .faq-list-wrap::after {
-        content: '';
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        border-radius: 42% 58% 56% 44% / 44% 36% 64% 56%;
-        pointer-events: none;
-        z-index: 0;
-    }
-
-    .faq-list-wrap::before {
-        width: 310px;
-        height: 310px;
-        background: #ff6400;
-        box-shadow: inset -10px -8px 0 rgba(255, 255, 255, 0.2);
-        opacity: 0.94;
-        animation: faqFloat 5.4s ease-in-out infinite, faqPulse 4.2s ease-in-out infinite;
-    }
-
-    .faq-list-wrap::after {
-        content: '?';
-        width: 310px;
-        height: 310px;
-        color: #fff;
-        font-weight: 700;
-        font-size: 9rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-shadow: 0 2px 0 rgba(255, 255, 255, 0.15);
-        animation: faqFloat 5.4s ease-in-out infinite;
-    }
-
-    .faq-list-wrap.is-empty::before,
-    .faq-list-wrap.is-empty::after {
-        display: none;
-    }
-
-    .faq-list {
-        width: 100%;
-        position: relative;
-        z-index: 2;
     }
 
     .faq-item {
         background: #fff;
-        border: 1px solid #e2e2e2;
-        border-radius: 6px;
-        margin-bottom: 12px;
-        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.04);
+        border: 1.5px solid #e5e7eb;
+        border-radius: 12px;
+        margin-bottom: 10px;
         overflow: hidden;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        position: relative;
-        z-index: 2;
+        transition: border-color 0.2s, box-shadow 0.2s;
     }
 
     .faq-item:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+        border-color: #f78b00;
+        box-shadow: 0 4px 16px rgba(247, 139, 0, 0.08);
+    }
+
+    .faq-item.active {
+        border-color: #f78b00;
+        box-shadow: 0 4px 20px rgba(247, 139, 0, 0.1);
     }
 
     .faq-question-btn {
         width: 100%;
-        border: 0;
-        background: #fff;
-        display: grid;
-        grid-template-columns: 34px 1fr 30px;
+        border: none;
+        background: transparent;
+        display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 14px;
         text-align: left;
-        padding: 11px 14px;
+        padding: 18px 20px;
+        cursor: pointer;
     }
 
-    .faq-plus-left {
-        font-size: 1.9rem;
-        color: #f97800;
-        line-height: 1;
-        font-weight: 300;
-        text-align: center;
+    .faq-num {
+        flex-shrink: 0;
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        background: #fff7ed;
+        color: #f78b00;
+        font-size: 0.8rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s, color 0.2s;
+    }
+
+    .faq-item.active .faq-num {
+        background: #f78b00;
+        color: #fff;
     }
 
     .faq-question-text {
-        color: #262648;
-        font-weight: 700;
-        font-size: 1.02rem;
-        line-height: 1.35;
+        flex: 1;
+        color: #1a1a2e;
+        font-weight: 600;
+        font-size: 0.97rem;
+        line-height: 1.4;
     }
 
-    .faq-plus-right {
-        width: 24px;
-        height: 24px;
+    .faq-chevron {
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
         border-radius: 50%;
-        background: #f97800;
-        color: #fff;
-        display: inline-flex;
+        border: 1.5px solid #e5e7eb;
+        display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.05rem;
-        font-weight: 700;
-        transition: transform 0.2s ease;
+        color: #9ca3af;
+        font-size: 0.75rem;
+        transition: transform 0.25s, border-color 0.2s, color 0.2s, background 0.2s;
     }
 
-    .faq-item.active .faq-plus-right {
-        transform: rotate(45deg);
+    .faq-item.active .faq-chevron {
+        transform: rotate(180deg);
+        border-color: #f78b00;
+        color: #f78b00;
+        background: #fff7ed;
     }
 
     .faq-answer {
         max-height: 0;
         overflow: hidden;
-        padding: 0 60px;
-        color: #666;
-        font-size: 0.96rem;
-        line-height: 1.55;
         opacity: 0;
-        transition: max-height 0.28s ease, opacity 0.22s ease, padding 0.22s ease;
+        transition: max-height 0.3s ease, opacity 0.25s ease, padding 0.25s ease;
+        padding: 0 20px 0 66px;
+        color: #6b7280;
+        font-size: 0.93rem;
+        line-height: 1.7;
     }
 
     .faq-item.active .faq-answer {
-        max-height: 220px;
+        max-height: 300px;
         opacity: 1;
-        padding: 0 60px 16px;
+        padding: 0 20px 18px 66px;
     }
 
-    .faq-cta {
-        margin-top: 34px;
-        background: linear-gradient(90deg, #e8df4a 0%, #ff8500 100%);
-        border-radius: 8px;
-        padding: 26px 34px;
-        animation: faqFadeUp 0.55s ease 0.34s both;
+    /* Divider inside item */
+    .faq-item.active .faq-question-btn {
+        border-bottom: 1px solid #fde8c8;
+    }
+
+    /* Empty state */
+    .faq-empty {
+        background: #fff;
+        border: 1.5px dashed #e5e7eb;
+        border-radius: 12px;
+        padding: 40px 20px;
         text-align: center;
+        color: #9ca3af;
+        font-size: 0.95rem;
+    }
+
+    .faq-empty i {
+        font-size: 2rem;
+        margin-bottom: 10px;
+        display: block;
+        color: #d1d5db;
+    }
+
+    /* CTA */
+    .faq-cta {
+        max-width: 780px;
+        margin: 40px auto 0;
+        background: linear-gradient(135deg, #1a1a2e 0%, #2d2d5e 100%);
+        border-radius: 16px;
+        padding: 40px 48px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+    }
+
+    .faq-cta-body {
+        flex: 1;
     }
 
     .faq-cta-title {
-        margin: 0 0 8px;
-        font-size: 2.95rem;
-        font-weight: 500;
-        color: #2f2300;
+        margin: 0 0 6px;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #fff;
+        line-height: 1.3;
     }
 
     .faq-cta-text {
-        margin: 0 0 18px;
-        font-size: 2.25rem;
-        color: #2f2300;
-        font-weight: 500;
+        margin: 0;
+        font-size: 0.9rem;
+        color: rgba(255,255,255,0.65);
+        line-height: 1.5;
     }
 
     .faq-cta-btn {
+        flex-shrink: 0;
         display: inline-flex;
         align-items: center;
-        justify-content: center;
-        background: #0a0055;
+        gap: 8px;
+        background: #f78b00;
         color: #fff;
         text-decoration: none;
-        border-radius: 999px;
-        padding: 12px 34px;
-        font-size: 1.9rem;
+        border-radius: 10px;
+        padding: 13px 28px;
+        font-size: 0.92rem;
         font-weight: 600;
-        transition: transform 0.2s ease;
+        font-family: 'Poppins', Arial, sans-serif;
+        transition: background 0.2s, transform 0.2s;
+        white-space: nowrap;
     }
 
     .faq-cta-btn:hover {
+        background: #e07a00;
         color: #fff;
         transform: translateY(-1px);
     }
 
-    .faq-empty {
-        background: #fff;
-        border: 1px solid #e2e2e2;
-        border-radius: 8px;
-        padding: 20px 18px;
-        text-align: center;
-        color: #666;
-        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.04);
-        position: relative;
-        z-index: 2;
-    }
-
+    /* Animations */
     @keyframes faqFadeUp {
-        from {
-            opacity: 0;
-            transform: translateY(16px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        from { opacity: 0; transform: translateY(18px); }
+        to   { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes faqFloat {
-        0%, 100% {
-            transform: translate(-50%, -50%) translate(0, 0) rotate(0deg);
-        }
-        50% {
-            transform: translate(-50%, -50%) translate(-6px, 6px) rotate(-2deg);
-        }
-    }
+    .faq-hero    { animation: faqFadeUp 0.45s ease both; }
+    .faq-search-wrap { animation: faqFadeUp 0.45s ease 0.08s both; }
+    .faq-list-wrap   { animation: faqFadeUp 0.45s ease 0.16s both; }
+    .faq-cta         { animation: faqFadeUp 0.45s ease 0.24s both; }
 
-    @keyframes faqPulse {
-        0%,
-        100% {
-            box-shadow: inset -10px -8px 0 rgba(255, 255, 255, 0.2), 0 0 0 0 rgba(255, 100, 0, 0.05);
-        }
-        50% {
-            box-shadow: inset -12px -10px 0 rgba(255, 255, 255, 0.24), 0 0 0 10px rgba(255, 100, 0, 0.02);
-        }
-    }
-
-    @media (max-width: 992px) {
-        .faq-list-wrap {
-            padding-right: 0;
-        }
-
-        .faq-list-wrap::before {
-            width: 220px;
-            height: 220px;
-            opacity: 0.9;
-        }
-
-        .faq-list-wrap::after {
-            width: 220px;
-            height: 220px;
-            font-size: 6.2rem;
-        }
-
-        .faq-title {
-            font-size: 2rem;
-        }
-
-        .faq-subtitle {
-            font-size: 1.1rem;
-        }
-
-        .faq-cta-title,
-        .faq-cta-text {
-            font-size: 1.6rem;
-        }
-
-        .faq-cta-btn {
-            font-size: 1.1rem;
-        }
-    }
-
-    @media (max-width: 640px) {
-        .faq-list-wrap::before {
-            width: 150px;
-            height: 150px;
-            opacity: 0.78;
-        }
-
-        .faq-list-wrap::after {
-            width: 150px;
-            height: 150px;
-            font-size: 4.2rem;
-        }
-
-        .faq-search {
-            grid-template-columns: 1fr;
-        }
-
-        .faq-answer {
-            padding: 0 14px 14px 56px;
-        }
-
-        .faq-item.active .faq-answer {
-            padding: 0 14px 14px 56px;
-        }
-
+    /* Responsive */
+    @media (max-width: 767px) {
+        .faq-page { padding: 40px 0 36px; }
+        .faq-title { font-size: 1.7rem; }
         .faq-cta {
-            padding: 20px;
+            flex-direction: column;
+            text-align: center;
+            padding: 28px 24px;
+        }
+        .faq-answer,
+        .faq-item.active .faq-answer {
+            padding-left: 20px;
         }
     }
 </style>
 
 <div class="faq-page">
     <div class="container">
-        <div class="d-flex justify-content-center">
-            <h1 class="faq-title">Frequently Asked Questions</h1>
-        </div>
-        <p class="faq-subtitle">Temukan jawaban atas pertanyaan yang sering diajukan mengenai layanan dan produk kami</p>
 
-        <form class="faq-search" method="GET" action="{{ route('faq.page') }}">
-            <div class="faq-input-wrap">
-                <i class="fas fa-search"></i>
-                <input type="text" name="q" value="{{ $searchKeyword }}" placeholder="Cari Pertanyaan">
-            </div>
-            <button type="submit">Cari</button>
-        </form>
-
-        <div class="faq-list-wrap {{ count($faqs) === 0 ? 'is-empty' : '' }}">
-            <div class="faq-list" id="faqAccordion">
-                @forelse($faqs as $index => $faq)
-                    <article class="faq-item {{ $index === 0 ? 'active' : '' }}">
-                        <button type="button" class="faq-question-btn" data-faq-toggle>
-                            <span class="faq-plus-left">+</span>
-                            <span class="faq-question-text">{{ $faq['question'] }}</span>
-                            <span class="faq-plus-right">+</span>
-                        </button>
-                        <div class="faq-answer">{{ $faq['answer'] }}</div>
-                    </article>
-                @empty
-                    <div class="faq-empty">Pertanyaan tidak ditemukan. Coba kata kunci lain.</div>
-                @endforelse
-            </div>
+        {{-- Hero --}}
+        <div class="faq-hero">
+            <span class="faq-badge">FAQ</span>
+            <h1 class="faq-title">Ada yang ingin kamu <span>tanyakan?</span></h1>
+            <p class="faq-subtitle">Temukan jawaban atas pertanyaan yang sering diajukan mengenai layanan dan produk kami.</p>
         </div>
 
+        {{-- Search --}}
+        <div class="faq-search-wrap">
+            <form class="faq-search" method="GET" action="{{ route('faq.page') }}">
+                <div class="faq-input-wrap">
+                    <i class="fas fa-search"></i>
+                    <input type="text" name="q" value="{{ $searchKeyword }}" placeholder="Cari pertanyaan...">
+                </div>
+                <button type="submit">Cari</button>
+            </form>
+        </div>
+
+        {{-- Accordion --}}
+        <div class="faq-list-wrap">
+            @forelse($faqs as $index => $faq)
+                <article class="faq-item {{ $index === 0 ? 'active' : '' }}">
+                    <button type="button" class="faq-question-btn" data-faq-toggle>
+                        <span class="faq-num">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                        <span class="faq-question-text">{{ $faq['question'] }}</span>
+                        <span class="faq-chevron"><i class="fas fa-chevron-down"></i></span>
+                    </button>
+                    <div class="faq-answer">{{ $faq['answer'] }}</div>
+                </article>
+            @empty
+                <div class="faq-empty">
+                    <i class="fas fa-search"></i>
+                    Pertanyaan tidak ditemukan. Coba kata kunci lain.
+                </div>
+            @endforelse
+        </div>
+
+        {{-- CTA --}}
         <section class="faq-cta">
-            <h2 class="faq-cta-title">Masih Memiliki Pertanyaan ?</h2>
-            <p class="faq-cta-text">Silahkan hubungi Tim kami untuk mendapatkan informasi lebih lanjut</p>
-            <a href="{{ route('contact.page') }}" class="faq-cta-btn">Hubungi Kami</a>
+            <div class="faq-cta-body">
+                <h2 class="faq-cta-title">Masih punya pertanyaan?</h2>
+                <p class="faq-cta-text">Tim kami siap membantu kamu mendapatkan informasi lebih lanjut.</p>
+            </div>
+            <a href="{{ route('contact.page') }}" class="faq-cta-btn">
+                Hubungi Kami <i class="fas fa-arrow-right"></i>
+            </a>
         </section>
+
     </div>
 </div>
 @endsection
@@ -447,26 +388,18 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const navbar = document.querySelector('.transparent-navbar');
-        if (navbar) {
-            navbar.classList.add('scrolled');
-        }
+        if (navbar) navbar.classList.add('scrolled');
 
-        const items = document.querySelectorAll('.faq-item');
-        items.forEach(function (item) {
+        document.querySelectorAll('.faq-item').forEach(function (item) {
             const trigger = item.querySelector('[data-faq-toggle]');
-            if (!trigger) {
-                return;
-            }
+            if (!trigger) return;
 
             trigger.addEventListener('click', function () {
                 const isActive = item.classList.contains('active');
-                items.forEach(function (faqItem) {
-                    faqItem.classList.remove('active');
+                document.querySelectorAll('.faq-item').forEach(function (el) {
+                    el.classList.remove('active');
                 });
-
-                if (!isActive) {
-                    item.classList.add('active');
-                }
+                if (!isActive) item.classList.add('active');
             });
         });
     });
