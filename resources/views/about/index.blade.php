@@ -39,35 +39,7 @@
 </section>
 
 {{-- ===================== ABOUT ===================== --}}
-<section class="section-padding">
-    <div class="container">
-        <div class="row align-items-center">
-
-            {{-- GAMBAR DARI DB --}}
-            <div class="col-lg-6 mb-4">
-                @if($companyProfile->image)
-                    <img src="{{ asset($companyProfile->image) }}" alt="{{ $companyProfile->company_name }}" class="img-fluid rounded">
-                @endif
-            </div>
-
-            {{-- TEKS DARI DB --}}
-            <div class="col-lg-6">
-                <h2 class="section-title" style="color: #EE8E0F;">Tentang Perusahaan</h2>
-                <div class="divider-line" style="background: linear-gradient(90deg, #FFA500, #FF8C00, #FFA500); width: 50px; height: 3px; margin: 12px 0; border-radius: 2px; box-shadow: 0 2px 8px rgba(255, 165, 0, 0.3); animation: shimmer-divider 3s ease-in-out infinite;"></div>
-
-                @if(!empty($company?->description))
-                    <p style="line-height:1.8; color:#555; text-align: justify;">
-                        {{ $company->description }}
-                    </p>
-                @else
-                    <p class="text-muted">Belum ada deskripsi perusahaan</p>
-                @endif
-
-            </div>
-
-        </div>
-    </div>
-</section>
+@include('partials.about-section', ['company' => $company, 'showButton' => false, 'limitDescription' => false])
 
 
 {{-- ===================== STATISTIK ===================== --}}
@@ -271,10 +243,7 @@
             line-height: 1.6;
         }
 
-        @keyframes shimmer-divider {
-            0% { background-position: -100% 0; }
-            100% { background-position: 100% 0; }
-        }
+
 
         /* Brand Scroll Styles */
         .brand-scroll-wrapper {

@@ -56,11 +56,11 @@ php artisan migrate --force
 
 ## 5. Pengaturan Folder Permissions
 
-Apache (user `www-data`) harus memiliki akses tulis ke folder `storage` dan `bootstrap/cache`:
+Apache (user `www-data`) harus memiliki akses tulis ke folder `storage`, `bootstrap/cache`, dan `public/uploads`:
 
 ```bash
-sudo chown -R www-data:www-data /var/www/compro_aro/storage /var/www/compro_aro/bootstrap/cache
-sudo chmod -R 775 /var/www/compro_aro/storage /var/www/compro_aro/bootstrap/cache
+sudo chown -R www-data:www-data /var/www/compro_aro/storage /var/www/compro_aro/bootstrap/cache /var/www/compro_aro/public/uploads
+sudo chmod -R 775 /var/www/compro_aro/storage /var/www/compro_aro/bootstrap/cache /var/www/compro_aro/public/uploads
 ```
 
 ## 6. Konfigurasi Apache VirtualHost

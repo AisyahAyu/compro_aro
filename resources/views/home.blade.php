@@ -325,16 +325,18 @@
         <div class="hero-slide {{ $index == 0 ? 'active' : '' }}" style="background-image: url({{ asset($banner->image) }})">
             <div class="hero-overlay"></div>
             <div class="hero-content-wrapper">
-                <div class="hero-content">
-                    @if($banner->title)
-                        <h1 class="hero-title">{{ $banner->title }}</h1>
-                    @endif
-                    @if($banner->description)
-                        <p class="hero-description">{{ $banner->description }}</p>
-                    @endif
-                    @if($banner->button_text && $banner->button_link)
-                        <a href="{{ $banner->button_link }}" class="hero-button">{{ $banner->button_text }}</a>
-                    @endif
+                <div class="container">
+                    <div class="hero-content">
+                        @if($banner->title)
+                            <h1 class="hero-title">{{ $banner->title }}</h1>
+                        @endif
+                        @if($banner->description)
+                            <p class="hero-description">{{ $banner->description }}</p>
+                        @endif
+                        @if($banner->button_text && $banner->button_link)
+                            <a href="{{ $banner->button_link }}" class="hero-button">{{ $banner->button_text }}</a>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
@@ -352,23 +354,7 @@
 
 <!-- Tentang Perusahaan -->
 @if($companyProfile)
-<section id="tentang" class="section-padding">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6 mb-4">
-                @if($companyProfile->image)
-                    <img src="{{ asset($companyProfile->image) }}" alt="{{ $companyProfile->company_name }}" class="img-fluid rounded">
-                @endif
-            </div>
-            <div class="col-lg-6 mb-4">
-                <h2 class="section-title">{{ $companyProfile->company_name }}</h2>
-                <div class="divider-line mb-3"></div>
-                <p class="lead">{{ Str::limit($companyProfile->description, 200) }}</p>
-                <a href="{{ route('about.index') }}" class="btn btn-contact">Lihat Selengkapnya</a>
-            </div>
-        </div>
-    </div>
-</section>
+    @include('partials.about-section', ['company' => $companyProfile, 'showButton' => true, 'limitDescription' => true])
 @endif
 
 <!-- Solusi Terbaik -->

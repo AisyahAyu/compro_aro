@@ -225,7 +225,7 @@ class HomeController extends Controller
         $partners = Partner::where('is_active', true)->orderBy('order')->get();
         $products = Product::where('is_active', true)->inRandomOrder()->limit(4)->get();
         $platform = Platform::where('is_active', true)->first();
-        
+
         // Process platform URL safely
         if ($platform && $platform->platform_url) {
             $url = $platform->platform_url;
@@ -261,11 +261,11 @@ class HomeController extends Controller
         $selectedCategory = (string) request()->query('category', 'Semua');
         $selectedBrands = request()->query('brands', []);
 
-        if (! is_array($selectedBrands)) {
+        if (!is_array($selectedBrands)) {
             $selectedBrands = [$selectedBrands];
         }
 
-        if (! in_array($selectedCategory, $categories, true)) {
+        if (!in_array($selectedCategory, $categories, true)) {
             $selectedCategory = 'Semua';
         }
 
@@ -300,7 +300,7 @@ class HomeController extends Controller
         $companyProfile = CompanyProfile::first();
         ['products' => $products] = $this->getCatalogData();
 
-        if (! isset($products[$index])) {
+        if (!isset($products[$index])) {
             abort(404);
         }
 
