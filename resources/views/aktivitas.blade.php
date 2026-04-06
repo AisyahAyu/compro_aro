@@ -40,11 +40,11 @@
                         <span class="badge text-white position-absolute m-3 px-3 py-1"
                               style="background:#f38100;">TERBARU</span>
 
-                        <a href="{{ route('detail-aktivitas', $utama->id) }}">
-                            <img src="{{ $utama->gambar_url }}"
-                                 class="img-fluid rounded mb-3 shadow-sm"
-                                 style="width:100%; height:320px; object-fit:cover;">
-                        </a>
+                                        <a href="{{ route('detail-aktivitas', $utama->id) }}">
+<img src="{{ $utama->gambar_url }}"
+     srcset="{{ $utama->gambar_url }} 1x, {{ $utama->gambar_url_hd }} 2x"
+     class="img-fluid rounded mb-3 shadow-sm"
+     style="width:100%; height:300px; object-fit:cover;">
                     </div>
 
 
@@ -262,6 +262,11 @@ $(document).ready(function() {
             font-size: 1rem !important;
         }
     }
+img {
+  filter: contrast(1.05) sharpness(1.1);
+}
+
+
 </style>
 
 @endsection

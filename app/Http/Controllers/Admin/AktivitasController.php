@@ -32,7 +32,7 @@ class AktivitasController extends Controller
             'judul' => 'required|max:255',
             'Deskripsi' => 'required',
             'kategori' => 'required',
-            'gambar' => 'nullable|image|mimes:jpg,png,jpeg|max:2048'
+            'gambar' => 'nullable|image|mimes:jpg,png,jpeg|max:5120'
         ]);
 
         if ($request->hasFile('gambar')) {
@@ -59,7 +59,7 @@ class AktivitasController extends Controller
             'judul' => 'required|max:255',
             'Deskripsi' => 'required',
             'kategori' => 'required',
-            'gambar' => 'nullable|image|mimes:jpg,png,jpeg|max:2048'
+            'gambar' => 'nullable|image|mimes:jpg,png,jpeg|max:5120'
         ]);
 
         if ($request->hasFile('gambar')) {
