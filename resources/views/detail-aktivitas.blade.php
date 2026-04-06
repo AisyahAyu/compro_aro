@@ -17,7 +17,7 @@ $imgs = is_array($aktivitas->gambar) ? $aktivitas->gambar : [$aktivitas->gambar]
     <div class="row mb-5 px-3">
         <div class="col-12">
             <div class="banner-container shadow-sm rounded overflow-hidden">
-                <img src="{{ asset('storage/' . ($imgs[0] ?? 'default.jpg')) }}"
+                <img src="{{ asset('storage/aktivitas/' . ($imgs[0] ?? 'default.jpg')) }}"
                     alt="{{ $aktivitas->judul }}"
                     class="img-fluid w-100 main-banner-img">
             </div>
@@ -78,7 +78,7 @@ $imgs = is_array($aktivitas->gambar) ? $aktivitas->gambar : [$aktivitas->gambar]
                 <div class="card border-0 shadow-sm h-100 custom-card">
                     <a href="{{ route('detail-aktivitas', $item->id) }}" class="overflow-hidden">
                         @php $itemImgs = is_array($item->gambar) ? $item->gambar : [$item->gambar]; @endphp
-                        <img src="{{ asset('storage/' . ($itemImgs[0] ?? 'default.jpg')) }}"
+                        <img src="{{ asset('storage/aktivitas/' . ($itemImgs[0] ?? 'default.jpg')) }}"
                             class="card-img-top thumb-img"
                             alt="{{ $item->judul }}">
                     </a>

@@ -41,7 +41,7 @@
                               style="background:#f38100;">TERBARU</span>
 
                         <a href="{{ route('detail-aktivitas', $utama->id) }}">
-                            <img src="{{ asset('storage/' . $utama->gambar) }}"
+                            <img src="{{ asset('storage/aktivitas/' . $utama->gambar) }}"
                                  class="img-fluid rounded mb-3 shadow-sm"
                                  style="width:100%; height:320px; object-fit:cover;">
                         </a>
@@ -121,7 +121,7 @@
         <div class="row">
             @foreach($galeri as $g)
             <div class="col-lg-4 col-md-6 mb-4">
-                <img src="{{ asset('storage/' . $g->gambar) }}"
+                <img src="{{ asset('storage/aktivitas/' . $g->gambar) }}"
                      class="img-fluid rounded shadow-sm"
                      style="height:200px; width:100%; object-fit:cover;">
             </div>

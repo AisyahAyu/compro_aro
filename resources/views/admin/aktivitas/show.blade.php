@@ -12,7 +12,7 @@
                 <div class="card-body box-profile">
                     <div class="text-center mb-3">
                         @if($aktivitas->gambar)
-                            <img class="img-fluid rounded" src="{{ asset('storage/' . $aktivitas->gambar) }}" alt="Gambar Aktivitas">
+                            <img class="img-fluid rounded" src="{{ asset('storage/aktivitas/' . $aktivitas->gambar) }}" alt="Gambar Aktivitas">
                         @else
                             <img class="img-fluid rounded" src="{{ asset('images/no-image.png') }}" alt="No Image">
                         @endif
