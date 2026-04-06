@@ -114,57 +114,47 @@
             </a>
           </li>
           <li class="nav-item has-treeview {{ request()->is('admin/statistics*') || request()->is('admin/visi-misi*') || request()->is('admin/team-members*') || request()->is('admin/brands*') ? 'menu-open' : '' }}">
-
-    <a href="#" class="nav-link">
-        <i class="nav-icon fas fa-info-circle"></i>
-        <p>
-            Tentang
-            <i class="right fas fa-angle-left"></i>
-        </p>
-    </a>
-
-    <ul class="nav nav-treeview">
-
-        <li class="nav-item">
-            <a href="/admin/statistics" class="nav-link {{ request()->is('admin/statistics*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Statistik</p>
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-info-circle"></i>
+              <p>
+                Tentang
+                <i class="right fas fa-angle-left"></i>
+              </p>
             </a>
-        </li>
-
-        <li class="nav-item">
-            <a href="/admin/visi-misi" class="nav-link {{ request()->is('admin/visi-misi*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Visi & Misi</p>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a href="{{ route('admin.brands.index') }}" 
-              class="nav-link {{ request()->is('admin/brands*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Brands</p>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a href="{{ route('admin.partners.index') }}" 
-              class="nav-link {{ request()->is('admin/partners*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Mitra Teknologi</p>
-            </a>
-        </li>
-
-
-        <li class="nav-item">
-            <a href="/admin/team-members" class="nav-link {{ request()->is('admin/team-members*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Team</p>
-            </a>
-        </li>
-
-    </ul>
-</li>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/admin/statistics" class="nav-link {{ request()->is('admin/statistics*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Statistik</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/admin/visi-misi" class="nav-link {{ request()->is('admin/visi-misi*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Visi & Misi</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.brands.index') }}" class="nav-link {{ request()->is('admin/brands*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Brands</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.partners.index') }}" class="nav-link {{ request()->is('admin/partners*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Mitra</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/admin/team-members" class="nav-link {{ request()->is('admin/team-members*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Team</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          
           <li class="nav-item">
             <a href="#" class="nav-link {{ request()->is('admin/banners*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-image"></i>
@@ -250,30 +240,6 @@
                 <a href="{{ route('admin.products.create') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tambah Produk</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          
-          <li class="nav-item">
-            <a href="#" class="nav-link {{ request()->is('admin/partners*') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-handshake"></i>
-              <p>
-                Mitra
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('admin.partners.index') }}" class="nav-link {{ request()->is('admin/partners') ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Daftar Mitra</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('admin.partners.create') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Tambah Mitra</p>
                 </a>
               </li>
             </ul>
