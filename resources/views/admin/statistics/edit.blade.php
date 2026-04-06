@@ -38,8 +38,13 @@
             </div>
 
             <div class="form-group">
+                <label>Value</label>
+                <input type="number" name="value" class="form-control" value="{{ $statistic->value }}" required>
+            </div>
+
+            <div class="form-group">
                 <label>Suffix</label>
-                <input type="text" name="suffix" class="form-control" value="{{ $statistic->suffix }}">
+                <input type="text" name="suffix" class="form-control" value="{{ $statistic->suffix }}" placeholder="e.g., +, %">
             </div>
 
             <div class="form-group">
@@ -50,6 +55,11 @@
                     <small>Icon saat ini: {{ $statistic->icon }}</small><br>
                     <img src="{{ asset('storage/' . $statistic->icon) }}" style="max-width: 50px; max-height: 50px;" alt="Icon">
                 @endif
+            </div>
+
+            <div class="form-group">
+                <label>Order (Urutan Tampil)</label>
+                <input type="number" name="order" class="form-control" value="{{ $statistic->order }}">
             </div>
 
             <div class="form-group">

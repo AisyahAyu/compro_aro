@@ -28,14 +28,24 @@
         </div>
 
         <div class="form-group">
+            <label>Value</label>
+            <input type="number" name="value" class="form-control" required>
+        </div>
+
+        <div class="form-group">
             <label>Suffix</label>
-            <input type="text" name="suffix" class="form-control">
+            <input type="text" name="suffix" class="form-control" placeholder="e.g., +, %">
         </div>
 
         {{-- 🔥 ICON SEKARANG = GAMBAR --}}
         <div class="form-group">
             <label>Icon (Upload Gambar)</label>
             <input type="file" name="icon" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Order (Urutan Tampil)</label>
+            <input type="number" name="order" class="form-control" value="0">
         </div>
 
         <div class="form-group">
