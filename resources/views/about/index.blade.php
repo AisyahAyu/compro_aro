@@ -6,11 +6,11 @@
 {{-- ===================== BANNER ===================== --}}
 <section class="hero-slider"
     style="
-        background-image: url('{{ asset('uploads/banners_about.png') }}');
+        background-image: url('{{ asset('uploads/banner_tentangg.png') }}');
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
-        min-height: 80vh;
+        min-height: 100vh;
     ">
 
     <div class="hero-content-wrapper">
@@ -772,15 +772,15 @@ function scrollToBrand(index) {
     const cardsPerView = 4;
     const totalPages = Math.ceil(totalBrands / cardsPerView);
     
-    // Calculate which page to scroll to based on dot index (0, 1, 2)
+    // Calculate which page to scroll to based on dot index
     let targetPage;
     if (index === 0) {
         targetPage = 0;
     } else if (index === 1) {
-        // Middle dot goes to the middle page
+        // Middle dot goes to middle page
         targetPage = Math.floor(totalPages / 2);
     } else if (index === 2) {
-        // Last dot goes to the last page
+        // Last dot goes to last page
         targetPage = totalPages - 1;
     }
     
@@ -792,7 +792,7 @@ function scrollToBrand(index) {
         behavior: 'smooth'
     });
     
-    // Update active dot
+    // Update active dot immediately
     document.querySelectorAll('.dot').forEach((dot, i) => {
         dot.classList.toggle('active', i === index);
     });
@@ -832,15 +832,15 @@ function scrollToPartner(index) {
     const cardsPerView = 4;
     const totalPages = Math.ceil(totalPartners / cardsPerView);
     
-    // Calculate which page to scroll to based on dot index (0, 1, 2)
+    // Calculate which page to scroll to based on dot index
     let targetPage;
     if (index === 0) {
         targetPage = 0;
     } else if (index === 1) {
-        // Middle dot goes to the middle page
+        // Middle dot goes to middle page
         targetPage = Math.floor(totalPages / 2);
     } else if (index === 2) {
-        // Last dot goes to the last page
+        // Last dot goes to last page
         targetPage = totalPages - 1;
     }
     
@@ -852,7 +852,7 @@ function scrollToPartner(index) {
         behavior: 'smooth'
     });
     
-    // Update active dot
+    // Update active dot immediately
     document.querySelectorAll('.partner-dot').forEach((dot, i) => {
         dot.classList.toggle('active', i === index);
     });

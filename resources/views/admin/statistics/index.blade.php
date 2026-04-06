@@ -15,7 +15,7 @@
 
     <div class="card-body">
 
-        {{-- ✅ NOTIF SUCCESS --}}
+        {{-- NOTIF SUCCESS --}}
         @if(session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
@@ -41,7 +41,7 @@
                     <td>{{ $item->title }}</td>
                     <td>{{ $item->suffix ?? '-' }}</td>
 
-                    {{-- ✅ FIX AMAN (CEK FILE ADA / TIDAK) --}}
+                    {{-- FIX AMAN (CEK FILE ADA / TIDAK) --}}
                     <td>
                         @if(!empty($item->icon) && file_exists(public_path('storage/'.$item->icon)))
                             <img src="{{ asset('storage/'.$item->icon) }}" 
