@@ -34,9 +34,9 @@
                     <div class="row mt-2">
                         <div class="col-md-7">
                             <div class="form-group">
-                                <label for="icon"><i class="fas fa-image mr-1"></i> Benefit Icon <span class="text-danger">*</span></label>
+                             <label for="icon"><i class="fas fa-image mr-1"></i> Benefit Icon</label>
                                 <div class="custom-file">
-                                    <input type="file" name="icon" class="custom-file-input @error('icon') is-invalid @enderror" id="icon" accept="image/*" required>
+                                    <input type="file" name="icon" class="custom-file-input @error('icon') is-invalid @enderror" id="icon" accept="image/*">
                                     <label class="custom-file-label" for="icon">Choose image...</label>
                                 </div>
                                 @error('icon') <span class="text-danger small">{{ $message }}</span> @enderror

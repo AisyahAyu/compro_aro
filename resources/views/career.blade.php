@@ -7,26 +7,23 @@
 {{-- CSS UNTUK BANNER ORANYE & PENCARIAN OVERLAP --}}
 <style>
     /* Reset & Background Global */
-   .hero-career {
-    background: linear-gradient(rgba(243, 112, 33, 0.9), rgba(229, 93, 10, 0.8)), 
-                url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1350&q=80'); 
+.hero-career {
+    background: linear-gradient(rgba(243, 112, 33, 0.9), rgba(229, 93, 10, 0.8)),
+                url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1350&q=80');
     background-size: cover;
     background-position: center;
-    background-blend-mode: multiply; /* Menjaga warna oranye tetap solid */
+    background-blend-mode: multiply;
 
-    /* --- PERUBAHAN UTAMA UNTUK BESARKAN KE BAWAH --- */
-    min-height: 85vh;           /* Mengambil 85% tinggi layar agar sangat besar */
-    display: flex;              /* Agar konten tetap di tengah walau banner besar */
-    align-items: center;        /* Konten tetap center secara vertikal */
-    padding-top: 150px;         /* Ruang atas untuk navbar */
-    padding-bottom: 150px;      /* Ruang bawah agar lebih panjang ke bawah */
-    /* ---------------------------------------------- */
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    padding-top: 150px;
+    padding-bottom: 150px;
 
     color: white;
     margin-top: 0;
     text-align: center;
 }
-
 /* Ukuran Font diperbesar sedikit agar seimbang dengan bannernya */
 .hero-career h1 { 
     font-size: 4rem; 

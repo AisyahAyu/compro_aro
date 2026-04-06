@@ -30,6 +30,7 @@ use App\Http\Controllers\Admin\BenefitController;
 use App\Http\Controllers\Admin\AktivitasController as AdminAktivitasController;
 use App\Http\Controllers\Admin\JobApplicationController as AdminJobApplicationController;
 use App\Http\Controllers\Admin\FaqController;
+use App\Http\Controllers\Admin\UpcomingEventController;
 
 
 // ======================
@@ -93,6 +94,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('aktivitas', AdminAktivitasController::class);
     Route::resource('applications', AdminJobApplicationController::class);
     Route::resource('faqs', FaqController::class);
+    Route::resource('upcoming_event', UpcomingEventController::class);
 
     // ======================
     // CONTACT SECTION (SINGLE)

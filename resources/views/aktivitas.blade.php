@@ -111,6 +111,65 @@
     </div>
 </section>
 
+
+{{-- AGENDA MENDATANG --}}
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold mb-3" style="color:#f38100; font-size: 28px;">Mendatang</h2>
+            <p class="text-muted" style="font-size: 16px; line-height: 1.6;">   
+            </p>
+        </div>
+
+        <div class="row justify-content-center mt-4">
+            @forelse($agendaMendatang as $event)
+                <div class="col-lg-4 col-md-6 mb-4" style="max-width: 350px;">
+                    <div class="card h-100 border-0 shadow-sm" style="border-radius: 20px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05) !important;">
+                        
+                        <div style="height: 180px; overflow: hidden;">
+                            @if($event->image)
+                                <img src="{{ asset('storage/' . $event->image) }}" class="card-img-top" alt="{{ $event->title }}" style="height: 100%; width: 100%; object-fit: cover;">
+                            @else
+                                <div class="bg-light d-flex align-items-center justify-content-center h-100 text-muted">
+                                    <i class="fas fa-image fa-2x"></i>
+                                </div>
+                            @endif
+                        </div>
+
+                        <div class="card-body p-4 d-flex flex-column">
+                            <h5 class="fw-bold mb-3" style="font-size: 18px; line-height: 1.4;">{{ $event->title }}</h5>
+                            
+                            <div class="text-muted mb-4" style="font-size: 14px; line-height: 1.6;">
+                                {!! $event->description !!}
+                            </div>
+
+                            <div class="mt-auto pt-3 border-top" style="font-size: 13px; color: #6c757d;">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="far fa-calendar-alt me-2 text-secondary"></i>
+                                    {{ \Carbon\Carbon::parse($event->event_date)->translatedFormat('d M Y') }}
+                                </div>
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fas fa-map-marker-alt me-2 text-secondary"></i>
+                                    {{ $event->location ?? 'TBA' }}
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="far fa-clock me-2 text-secondary"></i>
+                                    {{ \Carbon\Carbon::parse($event->start_time)->format('H.i') }} WIB - Selesai
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <div class="col-12 text-center py-5">
+                    <p class="text-muted">Belum ada agenda mendatang.</p>
+                </div>
+            @endforelse
+        </div>
+    </div>
+</section>
+
+
 {{-- GALERI --}}
 <section class="py-5 bg-light">
     <div class="container text-center">

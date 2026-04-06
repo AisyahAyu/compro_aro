@@ -384,6 +384,14 @@
               </a>
           </li>
 
+ <li class="nav-item">
+    <a href="{{ route('admin.upcoming_event.index') }}" 
+       class="nav-link {{ request()->is('admin/upcoming_event*') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-calendar-alt"></i>
+        <p>Agenda Mendatang</p>
+    </a>
+</li>
+
             <li class="nav-item">
               <a href="{{ route('admin.faqs.index') }}" class="nav-link {{ request()->is('admin/faqs*') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-question-circle"></i>

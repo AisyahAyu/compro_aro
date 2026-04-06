@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Aktivitas;
 use App\Models\Banner;
+use App\Models\UpcomingEvent; // Import model UpcomingEvent
 use Illuminate\Http\Request;
 
 class AktivitasController extends Controller
@@ -15,6 +16,13 @@ class AktivitasController extends Controller
             ->first();
 
         $utama = Aktivitas::latest()->first();
+
+        // Ambil data agenda mendatang dari tabel UpcomingEvent
+        $agendaMendatang = UpcomingEvent::where('is_published', true)
+            ->where('category', 'upcoming')
+            ->orderBy('event_date', 'asc') // Urutkan dari yang paling dekat tanggalnya
+            ->take(3)
+            ->get();
 
         $sidebarQuery = Aktivitas::latest();
 
@@ -45,11 +53,13 @@ class AktivitasController extends Controller
             ->take(6)
             ->get();
 
+        // Kirim $agendaMendatang ke view
         return view('aktivitas', compact(
             'banner',
             'utama',
             'sidebarPosts',
-            'galeri'
+            'galeri',
+            'agendaMendatang' 
         ));
     }
 
