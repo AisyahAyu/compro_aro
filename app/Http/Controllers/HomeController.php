@@ -14,33 +14,22 @@ use App\Models\Platform;
 use App\Models\Footer;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
+use App\Models\Faq;
 
 class HomeController extends Controller
 {
     private function getFaqData(): array
     {
-        return [
-            [
-                'question' => 'Apa saja layanan yang disediakan oleh perusahaan?',
-                'answer' => 'Perusahaan menyediakan berbagai layanan seperti instalasi sistem, pengembangan software, konsultasi teknologi, serta pelatihan di bidang teknologi informasi untuk mendukung kebutuhan klien.',
-            ],
-            [
-                'question' => 'Bagaimana cara melakukan pemesanan produk atau layanan?',
-                'answer' => 'Anda dapat melakukan pemesanan melalui tim sales kami via email, telepon, atau WhatsApp. Tim kami akan membantu proses kebutuhan, penawaran, hingga tahap pengadaan.',
-            ],
-            [
-                'question' => 'Bagaimana cara menghubungi tim perusahaan?',
-                'answer' => 'Silakan hubungi kami melalui email arobaskara@gmail.com, telepon (021) 38835187, atau WhatsApp +62 822-8888-6009 pada jam kerja.',
-            ],
-            [
-                'question' => 'Apakah perusahaan menyediakan layanan pelatihan atau workshop?',
-                'answer' => 'Ya, kami menyediakan pelatihan dan workshop sesuai kebutuhan implementasi sistem agar tim Anda dapat menggunakan solusi secara maksimal.',
-            ],
-            [
-                'question' => 'Apakah perusahaan menyediakan layanan konsultasi teknologi?',
-                'answer' => 'Ya, kami menyediakan layanan konsultasi teknologi untuk membantu perencanaan, pemilihan solusi, hingga strategi implementasi yang tepat.',
-            ],
-        ];
+        return Faq::where('is_active', true)
+            ->orderBy('order')
+            ->get()
+            ->map(function ($faq) {
+                return [
+                    'question' => $faq->question,
+                    'answer' => $faq->answer,
+                ];
+            })
+            ->toArray();
     }
 
 
