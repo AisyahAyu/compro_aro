@@ -35,14 +35,23 @@ class UpcomingEventController extends Controller
         'is_published' => 'required|boolean',
     ]);
 
-    // Tambahkan slug secara manual ke array validated
-    $validated['slug'] = Str::slug($request->title);
+    // --- LOGIKA SLUG OTOMATIS ---
+    $slug = Str::slug($request->title);
+    $originalSlug = $slug;
+    $count = 1;
+
+    // Cek di database, jika slug sudah ada, tambah angka di belakang (misal: olahraga-bulutangkis-1)
+    while (UpcomingEvent::where('slug', $slug)->exists()) {
+        $slug = $originalSlug . '-' . $count;
+        $count++;
+    }
+    $validated['slug'] = $slug;
+    // ----------------------------
 
     if ($request->hasFile('image')) {
         $validated['image'] = $request->file('image')->store('events', 'public');
     }
 
-    // Gunakan $validated, bukan $request->all()
     UpcomingEvent::create($validated);
 
     return redirect()->route('admin.upcoming_event.index')->with('success', 'Event successfully added!');
@@ -53,28 +62,42 @@ class UpcomingEventController extends Controller
         return view('admin.upcoming_event.edit', compact('upcomingEvent'));
     }
 
-    public function update(Request $request, UpcomingEvent $upcomingEvent)
-    {
-        $request->validate([
-            'title'      => 'required|max:255',
-            'event_date' => 'required|date',
-            'image'      => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
-        ]);
+   public function update(Request $request, UpcomingEvent $upcomingEvent)
+{
+    $request->validate([
+        'title'      => 'required|max:255',
+        'event_date' => 'required|date',
+        'image'      => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+    ]);
 
-        $data = $request->all();
-        $data['slug'] = Str::slug($request->title);
+    $data = $request->all();
 
-        if ($request->hasFile('image')) {
-            if ($upcomingEvent->image) {
-                Storage::disk('public')->delete($upcomingEvent->image);
-            }
-            $data['image'] = $request->file('image')->store('events', 'public');
-        }
+    // --- LOGIKA SLUG UPDATE ---
+    $slug = Str::slug($request->title);
+    $originalSlug = $slug;
+    $count = 1;
 
-        $upcomingEvent->update($data);
-
-        return redirect()->route('admin.upcoming_event.index')->with('success', 'Event berhasil diperbarui!');
+    // Cek slug, abaikan jika itu adalah slug milik data yang sedang di-edit
+    while (UpcomingEvent::where('slug', $slug)->where('id', '!=', $upcomingEvent->id)->exists()) {
+        $slug = $originalSlug . '-' . $count;
+        $count++;
     }
+    $data['slug'] = $slug;
+    // --------------------------
+
+    if ($request->hasFile('image')) {
+        if ($upcomingEvent->image) {
+            Storage::disk('public')->delete($upcomingEvent->image);
+        }
+        $data['image'] = $request->file('image')->store('events', 'public');
+    }
+
+    $upcomingEvent->update($data);
+
+    return redirect()->route('admin.upcoming_event.index')->with('success', 'Event berhasil diperbarui!');
+}
+
+
 public function show($id)
     {
         // Mencari data event berdasarkan ID
