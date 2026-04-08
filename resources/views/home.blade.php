@@ -609,44 +609,115 @@
 <!-- Platform Digital -->
 @if(isset($platforms) && $platforms->count() > 0)
 <section class="section-padding">
-    @foreach($platforms as $index => $platform)
-    <div class="platform-section {{ $index > 0 ? 'mt-5' : '' }}">
-        <div class="row align-items-center {{ $index % 2 != 0 ? 'flex-row-reverse' : '' }}">
-            <div class="col-lg-6 mb-4">
-                <span class="platform-tag">Platform Digital</span>
-                <h2 class="platform-title">
-                    {{ $platform->title ?? 'Platform Digital' }}<br>
-                    @if(!empty($platform->clean_url))
-                        <span class="highlight">{{ $platform->clean_url }}</span>
-                    @endif
-                </h2>
-                <p class="lead mb-4">{{ $platform->description }}</p>
-                
-                @if($platform->features)
-                    <ul class="platform-features">
-                        @foreach($platform->features as $feature)
-                            <li>
-                                <i class="fas fa-check-circle check-icon"></i>
-                                <span>{{ $feature }}</span>
-                            </li>
-                        @endforeach
-                    </ul>
-                @endif
-                
-                @if($platform->platform_url)
-                <a href="{{ $platform->platform_url }}" class="btn btn-platform" target="_blank">
-                    Lihat Selengkapnya
-                </a>
-                @endif
+    <style>
+        #platformCarousel .carousel-indicators {
+            margin-bottom: -40px;
+        }
+        #platformCarousel .carousel-indicators button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin: 0 6px;
+            background-color: rgba(255, 255, 255, 0.4);
+            border: none;
+            transition: all 0.3s ease;
+        }
+        #platformCarousel .carousel-indicators button.active {
+            background-color: var(--primary-orange);
+            transform: scale(1.3);
+        }
+        #platformCarousel .carousel-control-prev,
+        #platformCarousel .carousel-control-next {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.8;
+            transition: all 0.3s ease;
+            z-index: 5;
+        }
+        #platformCarousel .carousel-control-prev {
+            left: -20px;
+        }
+        #platformCarousel .carousel-control-next {
+            right: -20px;
+        }
+        #platformCarousel .carousel-control-prev:hover,
+        #platformCarousel .carousel-control-next:hover {
+            background: var(--primary-orange);
+            opacity: 1;
+            box-shadow: 0 4px 15px rgba(254, 152, 0, 0.4);
+        }
+        @media (max-width: 768px) {
+            #platformCarousel .carousel-control-prev { left: -10px; }
+            #platformCarousel .carousel-control-next { right: -10px; }
+        }
+    </style>
+    <div class="platform-section position-relative">
+        <div id="platformCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+            @if($platforms->count() > 1)
+            <div class="carousel-indicators">
+                @foreach($platforms as $index => $platform)
+                    <button type="button" data-bs-target="#platformCarousel" data-bs-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}" aria-current="{{ $index == 0 ? 'true' : 'false' }}" aria-label="Slide {{ $index + 1 }}"></button>
+                @endforeach
             </div>
-            <div class="col-lg-6 mb-4">
-                @if($platform->image)
-                    <img src="{{ asset($platform->image) }}" alt="{{ $platform->title }}" class="img-fluid rounded">
-                @endif
+            @endif
+
+            <div class="carousel-inner">
+                @foreach($platforms as $index => $platform)
+                <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 mb-4">
+                            <span class="platform-tag">Platform Digital</span>
+                            <h2 class="platform-title">
+                                {{ $platform->title ?? 'Platform Digital' }}<br>
+                                @if(!empty($platform->clean_url))
+                                    <span class="highlight">{{ $platform->clean_url }}</span>
+                                @endif
+                            </h2>
+                            <p class="lead mb-4">{{ $platform->description }}</p>
+                            
+                            @if($platform->features)
+                                <ul class="platform-features">
+                                    @foreach($platform->features as $feature)
+                                        <li>
+                                            <i class="fas fa-check-circle check-icon"></i>
+                                            <span>{{ $feature }}</span>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                            
+                            @if($platform->platform_url)
+                            <a href="{{ $platform->platform_url }}" class="btn btn-platform" target="_blank">
+                                Lihat Selengkapnya
+                            </a>
+                            @endif
+                        </div>
+                        <div class="col-lg-6 mb-4">
+                            @if($platform->image)
+                                <img src="{{ asset($platform->image) }}" alt="{{ $platform->title }}" class="img-fluid rounded">
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                @endforeach
             </div>
+
+            @if($platforms->count() > 1)
+            <button class="carousel-control-prev" type="button" data-bs-target="#platformCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#platformCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+            @endif
         </div>
     </div>
-    @endforeach
 </section>
 @endif
 @endsection
