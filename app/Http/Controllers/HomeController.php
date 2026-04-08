@@ -41,7 +41,7 @@ class HomeController extends Controller
         $legalities = Legality::where('is_active', true)->orderBy('order')->limit(3)->get();
         $workProcesses = WorkProcess::where('is_active', true)->orderBy('step_number')->get();
         $partners = Partner::where('is_active', true)->orderBy('order')->get();
-        $platform = Platform::where('is_active', true)->first();
+        $platforms = Platform::where('is_active', true)->get();
 
         // Fetch products from API instead of local DB
         $products = Cache::remember('featured_products', 3600, function () {
@@ -55,14 +55,14 @@ class HomeController extends Controller
         }
 
         // Process platform URL safely
-        if ($platform && $platform->platform_url) {
-            $url = $platform->platform_url;
-            if (is_array($url)) {
-                $url = implode('', $url);
+        foreach ($platforms as $platform) {
+            if ($platform->platform_url) {
+                $url = $platform->platform_url;
+                if (is_array($url)) {
+                    $url = implode('', $url);
+                }
+                $platform->clean_url = preg_replace('/^https?:\/\//', '', $url);
             }
-            $platform->clean_url = preg_replace('/^https?:\/\//', '', $url);
-        } else {
-            $platform = null;
         }
         $footers = Footer::where('is_active', true)->orderBy('order')->get();
 
@@ -74,7 +74,7 @@ class HomeController extends Controller
             'workProcesses',
             'partners',
             'products',
-            'platform',
+            'platforms',
             'footers'
         ));
     }

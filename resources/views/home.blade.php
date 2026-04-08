@@ -607,15 +607,18 @@
 @endif
 
 <!-- Platform Digital -->
-@if($platform)
+@if(isset($platforms) && $platforms->count() > 0)
 <section class="section-padding">
-    <div class="platform-section">
-        <div class="row align-items-center">
+    @foreach($platforms as $index => $platform)
+    <div class="platform-section {{ $index > 0 ? 'mt-5' : '' }}">
+        <div class="row align-items-center {{ $index % 2 != 0 ? 'flex-row-reverse' : '' }}">
             <div class="col-lg-6 mb-4">
                 <span class="platform-tag">Platform Digital</span>
                 <h2 class="platform-title">
-                    Belanja Mudah di<br>
-                    <span class="highlight">{{ $platform->clean_url ?? 'ayobelanja.co.id' }}</span>
+                    {{ $platform->title ?? 'Platform Digital' }}<br>
+                    @if(!empty($platform->clean_url))
+                        <span class="highlight">{{ $platform->clean_url }}</span>
+                    @endif
                 </h2>
                 <p class="lead mb-4">{{ $platform->description }}</p>
                 
@@ -630,9 +633,11 @@
                     </ul>
                 @endif
                 
+                @if($platform->platform_url)
                 <a href="{{ $platform->platform_url }}" class="btn btn-platform" target="_blank">
                     Lihat Selengkapnya
                 </a>
+                @endif
             </div>
             <div class="col-lg-6 mb-4">
                 @if($platform->image)
@@ -641,6 +646,7 @@
             </div>
         </div>
     </div>
+    @endforeach
 </section>
 @endif
 @endsection
