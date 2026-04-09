@@ -15,6 +15,7 @@ use App\Models\Footer;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 use App\Models\Faq;
+use App\Models\AboutStatistic;
 
 class HomeController extends Controller
 {
@@ -223,5 +224,20 @@ class HomeController extends Controller
             ->route('contact.page')
             ->with('contact_success', true)
             ->with('contact_payload', $validated);
+    }
+
+    public function solusi()
+    {
+        $companyProfile = CompanyProfile::first();
+        $categories = Category::where('is_active', true)->orderBy('order')->get();
+        $statistics = AboutStatistic::where('is_active', true)->orderBy('order')->get();
+        $platforms = Platform::where('is_active', true)->get();
+
+        return view('solusi', compact(
+            'companyProfile',
+            'categories',
+            'statistics',
+            'platforms'
+        ));
     }
 }

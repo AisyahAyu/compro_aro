@@ -24,6 +24,9 @@
                     <a class="nav-link {{ request()->is('karir*') ? 'active' : '' }}" href="{{ route('career') }}">Karir</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link {{ request()->is('solusi*') ? 'active' : '' }}" href="{{ route('solusi.page') }}">Solusi</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link {{ request()->is('product') || request()->is('produk*') ? 'active' : '' }}" href="{{ route('product.page') }}">Produk</a>
                 </li>
                 <li class="nav-item">

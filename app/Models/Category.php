@@ -8,7 +8,10 @@ class Category extends Model
 {
     protected $fillable = [
         'name',
+        'subtitle',
         'description',
+        'features',
+        'highlights',
         'image',
         'order',
         'is_active'
@@ -16,5 +19,7 @@ class Category extends Model
 
     protected $casts = [
         'is_active' => 'boolean',
+        'features' => 'array',
+        'highlights' => 'array',
     ];
 }

@@ -32,13 +32,30 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'subtitle' => 'nullable|string|max:255',
             'description' => 'required|string',
+            'features_raw' => 'nullable|string',
+            'highlights_raw' => 'nullable|array',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'order' => 'integer',
             'is_active' => 'boolean'
         ]);
 
-        $data = $request->except('image');
+        $data = $request->except(['image', 'features_raw', 'highlights_raw']);
+        
+        // Process features
+        if ($request->filled('features_raw')) {
+            $data['features'] = array_filter(array_map('trim', explode("\n", $request->features_raw)));
+        } else {
+            $data['features'] = [];
+        }
+
+        // Process highlights
+        if ($request->has('highlights_raw')) {
+            $data['highlights'] = $request->highlights_raw;
+        } else {
+            $data['highlights'] = [];
+        }
         
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -76,14 +93,27 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'subtitle' => 'nullable|string|max:255',
             'description' => 'required|string',
+            'features_raw' => 'nullable|string',
+            'highlights_raw' => 'nullable|array',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'order' => 'integer',
             'is_active' => 'boolean'
         ]);
 
         $category = Category::findOrFail($id);
-        $data = $request->except('image');
+        $data = $request->except(['image', 'features_raw', 'highlights_raw']);
+        
+        // Process features
+        if ($request->has('features_raw')) {
+            $data['features'] = array_filter(array_map('trim', explode("\n", $request->features_raw)));
+        }
+
+        // Process highlights
+        if ($request->has('highlights_raw')) {
+            $data['highlights'] = $request->highlights_raw;
+        }
         
         if ($request->hasFile('image')) {
             // Delete old image

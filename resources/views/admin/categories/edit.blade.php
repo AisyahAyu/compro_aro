@@ -26,11 +26,56 @@
                     </div>
                     
                     <div class="form-group">
+                        <label for="subtitle">Subtitle (Solusi Page Only)</label>
+                        <input type="text" class="form-control" id="subtitle" name="subtitle" value="{{ old('subtitle', $category->subtitle) }}" placeholder="e.g. Series Pro">
+                        @error('subtitle')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
                         <label for="description">Description <span class="text-danger">*</span></label>
                         <textarea class="form-control" id="description" name="description" rows="4" placeholder="Enter category description" required>{{ old('description', $category->description) }}</textarea>
                         @error('description')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="text-primary font-weight-bold"><i class="fas fa-magic mr-1"></i> Solusi Page Details</label>
+                        <hr class="mt-0">
+                        
+                        <div class="form-group">
+                            <label for="features_raw">Features List (Solusi Card Checkboxes)</label>
+                            @php
+                                $features_text = is_array($category->features) ? implode("\n", $category->features) : '';
+                            @endphp
+                            <textarea class="form-control" id="features_raw" name="features_raw" rows="6" placeholder="Enter one feature per line...">{{ old('features_raw', $features_text) }}</textarea>
+                            <small class="text-muted">Type each feature on a new line. These will appear with checkmarks.</small>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12"><label>Bottom Highlights (3 Items)</label></div>
+                            @php
+                                $highlights = is_array($category->highlights) ? $category->highlights : [];
+                            @endphp
+                            @for($i = 0; $i < 3; $i++)
+                            <div class="col-md-4">
+                                <div class="card card-outline card-warning p-2">
+                                    <h6 class="font-weight-bold">Highlight {{ $i+1 }}</h6>
+                                    <div class="form-group mb-1">
+                                        <input type="text" name="highlights_raw[{{ $i }}][icon]" class="form-control form-control-sm" placeholder="FA Icon" value="{{ old("highlights_raw.$i.icon", $highlights[$i]['icon'] ?? '') }}">
+                                    </div>
+                                    <div class="form-group mb-1">
+                                        <input type="text" name="highlights_raw[{{ $i }}][title]" class="form-control form-control-sm" placeholder="Title" value="{{ old("highlights_raw.$i.title", $highlights[$i]['title'] ?? '') }}">
+                                    </div>
+                                    <div class="form-group mb-0">
+                                        <input type="text" name="highlights_raw[{{ $i }}][desc]" class="form-control form-control-sm" placeholder="Short Desc" value="{{ old("highlights_raw.$i.desc", $highlights[$i]['desc'] ?? '') }}">
+                                    </div>
+                                </div>
+                            </div>
+                            @endfor
+                        </div>
                     </div>
                     
                     <div class="row">

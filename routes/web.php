@@ -61,6 +61,7 @@ Route::get('/privacy-policy', [HomeController::class, 'privacyPolicy'])->name('p
 Route::get('/terms-of-service', [HomeController::class, 'termsOfService'])->name('terms-of-service');
 Route::get('/aktivitas', [FrontendAktivitasController::class, 'index'])->name('aktivitas');
 Route::get('/aktivitas/{id}', [FrontendAktivitasController::class, 'show'])->whereNumber('id')->name('detail-aktivitas');
+Route::get('/solusi', [HomeController::class, 'solusi'])->name('solusi.page');
 
 // ======================
 // ADMIN

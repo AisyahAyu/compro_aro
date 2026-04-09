@@ -25,11 +25,50 @@
                     </div>
                     
                     <div class="form-group">
+                        <label for="subtitle">Subtitle (Solusi Page Only)</label>
+                        <input type="text" class="form-control" id="subtitle" name="subtitle" value="{{ old('subtitle', 'Series Pro') }}" placeholder="e.g. Series Pro">
+                        @error('subtitle')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
                         <label for="description">Description <span class="text-danger">*</span></label>
                         <textarea class="form-control" id="description" name="description" rows="4" placeholder="Enter category description" required>{{ old('description') }}</textarea>
                         @error('description')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="text-primary font-weight-bold"><i class="fas fa-magic mr-1"></i> Solusi Page Details</label>
+                        <hr class="mt-0">
+                        
+                        <div class="form-group">
+                            <label for="features_raw">Features List (Solusi Card Checkboxes)</label>
+                            <textarea class="form-control" id="features_raw" name="features_raw" rows="6" placeholder="Enter one feature per line...">{{ old('features_raw', "Ergonomis, jaga postur tetap sehat\nErgonomis, jaga postur tetap sehat\nErgonomis, jaga postur tetap sehat") }}</textarea>
+                            <small class="text-muted">Type each feature on a new line. These will appear with checkmarks.</small>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12"><label>Bottom Highlights (3 Items)</label></div>
+                            @for($i = 0; $i < 3; $i++)
+                            <div class="col-md-4">
+                                <div class="card card-outline card-warning p-2">
+                                    <h6 class="font-weight-bold">Highlight {{ $i+1 }}</h6>
+                                    <div class="form-group mb-1">
+                                        <input type="text" name="highlights_raw[{{ $i }}][icon]" class="form-control form-control-sm" placeholder="FA Icon (e.g. fas fa-medal)" value="{{ old("highlights_raw.$i.icon", $i == 0 ? 'fas fa-medal' : ($i == 1 ? 'fas fa-gem' : 'fas fa-palette')) }}">
+                                    </div>
+                                    <div class="form-group mb-1">
+                                        <input type="text" name="highlights_raw[{{ $i }}][title]" class="form-control form-control-sm" placeholder="Title" value="{{ old("highlights_raw.$i.title", $i == 0 ? 'Ergonomis Maksimal' : ($i == 1 ? 'Material Premium' : 'Pilihan Warna')) }}">
+                                    </div>
+                                    <div class="form-group mb-0">
+                                        <input type="text" name="highlights_raw[{{ $i }}][desc]" class="form-control form-control-sm" placeholder="Short Desc" value="{{ old("highlights_raw.$i.desc", $i == 0 ? 'Nyaman untuk harian' : ($i == 1 ? 'Kayu berkualitas' : '50+ kombinasi')) }}">
+                                    </div>
+                                </div>
+                            </div>
+                            @endfor
+                        </div>
                     </div>
                     
                     <div class="row">
