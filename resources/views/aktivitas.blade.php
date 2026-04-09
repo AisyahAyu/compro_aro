@@ -10,11 +10,12 @@
         <div class="row justify-content-center"> {{-- Menambah justify-content-center --}}
             <div class="col-lg-10 text-center"> {{-- Mengubah ke text-center --}}
                 <h1 class="fw-bold mb-3 judul-banner">
-                    Bangun Karier Anda<br>Bersama Kami
+                    Bersama Menciptakan Inovasi
                 </h1>
                 <p class="deskripsi-banner">
-                    Jadilah bagian dari tim yang berkembang bersama dan menciptakan solusi yang <br class="d-none d-md-block">
-                    berdampak bagi industri teknologi di Indonesia.
+                   Ikuti berbagai kegiatan, kolaborasi, dan perjalanan PT Aro Baskara Esa
+ <br class="d-none d-md-block">
+                    dalam menghadirkan solusi bagi mitra, pelanggan, dan berbagai sektor 
                 </p>
             </div>
         </div>
@@ -215,7 +216,7 @@ $(document).ready(function() {
 <style>
 .hero-section {
     /* Gaya Warna & Background Tetap Sama */
-    background: linear-gradient(rgba(243, 112, 33, 0.85), rgba(229, 93, 10, 0.85)), 
+    background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.35)),
                 url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1350&q=80');
     background-size: cover;
     background-position: center;

@@ -8,7 +8,7 @@
 <style>
     /* Reset & Background Global */
 .hero-career {
-    background: linear-gradient(rgba(243, 112, 33, 0.9), rgba(229, 93, 10, 0.8)),
+    background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.35)),
                 url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1350&q=80');
     background-size: cover;
     background-position: center;
@@ -420,7 +420,7 @@
     <div class="container">
         <h1 class="animate__animated animate__fadeInDown">Bangun Karier Anda <br> Bersama Kami</h1>
         <p class="animate__animated animate__fadeInUp">
-            Jadilah bagian dari tim yang berkembang bersama dan menciptakan solusi yang berdampak bagi industri teknologi di Indonesia.
+         Temukan peluang karier yang sesuai dengan passion dan keahlian Anda di PT Aro Baskara Esa.
         </p>
     </div>
 </section>
