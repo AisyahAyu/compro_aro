@@ -329,52 +329,58 @@
 }
 
 /* BENEFITS */
-.icon-wrapper { 
-    width: 80px; 
-    height: 80px; 
-    border-radius: 50%; 
-    overflow: hidden; 
-    margin: 0 auto 15px; 
-    background-color: #fff3eb; 
+/* BENEFITS */
+.benefit-card { 
+    background: #fff; 
+    border-radius: 16px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08); 
+    padding: 30px 20px; 
+    text-align: center; 
     
-    /* Tambahkan ini agar gambar di tengah secara vertikal & horizontal */
+    /* Flexbox Internal agar konten rapi */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    width: 100%;
+    height: 100%; /* Agar sejajar dalam satu baris */
+    transition: all 0.3s ease;
+}
+
+.benefit-card:hover {
+    transform: translateY(-5px);
+}
+
+.icon-wrapper { 
+    width: 100px; 
+    height: 100px; 
+    border-radius: 50%; 
+    margin-bottom: 20px; 
+    background-color: #fff3eb; 
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0; 
 }
 
 .icon-wrapper img { 
-    /* Gunakan contain agar logo utuh tidak terpotong */
     width: 70%; 
     height: 70%; 
     object-fit: contain; 
 }
 
-.benefit-card { 
-    background: #fff; 
-    border-radius: 16px; 
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08); 
-    padding: 30px 20px; 
-    text-align: center; 
-    height: 100%; 
-    transition: transform 0.3s ease; /* Tambahan sedikit efek halus */
-}
-
-.benefit-card:hover {
-    transform: translateY(-5px); /* Efek melayang saat kursor di atasnya */
+.benefit-card h6 {
+    min-height: 2.5rem; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .benefit-card p {
-    text-align: justify; /* Membuat teks rata kanan-kiri */
-    text-justify: inter-word; /* Mengoptimalkan spasi antar kata */
-    line-height: 1.6;
-    hyphens: auto; /* Opsional: Memotong kata jika terlalu panjang di mobile */
-}
-
-/* Tambahan agar title tetap di tengah meski deskripsinya justify */
-.benefit-card h6 {
     text-align: center;
-    margin-bottom: 12px;
+    line-height: 1.5;
+    color: #666;
+    flex-grow: 1; /* Mendorong konten jika ada tinggi sisa */
 }
 /* Styling Dropdown di Sidebar */
 .sidebar-select-career {
@@ -575,21 +581,39 @@
         <div class="text-center mb-5">
             <h2 class="fw-bold" style="color: #f37021;">Kenapa Bergabung dengan Kami</h2>
         </div>
-        <div class="row g-4">
+
+        @php
+            $count = count($benefits);
+        @endphp
+
+        <div class="row g-4 justify-content-center">
             @foreach($benefits as $benefit)
-            <div class="col-md-6 col-lg-3">
-                <div class="benefit-card">
+            <div class="
+                @if($count == 4)
+                    col-md-6 col-lg-3
+                @elseif($count > 4)
+                    col-md-6 col-lg-4
+                @else
+                    col-md-6 col-lg-4
+                @endif
+            ">
+                <div class="benefit-card h-100">
                     <div class="icon-wrapper">
                         <img src="{{ asset('storage/'.$benefit->icon) }}" alt="{{ $benefit->title }}">
                     </div>
-                    <h6 class="fw-bold mb-2" style="color: #003366;">{{ $benefit->title }}</h6>
-                    <p class="small text-muted mb-0">{{ $benefit->description }}</p>
+                    <h6 class="fw-bold mb-2" style="color: #003366;">
+                        {{ $benefit->title }}
+                    </h6>
+                    <p class="small text-muted mb-0">
+                        {{ $benefit->description }}
+                    </p>
                 </div>
             </div>
             @endforeach
         </div>
     </div>
 </section>
+      
 
 {{-- MODAL APPLY --}}
 <div class="modal fade" id="applyModal" tabindex="-1" aria-hidden="true">
