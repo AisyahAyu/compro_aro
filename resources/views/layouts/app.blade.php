@@ -728,8 +728,8 @@
         
         .product-card img {
             width: 100%;
-            height: 200px;
-            object-fit: cover;
+            height: 100%;
+            object-fit: contain;
         }
         
         .product-info {

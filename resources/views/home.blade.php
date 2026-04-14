@@ -599,7 +599,7 @@
             @endforelse
         </div>
         
-        <div class="text-center">
+        <div class="text-center mt-5">
             <a href="{{ route('products.page') }}" class="btn btn-contact">Lihat Selengkapnya</a>
         </div>
     </div>
