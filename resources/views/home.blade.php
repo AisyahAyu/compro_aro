@@ -90,7 +90,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px; /* biar ada nafas */
 }
 
 .product-card-img {
