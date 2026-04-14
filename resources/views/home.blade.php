@@ -82,37 +82,37 @@
     }
 
     /* Image area */
-    .product-card-img-wrap {
-        width: 100%;
-        aspect-ratio: 1 / 1;
-        position: relative;
-        background-color: #fff;
-        overflow: hidden;
-    }
+.product-card-img-wrap {
+    width: 100%;
+    background: #fff;
+    overflow: visible;
+    line-height: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px; /* biar ada nafas */
+}
 
-    .product-card-img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        display: block;
-        transition: transform 0.3s ease;
-    }
+.product-card-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    object-position: center;
+}
 
-    .product-card-link:hover .product-card-img {
-        transform: scale(1.05);
-    }
+
+
+    
+.product-card-link:hover .product-card-img {
+    transform: scale(1.12);
+}
+
 
     /* Refined Overlay for Ecommerce Look */
-    .product-card-img-wrap::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: #000;
-    }
-
+.product-card-img-wrap::after {
+    display: none;
+}
     .product-card-badge {
         position: absolute;
         top: 0;
@@ -215,12 +215,10 @@
         }
         
         .product-card-img-wrap {
-            aspect-ratio: 1 / 1;
             height: auto !important;
         }
         
         .product-card-img {
-            aspect-ratio: 1 / 1;
             height: auto !important;
         }
         
@@ -273,8 +271,8 @@
         
         .category-card img {
             width: 100%;
-            height: 160px;
-            object-fit: cover;
+            height: auto;
+            object-fit: contain;
         }
         
         .category-card .p-4 {
@@ -321,12 +319,10 @@
         }
         
         .product-card-img-wrap {
-            aspect-ratio: 1 / 1;
             height: auto !important;
         }
         
         .product-card-img {
-            aspect-ratio: 1 / 1;
             height: auto !important;
         }
         
@@ -350,12 +346,10 @@
         }
         
         .product-card-img-wrap {
-            aspect-ratio: 1 / 1;
             height: auto !important;
         }
         
         .product-card-img {
-            aspect-ratio: 1 / 1;
             height: auto !important;
         }
         
@@ -426,7 +420,7 @@
                 <p class="lead">Solusi lengkap kebutuhan operasional bisnis dan instansi.</p>
             </div>
             <div class="col-lg-4 text-end">
-                <a href="{{ route('products.page') }}" class="btn btn-outline-primary">
+                <a href="{{ route('solusi.page') }}" class="btn btn-outline-primary">
                     <i class="fas fa-arrow-right me-2"></i>Lihat Semua
                 </a>
             </div>
@@ -435,7 +429,7 @@
         <div class="row">
             @foreach($categories as $category)
                 <div class="col-lg-4 col-md-6 mb-4">
-                    <a href="{{ route('products.page') }}" class="category-card-link">
+                    <a href="{{ route('solusi.page') }}" class="category-card-link">
                         <div class="category-card">
                             @if($category->image)
                                 <img src="{{ asset($category->image) }}" alt="{{ $category->name }}">
@@ -698,7 +692,7 @@
                         </div>
                         <div class="col-lg-6 mb-4">
                             @if($platform->image)
-                                <img src="{{ asset($platform->image) }}" alt="{{ $platform->title }}" class="img-fluid rounded">
+                                <img src="{{ asset($platform->image) }}" alt="{{ $platform->title }}" class="img-fluid">
                             @endif
                         </div>
                     </div>
