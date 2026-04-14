@@ -166,6 +166,8 @@ class HomeController extends Controller
         $token = config('services.ecommerce.token');
 
         try {
+            // Remove trailing slash to avoid double slash
+            $baseUrl = rtrim($baseUrl, '/');
             $response = Http::withToken($token)
                 ->timeout(10)
                 ->get("{$baseUrl}/{$endpoint}", $params);

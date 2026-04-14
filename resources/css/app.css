@@ -268,7 +268,7 @@
 
 .partner-item img {
     max-width: 80px;
-    max-height: 50px;
+    height: auto;
     object-fit: contain;
 }
 
