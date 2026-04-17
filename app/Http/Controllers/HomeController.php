@@ -44,11 +44,12 @@ class HomeController extends Controller
         $partners = Partner::where('is_active', true)->orderBy('order')->get();
         $platforms = Platform::where('is_active', true)->get();
 
-        // Fetch products from API instead of local DB
-        $products = Cache::remember('featured_products', 3600, function () {
-            $data = $this->fetchFromEcommerceApi('products', ['limit' => 4]);
-            return is_array($data) ? array_slice($data, 0, 4) : [];
+        // Fetch products from API (reuse the same cache as products page)
+        $allProducts = Cache::remember('all_api_products', 3600, function () {
+            return $this->fetchFromEcommerceApi('products');
         });
+
+        $products = is_array($allProducts) ? array_slice($allProducts, 0, 4) : [];
 
         // Fallback to local if API fails or returns nothing
         if (empty($products)) {
@@ -161,10 +162,12 @@ class HomeController extends Controller
 
     private function fetchFromEcommerceApi($endpoint, $params = [])
     {
-        $baseUrl = config('services.ecommerce.base_url') ?? 'https://ayobelanja.co.id/api';
+        $baseUrl = rtrim(config('services.ecommerce.base_url') ?? 'https://ayobelanja.co.id/api', '/');
         $token = config('services.ecommerce.token');
 
         try {
+            // Remove trailing slash to avoid double slash
+            $baseUrl = rtrim($baseUrl, '/');
             $response = Http::withToken($token)
                 ->timeout(10)
                 ->get("{$baseUrl}/{$endpoint}", $params);

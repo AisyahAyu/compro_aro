@@ -100,7 +100,7 @@
 <section class="section-padding">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="section-title" style="color: #EE8E0F;">Visi & Misi Perusahaan</h2>
+            <h2 class="section-title" style="color: #EE8E0F; font-family: 'Georgia', 'Times New Roman', serif;">Visi & Misi</h2>
             <div class="divider-line mx-auto" style="background: linear-gradient(90deg, #FFA500, #FF8C00, #FFA500); width: 50px; height: 3px; margin: 12px auto 30px; border-radius: 2px; box-shadow: 0 2px 8px rgba(255, 165, 0, 0.3); animation: shimmer-divider 3s ease-in-out infinite;"></div>
             <p class="mt-3" style="color: #555; max-width: 600px; margin: 0 auto;">
                 Berikut visi dan misi yang menjadi arah serta komitmen perusahaan dalam menjalankan setiap kegiatan usaha.
@@ -111,7 +111,7 @@
 
             {{-- VISI --}}
             <div class="col-lg-6 mb-4">
-                <div class="vision-mission-card">
+                <div class="vision-mission-card visi-box">
                     <h3 class="vision-mission-title">
                         <div class="vision-mission-icon">
                             <i class="fas fa-eye"></i>
@@ -132,7 +132,7 @@
 
             {{-- MISI --}}
             <div class="col-lg-6 mb-4">
-                <div class="vision-mission-card">
+                <div class="vision-mission-card misi-box">
                     <h3 class="vision-mission-title">
                         <div class="vision-mission-icon">
                             <i class="fas fa-bullseye"></i>
@@ -166,7 +166,7 @@
         .vision-mission-card {
             background: #ffffff;
             border-radius: 15px;
-            padding: 35px 25px 25px 25px;
+            padding: 20px 18px 15px 18px;
             height: auto;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             border: 1px solid #f0f0f0;
@@ -180,30 +180,31 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 25px;
+            height: 18px;
             background: linear-gradient(90deg, #EE8E0F, #EE8E0F);
             border-radius: 15px 15px 0 0;
         }
 
         .vision-mission-icon {
-            width: 25px;
-            height: 25px;
+            width: 18px;
+            height: 18px;
             background: #EE8E0F;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 10px;
+            margin-right: 6px;
             color: white;
-            font-size: 14px;
+            font-size: 11px;
             flex-shrink: 0;
         }
 
         .vision-mission-title {
             color: #EE8E0F;
-            font-size: 22px;
+            font-size: 18px;
             font-weight: 700;
-            margin-bottom: 20px;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             justify-content: flex-start;
@@ -211,8 +212,9 @@
 
         .vision-mission-text {
             color: #555;
-            line-height: 1.6;
-            font-size: 16px;
+            line-height: 1.5;
+            font-size: 14px;
+            font-family: 'Georgia', 'Times New Roman', serif;
         }
 
         .misi-numbered-list {
@@ -230,6 +232,7 @@
             color: #555;
             display: flex;
             align-items: flex-start;
+            font-family: 'Georgia', 'Times New Roman', serif;
         }
 
         .misi-numbered-list li::before {
@@ -241,9 +244,55 @@
             font-weight: 700;
             font-size: 16px;
             line-height: 1.6;
+            font-family: 'Georgia', 'Times New Roman', serif;
         }
 
+        /* ================= ANIMASI VISI MISI ================= */
 
+        .visi-box {
+            transform: translateX(-100px);
+            opacity: 0;
+            transition: all 1s ease;
+        }
+
+        .misi-box {
+            transform: translateX(100px);
+            opacity: 0;
+            transition: all 1s ease;
+        }
+
+        .show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        /* ================= AUTO SCROLL LOGO ================= */
+
+        .auto-scroll {
+            display: flex;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .auto-scroll-track {
+            display: flex;
+            gap: 30px;
+            width: max-content;
+            animation: scrollLoop 25s linear infinite;
+        }
+
+        @keyframes scrollLoop {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    .auto-scroll-track {
+    will-change: transform;
+}
 
         /* Brand Scroll Styles */
         .brand-scroll-wrapper {
@@ -354,7 +403,7 @@
             justify-content: center;
 
             transition: all 0.4s ease;
-            border: 1px solid #eee;
+            border: 1px solid rgba(0, 0, 0, 0.05);
 
             position: relative;
             overflow: hidden;
@@ -372,6 +421,9 @@
 
         /* LOGO */
         .brand-logo {
+            max-width: 100%;
+            max-height: 60px;
+            width: 100%;
             height: 60px;
             object-fit: contain;
             transition: all 0.35s ease;
@@ -382,19 +434,24 @@
         }
 
         /* HOVER EFFECT */
+        .brand-item {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
         .brand-item:hover {
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(238, 142, 15, 0.25);
+            transform: translateY(-15px) scale(1.08);
+            box-shadow: 0 20px 50px rgba(238, 142, 15, 0.3), 0 0 25px rgba(238, 142, 15, 0.2);
             border-color: #EE8E0F;
         }
 
         .brand-item:hover::before {
-            opacity: 0.08;
+            opacity: 0.12;
         }
 
         .brand-item:hover .brand-logo {
             filter: grayscale(0%) opacity(1);
-            transform: scale(1.1);
+            transform: scale(1.15);
         }
 
         /* Partner Scroll Styles */
@@ -451,11 +508,16 @@
         }
 
         /* hover effect */
+        .partner-card .brand-item {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
         .partner-card .brand-item:hover {
-            transform: translateY(-12px) scale(1.05);
+            transform: translateY(-18px) scale(1.08);
             box-shadow: 
-                0 20px 45px rgba(238, 142, 15, 0.25),
-                0 0 20px rgba(238, 142, 15, 0.15);
+                0 25px 55px rgba(238, 142, 15, 0.35),
+                0 0 30px rgba(238, 142, 15, 0.25);
             border-color: #EE8E0F;
         }
 
@@ -607,7 +669,7 @@
 <section class="section-padding">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="section-title" style="color: #EE8E0F;">Brand Kami</h2>
+            <h2 class="section-title" style="color: #EE8E0F; font-family: 'Georgia', 'Times New Roman', serif;">Brand Kami</h2>
             <div class="divider-line mx-auto" style="background: linear-gradient(90deg, #FFA500, #FF8C00, #FFA500); width: 50px; height: 3px; margin: 12px auto 30px; border-radius: 2px; box-shadow: 0 2px 8px rgba(255, 165, 0, 0.3); animation: shimmer-divider 3s ease-in-out infinite;"></div>
             <p class="mt-3" style="color: #555; max-width: 600px; margin: 0 auto;">
                 Berbagai brand terpercaya yang telah bekerja sama dengan kami untuk memberikan solusi terbaik.
@@ -618,23 +680,22 @@
             <div class="brand-scroll-container">
                 @forelse($brands as $brand)
                 <div class="brand-card">
-    <div class="brand-item">
-        <img src="{{ $brand->logo_url }}" class="brand-logo" alt="brand">
-    </div>
-</div>
+                    <div class="brand-item">
+                        @if($brand->logo)
+                            <img src="{{ asset($brand->logo) }}" class="brand-logo" alt="{{ $brand->name }}" style="max-width: 100%; height: 60px; object-fit: contain; display: block;">
+                        @else
+                            <div class="text-muted" style="height: 60px; display: flex; align-items: center; justify-content: center;">
+                                No Logo
+                            </div>
+                        @endif
+                    </div>
+                </div>
                 @empty
                 <div class="col-12 text-center">
                     <p class="text-muted">Belum ada brand</p>
                 </div>
                 @endforelse
             </div>
-            @if($brands->count() > 4)
-            <div class="scroll-dots">
-                <button class="dot active" onclick="scrollToBrand(0)"></button>
-                <button class="dot" onclick="scrollToBrand(1)"></button>
-                <button class="dot" onclick="scrollToBrand(2)"></button>
-            </div>
-            @endif
         </div>
     </div>
 </section>
@@ -642,7 +703,7 @@
 {{-- ===================== PARTNER ===================== --}}
 <section class="section-padding text-center">
 
-    <h2 class="section-title" style="color: #EE8E0F;">Mitra Teknologi Resmi</h2>
+    <h2 class="section-title" style="color: #EE8E0F; font-family: 'Georgia', 'Times New Roman', serif;">Mitra Teknologi</h2>
     <div class="divider-line mx-auto" style="background: linear-gradient(90deg, #FFA500, #FF8C00, #FFA500); width: 50px; height: 3px; margin: 12px auto 30px; border-radius: 2px; box-shadow: 0 2px 8px rgba(255, 165, 0, 0.3); animation: shimmer-divider 3s ease-in-out infinite;"></div>
     <p class="mb-4 text-muted">
         Didukung oleh mitra teknologi resmi dan terpercaya.
@@ -650,24 +711,33 @@
 
     <div class="container">
         <div class="partner-scroll-wrapper">
-            <div class="partner-scroll-container">
-                @foreach($partners as $partner)
-                <div class="partner-card">
-                    <div class="brand-item">
-                        <img src="{{ asset($partner->logo) }}" 
-                            class="brand-logo" 
-                            alt="{{ $partner->name }}">
-                    </div>
-                </div>
-                @endforeach
+            <div class="partner-scroll-container auto-scroll">
+    <div class="auto-scroll-track">
+
+        @foreach($partners as $partner)
+        <div class="partner-card">
+            <div class="brand-item">
+                <img src="{{ asset($partner->logo) }}" 
+                     class="brand-logo" 
+                     alt="{{ $partner->name }}">
             </div>
-            @if($partners->count() > 4)
-            <div class="partner-scroll-dots">
-                <button class="partner-dot active" onclick="scrollToPartner(0)"></button>
-                <button class="partner-dot" onclick="scrollToPartner(1)"></button>
-                <button class="partner-dot" onclick="scrollToPartner(2)"></button>
+        </div>
+        @endforeach
+
+        {{-- DUPLIKASI BIAR LOOP HALUS --}}
+        @foreach($partners as $partner)
+        <div class="partner-card">
+            <div class="brand-item">
+                <img src="{{ asset($partner->logo) }}" 
+                     class="brand-logo" 
+                     alt="{{ $partner->name }}">
             </div>
-            @endif
+        </div>
+        @endforeach
+
+    </div>
+</div>
+            </div>
         </div>
     </div>
 
@@ -684,16 +754,17 @@
                 Tim Profesional Kami
             </p>
 
-            <h2 style="font-size:2.5rem; font-weight:800; color:#000;">
+            <h2 style="font-size:2.5rem; font-weight:800; color:#EE8E0F; font-family: 'Georgia', 'Times New Roman', serif;">
                 Perkenalan Tim
             </h2>
 
             <div style="
                 width:50px;
                 height:3px;
-                background:#000;
+                background: linear-gradient(90deg, #FFA500, #FF8C00, #FFA500);
                 margin-top:10px;
                 border-radius:2px;
+                box-shadow: 0 2px 8px rgba(255, 165, 0, 0.3);
             "></div>
         </div>
 
@@ -884,6 +955,69 @@ document.querySelector('.partner-scroll-container')?.addEventListener('scroll', 
         dot.classList.toggle('active', i === activeDotIndex);
     });
 });
+
+
+// Auto-scroll functionality for brands
+let brandAutoScrollInterval;
+let brandCurrentPage = 0;
+const brandContainer = document.querySelector('.brand-scroll-container');
+
+function startBrandAutoScroll() {
+    if (!brandContainer) return;
+    
+    const brands = document.querySelectorAll('.brand-card');
+    const totalBrands = brands.length;
+    const cardsPerView = 4;
+    const totalPages = Math.ceil(totalBrands / cardsPerView);
+    
+    // Only start auto-scroll if there are more than 5 items
+    if (totalBrands > 5) {
+        brandAutoScrollInterval = setInterval(() => {
+            // Progress to next page sequentially (1, 2, 3, 4, ...)
+            brandCurrentPage = (brandCurrentPage + 1) % totalPages;
+            
+            const cardWidth = 268;
+            const scrollPosition = brandCurrentPage * cardWidth * cardsPerView;
+            
+            brandContainer.scrollTo({
+                left: scrollPosition,
+                behavior: 'smooth'
+            });
+        }, 3500); // Change every 3.5 seconds (slightly different from partners)
+    }
+}
+
+function stopBrandAutoScroll() {
+    if (brandAutoScrollInterval) {
+        clearInterval(brandAutoScrollInterval);
+    }
+}
+
+// Start auto-scroll on page load
+document.addEventListener('DOMContentLoaded', function() {
+    startBrandAutoScroll();
+});
+
+// ================= ANIMASI VISI MISI =================
+const vmElements = document.querySelectorAll('.visi-box, .misi-box');
+
+const vmObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            // masuk layar → tampil
+            entry.target.classList.add('show');
+        } else {
+            // keluar layar → reset (biar bisa animasi lagi)
+            entry.target.classList.remove('show');
+        }
+    });
+});
+
+vmElements.forEach(el => vmObserver.observe(el));
+
+// Stop auto-scroll on hover and resume on mouse leave
+brandContainer?.addEventListener('mouseenter', stopBrandAutoScroll);
+brandContainer?.addEventListener('mouseleave', startBrandAutoScroll);
 </script>
 
 @endsection

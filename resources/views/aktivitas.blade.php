@@ -43,7 +43,6 @@
 
                                         <a href="{{ route('detail-aktivitas', $utama->id) }}">
 <img src="{{ $utama->gambar_url }}"
-     srcset="{{ $utama->gambar_url }} 1x, {{ $utama->gambar_url_hd }} 2x"
      class="img-fluid rounded mb-3 shadow-sm"
      style="width:100%; height:300px; object-fit:cover;">
                     </div>
