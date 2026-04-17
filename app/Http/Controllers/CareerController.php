@@ -10,46 +10,45 @@ use App\Models\Benefits;
 
 class CareerController extends Controller
 {
-    public function index(Request $request)
-    {
-        // 1. Ambil Banner, Benefit, dan Kategori
-        $banners = Banner::orderBy('order')->get();
-        $benefits = Benefits::where('status', 'active')->orderBy('order', 'asc')->get();
-        $jobCategories = JobCategory::all();
+public function index(Request $request)
+{
+    $banners = Banner::orderBy('order')->get();
+    $benefits = Benefits::where('status', 'active')->orderBy('order', 'asc')->get();
+    $jobCategories = JobCategory::all();
 
-        // 2. Query Lowongan Pekerjaan Aktif
-        $query = JobVacancy::where('status', 'Active');
+    $selectedCategory = $request->input('category', '');
 
-        // Logic Search (disesuaikan dengan key 'q' dari script AJAX)
-// Logic Search - Ubah dari 'q' menjadi 'search'
-        if ($request->filled('search')) {
-            $search = $request->search; // Ambil dari name="search"
-            $query->where('name', 'like', '%' . $search . '%');
-        }
+    $query = JobVacancy::where('status', 'Active')->latest();
 
-        // Logic Filter Kategori (Update: Menggunakan has & array_filter)
-        if ($request->has('category')) {
-            // Kita bungkus ke array dan bersihkan dari nilai kosong/null
-            $categoryIds = array_filter((array)$request->category);
+    // SEARCH
+    if ($request->filled('search')) {
+        $search = $request->search;
 
-            // Jika array tidak kosong (berarti user pilih kategori spesifik), jalankan filter
-            if (!empty($categoryIds)) {
-                $query->whereIn('job_category_id', $categoryIds);
-            }
-            // Jika array kosong (user pilih 'Semua Departemen'), filter whereIn akan dilewati 
-            // sehingga semua data 'Active' akan tampil.
-        }
-
-        $vacancies = $query->latest()->paginate(4)->withQueryString();
-
-        // 3. HANDLE AJAX RESPONSE
-        if ($request->ajax()) {
-            return response()->json([
-                'html' => view('partials.job_card_list', compact('vacancies'))->render()
-            ]);
-        }
-
-        // 4. Return View Normal
-        return view('career', compact('banners', 'benefits', 'jobCategories', 'vacancies'));
+        $query->where(function ($q) use ($search) {
+            $q->where('name', 'like', "%{$search}%")
+              ->orWhere('location', 'like', "%{$search}%");
+        });
     }
+
+    // FILTER
+    if ($request->filled('category')) {
+        $query->where('job_category_id', $request->category);
+    }
+
+    // WAJIB PAGINATION
+    $vacancies = $query->paginate(4)->withQueryString();
+
+    // AJAX → RETURN HTML
+    if ($request->expectsJson() || $request->ajax()) {
+        return view('partials.job_card_list', compact('vacancies'))->render();
+    }
+
+    return view('career', compact(
+        'banners',
+        'benefits',
+        'jobCategories',
+        'vacancies',
+        'selectedCategory'
+    ));
+}
 }
