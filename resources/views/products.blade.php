@@ -254,15 +254,14 @@
         /* Image area */
         .pp-card-img-wrap {
             width: 100%;
-            aspect-ratio: 1 / 1;
             position: relative;
             background-color: #fff;
-            overflow: hidden;
+            overflow: visible;
         }
 
         .pp-card-img {
             width: 100%;
-            height: 100%;
+            height: auto;
             object-fit: contain;
             display: block;
             transition: transform 0.3s ease;

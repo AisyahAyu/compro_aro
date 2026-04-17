@@ -44,12 +44,11 @@ class HomeController extends Controller
         $partners = Partner::where('is_active', true)->orderBy('order')->get();
         $platforms = Platform::where('is_active', true)->get();
 
-        // Fetch products from API (reuse the same cache as products page)
-        $allProducts = Cache::remember('all_api_products', 3600, function () {
-            return $this->fetchFromEcommerceApi('products');
+        // Fetch only the products needed for home page display
+        $products = Cache::remember('home_featured_products', 3600, function () {
+            $allProducts = $this->fetchFromEcommerceApi('products');
+            return is_array($allProducts) ? array_slice($allProducts, 0, 4) : [];
         });
-
-        $products = is_array($allProducts) ? array_slice($allProducts, 0, 4) : [];
 
         // Fallback to local if API fails or returns nothing
         if (empty($products)) {
@@ -93,17 +92,16 @@ class HomeController extends Controller
             return $this->fetchFromEcommerceApi('categories');
         });
 
-        // To extract brands, we fetch all products once and cache them
-        $allProductsForBrands = Cache::remember('all_api_products', 3600, function () {
-            return $this->fetchFromEcommerceApi('products');
+        // Cache brands separately to avoid storing all products data
+        $brands = Cache::remember('api_brands', 3600, function () {
+            $products = $this->fetchFromEcommerceApi('products');
+            return collect($products ?? [])
+                ->map(fn($p) => $p['brand'] ?? null)
+                ->filter()
+                ->unique('id_brand')
+                ->values()
+                ->all();
         });
-
-        $brands = collect($allProductsForBrands ?? [])
-            ->map(fn($p) => $p['brand'] ?? null)
-            ->filter()
-            ->unique('id_brand')
-            ->values()
-            ->all();
 
         // Filter products
         $params = [];
@@ -148,11 +146,9 @@ class HomeController extends Controller
             abort(404);
         }
 
-        $relatedProducts = Cache::remember('all_api_products', 3600, function () {
-            return $this->fetchFromEcommerceApi('products');
-        });
-        
-        $relatedProducts = collect($relatedProducts ?? [])
+        // Fetch related products directly from API
+        $allProducts = $this->fetchFromEcommerceApi('products');
+        $relatedProducts = collect($allProducts ?? [])
             ->filter(fn($item) => $item['slug'] !== $slug)
             ->take(3)
             ->all();

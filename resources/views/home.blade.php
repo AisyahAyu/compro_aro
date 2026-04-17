@@ -82,36 +82,37 @@
     }
 
     /* Image area */
-.product-card-img-wrap {
-    width: 100%;
-    background: #fff;
-    overflow: visible;
-    line-height: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+    .product-card-img-wrap {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        position: relative;
+        background-color: #fff;
+        overflow: hidden;
+    }
 
-.product-card-img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: contain;
-    object-position: center;
-}
+    .product-card-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        transition: transform 0.3s ease;
+    }
 
-
-
-    
-.product-card-link:hover .product-card-img {
-    transform: scale(1.12);
-}
-
+    .product-card-link:hover .product-card-img {
+        transform: scale(1.05);
+    }
 
     /* Refined Overlay for Ecommerce Look */
-.product-card-img-wrap::after {
-    display: none;
-}
+    .product-card-img-wrap::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: #000;
+    }
+
     .product-card-badge {
         position: absolute;
         top: 0;
@@ -214,10 +215,12 @@
         }
         
         .product-card-img-wrap {
+            aspect-ratio: 1 / 1;
             height: auto !important;
         }
         
         .product-card-img {
+            aspect-ratio: 1 / 1;
             height: auto !important;
         }
         
@@ -270,8 +273,8 @@
         
         .category-card img {
             width: 100%;
-            height: auto;
-            object-fit: contain;
+            height: 160px;
+            object-fit: cover;
         }
         
         .category-card .p-4 {
@@ -318,10 +321,12 @@
         }
         
         .product-card-img-wrap {
+            aspect-ratio: 1 / 1;
             height: auto !important;
         }
         
         .product-card-img {
+            aspect-ratio: 1 / 1;
             height: auto !important;
         }
         
@@ -345,10 +350,12 @@
         }
         
         .product-card-img-wrap {
+            aspect-ratio: 1 / 1;
             height: auto !important;
         }
         
         .product-card-img {
+            aspect-ratio: 1 / 1;
             height: auto !important;
         }
         
@@ -408,42 +415,643 @@
 
 <!-- Solusi Terbaik -->
 @if($categories->count() > 0)
-<section class="section-padding bg-light">
+<section class="solutions-premium-section section-padding">
+    <!-- Decorative Background -->
+    <div class="bg-decorative-solutions">
+        <div class="blur-shape blur-1"></div>
+        <div class="blur-shape blur-2"></div>
+        <div class="blur-shape blur-3"></div>
+    </div>
+    
     <div class="container">
-        <div class="row mb-5">
-            <div class="col-lg-8">
-                <div class="d-flex align-items-center mb-3">
-                    <i class="fas fa-star text-warning me-3" style="font-size: 2rem;"></i>
-                    <h3 class="mb-0 fw-bold">Solusi Terbaik</h3>
+        <!-- Modern Section Header -->
+        <div class="text-center mb-5">
+            <div class="section-header-premium">
+                <div class="icon-wrapper">
+                    <i class="fas fa-rocket"></i>
                 </div>
-                <p class="lead">Solusi lengkap kebutuhan operasional bisnis dan instansi.</p>
+                <h2 class="solutions-premium-title">Solusi Terbaik</h2>
+                <div class="title-underline-premium"></div>
             </div>
-            <div class="col-lg-4 text-end">
-                <a href="{{ route('solusi.page') }}" class="btn btn-outline-primary">
-                    <i class="fas fa-arrow-right me-2"></i>Lihat Semua
-                </a>
-            </div>
+            <p class="solutions-premium-subtitle">Solusi lengkap kebutuhan operasional bisnis dan instansi</p>
         </div>
         
-        <div class="row">
-            @foreach($categories as $category)
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <a href="{{ route('solusi.page') }}" class="category-card-link">
-                        <div class="category-card">
+        <!-- Dynamic Cards Grid -->
+        <div class="solutions-grid-premium">
+            @foreach($categories as $index => $category)
+                <div class="solution-card-premium scroll-reveal" style="animation-delay: {{ $index * 0.15 }}s;">
+                    <div class="card-inner">
+                        <!-- Image with Overlay -->
+                        <div class="card-image-wrapper">
                             @if($category->image)
-                                <img src="{{ asset($category->image) }}" alt="{{ $category->name }}">
+                                <img src="{{ asset($category->image) }}" alt="{{ $category->name }}" class="card-image">
+                                <div class="image-overlay"></div>
                             @endif
-                            <div class="p-4">
-                                <h4 class="fw-bold">{{ $category->name }}</h4>
-                                <p class="text-muted">{{ $category->description }}</p>
+                            
+                            <!-- Category Badge -->
+                            <div class="category-badge">
+                                <i class="fas fa-tag"></i>
+                                <span>{{ Str::limit($category->name, 15) }}</span>
                             </div>
                         </div>
-                    </a>
+                        
+                        <!-- Card Content -->
+                        <div class="card-content">
+                            <div class="card-icon">
+                                <i class="fas fa-cube"></i>
+                            </div>
+                            <h3 class="card-title">{{ $category->name }}</h3>
+                            <p class="card-description">{{ Str::limit($category->description, 80) }}</p>
+                            
+                            <!-- Card Action -->
+                            <div class="card-action">
+                                <span class="action-text">Jelajahi</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                        
+                        <!-- Hover Effects -->
+                        <div class="card-effects">
+                            <div class="glow-effect"></div>
+                            <div class="border-effect"></div>
+                        </div>
+                    </div>
                 </div>
             @endforeach
         </div>
+        
+        <!-- Modern CTA Button -->
+        <div class="text-center mt-5">
+            <div class="cta-wrapper">
+                <a href="{{ route('products.page') }}" class="cta-premium-btn">
+                    <span>Lihat Semua</span>
+                    <i class="fas fa-arrow-right"></i>
+                    <div class="btn-glow"></div>
+                </a>
+            </div>
+        </div>
     </div>
 </section>
+
+<style>
+/* Premium Solutions Section */
+.solutions-premium-section {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #ffffff 100%);
+    padding: 120px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* Decorative Background */
+.bg-decorative-solutions {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.blur-shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.3;
+    animation: floatShape 15s ease-in-out infinite;
+}
+
+.blur-1 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.4), transparent);
+    top: -100px;
+    right: -100px;
+    animation-delay: 0s;
+}
+
+.blur-2 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(147, 51, 234, 0.3), transparent);
+    bottom: -50px;
+    left: 20%;
+    animation-delay: 5s;
+}
+
+.blur-3 {
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(79, 172, 254, 0.3), transparent);
+    top: 30%;
+    left: -50px;
+    animation-delay: 10s;
+}
+
+@keyframes floatShape {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    25% { transform: translateY(-30px) scale(1.05); }
+    50% { transform: translateY(20px) scale(0.95); }
+    75% { transform: translateY(-20px) scale(1.02); }
+}
+
+/* Section Header */
+.section-header-premium {
+    position: relative;
+    z-index: 10;
+}
+
+.icon-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg, #ff6b35, #ffa500);
+    border-radius: 20px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+}
+
+.icon-wrapper:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 35px rgba(255, 107, 53, 0.4);
+}
+
+.icon-wrapper i {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.solutions-premium-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #2d3748;
+    margin-bottom: 15px;
+    letter-spacing: -1px;
+    position: relative;
+}
+
+.title-underline-premium {
+    width: 120px;
+    height: 4px;
+    background: linear-gradient(90deg, #ff6b35, #ffa500, #ff6b35);
+    margin: 0 auto 30px;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+}
+
+.title-underline-premium::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    50% { left: 100%; }
+    100% { left: 100%; }
+}
+
+.solutions-premium-subtitle {
+    font-size: 1.2rem;
+    color: #718096;
+    max-width: 600px;
+    margin: 0 auto 40px;
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+/* Modern CTA Button */
+.cta-wrapper {
+    position: relative;
+    z-index: 10;
+}
+
+.cta-premium-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 40px;
+    background: linear-gradient(45deg, #ff6b35, #ffa500);
+    background-size: 200% 200%;
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+    animation: btnGradient 3s ease infinite;
+}
+
+@keyframes btnGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.cta-premium-btn:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(255, 107, 53, 0.4);
+}
+
+.cta-premium-btn i {
+    transition: transform 0.3s ease;
+}
+
+.cta-premium-btn:hover i {
+    transform: translateX(5px);
+}
+
+.btn-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.3), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.cta-premium-btn:hover .btn-glow {
+    opacity: 1;
+}
+
+/* Dynamic Cards Grid */
+.solutions-grid-premium {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 80px;
+    position: relative;
+    z-index: 10;
+}
+
+.solution-card-premium {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeInUpPremium 0.8s ease forwards;
+}
+
+@keyframes fadeInUpPremium {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card-inner {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card-inner:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 1);
+}
+
+/* Card Image */
+.card-image-wrapper {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card-inner:hover .card-image {
+    transform: scale(1.1);
+    filter: brightness(1.1) saturate(1.2);
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(79, 172, 254, 0.1));
+    opacity: 0;
+    transition: all 0.8s ease;
+}
+
+.card-inner:hover .image-overlay {
+    opacity: 1;
+}
+
+/* Category Badge */
+.category-badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #ff6b35;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    z-index: 5;
+    transition: all 0.3s ease;
+}
+
+.category-badge i {
+    font-size: 0.7rem;
+}
+
+.card-inner:hover .category-badge {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 1);
+}
+
+/* Card Content */
+.card-content {
+    padding: 30px;
+    position: relative;
+    z-index: 5;
+}
+
+.card-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(45deg, #ff6b35, #ffa500);
+    border-radius: 15px;
+    margin-bottom: 20px;
+    color: white;
+    font-size: 1.2rem;
+    box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+    transition: all 0.3s ease;
+}
+
+.card-inner:hover .card-icon {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 12px 30px rgba(255, 107, 53, 0.4);
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.card-description {
+    color: #718096;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+}
+
+.card-action {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #ff6b35;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.card-action i {
+    transition: transform 0.3s ease;
+}
+
+.card-inner:hover .card-action {
+    color: #ffa500;
+}
+
+.card-inner:hover .card-action i {
+    transform: translateX(5px);
+}
+
+/* Card Effects */
+.card-effects {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+.glow-effect {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 107, 53, 0.1), transparent);
+    opacity: 0;
+    transition: all 0.6s ease;
+    animation: rotateGlow 8s linear infinite;
+}
+
+@keyframes rotateGlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.card-inner:hover .glow-effect {
+    opacity: 1;
+}
+
+.border-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 24px;
+    padding: 2px;
+    background: linear-gradient(45deg, #ff6b35, #ffa500, #ff8c42, #ff6b35);
+    background-size: 300% 300%;
+    animation: borderGradient 4s ease infinite;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+@keyframes borderGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.card-inner:hover .border-effect {
+    opacity: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .solutions-premium-section {
+        padding: 80px 0;
+    }
+    
+    .solutions-premium-title {
+        font-size: 2.5rem;
+    }
+    
+    .solutions-premium-subtitle {
+        font-size: 1rem;
+    }
+    
+    .solutions-grid-premium {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        margin-top: 60px;
+    }
+    
+    .card-content {
+        padding: 25px;
+    }
+    
+    .card-title {
+        font-size: 1.3rem;
+    }
+    
+    .cta-premium-btn {
+        padding: 15px 30px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .solutions-premium-section {
+        padding: 60px 0;
+    }
+    
+    .solutions-premium-title {
+        font-size: 2rem;
+    }
+    
+    .icon-wrapper {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .icon-wrapper i {
+        font-size: 1.2rem;
+    }
+    
+    .card-image-wrapper {
+        height: 180px;
+    }
+    
+    .card-content {
+        padding: 20px;
+    }
+    
+    .category-badge {
+        top: 15px;
+        left: 15px;
+        padding: 6px 12px;
+        font-size: 0.7rem;
+    }
+}
+
+/* Premium Orange Button */
+.btn-premium-orange {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 35px;
+    background: linear-gradient(45deg, #ff6b35, #ffa500);
+    background-size: 200% 200%;
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+    animation: btnOrangeGradient 3s ease infinite;
+    border: none;
+}
+
+@keyframes btnOrangeGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.btn-premium-orange:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(255, 107, 53, 0.4);
+    color: white;
+    text-decoration: none;
+}
+
+.btn-premium-orange i {
+    transition: transform 0.3s ease;
+}
+
+.btn-premium-orange:hover i {
+    transform: translateX(5px);
+}
+
+.btn-premium-orange::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.3), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.btn-premium-orange:hover::before {
+    opacity: 1;
+}
+
+.btn-premium-orange:focus {
+    outline: none;
+    box-shadow: 0 20px 40px rgba(255, 107, 53, 0.4);
+}
+
+.btn-premium-orange:active {
+    transform: translateY(-2px) scale(1.02);
+}
+</style>
 @endif
 
 <!-- Legalitas & Kepatuhan -->
@@ -519,7 +1127,7 @@
 
 <!-- Mitra Brand -->
 @if($partners->count() > 0)
-<section class="section-padding bg-light">
+<section class="section-padding" style="background-color: white;">
     <div class="container">
         <div class="text-center mb-5">
             <h2 class="section-title" style="color: var(--primary-orange);">Mitra Brand</h2>
@@ -545,16 +1153,101 @@
 
 <!-- Produk Terbaik -->
 @if(count($products) > 0)
-<section class="section-padding">
-    <div class="container">
+<style>
+/* Best Products Section Animations */
+@keyframes shimmer {
+    0% { left: -100%; }
+    50% { left: 100%; }
+    100% { left: 100%; }
+}
+
+@keyframes btnGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.best-products-section .btn-premium-orange:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(255, 107, 53, 0.4);
+    color: white;
+    text-decoration: none;
+}
+
+.best-products-section .btn-premium-orange:hover i {
+    transform: translateX(3px);
+    transition: transform 0.3s ease;
+}
+
+.best-products-section .btn-premium-orange i {
+    transition: transform 0.3s ease;
+}
+
+/* Icon hover effect */
+.best-products-section .text-center > div:first-child:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 35px rgba(255, 107, 53, 0.4);
+}
+
+/* Product cards entrance animation */
+.best-products-section .home-product-grid {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .best-products-section .section-title {
+        font-size: 2rem !important;
+    }
+    
+    .best-products-section .lead {
+        font-size: 1rem !important;
+    }
+    
+    .best-products-section .btn-premium-orange {
+        padding: 15px 30px !important;
+        font-size: 1rem !important;
+    }
+}
+</style>
+<section class="best-products-section section-padding" style="position: relative; background-color: white; overflow: hidden;">
+    <!-- Decorative Background Elements -->
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1;">
+        <div style="position: absolute; top: -100px; right: -100px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(255, 165, 0, 0.1), transparent); border-radius: 50%; filter: blur(60px);"></div>
+        <div style="position: absolute; bottom: -50px; left: 10%; width: 250px; height: 250px; background: radial-gradient(circle, rgba(255, 107, 53, 0.08), transparent); border-radius: 50%; filter: blur(50px);"></div>
+        <div style="position: absolute; top: 30%; left: -50px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(255, 165, 0, 0.06), transparent); border-radius: 50%; filter: blur(40px);"></div>
+    </div>
+    
+    <div class="container" style="position: relative; z-index: 2;">
+        <!-- Enhanced Section Header -->
         <div class="text-center mb-5">
-            <h2 class="section-title">Produk Terbaik</h2>
-            <div class="d-flex justify-content-center">
-                <div style="width: 100px; height: 3px; background: var(--primary-orange);"></div>
+            <div style="display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; background: linear-gradient(45deg, #ff6b35, #ffa500); border-radius: 20px; margin-bottom: 25px; box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3); transition: all 0.3s ease;">
+                <i class="fas fa-star" style="font-size: 2rem; color: white;"></i>
             </div>
+            <h2 class="section-title" style="font-size: 3rem; font-weight: 800; color: #2d3748; margin-bottom: 20px; position: relative;">
+                Produk Terbaik
+                <div style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 120px; height: 4px; background: linear-gradient(90deg, #ff6b35, #ffa500, #ff6b35); border-radius: 2px; overflow: hidden;">
+                    <div style="position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent); animation: shimmer 3s ease-in-out infinite;"></div>
+                </div>
+            </h2>
+            <p class="lead" style="color: #718096; font-size: 1.2rem; max-width: 600px; margin: 30px auto 0; font-weight: 300;">
+                Temukan pilihan produk unggulan kami dengan kualitas terbaik dan harga kompetitif
+            </p>
         </div>
         
-        <div class="home-product-grid">
+        <!-- Enhanced Product Grid Container -->
+        <div class="home-product-grid" style="position: relative; padding: 20px 0;">
             @forelse($products as $product)
                 @if(isset($product['slug']))
                     <a href="https://ayobelanja.co.id/products/{{ $product['slug'] }}" target="_blank" rel="noopener noreferrer" class="product-card-link">
@@ -592,8 +1285,14 @@
             @endforelse
         </div>
         
-        <div class="text-center mt-5">
-            <a href="{{ route('products.page') }}" class="btn btn-contact">Lihat Selengkapnya</a>
+        <!-- Enhanced CTA Button -->
+        <div class="text-center" style="margin-top: 50px; position: relative;">
+            <div style="position: absolute; top: -20px; left: 50%; transform: translateX(-50%); width: 200px; height: 40px; background: radial-gradient(ellipse at center, rgba(255, 165, 0, 0.1), transparent); filter: blur(20px);"></div>
+            <a href="{{ route('products.page') }}" class="btn btn-premium-orange" style="position: relative; z-index: 2; padding: 18px 45px; font-size: 1.1rem; font-weight: 700; background: linear-gradient(45deg, #ff6b35, #ffa500); background-size: 200% 200%; animation: btnGradient 3s ease infinite; box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3); border-radius: 50px; transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+                <i class="fas fa-shopping-bag me-2"></i>
+                Lihat Selengkapnya
+                <i class="fas fa-arrow-right ms-2"></i>
+            </a>
         </div>
     </div>
 </section>
@@ -691,7 +1390,7 @@
                         </div>
                         <div class="col-lg-6 mb-4">
                             @if($platform->image)
-                                <img src="{{ asset($platform->image) }}" alt="{{ $platform->title }}" class="img-fluid">
+                                <img src="{{ asset($platform->image) }}" alt="{{ $platform->title }}" class="img-fluid rounded">
                             @endif
                         </div>
                     </div>

@@ -34,7 +34,7 @@
                         Aktivitas
                     </a>
                 </li>
-                                <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link" href="{{ route('faq.page') }}">FAQ</a>
                 </li>
                 <li class="nav-item ms-4">
