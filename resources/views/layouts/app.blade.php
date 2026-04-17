@@ -6,6 +6,7 @@
     <title>@yield('title', 'Company Profile')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         :root {
             --primary-orange: #FE9800;
@@ -52,8 +53,8 @@
         /* Warna teks dan link saat transparan */
         .transparent-navbar .navbar-brand,
         .transparent-navbar .navbar-nav .nav-link {
-            color: white !important;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            color: #050052 !important;
+            /* text-shadow: 0 1px 3px rgba(0,0,0,0.3); */
         }
         
         .transparent-navbar .navbar-brand:hover,
@@ -170,7 +171,7 @@
                 text-align: center;
             }
         }
-        }
+        
         
         .navbar-nav {
             list-style: none;
