@@ -1,16 +1,20 @@
 @extends('layouts.app')
 
+@section('body-id', 'id="about-page"')
+
 @section('title', 'Tentang Kami - PT ARO')
+
 
 @section('content')
 <!-- Hero Section -->
 <section class="hero-slider">
-    <div class="hero-slide active" style="background-image: url('/uploads/banners/banner tentang.png'); background-size: cover; background-position: center; min-height: 80vh;">
+    <div class="hero-slide active" style="min-height: 80vh;">
+        <div class="hero-overlay"></div>
         <div class="hero-content-wrapper">
             <div class="container">
                 <div class="hero-content" style="text-align: left;">
-                    <h1 class="hero-title" style="font-size: 3.5rem; margin-bottom: 2rem; max-width: 500px;">Mengenal PT Aro Baskara Esa</h1>
-                    <p class="hero-description" style="font-size: 1.3rem; max-width: 500px; margin-bottom: 3rem; line-height: 1.6;">
+                    <h1 class="hero-title">Mengenal PT Aro Baskara Esa</h1>
+                    <p class="hero-description">
                         Solusi pengadaan barang dan jasa yang profesional, transparan dan terpercaya untuk sektor bisnis dan pemerintahan.
                     </p>
                     <a href="#hubungi" class="hero-button" style="background: transparent; border: 2px solid white; color: white; padding: 12px 30px; border-radius: 25px; text-decoration: none; font-weight: 500; transition: all 0.3s ease; display: inline-block;" onmouseover="this.style.background='#FE9800'; this.style.borderColor='#FE9800';" onmouseout="this.style.background='transparent'; this.style.borderColor='white';">

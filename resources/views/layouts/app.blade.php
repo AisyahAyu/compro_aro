@@ -1087,7 +1087,7 @@
             line-height: 1.1;
             color: var(--primary-blue) !important;
             text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            animation: slideInLeft 1s ease-out, pulse 3s ease-in-out infinite;
+            animation: slideInLeft 1s ease-out;
         }
 
         .hero-description {
@@ -1295,7 +1295,7 @@
         }
 
         .legality-card:hover::before {
-            animation: pulse 2s ease-in-out infinite;
+            /* animation: pulse 2s ease-in-out infinite; */
         }
 
         .legality-card:hover {
@@ -1349,7 +1349,7 @@
             font-size: 0.9rem;
             margin-bottom: 25px;
             backdrop-filter: blur(10px);
-            animation: pulse 3s ease-in-out infinite;
+            /* animation: pulse 3s ease-in-out infinite; */
         }
 
         .platform-title {
@@ -1390,7 +1390,7 @@
         .process-step-horizontal:hover .process-number-horizontal {
             transform: scale(1.15) rotate(10deg);
             box-shadow: 0 12px 35px rgba(254, 152, 0, 0.5);
-            animation: glow 2s ease-in-out infinite;
+            /* animation: glow 2s ease-in-out infinite; */
         }
 
         /* Enhanced Partner Logos */
@@ -1620,7 +1620,7 @@
             height: 4px;
             background: linear-gradient(90deg, var(--primary-orange), var(--gold));
             border-radius: 2px;
-            animation: glow 2s ease-in-out infinite;
+            /* animation: glow 2s ease-in-out infinite; */
         }
 
         .about-description {
@@ -1752,7 +1752,7 @@
         }
     </style>
 </head>
-<body>
+<body @yield('body-id')>
     @include('partials.navbar')
     
     <main>

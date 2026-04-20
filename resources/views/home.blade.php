@@ -382,7 +382,7 @@
             <div class="hero-overlay"></div>
             <div class="hero-content-wrapper">
                 <div class="container">
-                    <div class="hero-content">
+                    <div class="hero-content home-hero">
                         @if($banner->title)
                             <h1 class="hero-title">{{ $banner->title }}</h1>
                         @endif
@@ -1238,7 +1238,7 @@
             <h2 class="section-title" style="font-size: 3rem; font-weight: 800; color: #2d3748; margin-bottom: 20px; position: relative;">
                 Produk Terbaik
                 <div style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 120px; height: 4px; background: linear-gradient(90deg, #ff6b35, #ffa500, #ff6b35); border-radius: 2px; overflow: hidden;">
-                    <div style="position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent); animation: shimmer 3s ease-in-out infinite;"></div>
+                    <div style="position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent); /* animation: shimmer 3s ease-in-out infinite; */"></div>
                 </div>
             </h2>
             <p class="lead" style="color: #718096; font-size: 1.2rem; max-width: 600px; margin: 30px auto 0; font-weight: 300;">
@@ -1288,7 +1288,7 @@
         <!-- Enhanced CTA Button -->
         <div class="text-center" style="margin-top: 50px; position: relative;">
             <div style="position: absolute; top: -20px; left: 50%; transform: translateX(-50%); width: 200px; height: 40px; background: radial-gradient(ellipse at center, rgba(255, 165, 0, 0.1), transparent); filter: blur(20px);"></div>
-            <a href="{{ route('products.page') }}" class="btn btn-premium-orange" style="position: relative; z-index: 2; padding: 18px 45px; font-size: 1.1rem; font-weight: 700; background: linear-gradient(45deg, #ff6b35, #ffa500); background-size: 200% 200%; animation: btnGradient 3s ease infinite; box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3); border-radius: 50px; transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
+            <a href="{{ route('products.page') }}" class="btn btn-premium-orange" style="position: relative; z-index: 2; padding: 18px 45px; font-size: 1.1rem; font-weight: 700; background: linear-gradient(45deg, #ff6b35, #ffa500); background-size: 200% 200%; /* animation: btnGradient 3s ease infinite; */ box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3); border-radius: 50px; transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);">
                 <i class="fas fa-shopping-bag me-2"></i>
                 Lihat Selengkapnya
                 <i class="fas fa-arrow-right ms-2"></i>

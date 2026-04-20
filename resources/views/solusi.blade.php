@@ -3,6 +3,10 @@
 
 @section('content')
 <style>
+body {
+    background-color: white !important;
+}
+
 /* ==================== HERO ==================== */
 .solusi-hero {
     position: relative;
@@ -17,7 +21,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.3) 100%);
+    background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.2) 100%);
     z-index: 1;
 }
 .solusi-hero .container { position: relative; z-index: 2; }
@@ -25,7 +29,7 @@
 .solusi-hero-title {
     font-size: 3rem;
     font-weight: 800;
-    color: #fff;
+    color: #333;
     line-height: 1.2;
     margin-bottom: 1.5rem;
     max-width: 550px;
@@ -35,7 +39,7 @@
     font-style: italic;
 }
 .solusi-hero-subtitle {
-    color: rgba(255,255,255,0.9);
+    color: rgba(51,51,51,0.9);
     font-size: 1.05rem;
     line-height: 1.7;
     margin-bottom: 0;
@@ -54,7 +58,7 @@
     margin: 0 0 2.5rem 0;
 }
 .solusi-hero-list li {
-    color: rgba(255,255,255,0.92);
+    color: rgba(51,51,51,0.92);
     font-size: 1.05rem;
     margin-bottom: 12px;
     display: flex;
@@ -79,13 +83,13 @@
 .solusi-stat-value {
     font-size: 2.5rem;
     font-weight: 800;
-    color: #fff;
+    color: #333;
     line-height: 1;
     margin-bottom: 2px;
 }
 .solusi-stat-value span { color: var(--primary-orange); }
 .solusi-stat-label {
-    color: rgba(255,255,255,0.7);
+    color: rgba(51,51,51,0.7);
     font-size: 0.9rem;
 }
 
@@ -364,7 +368,7 @@
 </style>
 
 {{-- ==================== HERO ==================== --}}
-<section class="solusi-hero" style="background-image: url('{{ asset('uploads/banner_tentangg.png') }}');">
+<section class="solusi-hero" style="background-image: url('{{ asset('uploads/banner_solusi.png') }}');">
     <div class="container">
         <div class="row">
             <div class="col-lg-7">

@@ -101,7 +101,7 @@
     <div class="container">
         <div class="text-center mb-5">
             <h2 class="section-title" style="color: #EE8E0F; font-family: 'Georgia', 'Times New Roman', serif;">Visi & Misi</h2>
-            <div class="divider-line mx-auto" style="background: linear-gradient(90deg, #FFA500, #FF8C00, #FFA500); width: 50px; height: 3px; margin: 12px auto 30px; border-radius: 2px; box-shadow: 0 2px 8px rgba(255, 165, 0, 0.3); animation: shimmer-divider 3s ease-in-out infinite;"></div>
+            <div class="divider-line mx-auto" style="background: linear-gradient(90deg, #FFA500, #FF8C00, #FFA500); width: 50px; height: 3px; margin: 12px auto 30px; border-radius: 2px; box-shadow: 0 2px 8px rgba(255, 165, 0, 0.3); /* animation: shimmer-divider 3s ease-in-out infinite; */"></div>
             <p class="mt-3" style="color: #555; max-width: 600px; margin: 0 auto;">
                 Berikut visi dan misi yang menjadi arah serta komitmen perusahaan dalam menjalankan setiap kegiatan usaha.
             </p>
@@ -670,7 +670,7 @@
     <div class="container">
         <div class="text-center mb-5">
             <h2 class="section-title" style="color: #EE8E0F; font-family: 'Georgia', 'Times New Roman', serif;">Brand Kami</h2>
-            <div class="divider-line mx-auto" style="background: linear-gradient(90deg, #FFA500, #FF8C00, #FFA500); width: 50px; height: 3px; margin: 12px auto 30px; border-radius: 2px; box-shadow: 0 2px 8px rgba(255, 165, 0, 0.3); animation: shimmer-divider 3s ease-in-out infinite;"></div>
+            <div class="divider-line mx-auto" style="background: linear-gradient(90deg, #FFA500, #FF8C00, #FFA500); width: 50px; height: 3px; margin: 12px auto 30px; border-radius: 2px; box-shadow: 0 2px 8px rgba(255, 165, 0, 0.3); /* animation: shimmer-divider 3s ease-in-out infinite; */"></div>
             <p class="mt-3" style="color: #555; max-width: 600px; margin: 0 auto;">
                 Berbagai brand terpercaya yang telah bekerja sama dengan kami untuk memberikan solusi terbaik.
             </p>
@@ -704,7 +704,7 @@
 <section class="section-padding text-center">
 
     <h2 class="section-title" style="color: #EE8E0F; font-family: 'Georgia', 'Times New Roman', serif;">Mitra Teknologi</h2>
-    <div class="divider-line mx-auto" style="background: linear-gradient(90deg, #FFA500, #FF8C00, #FFA500); width: 50px; height: 3px; margin: 12px auto 30px; border-radius: 2px; box-shadow: 0 2px 8px rgba(255, 165, 0, 0.3); animation: shimmer-divider 3s ease-in-out infinite;"></div>
+    <div class="divider-line mx-auto" style="background: linear-gradient(90deg, #FFA500, #FF8C00, #FFA500); width: 50px; height: 3px; margin: 12px auto 30px; border-radius: 2px; box-shadow: 0 2px 8px rgba(255, 165, 0, 0.3); /* animation: shimmer-divider 3s ease-in-out infinite; */"></div>
     <p class="mb-4 text-muted">
         Didukung oleh mitra teknologi resmi dan terpercaya.
     </p>
