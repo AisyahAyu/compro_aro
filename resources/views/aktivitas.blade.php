@@ -4,7 +4,7 @@
 
 @section('content')
 
-{{-- HERO SECTION --}}
+<!-- {{-- HERO SECTION --}}
 <section class="hero-section d-flex align-items-center text-white">
     <div class="container">
         <div class="row justify-content-center"> {{-- Menambah justify-content-center --}}
@@ -20,11 +20,78 @@
             </div>
         </div>
     </div>
+</section> -->
+
+{{-- HERO SECTION: AKTIVITAS & BERITA (FULL SCREEN & ONLINE ICON) --}}
+<section class="hero-activity d-flex align-items-center" style="
+    background: radial-gradient(circle at 10% 20%, #fff9f0 0%, #ffffff 40%, #e0f2fe 100%); 
+    min-height: 100vh; {{-- Banner memenuhi satu layar penuh --}}
+    padding: 140px 0; {{-- Jarak atas bawah diperlebar --}}
+    position: relative;
+    overflow: hidden;">
+
+    {{-- Aksen Dekoratif --}}
+    <div style="position: absolute; top: 10%; right: -5%; width: 650px; height: 650px; background: rgba(255, 165, 0, 0.04); border-radius: 50%; z-index: 0;"></div>
+
+    <div class="container" style="position: relative; z-index: 1;">
+        <div class="row align-items-center">
+            <div class="col-lg-7">
+                {{-- Label Orange Gelap --}}
+                <div class="d-flex align-items-center mb-4">
+                    <div style="width: 45px; height: 5px; background-color: #c2410c; border-radius: 3px; margin-right: 15px;"></div>
+                    <span style="color: #c2410c; font-weight: 700; letter-spacing: 2px; font-size: 0.9rem; text-transform: uppercase;">
+                        Update Aktivitas
+                    </span>
+                </div>
+                
+                {{-- Judul Proporsional --}}
+                <h1 class="fw-bold mb-4" style="color: #0f172a; font-size: 3.5rem; line-height: 1.1; letter-spacing: -1.5px;">
+                    Eksplorasi Kegiatan & <br> 
+                    <span style="color: #f97316;">Inovasi Terbaru Kami</span>
+                </h1>
+                
+                {{-- Deskripsi --}}
+                <p class="mb-5 text-start" style="color: #475569; max-width: 580px; font-size: 1.2rem; line-height: 1.8;">
+                    Ikuti perjalanan <strong>PT Aro Baskara Esa</strong> melalui dokumentasi proyek, laporan kegiatan, dan berita terkini yang membawa dampak positif bagi industri.
+                </p>
+
+                <div class="d-flex align-items-center">
+                    <a href="#kegiatan" class="btn px-5 py-3 shadow-sm" style="background-color: #f97316; color: white; border: none; border-radius: 12px; font-weight: 600; font-size: 1.05rem;">
+                        Lihat Semua Kegiatan
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-5 d-none d-lg-block">
+                {{-- Card Info --}}
+                <div class="p-5 shadow-sm" style="background: white; border-radius: 24px; border: 1px solid #f1f5f9; position: relative;">
+                    <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 5px; background: #f97316; border-radius: 0 0 10px 10px;"></div>
+
+                    <div class="d-flex gap-4 mb-4">
+                        {{-- Kotak Krem dengan ICON ONLINE --}}
+                        <div style="flex-shrink: 0; width: 60px; height: 60px; background: #fff4e6; border-radius: 16px; display: flex; align-items: center; justify-content: center;">
+                            <img src="https://cdn-icons-png.flaticon.com/512/2010/2010150.png" 
+                                 alt="Rocket Icon" 
+                                 style="width: 32px; height: 32px; filter: invert(53%) sepia(85%) saturate(1352%) hue-rotate(345deg) brightness(101%) contrast(97%);">
+                        </div>
+                        <div>
+                            <h6 class="fw-bold mb-1" style="color: #0f172a; font-size: 1.2rem;">Komitmen Berkelanjutan</h6>
+                            <p class="text-muted mb-0" style="font-size: 0.9rem; line-height: 1.6;">Setiap langkah didokumentasikan untuk transparansi kepada mitra kami.</p>
+                        </div>
+                    </div>
+
+                    <div class="progress" style="height: 8px; border-radius: 10px; background-color: #f1f5f9;">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 75%; background-color: #f97316; border-radius: 10px;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 
 {{-- CONTENT --}}
-<section class="py-5">
+<section id="kegiatan" class="py-5">
     <div class="container">
         {{-- TITLE --}}
         <h2 class="fw-bold mb-4"
@@ -212,8 +279,8 @@ $(document).ready(function() {
 });
 </script>
 
-<style>
-.hero-section {
+<!-- <style>
+/* .hero-section {
     /* Gaya Warna & Background Tetap Sama */
     background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.35)),
                 url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1350&q=80');
@@ -264,9 +331,9 @@ $(document).ready(function() {
     }
 img {
   filter: contrast(1.05) sharpness(1.1);
-}
+} */ -->
 
-
-</style>
+<!-- 
+</style> -->
 
 @endsection

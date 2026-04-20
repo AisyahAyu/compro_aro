@@ -6,55 +6,61 @@
 
 {{-- CSS UNTUK BANNER ORANYE & PENCARIAN OVERLAP --}}
 <style>
-    /* Reset & Background Global */
-.hero-career {
+  .hero-career {
     position: relative;
-    /* padding: 120px 20px; <--- Ini yang bikin lowong */
-    
-    /* Ganti jadi seperti ini agar lebih rapat: */
-    padding-top: 80px;    /* Jarak atas tetap atau sedikit kurangi */
-    padding-bottom: 80px; /* Jarak bawah dipangkas biar ga terlalu kosong */
+    padding-top: 140px;    
+    padding-bottom: 80px; 
     padding-left: 20px;
     padding-right: 20px;
-
     margin-bottom: 40px;  
-    /* -------------------- */
-
     overflow: hidden;
+    
+    /* Gradasi Background Utama dibuat lebih cerah */
     background: linear-gradient(
         to right,
         #ffffff 0%,
-        #ffffff 60%,
-        rgba(255, 140, 0, 0.08) 100%
+        #ffffff 40%,
+        rgba(255, 122, 0, 0.12) 100% /* Orange lebih terang di ujung kanan */
     );
 }
 
-/* GRID */
+/* GRID (Dibuat lebih tajam) */
 .hero-career::before {
     content: "";
     position: absolute;
     inset: 0;
+    /* Opacity grid dinaikkan dari 0.04 ke 0.08 agar lebih kelihatan */
     background-image: 
-        linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
-    background-size: 40px 40px;
+        linear-gradient(rgba(0, 0, 0, 0.08) 1.5px, transparent 1.5px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.08) 1.5px, transparent 1.5px);
+    background-size: 45px 45px;
+    z-index: 0;
 }
 
-/* GLOW */
+/* GLOW (Dibuat lebih terlihat/vibrant) */
 .hero-career::after {
     content: "";
     position: absolute;
-    right: 0;
-    top: 0;
-    width: 60%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(255,140,0,0.2), transparent 70%);
+    right: -10%;
+    top: -10%;
+    width: 70%;
+    height: 120%;
+    /* Opacity radial dinaikkan untuk efek "sunlight" dari samping */
+    background: radial-gradient(
+        circle, 
+        rgba(255, 122, 0, 0.25) 0%, 
+        rgba(255, 122, 0, 0.05) 50%, 
+        transparent 80%
+    );
+    z-index: 1;
 }
 
-/* CONTENT -> PINDAH KE KIRI */
+/* CONTENT */
 .hero-content {
+    position: relative;
+    z-index: 2; /* Agar konten di atas grid & glow */
     max-width: 650px;
-    margin-left: 30 !important;   /* 🔥 ini kunci */
+    margin-left: 30px !important; 
     margin-right: auto;
     text-align: left;
 }
@@ -70,24 +76,44 @@
     font-weight: 600;
 }
 
-/* TITLE (DIPERKECIL & RAPI) */
+/* TITLE */
 .hero-career h1 {
-    font-size: 44px;   /* dari 58 → 44 */
+    font-size: 50px; 
     font-weight: 800;
     margin: 20px 0;
     color: #111;
-    line-height: 1.3;
+    line-height: 1.2;
+
+    display: inline-block; /* 🔥 WAJIB */
+    animation: pulseAll 3s ease-in-out infinite;
 }
 
-/* ORANGE NYA TETAP KELIHATAN */
+/* span tetap gradient */
 .hero-career h1 span {
-    color: #ff7a00;
+    background: linear-gradient(90deg, #ff7a00, #ffb347);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
+/* 🔥 animasi utama */
+@keyframes pulseAll {
+    0% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+    50% {
+        transform: scale(1.03);
+        filter: brightness(1.1);
+    }
+    100% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+}
 /* TEXT */
 .hero-career p {
-    font-size: 16px;
-    color: #555;
+    font-size: 15px; /* Sedikit lebih besar agar mudah dibaca */
+    color: #444;
     line-height: 1.7;
     max-width: 520px;
 }
@@ -98,26 +124,40 @@
 }
 
 .btn-primary {
-    padding: 12px 26px;
-    background: #ff8c00; /* Warna orange gelap (Dark Orange) */
+    padding: 14px 30px; /* Padding sedikit diperbesar */
+    background: #ff8c00; 
     color: #fff;
     border-radius: 10px;
     text-decoration: none;
     font-weight: 600;
+    transition: 0.3s;
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3); /* Tambah shadow biar pop-out */
 }
+
+.btn-primary:hover {
+    background: #e67e00;
+    transform: translateY(-2px);
+}
+
 .career-header {
     margin-bottom: 80px; 
 }
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
+    .hero-career {
+        padding-top: 100px;
+        text-align: center;
+    }
+    .hero-content {
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
     .hero-career h1 {
-        font-size: 32px;
+        font-size: 36px;
     }
 }
-
-
-
 
     /* 2. SEARCH SECTION - EFEK OVERLAP (Masuk ke Banner) */
 /* Header Styling */
@@ -608,6 +648,8 @@
         <div class="hero-btn">
             <a href="#career" class="btn-primary">Lihat lowongan</a>
         </div>
+
+        
 
     </div>
 </section>
