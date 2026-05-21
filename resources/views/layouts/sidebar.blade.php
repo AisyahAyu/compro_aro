@@ -60,15 +60,6 @@
                     </a>
                 </li>
 
-                <!-- Product -->
-                <li class="nav-item">
-                    <a href="{{ route('admin.products.index') }}"
-                       class="nav-link {{ request()->is('admin/products*') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-box"></i>
-                        <p>Products</p>
-                    </a>
-                </li>
-
                 <!-- Partner -->
                 <li class="nav-item">
                     <a href="{{ route('admin.partners.index') }}"

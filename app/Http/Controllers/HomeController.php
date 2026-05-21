@@ -9,7 +9,6 @@ use App\Models\Category;
 use App\Models\Legality;
 use App\Models\WorkProcess;
 use App\Models\Partner;
-use App\Models\Product;
 use App\Models\Platform;
 use App\Models\Footer;
 use Illuminate\Support\Facades\Http;
@@ -50,9 +49,9 @@ class HomeController extends Controller
             return is_array($allProducts) ? array_slice($allProducts, 0, 4) : [];
         });
 
-        // Fallback to local if API fails or returns nothing
+        // Fallback: jika API gagal, tampilkan array kosong
         if (empty($products)) {
-            $products = Product::where('is_active', true)->inRandomOrder()->limit(4)->get();
+            $products = [];
         }
 
         // Process platform URL safely

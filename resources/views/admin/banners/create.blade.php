@@ -51,7 +51,6 @@
                                     <option value="#produk" {{ old('button_link') == '#produk' ? 'selected' : '' }}>Produk</option>
                                     <option value="#solusi" {{ old('button_link') == '#solusi' ? 'selected' : '' }}>Solusi</option>
                                     <option value="#mitra" {{ old('button_link') == '#mitra' ? 'selected' : '' }}>Mitra</option>
-                                    <option value="/karir" {{ old('button_link') == '/karir' ? 'selected' : '' }}>Karir</option>
                                     <option value="/kontak" {{ old('button_link') == '/kontak' ? 'selected' : '' }}>Kontak</option>
                                 </select>
                                 @error('button_link')

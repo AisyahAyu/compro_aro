@@ -35,17 +35,7 @@
     <!-- fix for small devices only -->
     <div class="clearfix hidden-md-up"></div>
 
-    <div class="col-12 col-sm-6 col-md-3">
-        <div class="info-box mb-3">
-            <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-box"></i></span>
-            <div class="info-box-content">
-                <span class="info-box-text">Products</span>
-                <span class="info-box-number">{{ App\Models\Product::count() }}</span>
-            </div>
-            <!-- /.info-box-content -->
-        </div>
-        <!-- /.info-box -->
-    </div>
+
     <!-- /.col -->
     <div class="col-12 col-sm-6 col-md-3">
         <div class="info-box mb-3">
@@ -156,10 +146,7 @@
                                         <i class="fas fa-th-large text-success mr-2"></i>
                                         <span>Categories: {{ App\Models\Category::count() }}</span>
                                     </div>
-                                    <div class="d-flex align-items-center mb-3">
-                                        <i class="fas fa-box text-warning mr-2"></i>
-                                        <span>Products: {{ App\Models\Product::count() }}</span>
-                                    </div>
+
                                 </div>
                                 <div class="col-6">
                                     <div class="d-flex align-items-center mb-3">
@@ -239,16 +226,7 @@
                                     </a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td><i class="fas fa-box text-warning"></i> Products</td>
-                                <td>{{ App\Models\Product::count() }} items</td>
-                                <td><span class="badge badge-success">Active</span></td>
-                                <td>
-                                    <a href="{{ route('admin.products.index') }}" class="btn btn-sm btn-primary">
-                                        <i class="fas fa-edit"></i> Manage
-                                    </a>
-                                </td>
-                            </tr>
+
                             <tr>
                                 <td><i class="fas fa-handshake text-danger"></i> Partners</td>
                                 <td>{{ App\Models\Partner::count() }} items</td>
@@ -389,13 +367,7 @@
                     </div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-6 text-center">
-                        <a href="{{ route('admin.products.create') }}" class="btn btn-block btn-outline-light">
-                            <i class="fas fa-plus fa-2x mb-2"></i><br>
-                            Add Product
-                        </a>
-                    </div>
-                    <div class="col-6 text-center">
+                    <div class="col-12 text-center">
                         <a href="{{ route('admin.partners.create') }}" class="btn btn-block btn-outline-light">
                             <i class="fas fa-plus fa-2x mb-2"></i><br>
                             Add Partner

@@ -81,23 +81,6 @@ INSERT INTO `banners` (`id`, `title`, `description`, `button_text`, `button_link
 -- --------------------------------------------------------
 
 --
--- Table structure for table `benefits`
---
-
-CREATE TABLE `benefits` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
-  `icon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `order` int NOT NULL DEFAULT '0',
-  `status` enum('active','inactive') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `brands`
 --
 
@@ -294,7 +277,7 @@ CREATE TABLE `footers` (
 
 INSERT INTO `footers` (`id`, `section`, `content`, `links`, `order`, `is_active`, `created_at`, `updated_at`) VALUES
 (1, 'about', 'PT. Solusi Bisnis Indonesia adalah perusahaan terpercaya yang menyediakan solusi lengkap untuk kebutuhan operasional bisnis dan instansi.', NULL, 1, 1, '2026-03-13 01:23:15', '2026-03-13 01:23:15'),
-(2, 'quick_links', 'Tentang Kami,Produk,Aktivitas,Karir,FAQ', '{\"Tentang Kami\":\"#tentang\",\"Produk\":\"#produk\",\"Aktivitas\":\"#aktivitas\",\"Karir\":\"#karir\",\"FAQ\":\"#faq\"}', 2, 1, '2026-03-13 01:23:15', '2026-03-13 01:23:15'),
+(2, 'quick_links', 'Tentang Kami,Produk,Aktivitas,FAQ', '{\"Tentang Kami\":\"#tentang\",\"Produk\":\"#produk\",\"Aktivitas\":\"#aktivitas\",\"FAQ\":\"#faq\"}', 2, 1, '2026-03-13 01:23:15', '2026-03-13 01:23:15'),
 (3, 'contact', 'Jl. Sudirman No. 123, Jakarta Pusat, Indonesia | +62 21 1234 5678 | info@solusibisnis.com', NULL, 3, 1, '2026-03-13 01:23:15', '2026-03-13 01:23:15');
 
 -- --------------------------------------------------------
@@ -316,29 +299,6 @@ CREATE TABLE `jobs` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `job_applications`
---
-
-CREATE TABLE `job_applications` (
-  `id` bigint UNSIGNED NOT NULL,
-  `job_vacancy_id` bigint UNSIGNED NOT NULL,
-  `full_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `last_education` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `years_of_experience` int NOT NULL,
-  `previous_job` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `linkedin_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cover_letter` text COLLATE utf8mb4_unicode_ci,
-  `resume_path` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` enum('pending','reviewed','accepted','rejected') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `job_batches`
 --
 
@@ -354,55 +314,6 @@ CREATE TABLE `job_batches` (
   `created_at` int NOT NULL,
   `finished_at` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `job_categories`
---
-
-CREATE TABLE `job_categories` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `job_categories`
---
-
-INSERT INTO `job_categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'asdasdasd', '2026-03-29 20:59:41', '2026-03-29 20:59:41');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `job_vacancies`
---
-
-CREATE TABLE `job_vacancies` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` enum('full_time','part_time','internship','freelance') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `experience` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `salary` bigint DEFAULT NULL,
-  `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `responsibility` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `qualification` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `location` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `job_category_id` bigint UNSIGNED NOT NULL,
-  `status` enum('active','inactive') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `job_vacancies`
---
-
-INSERT INTO `job_vacancies` (`id`, `name`, `type`, `experience`, `salary`, `description`, `responsibility`, `qualification`, `location`, `job_category_id`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'BERSIHBERSIH', 'full_time', '123123', NULL, 'asdasd', 'asdasd', 'asdasd', 'asdasdasd', 1, 'active', '2026-03-29 21:00:02', '2026-03-29 21:00:02');
 
 -- --------------------------------------------------------
 
@@ -468,11 +379,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (19, '2026_03_26_034555_add_division_to_team_members_table', 4),
 (20, '2026_03_26_035955_create_brands_table', 4),
 (21, '2026_03_19_100008_create_aktivitas_table', 5),
-(22, '2026_03_25_042836_create_job_categories_table', 5),
-(23, '2026_03_25_042916_create_job_vacancies_table', 5),
-(24, '2026_03_25_080637_create_benefits_table', 5),
-(25, '2026_03_26_035852_create_job_applications_table', 5),
-(26, '2026_03_26_152947_create_partners_table', 6),
+(22, '2026_03_26_152947_create_partners_table', 6),
 (27, '2026_03_27_083500_fix_visi_misi_description_column', 6),
 (28, '2026_03_30_100000_create_faqs_table', 7);
 
@@ -723,12 +630,6 @@ ALTER TABLE `banners`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `benefits`
---
-ALTER TABLE `benefits`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `brands`
 --
 ALTER TABLE `brands`
@@ -793,30 +694,10 @@ ALTER TABLE `jobs`
   ADD KEY `jobs_queue_reserved_at_available_at_index` (`queue`,`reserved_at`,`available_at`);
 
 --
--- Indexes for table `job_applications`
---
-ALTER TABLE `job_applications`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `job_applications_job_vacancy_id_foreign` (`job_vacancy_id`);
-
---
 -- Indexes for table `job_batches`
 --
 ALTER TABLE `job_batches`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `job_categories`
---
-ALTER TABLE `job_categories`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `job_vacancies`
---
-ALTER TABLE `job_vacancies`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `job_vacancies_job_category_id_foreign` (`job_category_id`);
 
 --
 -- Indexes for table `legalities`
@@ -910,10 +791,6 @@ ALTER TABLE `banners`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `benefits`
---
-ALTER TABLE `benefits`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `brands`
@@ -962,24 +839,6 @@ ALTER TABLE `footers`
 --
 ALTER TABLE `jobs`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `job_applications`
---
-ALTER TABLE `job_applications`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `job_categories`
---
-ALTER TABLE `job_categories`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `job_vacancies`
---
-ALTER TABLE `job_vacancies`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `legalities`
@@ -1045,17 +904,6 @@ ALTER TABLE `work_processes`
 -- Constraints for dumped tables
 --
 
---
--- Constraints for table `job_applications`
---
-ALTER TABLE `job_applications`
-  ADD CONSTRAINT `job_applications_job_vacancy_id_foreign` FOREIGN KEY (`job_vacancy_id`) REFERENCES `job_vacancies` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `job_vacancies`
---
-ALTER TABLE `job_vacancies`
-  ADD CONSTRAINT `job_vacancies_job_category_id_foreign` FOREIGN KEY (`job_category_id`) REFERENCES `job_categories` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

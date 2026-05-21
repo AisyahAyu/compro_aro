@@ -21,9 +21,6 @@
                     <a class="nav-link" href="{{ route('about.index') }}">Tentang</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('karir*') ? 'active' : '' }}" href="{{ route('career') }}">Karir</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link {{ request()->is('solusi*') ? 'active' : '' }}" href="{{ route('solusi.page') }}">Solusi</a>
                 </li>
                 <li class="nav-item">

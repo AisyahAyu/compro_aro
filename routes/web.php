@@ -5,9 +5,7 @@ use Illuminate\Support\Facades\Route;
 // Frontend Controllers
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
-use App\Http\Controllers\CareerController;
 use App\Http\Controllers\AktivitasController as FrontendAktivitasController;
-use App\Http\Controllers\JobApplicationController as FrontendJobApplicationController;
 
 // Admin Controllers
 use App\Http\Controllers\Admin\BannerController;
@@ -16,7 +14,6 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\LegalityController;
 use App\Http\Controllers\Admin\WorkProcessController;
 use App\Http\Controllers\Admin\PartnerController;
-use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\PlatformController;
 use App\Http\Controllers\Admin\FooterController;
 use App\Http\Controllers\Admin\BrandController;
@@ -24,11 +21,7 @@ use App\Http\Controllers\Admin\StatisticsController;
 use App\Http\Controllers\Admin\VisiMisiController;
 use App\Http\Controllers\Admin\TeamMemberController;
 use App\Http\Controllers\Admin\ContactSectionController;
-use App\Http\Controllers\Admin\JobVacancyController;
-use App\Http\Controllers\Admin\JobCategoryController;
-use App\Http\Controllers\Admin\BenefitController;
 use App\Http\Controllers\Admin\AktivitasController as AdminAktivitasController;
-use App\Http\Controllers\Admin\JobApplicationController as AdminJobApplicationController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\UpcomingEventController;
 
@@ -43,8 +36,6 @@ Route::get('/produk/detail/{index}', [HomeController::class, 'productDetail'])->
 Route::get('/faq', [HomeController::class, 'faq'])->name('faq.page');
 Route::get('/hubungi-kami', [HomeController::class, 'contact'])->name('contact.page');
 Route::post('/hubungi-kami', [HomeController::class, 'submitContact'])->name('contact.submit');
-Route::get('/karir', [CareerController::class, 'index'])->name('career');
-Route::post('/apply', [FrontendJobApplicationController::class, 'store'])->name('apply');
 Route::get('/tentang-kami', [AboutController::class, 'index'])->name('about.index');
 Route::get('/tentang-kami/visi-misi', [AboutController::class, 'visiMisi'])->name('about.visi-misi');
 Route::get('/tentang-kami/tim-kami', [AboutController::class, 'team'])->name('about.team');
@@ -82,18 +73,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('legalities', LegalityController::class);
     Route::resource('work-processes', WorkProcessController::class);
     Route::resource('partners', PartnerController::class); // ✅ MITRA TEKNOLOGI
-    Route::resource('products', ProductController::class);
     Route::resource('platforms', PlatformController::class);
     Route::resource('footers', FooterController::class);
     Route::resource('team-members', TeamMemberController::class);
     Route::resource('statistics', StatisticsController::class);
     Route::resource('visi-misi', VisiMisiController::class);
     Route::resource('brands', BrandController::class);
-    Route::resource('job-vacancies', JobVacancyController::class)->names('job_vacancies');
-    Route::resource('job-categories', JobCategoryController::class)->names('job_categories');
-    Route::resource('benefits', BenefitController::class);
     Route::resource('aktivitas', AdminAktivitasController::class);
-    Route::resource('applications', AdminJobApplicationController::class);
     Route::resource('faqs', FaqController::class);
     Route::resource('upcoming_event', UpcomingEventController::class);
 

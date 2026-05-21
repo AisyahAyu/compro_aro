@@ -4,7 +4,7 @@
 [![Vite](https://img.shields.io/badge/Vite-7.x-646CFF.svg)](https://vitejs.dev)
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.x-38B2AC.svg)](https://tailwindcss.com)
 
-A comprehensive and dynamic Company Profile (Compro) application built with Laravel 11. This platform features a sleek frontend for users and a robust admin dashboard for managing all content dynamically, including products, solutions, activities, and career opportunities.
+A comprehensive and dynamic Company Profile (Compro) application built with Laravel 11. This platform features a sleek frontend for users and a robust admin dashboard for managing all content dynamically, including products, solutions, and activities.
 
 ---
 
@@ -18,7 +18,6 @@ The application is designed with a modern, responsive user interface focusing on
 - **Product Catalog**: Advanced catalog with search functionality and filtering by **Categories** and **Platforms**.
 - **Solusi (Solutions)**: Detailed overview of business solutions provided by ARO.
 - **Aktivitas (Activities)**: A news/blog section to keep users updated on company events and milestones.
-- **Career Portal**: Integrated job vacancy listings with a direct application system including file uploads for CVs.
 - **Admin Dashboard**: A secure, private interface for administrators to manage every piece of content on the site without touching the code.
 
 ---
@@ -32,8 +31,8 @@ compro_aro/
 ├── app/
 │   ├── Http/Controllers/
 │   │   ├── Admin/             # Controllers for administrative tasks (CRUD)
-│   │   └── ...                # Frontend controllers (Home, Career, etc.)
-│   ├── Models/                # Eloquent models (Product, Banner, Job, Aktivitas, etc.)
+│   │   └── ...                # Frontend controllers (Home, About, etc.)
+│   ├── Models/                # Eloquent models (Product, Banner, Aktivitas, etc.)
 │   └── ...
 ├── database/
 │   ├── migrations/            # Database schema definitions
@@ -48,7 +47,7 @@ compro_aro/
 │       ├── admin/             # Blade templates for back-office management
 │       ├── layouts/           # Master layouts (frontend & admin)
 │       ├── partials/          # Reusable UI components (Navbar, Footer, Sidebar)
-│       └── ...                # Page-specific views (Solusi, Aktivitas, Karir)
+│       └── ...                # Page-specific views (Solusi, Aktivitas)
 ├── routes/
 │   └── web.php                # Definition of all frontend and admin routes
 ├── .env                       # Environment configuration
