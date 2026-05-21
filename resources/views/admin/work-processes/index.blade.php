@@ -75,13 +75,17 @@
 
 @section('scripts')
 <script>
+  $.fn.DataTable.ext.errMode = 'none';
   $(function () {
-    $("#example1").DataTable({
+    var table = $("#example1").DataTable({
       "responsive": true,
       "lengthChange": false,
       "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+      "buttons": ["copy", "csv", "print", "colvis"]
+    });
+    if (table.buttons) {
+      table.buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    }
   });
 </script>
 @endsection
