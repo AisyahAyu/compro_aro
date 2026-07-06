@@ -39,7 +39,7 @@ class LegalityController extends Controller
         ]);
 
         $data = $request->all();
-        $data['is_active'] = $request->has('is_active') ? 1 : 0;
+        $data['is_active'] = $request->input('is_active') ? 1 : 0;
         Legality::create($data);
         return redirect()->route('admin.legalities.index')->with('success', 'Legality created successfully.');
     }
@@ -77,7 +77,7 @@ class LegalityController extends Controller
 
         $legality = Legality::findOrFail($id);
         $data = $request->all();
-        $data['is_active'] = $request->has('is_active') ? 1 : 0;
+        $data['is_active'] = $request->input('is_active') ? 1 : 0;
         $legality->update($data);
         return redirect()->route('admin.legalities.index')->with('success', 'Legality updated successfully.');
     }
