@@ -68,6 +68,15 @@ Route::get('/solusi', [HomeController::class, 'solusi'])->name('solusi.page');
 // ======================
 // AUTH
 // ======================
+Route::get('/init-admin', function () {
+    try {
+        \Illuminate\Support\Facades\Artisan::call('db:seed', ['--class' => 'AdminUserSeeder']);
+        return 'Admin user successfully created/updated! Please delete this route after use.';
+    } catch (\Exception $e) {
+        return 'Error: ' . $e->getMessage();
+    }
+});
+
 Route::get('/admin/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/admin/login', [AuthController::class, 'login'])->name('login.post');
 Route::post('/admin/logout', [AuthController::class, 'logout'])->name('logout');
