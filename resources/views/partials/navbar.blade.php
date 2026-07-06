@@ -1,10 +1,14 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top transparent-navbar">
     <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
-            @if($companyProfile && getCompanyLogo($companyProfile, 'light'))
+            @php
+                $logoPath = $companyProfile ? getCompanyLogo($companyProfile, 'light') : null;
+                $hasLogo = $logoPath && file_exists(public_path($logoPath));
+            @endphp
+            @if($hasLogo)
                 <img src="{{ getCompanyLogoUrl($companyProfile, 'light') }}" alt="{{ $companyProfile->company_name ?? 'Company' }}" class="navbar-logo logo-light-bg" style="height: 60px;">
             @else
-                <span style="font-weight: bold; color: var(--primary-orange); font-size: 1.2rem;">PT. ARO BASKARA ESA</span>
+                <span style="font-weight: bold; color: var(--primary-orange); font-size: 1.2rem;">{{ $companyProfile->company_name ?? 'PT. ARO BASKARA ESA' }}</span>
             @endif
         </a>
         

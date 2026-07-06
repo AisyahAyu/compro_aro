@@ -50,9 +50,16 @@
         <div class="row g-4">
             <!-- KOLOM 1: LOGO & DESKRIPSI PERUSAHAAN -->
             <div class="col-lg-3 col-md-6 mb-4">
-                @if($footerSettings->footer_logo)
+                @php
+                    $footerLogoPath = $footerSettings->footer_logo ?? null;
+                    $hasFooterLogo = $footerLogoPath && file_exists(public_path('storage/' . $footerLogoPath));
+                    
+                    $companyLogoPath = $companyProfile ? getCompanyLogo($companyProfile, 'dark') : null;
+                    $hasCompanyLogo = $companyLogoPath && file_exists(public_path($companyLogoPath));
+                @endphp
+                @if($hasFooterLogo)
                     <img src="{{ asset('storage/' . $footerSettings->footer_logo) }}" alt="{{ $companyProfile->company_name ?? 'PT ARO Baskara Esa' }}" class="footer-logo logo-dark-bg" style="height: 60px; margin-bottom: 20px; object-fit: contain;">
-                @elseif($companyProfile && getCompanyLogo($companyProfile, 'dark'))
+                @elseif($hasCompanyLogo)
                     <img src="{{ getCompanyLogoUrl($companyProfile, 'dark') }}" alt="{{ $companyProfile->company_name ?? 'PT ARO Baskara Esa' }}" class="footer-logo logo-dark-bg" style="height: 60px; margin-bottom: 20px; object-fit: contain;">
                 @endif
                 <p class="mt-3" style="color: {{ $footerSettings->footer_text_color }}; line-height: 1.6; opacity: 0.9;">
