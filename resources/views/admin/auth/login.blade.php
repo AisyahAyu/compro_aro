@@ -427,9 +427,9 @@
                 @php
                     $companyProfile = \App\Models\CompanyProfile::first();
                 @endphp
-                @if($companyProfile && $companyProfile->logo)
+                @if($companyProfile && getCompanyLogo($companyProfile, 'light'))
                     <div style="text-align: center; margin-bottom: 20px;">
-                        <img src="{{ asset('storage/' . $companyProfile->logo) }}" alt="{{ $companyProfile->company_name ?? 'Logo' }}" style="height: 80px; object-fit: contain; animation: pulse 2s ease-in-out infinite;">
+                        <img src="{{ getCompanyLogoUrl($companyProfile, 'light') }}" alt="{{ $companyProfile->company_name ?? 'Logo' }}" style="height: 80px; object-fit: contain; animation: pulse 2s ease-in-out infinite;">
                     </div>
                 @else
                     <div class="logo-container">
@@ -441,6 +441,11 @@
             </div>
             
             <div class="login-card-body">
+                <div class="text-center mb-4">
+                    <a href="{{ url('/') }}" class="text-decoration-none" style="color: var(--primary); font-size: 14px; font-weight: 500;">
+                        <i class="fas fa-arrow-left me-1"></i> Back to Homepage
+                    </a>
+                </div>
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <i class="fas fa-exclamation-circle"></i>
