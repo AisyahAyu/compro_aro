@@ -38,11 +38,14 @@ class PlatformController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'features' => 'nullable|array',
             'features.*' => 'string|max:255',
-            'is_active' => 'boolean'
+            'is_active' => 'nullable'
         ]);
 
-        $data = $request->except('image');
-        
+        $data = $request->except(['image', 'is_active']);
+
+        // Handle is_active checkbox
+        $data['is_active'] = $request->has('is_active') ? true : false;
+
         // Clean and normalize URL manually
         $url = $request->platform_url;
         if (is_array($url)) {
@@ -51,7 +54,7 @@ class PlatformController extends Controller
             $url = 'https://' . $url;
         }
         $data['platform_url'] = $url;
-        
+
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
@@ -93,12 +96,15 @@ class PlatformController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'features' => 'nullable|array',
             'features.*' => 'string|max:255',
-            'is_active' => 'boolean'
+            'is_active' => 'nullable'
         ]);
 
         $platform = Platform::findOrFail($id);
-        $data = $request->except('image');
-        
+        $data = $request->except(['image', 'is_active']);
+
+        // Handle is_active checkbox
+        $data['is_active'] = $request->has('is_active') ? true : false;
+
         // Clean and normalize URL manually
         $url = $request->platform_url;
         if (is_array($url)) {
@@ -107,13 +113,13 @@ class PlatformController extends Controller
             $url = 'https://' . $url;
         }
         $data['platform_url'] = $url;
-        
+
         if ($request->hasFile('image')) {
             // Delete old image
             if ($platform->image && file_exists(public_path($platform->image))) {
                 unlink(public_path($platform->image));
             }
-            
+
             $image = $request->file('image');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('uploads/platforms'), $imageName);

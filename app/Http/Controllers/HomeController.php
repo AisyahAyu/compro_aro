@@ -10,6 +10,9 @@ use App\Models\Legality;
 use App\Models\WorkProcess;
 use App\Models\Partner;
 use App\Models\Platform;
+use App\Models\ProductLink;
+use App\Models\Product;
+use App\Models\Brand;
 use App\Models\Footer;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
@@ -38,21 +41,13 @@ class HomeController extends Controller
         $banners = Banner::where('is_active', true)->orderBy('order')->get();
         $companyProfile = CompanyProfile::first();
         $categories = Category::where('is_active', true)->orderBy('order')->limit(3)->get();
-        $legalities = Legality::where('is_active', true)->orderBy('order')->limit(3)->get();
+        $legalities = Legality::where('is_active', true)->orderBy('order')->limit(4)->get();
         $workProcesses = WorkProcess::where('is_active', true)->orderBy('step_number')->get();
         $partners = Partner::where('is_active', true)->orderBy('order')->get();
         $platforms = Platform::where('is_active', true)->get();
 
         // Fetch only the products needed for home page display
-        $products = Cache::remember('home_featured_products', 3600, function () {
-            $allProducts = $this->fetchFromEcommerceApi('products');
-            return is_array($allProducts) ? array_slice($allProducts, 0, 4) : [];
-        });
-
-        // Fallback: jika API gagal, tampilkan array kosong
-        if (empty($products)) {
-            $products = [];
-        }
+        $products = Product::latest()->limit(4)->get();
 
         // Process platform URL safely
         foreach ($platforms as $platform) {
@@ -83,41 +78,52 @@ class HomeController extends Controller
     {
         $companyProfile = CompanyProfile::first();
         $searchKeyword = trim((string) $request->query('q', ''));
-        $selectedCategory = (string) $request->query('category', '');
+        $selectedCategory = $request->query('category', '');
         $selectedBrands = (array) $request->query('brands', []);
 
-        // Fetch Categories (Cached)
-        $categories = Cache::remember('api_categories', 3600, function () {
-            return $this->fetchFromEcommerceApi('categories');
-        });
+        // Fetch local active categories
+        $categories = Category::where('is_active', true)->orderBy('order')->get();
 
-        // Cache brands separately to avoid storing all products data
-        $brands = Cache::remember('api_brands', 3600, function () {
-            $products = $this->fetchFromEcommerceApi('products');
-            return collect($products ?? [])
-                ->map(fn($p) => $p['brand'] ?? null)
-                ->filter()
-                ->unique('id_brand')
-                ->values()
-                ->all();
-        });
+        // Fetch local active brands
+        $brands = Brand::where('is_active', true)->orderBy('order')->get();
 
-        // Filter products
-        $params = [];
-        if (!empty($searchKeyword)) $params['q'] = $searchKeyword;
-        if (!empty($selectedCategory)) $params['category'] = $selectedCategory;
-        if (!empty($selectedBrands)) $params['brands'] = $selectedBrands;
+        // Filter products from local DB
+        $query = Product::with(['category', 'brand']);
 
-        $products = $this->fetchFromEcommerceApi('products', $params);
+        if (!empty($searchKeyword)) {
+            $query->where(function($q) use ($searchKeyword) {
+                $q->where('name', 'like', "%{$searchKeyword}%")
+                  ->orWhere('type', 'like', "%{$searchKeyword}%")
+                  ->orWhere('specification', 'like', "%{$searchKeyword}%")
+                  ->orWhere('brand_name', 'like', "%{$searchKeyword}%");
+            });
+        }
+
+        if (!empty($selectedCategory)) {
+            $query->where('category_id', $selectedCategory);
+        }
+
+        if (!empty($selectedBrands)) {
+            $query->whereIn('brand_id', $selectedBrands);
+        }
+
+        $products = $query->latest()->get();
+
+        // Get product links from ProductLink model
+        $productLink = ProductLink::where('is_active', true)->first();
+        $marketplaceUrl = $productLink->marketplace_url ?? 'https://ayobelanja.co.id';
+        $inaprocUrl = $productLink->inaproc_url ?? 'https://inaproc.lkpp.go.id';
 
         $banner = [
             'greeting' => 'Selamat Datang di Katalog Kami',
             'title_main' => 'Temukan Produk',
             'title_highlight' => 'Terbaik',
             'title_suffix' => 'untuk Kebutuhan Anda',
-            'description' => 'Kami menyediakan berbagai macam furniture kantor, pendidikan, dan peralatan lainnya dengan kualitas premium dan harga kompetitif.',
-            'primary_button' => 'Lihat Produk',
-            'secondary_button' => 'Beli Sekarang',
+            'description' => 'Temukan berbagai produk berkualitas untuk kebutuhan kantor, pendidikan, dan industri. Belanja melalui marketplace resmi atau akses katalog pengadaan di INAPROC sesuai kebutuhan.',
+            'primary_button' => '🛒 Marketplace Resmi',
+            'secondary_button' => '🏛️ Katalog INAPROC',
+            'primary_button_url' => $marketplaceUrl,
+            'secondary_button_url' => $inaprocUrl,
             'image' => asset('uploads/banners/banner1.jpg'),
         ];
 
@@ -133,24 +139,14 @@ class HomeController extends Controller
         ));
     }
 
-    public function productDetail(string $slug)
+    public function productDetail(int $id)
     {
         $companyProfile = CompanyProfile::first();
         
-        $product = Cache::remember("product_detail_{$slug}", 3600, function () use ($slug) {
-            return $this->fetchFromEcommerceApi("products/{$slug}");
-        });
+        $product = Product::with(['category', 'brand'])->findOrFail($id);
 
-        if (empty($product)) {
-            abort(404);
-        }
-
-        // Fetch related products directly from API
-        $allProducts = $this->fetchFromEcommerceApi('products');
-        $relatedProducts = collect($allProducts ?? [])
-            ->filter(fn($item) => $item['slug'] !== $slug)
-            ->take(3)
-            ->all();
+        // Fetch related products from DB
+        $relatedProducts = Product::where('id', '!=', $id)->limit(3)->get();
 
         return view('product-detail', compact('companyProfile', 'product', 'relatedProducts'));
     }

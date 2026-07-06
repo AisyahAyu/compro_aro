@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $product['name'] . ' - Detail Produk')
+@section('title', $product->name . ' - Detail Produk')
 
 @section('content')
 <style>
@@ -342,72 +342,58 @@
             <div class="pd-shell">
                 <div class="pd-top">
                     <div>
-                        <span class="pd-label">Terlaris</span>
                         <div class="pd-main-image-wrap">
-                            <img src="{{ $product['gallery'][0] }}" alt="{{ $product['name'] }}" class="pd-main-image">
-                        </div>
-                        <div class="pd-thumbs">
-                            @foreach($product['gallery'] as $galleryImage)
-                                <div class="pd-thumb-item">
-                                    <img src="{{ $galleryImage }}" alt="Thumbnail {{ $product['name'] }}">
-                                </div>
-                            @endforeach
+                            @if($product->image)
+                                <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" class="pd-main-image">
+                            @endif
                         </div>
                     </div>
 
                     <div>
-                        <h1 class="pd-title">{{ $product['name'] }}</h1>
+                        <h1 class="pd-title">{{ $product->name }}</h1>
                         <div class="pd-category">
                             <span class="pd-category-label">Kategori :</span>
-                            <span>{{ $product['category'] }}</span>
+                            <span>{{ $product->category->name ?? '-' }}</span>
                         </div>
-                        <p class="pd-description">{{ $product['description'] }}</p>
-                        <ul class="pd-highlights">
-                            @foreach($product['highlights'] as $highlight)
-                                <li>{{ $highlight }}</li>
-                            @endforeach
-                        </ul>
-                        <a href="https://ayobelanja.co.id/" class="pd-btn-market" target="_blank" rel="noopener noreferrer">
-                            <i class="fas fa-shopping-bag"></i>
-                            Lihat di E-Belanja
-                        </a>
+                        <div class="pd-category">
+                            <span class="pd-category-label">Merek :</span>
+                            <span>{{ $product->resolved_brand_name }}</span>
+                        </div>
+                        <div class="pd-category">
+                            <span class="pd-category-label">Tipe Produk :</span>
+                            <span>{{ $product->type ?? '-' }}</span>
+                        </div>
                     </div>
                 </div>
 
                 <div class="pd-spec-grid">
                     <div>
-                        <h2 class="pd-sec-title">Deskripsi Produk</h2>
-                        <p class="pd-sec-desc">{{ $product['description'] }}</p>
-
-                        <h3 class="pd-subtitle">Spesifikasi Produk</h3>
-                        <p class="pd-mini-list">
-                            Material : {{ $product['material'] }}<br>
-                            Berat : {{ $product['weight'] }}
-                        </p>
+                        <h2 class="pd-sec-title">Deskripsi / Spesifikasi</h2>
+                        <p class="pd-sec-desc" style="white-space: pre-line;">{{ $product->specification ?? 'Tidak ada spesifikasi khusus.' }}</p>
                     </div>
 
                     <div>
                         <table class="pd-table">
                             <tbody>
                             <tr>
-                                <td>Material</td>
-                                <td>{{ $product['material'] }}</td>
+                                <td>Merek</td>
+                                <td>{{ $product->resolved_brand_name }}</td>
                             </tr>
                             <tr>
-                                <td>Ukuran</td>
-                                <td>{{ $product['size'] }}</td>
+                                <td>Tipe</td>
+                                <td>{{ $product->type ?? '-' }}</td>
                             </tr>
                             <tr>
-                                <td>Warna</td>
-                                <td>{{ $product['color'] }}</td>
+                                <td>Dimensi</td>
+                                <td>{{ $product->dimensions ?? '-' }}</td>
                             </tr>
                             <tr>
-                                <td>Berat</td>
-                                <td>{{ $product['weight'] }}</td>
+                                <td>SKU</td>
+                                <td><code>{{ $product->sku ?? '-' }}</code></td>
                             </tr>
                             <tr>
-                                <td>Kategori</td>
-                                <td>{{ $product['category'] }}</td>
+                                <td>Asal Negara</td>
+                                <td>{{ $product->country_of_origin ?? '-' }}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -419,13 +405,16 @@
 
     <section class="pd-related">
         <div class="container">
+            <h3 class="mb-4 text-center font-weight-bold">Produk Lainnya</h3>
             <div class="pd-related-grid">
                 @foreach($relatedProducts as $relatedProduct)
                     <article class="pd-related-card">
-                        <img src="{{ $relatedProduct['image'] }}" alt="{{ $relatedProduct['name'] }}">
+                        @if($relatedProduct->image)
+                            <img src="{{ asset($relatedProduct->image) }}" alt="{{ $relatedProduct->name }}">
+                        @endif
                         <div>
-                            <h4 class="pd-related-name">{{ $relatedProduct['name'] }}</h4>
-                            <a href="{{ route('products.detail', ['index' => $relatedProduct['original_index']]) }}" class="pd-related-btn">Lihat Detail</a>
+                            <h4 class="pd-related-name">{{ $relatedProduct->name }}</h4>
+                            <a href="{{ route('products.detail', $relatedProduct->id) }}" class="pd-related-btn">Lihat Detail</a>
                         </div>
                     </article>
                 @endforeach
@@ -440,7 +429,7 @@
                     <p class="pd-cta-small">MULAI SEKARANG</p>
                     <h2 class="pd-cta-title">Cari produk dengan harga terbaik?</h2>
                 </div>
-                <a href="https://ayobelanja.co.id/" target="_blank" rel="noopener noreferrer" class="pd-cta-btn">Klik disini</a>
+                <a href="{{ route('contact.page') }}" class="pd-cta-btn">Hubungi Kami</a>
             </div>
         </div>
     </section>

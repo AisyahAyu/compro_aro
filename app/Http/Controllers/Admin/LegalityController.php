@@ -35,10 +35,11 @@ class LegalityController extends Controller
             'description' => 'required|string',
             'icon' => 'nullable|string|max:255',
             'order' => 'integer',
-            'is_active' => 'boolean'
+            'is_active' => 'nullable|boolean'
         ]);
 
         $data = $request->all();
+        $data['is_active'] = $request->has('is_active') ? 1 : 0;
         Legality::create($data);
         return redirect()->route('admin.legalities.index')->with('success', 'Legality created successfully.');
     }
@@ -71,11 +72,13 @@ class LegalityController extends Controller
             'description' => 'required|string',
             'icon' => 'nullable|string|max:255',
             'order' => 'integer',
-            'is_active' => 'boolean'
+            'is_active' => 'nullable|boolean'
         ]);
 
         $legality = Legality::findOrFail($id);
-        $legality->update($request->all());
+        $data = $request->all();
+        $data['is_active'] = $request->has('is_active') ? 1 : 0;
+        $legality->update($data);
         return redirect()->route('admin.legalities.index')->with('success', 'Legality updated successfully.');
     }
 

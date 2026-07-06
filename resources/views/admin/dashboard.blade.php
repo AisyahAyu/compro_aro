@@ -374,6 +374,14 @@
                         </a>
                     </div>
                 </div>
+                <div class="row mt-3">
+                    <div class="col-12 text-center">
+                        <a href="{{ route('admin.product-links.edit') }}" class="btn btn-block btn-outline-light">
+                            <i class="fas fa-link fa-2x mb-2"></i><br>
+                            Product Links
+                        </a>
+                    </div>
+                </div>
             </div>
             
             <!-- /.card-body -->

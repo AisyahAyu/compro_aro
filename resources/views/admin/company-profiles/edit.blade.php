@@ -55,6 +55,15 @@
                     </div>
                     
                     <div class="form-group">
+                        <label for="whatsapp">WhatsApp</label>
+                        <input type="text" class="form-control" id="whatsapp" name="whatsapp" value="{{ old('whatsapp', $profile->whatsapp) }}" placeholder="Enter WhatsApp number (e.g., +62 822-8888-6009)">
+                        @error('whatsapp')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                        <small class="form-text text-muted">This number will be displayed in the footer with a WhatsApp link</small>
+                    </div>
+                    
+                    <div class="form-group">
                         <label for="address">Address</label>
                         <textarea class="form-control" id="address" name="address" rows="3" placeholder="Enter company address">{{ old('address', $profile->address) }}</textarea>
                         @error('address')
@@ -184,6 +193,7 @@
                     <h5>{{ $profile->company_name }}</h5>
                     <small class="text-muted">{{ $profile->email }}</small><br>
                     <small class="text-muted">{{ $profile->phone }}</small><br>
+                    <small class="text-muted">{{ $profile->whatsapp ?? 'Not set' }}</small><br>
                     <small class="text-muted">{{ $profile->address }}</small>
                 </div>
                 

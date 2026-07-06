@@ -40,7 +40,7 @@
                         @enderror
                         <small class="form-text text-muted">Masukkan domain saja (contoh: ayobelanja.co.id) atau URL lengkap</small>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="image">Platform Image <span class="text-danger">*</span></label>
                         <div class="input-group">

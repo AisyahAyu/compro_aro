@@ -389,8 +389,12 @@
                         @if($banner->description)
                             <p class="hero-description">{{ $banner->description }}</p>
                         @endif
-                        @if($banner->button_text && $banner->button_link)
-                            <a href="{{ $banner->button_link }}" class="hero-button">{{ $banner->button_text }}</a>
+                        @if($banner->button_text)
+                            @if($banner->button_link && $banner->button_link != '#produk')
+                                <a href="{{ $banner->button_link }}" class="hero-button">{{ $banner->button_text }}</a>
+                            @else
+                                <a href="{{ route('products.page') }}" class="hero-button">{{ $banner->button_text }}</a>
+                            @endif
                         @endif
                     </div>
                 </div>
@@ -1092,10 +1096,6 @@
 <section class="section-padding">
     <div class="container">
         <div class="text-center mb-5">
-            <div class="d-inline-flex align-items-center mb-3">
-                <div style="width: 50px; height: 3px; background: var(--primary-orange); margin-right: 15px;"></div>
-                <span class="text-uppercase fw-bold">Cara Kerja</span>
-            </div>
             <h2 class="section-title">
                 <span style="color: var(--primary-blue);">Proses Kerja</span> 
                 <span style="color: var(--primary-orange);">Kami</span>
@@ -1249,35 +1249,27 @@
         <!-- Enhanced Product Grid Container -->
         <div class="home-product-grid" style="position: relative; padding: 20px 0;">
             @forelse($products as $product)
-                @if(isset($product['slug']))
-                    <a href="https://ayobelanja.co.id/products/{{ $product['slug'] }}" target="_blank" rel="noopener noreferrer" class="product-card-link">
-                @endif
-                <div class="product-card">
-                    <div class="product-card-img-wrap">
-                        @if($product['image_url'] ?? $product->image ?? null)
-                            <img src="{{ $product['image_url'] ?? asset($product->image) }}" alt="{{ $product['nama_produk'] ?? $product->name }}" class="product-card-img">
-                        @endif
-                    </div>
-                    <div class="product-card-body">
-                        <h5 class="product-name">{{ $product['nama_produk'] ?? $product->name }}</h5>
-                        @if(isset($product['harga_produk']) || isset($product->price))
-                            <div class="product-label">Mulai dari</div>
-                            <div class="product-price">Rp {{ number_format($product['harga_produk'] ?? $product->price, 0, ',', '.') }}</div>
-                        @endif
-                        <div class="product-meta">
-                            <div class="product-location">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>{{ $product['asal_produk'] ?? $product->location ?? 'Indonesia' }}</span>
-                            </div>
-                            @if($product['tipe_produk'] ?? $product->type ?? null)
-                                <div class="product-type">{{ $product['tipe_produk'] ?? $product->type }}</div>
+                <a href="{{ route('products.detail', $product->id) }}" class="product-card-link">
+                    <div class="product-card">
+                        <div class="product-card-img-wrap">
+                            @if($product->image)
+                                <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" class="product-card-img">
                             @endif
                         </div>
+                        <div class="product-card-body">
+                            <h5 class="product-name">{{ $product->name }}</h5>
+                            <div class="product-meta">
+                                <div class="product-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>{{ $product->country_of_origin ?? 'Indonesia' }}</span>
+                                </div>
+                                @if($product->type)
+                                    <div class="product-type">{{ $product->type }}</div>
+                                @endif
+                            </div>
+                        </div>
                     </div>
-                </div>
-                @if(isset($product['slug']))
-                    </a>
-                @endif
+                </a>
             @empty
                 <div class="text-center w-100">
                     <p class="text-muted">Produk tidak tersedia saat ini.</p>

@@ -435,8 +435,9 @@
                         </h1>
                         <p class="pp-description">{{ $banner['description'] }}</p>
                         <div class="pp-actions">
-                            <a href="#daftar-produk" class="pp-btn-main">{{ $banner['primary_button'] }}</a>
-                            <a href="https://ayobelanja.co.id/" class="pp-btn-alt" target="_blank"
+                            <a href="{{ $banner['primary_button_url'] ?? '#daftar-produk' }}" class="pp-btn-main" target="_blank"
+                                rel="noopener noreferrer">{{ $banner['primary_button'] }}</a>
+                            <a href="{{ $banner['secondary_button_url'] ?? 'https://ayobelanja.co.id/' }}" class="pp-btn-alt" target="_blank"
                                 rel="noopener noreferrer">{{ $banner['secondary_button'] }}</a>
                         </div>
                     </div>
@@ -453,7 +454,7 @@
                     <select aria-label="Kategori produk" name="category">
                         <option value="">Semua Kategori</option>
                         @foreach($categories as $category)
-                            <option value="{{ $category['id_kategori'] }}" {{ $selectedCategory == $category['id_kategori'] ? 'selected' : '' }}>{{ $category['nama_kategori'] }}</option>
+                            <option value="{{ $category->id }}" {{ $selectedCategory == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                         @endforeach
                     </select>
                     <input type="text" name="q" value="{{ $searchKeyword }}" placeholder="Cari Produk yang Anda butuhkan"
@@ -475,10 +476,10 @@
                                     </li>
                                     @foreach($categories as $category)
                                         <li>
-                                            <a href="{{ route('products.page', ['category' => $category['id_kategori'], 'q' => $searchKeyword, 'brands' => $selectedBrands]) }}"
-                                                class="text-decoration-none {{ $selectedCategory == $category['id_kategori'] ? 'fw-bold text-dark' : 'text-secondary' }}">{{ $category['nama_kategori'] }}</a>
+                                            <a href="{{ route('products.page', ['category' => $category->id, 'q' => $searchKeyword, 'brands' => $selectedBrands]) }}"
+                                                class="text-decoration-none {{ $selectedCategory == $category->id ? 'fw-bold text-dark' : 'text-secondary' }}">{{ $category->name }}</a>
                                             <span
-                                                class="pp-arrow">{{ $selectedCategory == $category['id_kategori'] ? '•' : '›' }}</span>
+                                                class="pp-arrow">{{ $selectedCategory == $category->id ? '•' : '›' }}</span>
                                         </li>
                                     @endforeach
                                 </ul>
@@ -494,8 +495,8 @@
                                         @foreach($brands as $brand)
                                             <li>
                                                 <label>
-                                                    <input type="checkbox" name="brands[]" value="{{ $brand['id_brand'] }}" {{ in_array($brand['id_brand'], $selectedBrands, false) ? 'checked' : '' }}>
-                                                    {{ $brand['nama_brand'] }}
+                                                    <input type="checkbox" name="brands[]" value="{{ $brand->id }}" {{ in_array($brand->id, $selectedBrands, false) ? 'checked' : '' }}>
+                                                    {{ $brand->name }}
                                                 </label>
                                             </li>
                                         @endforeach
@@ -510,28 +511,27 @@
                     <div class="col-lg-9">
                         <div class="pp-products">
                             @forelse($products as $product)
-                                <a href="https://ayobelanja.co.id/products/{{ $product['slug'] }}" target="_blank"
-                                    rel="noopener noreferrer" class="pp-card-link">
+                                <a href="{{ route('products.detail', $product->id) }}" class="pp-card-link">
                                     <article class="pp-card">
                                         <div class="pp-card-img-wrap">
-                                            <img src="{{ $product['image_url'] ?? '' }}" alt="{{ $product['nama_produk'] }}"
-                                                class="pp-card-img" loading="lazy">
+                                            @if($product->image)
+                                                <img src="{{ asset($product->image) }}" alt="{{ $product->name }}"
+                                                    class="pp-card-img" loading="lazy">
+                                            @endif
                                         </div>
                                         <div class="pp-card-body">
-                                            <h4 class="pp-card-name">{{ $product['nama_produk'] }}</h4>
-                                            @if(!empty($product['harga_produk']))
-                                                <div class="pp-card-label">Mulai dari</div>
-                                                <div class="pp-price">Rp
-                                                    {{ number_format((float) $product['harga_produk'], 0, ',', '.') }}</div>
-                                            @endif
+                                            <h4 class="pp-card-name">{{ $product->name }}</h4>
                                             <div class="pp-card-meta">
                                                 <div class="pp-card-location">
                                                     <i class="fas fa-map-marker-alt"></i>
-                                                    <span>{{ $product['asal_produk'] ?? 'Indonesia' }}</span>
+                                                    <span>{{ $product->country_of_origin ?? 'Indonesia' }}</span>
                                                 </div>
-                                                @if(!empty($product['tipe_produk']))
-                                                    <div class="pp-type">{{ $product['tipe_produk'] }}</div>
+                                                @if(!empty($product->type))
+                                                    <div class="pp-type">{{ $product->type }}</div>
                                                 @endif
+                                            </div>
+                                            <div class="mt-auto pt-2">
+                                                <span class="btn btn-warning btn-sm w-100 text-white" style="background-color: #f78b00; border-color: #f78b00; font-size: 12px; font-weight: 600;">Lihat Detail</span>
                                             </div>
                                         </div>
                                     </article>

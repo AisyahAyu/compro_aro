@@ -420,31 +420,32 @@
 
                         <div class="contact-group">
                             <label for="full_name">Nama Lengkap <span class="contact-required">*</span></label>
-                            <input id="full_name" type="text" name="full_name" class="contact-input" value="{{ old('full_name') }}" placeholder="PT ARO BASKARA ESA" required>
+                            <input id="full_name" type="text" name="full_name" class="contact-input" value="{{ old('full_name') }}" placeholder="Masukkan nama lengkap" required>
                             @error('full_name')<span class="contact-error">{{ $message }}</span>@enderror
                         </div>
 
                         <div class="contact-group">
                             <label for="company_name">Nama Perusahaan</label>
-                            <input id="company_name" type="text" name="company_name" class="contact-input" value="{{ old('company_name') }}" placeholder="PT ARO BASKARA ESA">
+                            <input id="company_name" type="text" name="company_name" class="contact-input" value="{{ old('company_name') }}" placeholder="Masukkan nama perusahaan">
                             @error('company_name')<span class="contact-error">{{ $message }}</span>@enderror
                         </div>
 
                         <div class="contact-group">
                             <label for="email">Email <span class="contact-required">*</span></label>
-                            <input id="email" type="email" name="email" class="contact-input" value="{{ old('email') }}" placeholder="email@perusahaan.com" required>
+                            <input id="email" type="email" name="email" class="contact-input" value="{{ old('email') }}" placeholder="Masukkan alamat email" required>
                             @error('email')<span class="contact-error">{{ $message }}</span>@enderror
                         </div>
 
                         <div class="contact-group">
                             <label for="phone">No. Telepon / WhatsApp</label>
-                            <input id="phone" type="text" name="phone" class="contact-input" value="{{ old('phone') }}" placeholder="+62 822-8888-6009" required>
+                            <input id="phone" type="text" name="phone" class="contact-input" value="{{ old('phone') }}" placeholder="Masukkan nomor telepon atau WhatsApp" required>
                             @error('phone')<span class="contact-error">{{ $message }}</span>@enderror
                         </div>
 
                         <div class="contact-group">
                             <label for="product_category">Kategori Produk <span class="contact-required">*</span></label>
                             <select id="product_category" name="product_category" class="contact-select" required>
+                                <option value="" disabled selected>Pilih kategori produk</option>
                                 @php $selectedCategory = old('product_category', 'Furniture Kantor'); @endphp
                                 <option value="Furniture Kantor" {{ $selectedCategory === 'Furniture Kantor' ? 'selected' : '' }}>Furniture Kantor</option>
                                 <option value="Furniture Pendidikan" {{ $selectedCategory === 'Furniture Pendidikan' ? 'selected' : '' }}>Furniture Pendidikan</option>
@@ -457,6 +458,7 @@
                         <div class="contact-group">
                             <label for="estimated_units">Estimasi Jumlah Unit</label>
                             <select id="estimated_units" name="estimated_units" class="contact-select" required>
+                                <option value="" disabled selected>Pilih estimasi jumlah unit</option>
                                 @php $selectedUnits = old('estimated_units', '1 - 10 Unit'); @endphp
                                 <option value="1 - 10 Unit" {{ $selectedUnits === '1 - 10 Unit' ? 'selected' : '' }}>1 - 10 Unit</option>
                                 <option value="11 - 50 Unit" {{ $selectedUnits === '11 - 50 Unit' ? 'selected' : '' }}>11 - 50 Unit</option>
@@ -467,7 +469,7 @@
 
                         <div class="contact-group full">
                             <label for="message">Pesan <span class="contact-required">*</span></label>
-                            <textarea id="message" name="message" class="contact-textarea" placeholder="Saya ingin menanyakan tentang ketersediaan produk Meja Kantor Modern ukuran 120 cm dan harga untuk pembelian 5 unit. Mohon informasi lebih lanjut..." required>{{ old('message') }}</textarea>
+                            <textarea id="message" name="message" class="contact-textarea" placeholder="Masukkan kebutuhan atau pertanyaan Anda" required>{{ old('message') }}</textarea>
                             @error('message')<span class="contact-error">{{ $message }}</span>@enderror
                         </div>
 

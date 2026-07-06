@@ -14,6 +14,7 @@ class CompanyProfile extends Model
         'logo_dark',
         'email',
         'phone',
+        'whatsapp',
         'address',
         'social_media'
     ];

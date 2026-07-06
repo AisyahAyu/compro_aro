@@ -33,6 +33,15 @@
                     </a>
                 </li>
 
+                <!-- Product Links -->
+                <li class="nav-item">
+                    <a href="{{ route('admin.product-links.edit') }}"
+                       class="nav-link {{ request()->is('admin/product-links*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-link"></i>
+                        <p>Product Links</p>
+                    </a>
+                </li>
+
                 <!-- Banner -->
                 <li class="nav-item">
                     <a href="{{ route('admin.banners.index') }}"

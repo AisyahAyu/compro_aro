@@ -67,6 +67,14 @@
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
       </li>
+      <li class="nav-item">
+        <form action="{{ route('logout') }}" method="post" class="d-inline">
+          @csrf
+          <button type="submit" class="nav-link" style="background: none; border: none; cursor: pointer;">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </button>
+        </form>
+      </li>
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -204,6 +212,20 @@
             </a>
           </li>
           
+          <li class="nav-item">
+            <a href="{{ route('admin.brands.index') }}" class="nav-link {{ request()->is('admin/brands*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-tags"></i>
+              <p>Merek (Brand)</p>
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a href="{{ route('admin.products.index') }}" class="nav-link {{ request()->is('admin/products*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-box"></i>
+              <p>Produk</p>
+            </a>
+          </li>
+          
 
 
           <li class="nav-item">
@@ -298,6 +320,31 @@
                 <i class="nav-icon fas fa-question-circle"></i>
                 <p>FAQ</p>
               </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="{{ route('admin.product-links.edit') }}" class="nav-link {{ request()->is('admin/product-links*') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-link"></i>
+                <p>Product Links</p>
+              </a>
+            </li>
+            
+            <li class="nav-item has-treeview {{ request()->is('admin/footer-settings*') ? 'menu-open' : '' }}">
+              <a href="#" class="nav-link {{ request()->is('admin/footer-settings*') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-cog"></i>
+                <p>
+                  Pengaturan
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{ route('admin.footer-settings.index') }}" class="nav-link {{ request()->is('admin/footer-settings*') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Tampilan Footer</p>
+                  </a>
+                </li>
+              </ul>
             </li>
         </ul>
       </nav>

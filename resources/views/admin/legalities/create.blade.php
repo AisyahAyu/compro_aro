@@ -57,6 +57,7 @@
                     
                     <div class="form-group">
                         <div class="custom-control custom-switch">
+                            <input type="hidden" name="is_active" value="0">
                             <input type="checkbox" class="custom-control-input" id="is_active" name="is_active" value="1" {{ old('is_active', '1') ? 'checked' : '' }}>
                             <label class="custom-control-label" for="is_active">Active</label>
                         </div>
@@ -93,7 +94,7 @@
                 
                 <div class="callout callout-warning">
                     <h5><i class="fas fa-exclamation-triangle"></i> Note:</h5>
-                    <p>Legalities will appear in the "Legalities & Compliance" section of the website. Maximum 3 legalities are displayed based on order.</p>
+                    <p>Legalities will appear in the "Legalities & Compliance" section of the website. Maximum 4 legalities are displayed based on order.</p>
                 </div>
                 
                 <div class="callout callout-primary">

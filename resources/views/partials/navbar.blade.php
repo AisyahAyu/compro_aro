@@ -23,8 +23,56 @@
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('solusi*') ? 'active' : '' }}" href="{{ route('solusi.page') }}">Solusi</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->is('product') || request()->is('produk*') ? 'active' : '' }}" href="{{ route('product.page') }}">Produk</a>
+                <li class="nav-item custom-dropdown-wrapper">
+                    <a class="nav-link {{ request()->is('product') || request()->is('produk*') ? 'active' : '' }} dropdown-toggle-custom" href="{{ route('product.page') }}">
+                        Produk <i class="fas fa-chevron-down ms-1 dropdown-arrow-icon"></i>
+                    </a>
+                    
+                    @if(isset($navbarCategories) && $navbarCategories->count() > 0)
+                        <!-- Mega Dropdown Menu -->
+                        <div class="custom-mega-dropdown">
+                            <ul class="dropdown-category-list">
+                                @php
+                                    if (!function_exists('getNavbarCategoryIcon')) {
+                                        function getNavbarCategoryIcon($name) {
+                                            $name = strtolower($name);
+                                            if (str_contains($name, 'kantor') && str_contains($name, 'furniture')) {
+                                                return 'fa-chair';
+                                            } elseif (str_contains($name, 'pendidikan') && str_contains($name, 'furniture')) {
+                                                return 'fa-school';
+                                            } elseif (str_contains($name, 'kantor')) {
+                                                return 'fa-briefcase';
+                                            } elseif (str_contains($name, 'pendidikan')) {
+                                                return 'fa-book-open';
+                                            } elseif (str_contains($name, 'mesin') || str_contains($name, 'perkakas')) {
+                                                return 'fa-tools';
+                                            } elseif (str_contains($name, 'dapur')) {
+                                                return 'fa-utensils';
+                                            } elseif (str_contains($name, 'elektronik')) {
+                                                return 'fa-laptop';
+                                            } elseif (str_contains($name, 'kit') || str_contains($name, 'p3k') || str_contains($name, 'aid')) {
+                                                return 'fa-kit-medical';
+                                            }
+                                            return 'fa-folder';
+                                        }
+                                    }
+                                @endphp
+                                @foreach($navbarCategories as $category)
+                                    <li>
+                                        <a href="{{ route('products.page', ['category' => $category->id]) }}" class="dropdown-category-item">
+                                            <i class="fas {{ getNavbarCategoryIcon($category->name) }} category-icon"></i>
+                                            <span>{{ $category->name }}</span>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                            <div class="dropdown-footer">
+                                <a href="{{ route('products.page') }}" class="btn-all-products">
+                                    Lihat Semua Produk <i class="fas fa-arrow-right ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    @endif
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('aktivitas*') ? 'active' : '' }}" href="{{ route('aktivitas') }}">

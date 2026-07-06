@@ -1750,6 +1750,189 @@
                 justify-content: center;
             }
         }
+
+        /* ==========================================================================
+           PT ARO BASKARA ESA - MEGA DROPDOWN MENU NAVBAR
+           ========================================================================== */
+        
+        .custom-dropdown-wrapper {
+            position: relative;
+        }
+
+        @media (min-width: 992px) {
+            .custom-dropdown-wrapper::before {
+                content: '';
+                position: absolute;
+                top: 100%;
+                left: -20px;
+                right: -20px;
+                height: 25px;
+                background: transparent;
+                z-index: 1079;
+            }
+        }
+
+        /* Desktop Mode Dropdown Styling & Animations */
+        @media (min-width: 992px) {
+            .navbar .custom-dropdown-wrapper:hover .custom-mega-dropdown {
+                opacity: 1 !important;
+                visibility: visible !important;
+                transform: translateX(-50%) translateY(0);
+                pointer-events: auto !important;
+            }
+            
+            .navbar .custom-mega-dropdown {
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                transform: translateX(-50%) translateY(15px);
+                width: 380px; /* Lebar proporsional ±300–400px */
+                background: #ffffff;
+                border-radius: 14px; /* Border radius 12-16px */
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Shadow lembut */
+                border: 1px solid rgba(5, 0, 82, 0.05);
+                padding: 12px 0 0 0;
+                opacity: 0 !important;
+                visibility: hidden !important;
+                transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                            transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                            visibility 0.3s;
+                z-index: 1080;
+                pointer-events: none !important;
+                overflow: hidden;
+            }
+            
+            .dropdown-arrow-icon {
+                transition: transform 0.3s ease;
+                font-size: 0.75rem;
+                vertical-align: middle;
+            }
+            
+            .custom-dropdown-wrapper:hover .dropdown-arrow-icon {
+                transform: rotate(180deg);
+            }
+        }
+
+        /* Dropdown Category List Structure */
+        .dropdown-category-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .dropdown-category-list li {
+            padding: 0 12px;
+            margin-bottom: 6px;
+        }
+
+        .dropdown-category-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Category Item Design with hover animation */
+        .dropdown-category-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 16px;
+            border-radius: 10px;
+            color: var(--primary-blue); /* Default dark blue text */
+            text-decoration: none !important;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+
+        .dropdown-category-item .category-icon {
+            font-size: 1.05rem;
+            width: 24px;
+            margin-right: 12px;
+            color: var(--primary-orange);
+            transition: transform 0.25s ease;
+            text-align: center;
+        }
+
+        .dropdown-category-item:hover {
+            background-color: rgba(254, 152, 0, 0.08) !important; /* Warna oranye muda */
+            color: var(--primary-orange) !important; /* Warna oranye / utama website */
+            padding-left: 20px; /* Transisi geser halus */
+        }
+
+        .dropdown-category-item:hover .category-icon {
+            transform: scale(1.2);
+            color: var(--primary-orange) !important;
+        }
+
+        /* Dropdown Footer Area */
+        .dropdown-footer {
+            background-color: #fcfcfc;
+            border-top: 1px solid #f1f1f1;
+            margin-top: 8px;
+            padding: 12px 20px;
+            text-align: center;
+        }
+
+        .btn-all-products {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary-orange) !important;
+            font-weight: 600;
+            text-decoration: none !important;
+            font-size: 0.9rem;
+            transition: color 0.25s ease, transform 0.25s ease;
+        }
+
+        .btn-all-products:hover {
+            color: #e68900 !important;
+            transform: translateX(4px);
+        }
+
+        /* Responsive Mobile/Tablet Breakpoint Configuration */
+        @media (max-width: 991.98px) {
+            .dropdown-arrow-icon {
+                float: right;
+                margin-top: 6px;
+                transition: transform 0.3s ease;
+            }
+            
+            .custom-dropdown-wrapper.open .dropdown-arrow-icon {
+                transform: rotate(180deg);
+            }
+            
+            .custom-mega-dropdown {
+                display: none;
+                width: 100%;
+                background: #fcfcfc;
+                border-radius: 10px;
+                border-left: 4px solid var(--primary-orange);
+                margin: 8px 0;
+                padding: 10px 0 0 0;
+                box-shadow: inset 0 2px 8px rgba(0,0,0,0.03);
+                overflow: hidden;
+            }
+            
+            .custom-dropdown-wrapper.open .custom-mega-dropdown {
+                display: block;
+            }
+            
+            .dropdown-category-item {
+                padding: 8px 16px;
+                font-size: 0.95rem;
+                background: transparent !important;
+            }
+            
+            .dropdown-category-item:hover {
+                background-color: rgba(254, 152, 0, 0.05) !important;
+                padding-left: 20px;
+            }
+            
+            .dropdown-footer {
+                text-align: left;
+                padding: 10px 16px;
+            }
+        }
     </style>
 </head>
 <body @yield('body-id')>
@@ -2018,14 +2201,61 @@
             });
         }
         
+        // Handle mobile toggle for custom mega dropdown
+        function initCustomMegaDropdown() {
+            const dropdownWrapper = document.querySelector('.custom-dropdown-wrapper');
+            const dropdownToggle = document.querySelector('.dropdown-toggle-custom');
+            const megaDropdown = document.querySelector('.custom-mega-dropdown');
+            
+            if (dropdownToggle && megaDropdown && dropdownWrapper) {
+                // Click behavior for mobile
+                dropdownToggle.addEventListener('click', function(e) {
+                    if (window.innerWidth < 992) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        const isOpen = dropdownWrapper.classList.contains('open');
+                        if (isOpen) {
+                            dropdownWrapper.classList.remove('open');
+                            megaDropdown.style.display = 'none';
+                        } else {
+                            dropdownWrapper.classList.add('open');
+                            megaDropdown.style.display = 'block';
+                        }
+                    }
+                });
+                
+                // Close when clicking outside on mobile
+                document.addEventListener('click', function(e) {
+                    if (window.innerWidth < 992) {
+                        if (!dropdownWrapper.contains(e.target)) {
+                            dropdownWrapper.classList.remove('open');
+                            megaDropdown.style.display = 'none';
+                        }
+                    }
+                });
+            }
+        }
+        
         // Run on load and resize
         document.addEventListener('DOMContentLoaded', function() {
             handleHamburgerMenu();
             enableHoverDropdown();
+            initCustomMegaDropdown();
         });
         window.addEventListener('resize', function() {
             handleHamburgerMenu();
             enableHoverDropdown();
+            
+            // Reset mobile styles for custom mega dropdown on resize to desktop
+            const dropdownWrapper = document.querySelector('.custom-dropdown-wrapper');
+            const megaDropdown = document.querySelector('.custom-mega-dropdown');
+            if (megaDropdown && dropdownWrapper) {
+                if (window.innerWidth >= 992) {
+                    dropdownWrapper.classList.remove('open');
+                    megaDropdown.style.display = '';
+                }
+            }
         });
     </script>
     @yield('scripts')
