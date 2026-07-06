@@ -426,8 +426,10 @@
             <div class="login-card-header">
                 @php
                     $companyProfile = \App\Models\CompanyProfile::first();
+                    $logoPath = $companyProfile ? getCompanyLogo($companyProfile, 'light') : null;
+                    $hasLogo = $logoPath && file_exists(public_path($logoPath));
                 @endphp
-                @if($companyProfile && getCompanyLogo($companyProfile, 'light'))
+                @if($hasLogo)
                     <div style="text-align: center; margin-bottom: 20px;">
                         <img src="{{ getCompanyLogoUrl($companyProfile, 'light') }}" alt="{{ $companyProfile->company_name ?? 'Logo' }}" style="height: 80px; object-fit: contain;">
                     </div>
