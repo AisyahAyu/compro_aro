@@ -15,19 +15,21 @@ class CompanyProfileSeeder extends Seeder
         \App\Models\CompanyProfile::updateOrCreate(
             ['id' => 1],
             [
-                'company_name' => 'PT. Solusi Bisnis Indonesia',
-                'description' => 'Kami adalah perusahaan yang berkomitmen untuk memberikan solusi terbaik untuk kebutuhan bisnis Anda. Dengan pengalaman lebih dari 10 tahun, kami telah membantu ratusan perusahaan dan instansi untuk meningkatkan efisiensi operasional mereka.',
-                'image' => 'uploads/company-image.jpg',
-                'logo' => 'uploads/company-logo.png',
-                'email' => 'info@solusibisnis.com',
-                'phone' => '+62 21 1234 5678',
-                'address' => 'Jl. Sudirman No. 123, Jakarta Pusat, Indonesia',
+                'company_name' => 'PT. ARO Baskara Esa',
+                'description' => 'PT ARO Baskara Esa berkomitmen menjadi mitra pengadaan yang andal bagi sektor swasta dan instansi pemerintah. Dengan mengutamakan integritas, efisiensi, dan kepatuhan terhadap regulasi, kami menghadirkan solusi pengadaan yang dirancang sesuai kebutuhan spesifik setiap mitra.',
+                'image' => 'uploads/tentangperusahaan.png',
+                'logo' => 'uploads/1773390371_logo.png',
+                'logo_dark' => 'uploads/1773631215_logo_dark.png',
+                'email' => 'arobaskara@gmail.com',
+                'phone' => '(021) 38835187',
+                'whatsapp' => '6282288886009',
+                'address' => "Jl. TM. Slamet Riyadi Raya No. 9 RT.1 RW.4\nKb. Manggis, Kec. Matraman\nDaerah Khusus Ibukota Jakarta\n13150",
                 'operational_hours' => "Senin-Jumat\n08.00 - 17.00\nSabtu\n08.00 - 12.00\nMinggu & Hari Libur\nTutup",
                 'social_media' => [
-                    'facebook' => 'https://facebook.com/solusibisnis',
-                    'twitter' => 'https://twitter.com/solusibisnis',
-                    'instagram' => 'https://instagram.com/solusibisnis',
-                    'linkedin' => 'https://linkedin.com/company/solusibisnis'
+                    'facebook' => '',
+                    'twitter' => '',
+                    'instagram' => '',
+                    'linkedin' => ''
                 ]
             ]
         );
