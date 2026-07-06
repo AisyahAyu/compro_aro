@@ -121,6 +121,13 @@
               <p>Dashboard</p>
             </a>
           </li>
+          
+          <li class="nav-item">
+            <a href="{{ route('admin.users.index') }}" class="nav-link {{ request()->is('admin/users*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-users"></i>
+              <p>Manajemen Admin</p>
+            </a>
+          </li>
           <li class="nav-item has-treeview {{ request()->is('admin/statistics*') || request()->is('admin/visi-misi*') || request()->is('admin/team-members*') || request()->is('admin/brands*') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-info-circle"></i>

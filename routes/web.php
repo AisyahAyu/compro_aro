@@ -33,7 +33,7 @@ use App\Http\Controllers\Admin\JobApplicationController as AdminJobApplicationCo
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\UpcomingEventController;
 use App\Http\Controllers\Admin\ProductLinkController;
-
+use App\Http\Controllers\Admin\UserController;
 
 // ======================
 // FRONTEND
@@ -133,6 +133,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     // ======================
     Route::get('product-links/edit', [ProductLinkController::class, 'edit'])->name('product-links.edit');
     Route::post('product-links/update', [ProductLinkController::class, 'update'])->name('product-links.update');
+
+    // ======================
+    // USERS (ADMINS)
+    // ======================
+    Route::resource('users', UserController::class);
 
 });
 
