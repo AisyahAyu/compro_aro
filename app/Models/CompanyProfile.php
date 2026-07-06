@@ -16,6 +16,7 @@ class CompanyProfile extends Model
         'phone',
         'whatsapp',
         'address',
+        'operational_hours',
         'social_media'
     ];
 

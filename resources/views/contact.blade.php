@@ -507,9 +507,21 @@
                     <div class="contact-hours">
                         <h4>Jam Operasional</h4>
                         <ul>
-                            <li><span>Senin-Jumat</span><strong>08.00 - 17.00</strong></li>
-                            <li><span>Sabtu</span><strong>08.00 - 12.00</strong></li>
-                            <li><span>Minggu & Hari Libur</span><strong>Tutup</strong></li>
+                            @if($companyProfile && $companyProfile->operational_hours)
+                                @php
+                                    $lines = explode("\n", str_replace("\r", "", trim($companyProfile->operational_hours)));
+                                @endphp
+                                @for($i = 0; $i < count($lines); $i+=2)
+                                    <li>
+                                        <span>{{ $lines[$i] ?? '' }}</span>
+                                        <strong>{{ $lines[$i+1] ?? '' }}</strong>
+                                    </li>
+                                @endfor
+                            @else
+                                <li><span>Senin-Jumat</span><strong>08.00 - 17.00</strong></li>
+                                <li><span>Sabtu</span><strong>08.00 - 12.00</strong></li>
+                                <li><span>Minggu & Hari Libur</span><strong>Tutup</strong></li>
+                            @endif
                         </ul>
                     </div>
                 </aside>

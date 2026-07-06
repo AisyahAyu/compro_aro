@@ -79,6 +79,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'info@solusibisnis.com',
             'phone' => '+62 21 1234 5678',
             'address' => 'Jl. Sudirman No. 123, Jakarta Pusat, Indonesia',
+            'operational_hours' => "Senin-Jumat\n08.00 - 17.00\nSabtu\n08.00 - 12.00\nMinggu & Hari Libur\nTutup",
             'social_media' => [
                 'facebook' => 'https://facebook.com/solusibisnis',
                 'twitter' => 'https://twitter.com/solusibisnis',

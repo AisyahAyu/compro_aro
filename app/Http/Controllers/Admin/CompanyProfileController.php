@@ -40,6 +40,7 @@ class CompanyProfileController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'logo_dark' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'operational_hours' => 'nullable|string',
         ]);
 
         $data = $request->except(['image', 'logo', 'logo_dark', 'social_media']);
@@ -113,6 +114,7 @@ class CompanyProfileController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'logo_dark' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'operational_hours' => 'nullable|string',
         ]);
 
         $profile = CompanyProfile::findOrFail($id);

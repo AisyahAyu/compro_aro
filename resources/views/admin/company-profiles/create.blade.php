@@ -69,6 +69,15 @@
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
+
+                    <div class="form-group">
+                        <label for="operational_hours">Operational Hours</label>
+                        <textarea class="form-control" id="operational_hours" name="operational_hours" rows="5" placeholder="Enter operational hours">{{ old('operational_hours') }}</textarea>
+                        @error('operational_hours')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                        <small class="form-text text-muted">Example: Senin-Jumat: 08.00 - 17.00</small>
+                    </div>
                     
                     <div class="row">
                         <div class="col-sm-6">
