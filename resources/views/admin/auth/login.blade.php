@@ -19,8 +19,8 @@
     
     <style>
         :root {
-            --primary: #2563EB;
-            --primary-dark: #1D4ED8;
+            --primary: #f78b00;
+            --primary-dark: #d67a02;
             --secondary: #1E293B;
             --background: #F8FAFC;
             --text-dark: #1E293B;
@@ -40,7 +40,7 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #2563EB 100%);
+            background: linear-gradient(110deg, rgba(190, 88, 0, 0.72), rgba(118, 47, 0, 0.65)), url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1800&q=80') center/cover;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -424,9 +424,18 @@
     <div class="login-container">
         <div class="login-card">
             <div class="login-card-header">
-                <div class="logo-container">
-                    <i class="fas fa-shield-halved"></i>
-                </div>
+                @php
+                    $companyProfile = \App\Models\CompanyProfile::first();
+                @endphp
+                @if($companyProfile && $companyProfile->logo)
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <img src="{{ asset('storage/' . $companyProfile->logo) }}" alt="{{ $companyProfile->company_name ?? 'Logo' }}" style="height: 80px; object-fit: contain; animation: pulse 2s ease-in-out infinite;">
+                    </div>
+                @else
+                    <div class="logo-container">
+                        <i class="fas fa-shield-halved"></i>
+                    </div>
+                @endif
                 <h2>Welcome Back</h2>
                 <p>Sign in to your admin dashboard</p>
             </div>
