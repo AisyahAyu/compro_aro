@@ -441,12 +441,15 @@
                     
                     <div class="pd-order-btn-container">
                         @php
-                            $phone = preg_replace('/[^0-9]/', '', $companyProfile->phone ?? '');
-                            if (substr($phone, 0, 1) === '0') {
-                                $phone = '62' . substr($phone, 1);
+                            $waNumber = '6282288886009';
+                            if (isset($companyProfile) && $companyProfile->whatsapp) {
+                                $waNumber = preg_replace('/[^0-9]/', '', $companyProfile->whatsapp);
+                                if (substr($waNumber, 0, 1) === '0') {
+                                    $waNumber = '62' . substr($waNumber, 1);
+                                }
                             }
                         @endphp
-                        <a href="https://wa.me/{{ $phone }}?text=Halo,%20saya%20tertarik%20dengan%20produk%20{{ urlencode($product->name) }}" target="_blank" class="pd-order-btn">
+                        <a href="https://wa.me/{{ $waNumber }}?text=Halo,%20saya%20tertarik%20dengan%20produk%20{{ urlencode($product->name) }}" target="_blank" class="pd-order-btn">
                             <i class="fab fa-whatsapp"></i> Info Pemesanan
                         </a>
                     </div>
