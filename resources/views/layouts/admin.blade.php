@@ -46,10 +46,11 @@
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
-  <!-- Preloader -->
+  <!-- Preloader 
   <div class="preloader flex-column justify-content-center align-items-center">
     <i class="fas fa-spinner fa-spin text-primary" style="font-size: 3rem;"></i>
   </div>
+  -->
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-dark navbar-dark">
@@ -128,7 +129,7 @@
               <p>Manajemen Admin</p>
             </a>
           </li>
-          <li class="nav-item has-treeview {{ request()->is('admin/statistics*') || request()->is('admin/visi-misi*') || request()->is('admin/team-members*') || request()->is('admin/brands*') ? 'menu-open' : '' }}">
+          <li class="nav-item has-treeview {{ request()->is('admin/statistics*') || request()->is('admin/visi-misi*') || request()->is('admin/team-members*') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-info-circle"></i>
               <p>
@@ -147,12 +148,6 @@
                 <a href="/admin/visi-misi" class="nav-link {{ request()->is('admin/visi-misi*') ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Visi & Misi</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('admin.brands.index') }}" class="nav-link {{ request()->is('admin/brands*') ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Brands</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -212,25 +207,34 @@
             </ul>
           </li>
           
-          <li class="nav-item">
-            <a href="{{ route('admin.categories.index') }}" class="nav-link {{ request()->is('admin/categories*') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-lightbulb"></i>
-              <p>Solusi (Kategori)</p>
+          <li class="nav-item has-treeview {{ request()->is('admin/categories*') || request()->is('admin/brands*') || request()->is('admin/products*') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ request()->is('admin/categories*') || request()->is('admin/brands*') || request()->is('admin/products*') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-boxes"></i>
+              <p>
+                Kelola Produk
+                <i class="right fas fa-angle-left"></i>
+              </p>
             </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="{{ route('admin.brands.index') }}" class="nav-link {{ request()->is('admin/brands*') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-tags"></i>
-              <p>Merek (Brand)</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="{{ route('admin.products.index') }}" class="nav-link {{ request()->is('admin/products*') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-box"></i>
-              <p>Produk</p>
-            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.categories.index') }}" class="nav-link {{ request()->is('admin/categories*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Kategori</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.brands.index') }}" class="nav-link {{ request()->is('admin/brands*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Merek</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.products.index') }}" class="nav-link {{ request()->is('admin/products*') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Produk</p>
+                </a>
+              </li>
+            </ul>
           </li>
           
 

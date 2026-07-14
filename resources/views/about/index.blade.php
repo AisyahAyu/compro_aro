@@ -6,7 +6,7 @@
 {{-- ===================== BANNER ===================== --}}
 <section class="hero-slider"
     style="
-        background-image: url('{{ asset('uploads/banner_tentangg.png') }}');
+        background-image: url('{{ $banner ? asset($banner->image) : asset('uploads/banner_tentangg.png') }}');
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
@@ -19,18 +19,25 @@
 
                 <h1 class="hero-title"
                     style="color: white; font-size: 3.5rem; margin-bottom: 2rem; max-width: 500px;">
-                    Mengenal PT Aro Baskara Esa
+                    {{ $banner->title ?? 'Mengenal PT Aro Baskara Esa' }}
                 </h1>
 
                 <p class="hero-description"
                     style="color: white; font-size: 1.3rem; max-width: 500px; margin-bottom: 3rem; line-height: 1.6;">
-                    Solusi pengadaan barang dan jasa yang profesional, transparan dan terpercaya untuk sektor bisnis dan pemerintahan.
+                    {{ $banner->description ?? 'Solusi pengadaan barang dan jasa yang profesional, transparan dan terpercaya untuk sektor bisnis dan pemerintahan.' }}
                 </p>
 
+                @if($banner && !empty($banner->button_text))
+                <a href="{{ $banner->button_link ?? '#hubungi' }}" class="hero-button"
+                    style="background: transparent; border: 2px solid white; color: white; padding: 12px 30px; border-radius: 25px; text-decoration: none;">
+                    {{ $banner->button_text }}
+                </a>
+                @elseif(!$banner)
                 <a href="#hubungi" class="hero-button"
                     style="background: transparent; border: 2px solid white; color: white; padding: 12px 30px; border-radius: 25px; text-decoration: none;">
                     Lihat Sekarang
                 </a>
+                @endif
 
             </div>
         </div>

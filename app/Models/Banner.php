@@ -13,7 +13,8 @@ class Banner extends Model
         'button_link',
         'image',
         'order',
-        'is_active'
+        'is_active',
+        'page_type'
     ];
 
     protected $casts = [

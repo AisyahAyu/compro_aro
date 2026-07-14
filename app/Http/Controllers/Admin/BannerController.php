@@ -28,7 +28,8 @@ class BannerController extends Controller
             'button_link' => 'nullable|string|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'order' => 'integer',
-            'is_active' => 'boolean'
+            'is_active' => 'boolean',
+            'page_type' => 'required|string|in:home,about'
         ]);
 
         $data = $request->all();
@@ -64,7 +65,8 @@ class BannerController extends Controller
             'button_link' => 'nullable|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'order' => 'integer',
-            'is_active' => 'boolean'
+            'is_active' => 'boolean',
+            'page_type' => 'required|string|in:home,about'
         ]);
 
         $banner = Banner::findOrFail($id);

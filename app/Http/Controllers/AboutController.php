@@ -17,7 +17,10 @@ class AboutController extends Controller
     public function index()
     {
         // Section 13 — Banner halaman tentang
-        $banner = Banner::where('is_active', true)->first();
+        $banner = Banner::where('is_active', true)
+            ->where('page_type', 'about')
+            ->orderBy('order')
+            ->first();
 
         // Section 14 — Deskripsi perusahaan
         $company = CompanyProfile::first();

@@ -22,6 +22,7 @@
                     <thead>
                         <tr>
                             <th>ID</th>
+                            <th>Page</th>
                             <th>Title</th>
                             <th>Image</th>
                             <th>Order</th>
@@ -33,6 +34,11 @@
                         @forelse($banners as $banner)
                             <tr>
                                 <td>{{ $banner->id }}</td>
+                                <td>
+                                    <span class="badge {{ $banner->page_type == 'home' ? 'badge-primary' : 'badge-info' }}">
+                                        {{ ucfirst($banner->page_type ?? 'home') }}
+                                    </span>
+                                </td>
                                 <td>{{ $banner->title ?? 'N/A' }}</td>
                                 <td>
                                     @if($banner->image)

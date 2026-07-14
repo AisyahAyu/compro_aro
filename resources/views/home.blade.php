@@ -444,7 +444,7 @@
         <div class="solutions-grid-premium">
             @foreach($categories as $index => $category)
                 <div class="solution-card-premium scroll-reveal" style="animation-delay: {{ $index * 0.15 }}s;">
-                    <div class="card-inner">
+                    <a href="{{ route('products.page', ['category' => $category->id]) }}" class="card-inner" style="display: block; text-decoration: none;">
                         <!-- Image with Overlay -->
                         <div class="card-image-wrapper">
                             @if($category->image)
@@ -479,7 +479,7 @@
                             <div class="glow-effect"></div>
                             <div class="border-effect"></div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             @endforeach
         </div>
@@ -696,7 +696,8 @@
 /* Dynamic Cards Grid */
 .solutions-grid-premium {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 350px));
+    justify-content: center;
     gap: 30px;
     margin-top: 80px;
     position: relative;

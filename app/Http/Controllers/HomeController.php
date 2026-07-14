@@ -38,7 +38,12 @@ class HomeController extends Controller
 
     public function index()
     {
-        $banners = Banner::where('is_active', true)->orderBy('order')->get();
+        $banners = Banner::where('is_active', true)
+            ->where(function($query) {
+                $query->where('page_type', 'home')->orWhereNull('page_type');
+            })
+            ->orderBy('order')
+            ->get();
         $companyProfile = CompanyProfile::first();
         $categories = Category::where('is_active', true)->orderBy('order')->limit(3)->get();
         $legalities = Legality::where('is_active', true)->orderBy('order')->limit(4)->get();
@@ -146,7 +151,7 @@ class HomeController extends Controller
         $product = Product::with(['category', 'brand'])->findOrFail($id);
 
         // Fetch related products from DB
-        $relatedProducts = Product::where('id', '!=', $id)->limit(3)->get();
+        $relatedProducts = Product::where('id', '!=', $id)->limit(5)->get();
 
         return view('product-detail', compact('companyProfile', 'product', 'relatedProducts'));
     }

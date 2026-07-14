@@ -36,7 +36,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="button_text">Button Text</label>
-                                <input type="text" class="form-control" id="button_text" name="button_text" value="{{ old('button_text', 'Lihat Selengkapnya') }}" placeholder="Button text">
+                                <input type="text" class="form-control" id="button_text" name="button_text" value="{{ old('button_text') }}" placeholder="Biarkan kosong jika tidak ingin menampilkan tombol">
                                 @error('button_text')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -58,6 +58,17 @@
                                 @enderror
                             </div>
                         </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="page_type">Halaman (Page Type)</label>
+                        <select class="form-control" id="page_type" name="page_type" required>
+                            <option value="home" {{ old('page_type') == 'home' ? 'selected' : '' }}>Home / Beranda</option>
+                            <option value="about" {{ old('page_type') == 'about' ? 'selected' : '' }}>Tentang / About</option>
+                        </select>
+                        @error('page_type')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                     
                     <div class="form-group">

@@ -6,257 +6,291 @@
 <style>
     .pd-page {
         margin-top: 90px;
-        background: #f2f3f5;
-        color: #1f1f1f;
-        padding-bottom: 44px;
+        background: #ffffff;
+        color: #333333;
+        padding-bottom: 60px;
     }
 
     .pd-main {
         padding: 36px 0 18px;
     }
 
-    .pd-shell {
-        background: #ffffff;
-        border: 1px solid #e5e7eb;
-        border-radius: 12px;
-        padding: 24px;
-        box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+    .pd-breadcrumb {
+        font-size: 0.95rem;
+        color: #1a73e8;
+        margin-bottom: 25px;
+        padding: 0;
+    }
+    .pd-breadcrumb a {
+        color: #1a73e8;
+        text-decoration: none;
+    }
+    .pd-breadcrumb a:hover {
+        text-decoration: underline;
+    }
+    .pd-breadcrumb span {
+        margin: 0 12px;
+        color: #888;
+        font-size: 0.8rem;
+    }
+    .pd-breadcrumb span.active {
+        color: #1a73e8;
     }
 
-    .pd-top {
+    .pd-title-section {
+        margin-bottom: 30px;
+    }
+    .pd-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #222;
+        margin-bottom: 5px;
+    }
+    .pd-type-subtitle {
+        font-size: 1.1rem;
+        color: #555;
+        font-weight: 500;
+    }
+
+    .pd-grid {
         display: grid;
-        grid-template-columns: 1fr 1.1fr;
-        gap: 34px;
+        grid-template-columns: 0.8fr 1.2fr;
+        gap: 50px;
         align-items: start;
     }
 
-    .pd-label {
-        background: #f78b00;
-        color: #fff;
-        font-size: 0.74rem;
-        font-weight: 600;
-        border-radius: 4px;
-        display: inline-block;
-        padding: 4px 10px;
-        margin-bottom: 10px;
-    }
-
     .pd-main-image-wrap {
-        background: #fafafa;
-        border: 1px solid #dddddd;
+        border: 1px solid #f0f0f0;
         border-radius: 8px;
-        padding: 10px;
+        padding: 5px;
+        background: #fff;
     }
-
     .pd-main-image {
         width: 100%;
-        height: 340px;
-        object-fit: cover;
-        border-radius: 6px;
+        height: auto;
+        object-fit: contain;
+        border-radius: 4px;
         display: block;
     }
 
     .pd-thumbs {
-        margin-top: 12px;
+        margin-top: 15px;
         display: flex;
         gap: 10px;
-        flex-wrap: wrap;
     }
-
     .pd-thumb-item {
-        width: 78px;
-        height: 62px;
-        border-radius: 6px;
-        border: 1px solid #d8d8d8;
-        background: #fff;
+        width: 65px;
+        height: 65px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
         padding: 2px;
-        overflow: hidden;
+        cursor: pointer;
+        background: #fff;
     }
-
-    .pd-thumbs img {
+    .pd-thumb-item img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
-        border-radius: 4px;
-        display: block;
+        object-fit: contain;
     }
 
-    .pd-title {
-        font-size: 2rem;
-        line-height: 1.2;
-        margin-bottom: 12px;
-        font-weight: 700;
-        color: #111827;
+    .pd-details-col {
+        border: 1px solid #f2e3d5;
+        border-radius: 6px;
+        overflow: hidden;
+        background: #fff;
     }
 
-    .pd-category {
-        margin-bottom: 14px;
-        font-size: 1.1rem;
+    .pd-details-header {
+        background: #fff8f3;
+        padding: 15px;
+        text-align: center;
+        border-bottom: 2px solid #e27d3b;
     }
-
-    .pd-category-label {
-        color: #f78b00;
-        font-weight: 700;
-    }
-
-    .pd-description {
-        font-size: 0.98rem;
-        color: #353535;
-        line-height: 1.65;
-        margin-bottom: 12px;
-        max-width: 720px;
-    }
-
-    .pd-highlights {
-        list-style: none;
-        margin: 0 0 16px;
-        padding: 0;
-    }
-
-    .pd-highlights li {
-        margin-bottom: 5px;
-        color: #222;
-        font-size: 0.95rem;
-    }
-
-    .pd-highlights li::before {
-        content: "✓";
-        margin-right: 8px;
-        font-weight: 700;
-    }
-
-    .pd-btn-market {
-        background: #f78b00;
-        color: #fff;
-        border: 1px solid #f78b00;
-        border-radius: 8px;
-        text-decoration: none;
-        font-weight: 600;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 9px 14px;
-        font-size: 0.92rem;
-    }
-
-    .pd-btn-market:hover {
-        background: #e87f00;
-        color: #fff;
-    }
-
-    .pd-spec-grid {
-        margin-top: 22px;
-        display: grid;
-        grid-template-columns: 1.2fr 0.95fr;
-        gap: 24px;
-        padding-top: 18px;
-        border-top: 1px solid #ececec;
-    }
-
-    .pd-sec-title {
-        font-size: 1.6rem;
-        font-weight: 700;
-        margin-bottom: 8px;
-    }
-
-    .pd-sec-desc {
-        color: #2f2f2f;
-        line-height: 1.6;
-        margin-bottom: 16px;
-        font-size: 0.97rem;
-    }
-
-    .pd-subtitle {
-        font-size: 1.35rem;
-        margin-bottom: 8px;
-        font-weight: 700;
-    }
-
-    .pd-mini-list {
-        color: #252525;
+    .pd-details-header h3 {
         margin: 0;
-        font-size: 0.95rem;
-        line-height: 1.6;
+        font-size: 1rem;
+        color: #e27d3b;
+        font-weight: 600;
     }
 
     .pd-table {
         width: 100%;
-        border-collapse: separate;
-        border-spacing: 0;
-        background: #fff;
-        border: 1px solid #d7d7d7;
-        border-radius: 6px;
-        overflow: hidden;
+        border-collapse: collapse;
     }
-
+    .pd-table tr {
+        border-bottom: 1px solid #f9f9f9;
+    }
+    .pd-table tr:last-child {
+        border-bottom: none;
+    }
     .pd-table td {
-        padding: 10px 13px;
-        border-bottom: 1px solid #e9e9e9;
-        border-right: 1px solid #e9e9e9;
-        font-size: 0.92rem;
+        padding: 16px 20px;
+        vertical-align: top;
+        font-size: 0.95rem;
+        line-height: 1.6;
     }
-
-    .pd-table tr:last-child td {
-        border-bottom: 0;
+    .pd-table td:first-child {
+        width: 25%;
+        color: #888;
+        font-weight: 500;
     }
-
     .pd-table td:last-child {
-        border-right: 0;
-        color: #353535;
+        color: #333;
+        font-weight: 500;
     }
 
+    .pd-order-btn-container {
+        text-align: right;
+        margin-top: 25px;
+    }
+
+    .pd-order-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid #e27d3b;
+        color: #e27d3b;
+        background: #fff;
+        padding: 10px 24px;
+        border-radius: 4px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.2s;
+    }
+    .pd-order-btn:hover {
+        background: #fff8f3;
+        color: #d16b2a;
+    }
+
+    /* Related Products Section */
     .pd-related {
-        padding: 14px 0 26px;
+        padding: 40px 0 26px;
+        border-top: 1px solid #eaeaea;
+        margin-top: 80px;
     }
 
     .pd-related-grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 18px;
-    }
-
-    .pd-related-card {
-        background: #ffffff;
-        border-radius: 8px;
-        border: 1px solid #dedede;
-        padding: 12px;
         display: flex;
-        gap: 12px;
-        align-items: center;
-        min-height: 120px;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+    
+    .pd-related-grid > a {
+        width: 195px; /* Exact width from products page grid */
     }
 
-    .pd-related-card img {
-        width: 120px;
-        height: 86px;
-        object-fit: cover;
-        border-radius: 6px;
-        background: #fff;
+    .pp-card-link {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        height: 100%;
     }
 
-    .pd-related-name {
-        font-size: 1.05rem;
+    .pp-card {
+        width: 100%;
+        background-color: #ffffff;
+        border: 1px solid #e8e8e8;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        transition: box-shadow 0.2s ease, transform 0.2s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        height: 100%;
+    }
+
+    .pp-card-link:hover .pp-card {
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        transform: translateY(-4px);
+    }
+
+    .pp-card-img-wrap {
+        width: 100%;
+        position: relative;
+        background-color: #fff;
+        overflow: visible;
+    }
+
+    .pp-card-img {
+        width: 100%;
+        aspect-ratio: 1 / 1; /* Force square like the products page */
+        object-fit: contain;
+        display: block;
+        transition: transform 0.3s ease;
+    }
+
+    .pp-card-link:hover .pp-card-img {
+        transform: scale(1.05);
+    }
+
+    .pp-card-img-wrap::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: #000;
+        z-index: 1;
+    }
+
+    .pp-card-body {
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        border-top: 1px solid #f0f0f0;
+    }
+
+    .pp-card-name {
+        font-size: 13px;
         font-weight: 600;
-        line-height: 1.35;
+        color: #222;
+        line-height: 1.3;
+        margin-bottom: 6px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        height: 34px;
+    }
+
+    .pp-card-meta {
+        margin-top: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px solid #f5f5f5;
+        padding-top: 8px;
+        gap: 8px;
         margin-bottom: 8px;
     }
 
-    .pd-related-btn {
-        background: #f78b00;
-        border: 1px solid #f78b00;
-        color: #fff;
-        border-radius: 10px;
-        text-decoration: none;
-        padding: 6px 12px;
-        display: inline-block;
-        font-weight: 600;
-        font-size: 0.86rem;
+    .pp-card-location {
+        font-size: 11px;
+        color: #1a5fa8;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-weight: 500;
     }
 
+    .pp-type {
+        font-size: 11px;
+        color: #888;
+        background: #f4f4f4;
+        padding: 2px 6px;
+        border-radius: 4px;
+    }
+
+    /* CTA Section */
     .pd-cta {
-        background: linear-gradient(90deg, #ff8f15 0%, #ebda45 100%);
-        margin-top: 6px;
-        border-radius: 10px;
+        background: #fff;
+        margin-top: 40px;
+        border-radius: 12px;
+        border: 1px solid #eaeaea;
         overflow: hidden;
     }
 
@@ -264,49 +298,49 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 16px;
-        padding: 24px 18px;
+        gap: 20px;
+        padding: 40px;
+        background: #fafafa;
     }
 
     .pd-cta-small {
-        margin: 0;
-        color: #523000;
+        margin: 0 0 5px 0;
+        color: #f78b00;
         font-size: 0.95rem;
-        letter-spacing: 0.4px;
+        letter-spacing: 0.5px;
         font-weight: 600;
+        text-transform: uppercase;
     }
 
     .pd-cta-title {
         margin: 0;
-        color: #4a2600;
-        font-size: 2.1rem;
-        line-height: 1.15;
+        color: #222;
+        font-size: 2rem;
+        line-height: 1.2;
         font-weight: 700;
     }
 
     .pd-cta-btn {
-        border-radius: 999px;
-        background: #0b0550;
+        border-radius: 6px;
+        background: #111;
         color: #fff;
         text-decoration: none;
-        padding: 10px 22px;
+        padding: 12px 28px;
         font-weight: 600;
-        font-size: 1rem;
+        font-size: 1.05rem;
         white-space: nowrap;
+        transition: all 0.2s;
     }
 
     .pd-cta-btn:hover {
+        background: #333;
         color: #fff;
     }
 
     @media (max-width: 991px) {
-        .pd-shell {
-            padding: 18px;
-        }
-
-        .pd-top,
-        .pd-spec-grid {
+        .pd-grid {
             grid-template-columns: 1fr;
+            gap: 30px;
         }
 
         .pd-related-grid {
@@ -322,10 +356,6 @@
             font-size: 1.6rem;
         }
 
-        .pd-main-image {
-            height: 260px;
-        }
-
         .pd-cta-title {
             font-size: 1.5rem;
         }
@@ -339,48 +369,51 @@
 <div class="pd-page">
     <section class="pd-main">
         <div class="container">
-            <div class="pd-shell">
-                <div class="pd-top">
-                    <div>
-                        <div class="pd-main-image-wrap">
-                            @if($product->image)
-                                <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" class="pd-main-image">
-                            @endif
-                        </div>
-                    </div>
+            
+            <!-- Breadcrumbs -->
+            <div class="pd-breadcrumb">
+                <a href="{{ route('products.page', ['category' => $product->category_id]) }}">{{ $product->category->name ?? 'Kategori' }}</a>
+                <span>&gt;</span>
+                <span class="active">{{ $product->name }}</span>
+            </div>
 
-                    <div>
-                        <h1 class="pd-title">{{ $product->name }}</h1>
-                        <div class="pd-category">
-                            <span class="pd-category-label">Kategori :</span>
-                            <span>{{ $product->category->name ?? '-' }}</span>
-                        </div>
-                        <div class="pd-category">
-                            <span class="pd-category-label">Merek :</span>
-                            <span>{{ $product->resolved_brand_name }}</span>
-                        </div>
-                        <div class="pd-category">
-                            <span class="pd-category-label">Tipe Produk :</span>
-                            <span>{{ $product->type ?? '-' }}</span>
+            <!-- Title Section -->
+            <div class="pd-title-section">
+                <h1 class="pd-title">{{ $product->name }}</h1>
+                <div class="pd-type-subtitle">{{ $product->type ?? '-' }}</div>
+            </div>
+
+            <!-- Grid -->
+            <div class="pd-grid">
+                <!-- Left: Image -->
+                <div class="pd-image-col">
+                    <div class="pd-main-image-wrap">
+                        @if($product->image)
+                            <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" class="pd-main-image">
+                        @endif
+                    </div>
+                    @if($product->image)
+                    <div class="pd-thumbs">
+                        <div class="pd-thumb-item">
+                            <img src="{{ asset($product->image) }}" alt="{{ $product->name }}">
                         </div>
                     </div>
+                    @endif
                 </div>
 
-                <div class="pd-spec-grid">
-                    <div>
-                        <h2 class="pd-sec-title">Deskripsi / Spesifikasi</h2>
-                        <p class="pd-sec-desc" style="white-space: pre-line;">{{ $product->specification ?? 'Tidak ada spesifikasi khusus.' }}</p>
-                    </div>
-
-                    <div>
+                <!-- Right: Details -->
+                <div class="pd-details-container">
+                    <div class="pd-details-col">
+                        <div class="pd-details-header">
+                            <h3>Detail Produk</h3>
+                        </div>
                         <table class="pd-table">
-                            <tbody>
                             <tr>
-                                <td>Merek</td>
-                                <td>{{ $product->resolved_brand_name }}</td>
+                                <td>Nama Produk</td>
+                                <td>{{ $product->name }}</td>
                             </tr>
                             <tr>
-                                <td>Tipe</td>
+                                <td>Tipe Produk</td>
                                 <td>{{ $product->type ?? '-' }}</td>
                             </tr>
                             <tr>
@@ -388,18 +421,38 @@
                                 <td>{{ $product->dimensions ?? '-' }}</td>
                             </tr>
                             <tr>
+                                <td>Spesifikasi</td>
+                                <td style="white-space: pre-line;">{{ $product->specification ?? '-' }}</td>
+                            </tr>
+                            <tr>
+                                <td>Merek</td>
+                                <td>{{ $product->resolved_brand_name }}</td>
+                            </tr>
+                            <tr>
                                 <td>SKU</td>
-                                <td><code>{{ $product->sku ?? '-' }}</code></td>
+                                <td>{{ $product->sku ?? '-' }}</td>
                             </tr>
                             <tr>
                                 <td>Asal Negara</td>
                                 <td>{{ $product->country_of_origin ?? '-' }}</td>
                             </tr>
-                            </tbody>
                         </table>
+                    </div>
+                    
+                    <div class="pd-order-btn-container">
+                        @php
+                            $phone = preg_replace('/[^0-9]/', '', $companyProfile->phone ?? '');
+                            if (substr($phone, 0, 1) === '0') {
+                                $phone = '62' . substr($phone, 1);
+                            }
+                        @endphp
+                        <a href="https://wa.me/{{ $phone }}?text=Halo,%20saya%20tertarik%20dengan%20produk%20{{ urlencode($product->name) }}" target="_blank" class="pd-order-btn">
+                            <i class="fab fa-whatsapp"></i> Info Pemesanan
+                        </a>
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
@@ -408,15 +461,31 @@
             <h3 class="mb-4 text-center font-weight-bold">Produk Lainnya</h3>
             <div class="pd-related-grid">
                 @foreach($relatedProducts as $relatedProduct)
-                    <article class="pd-related-card">
-                        @if($relatedProduct->image)
-                            <img src="{{ asset($relatedProduct->image) }}" alt="{{ $relatedProduct->name }}">
-                        @endif
-                        <div>
-                            <h4 class="pd-related-name">{{ $relatedProduct->name }}</h4>
-                            <a href="{{ route('products.detail', $relatedProduct->id) }}" class="pd-related-btn">Lihat Detail</a>
-                        </div>
-                    </article>
+                    <a href="{{ route('products.detail', $relatedProduct->id) }}" class="pp-card-link">
+                        <article class="pp-card">
+                            <div class="pp-card-img-wrap">
+                                @if($relatedProduct->image)
+                                    <img src="{{ asset($relatedProduct->image) }}" alt="{{ $relatedProduct->name }}"
+                                        class="pp-card-img" loading="lazy">
+                                @endif
+                            </div>
+                            <div class="pp-card-body">
+                                <h4 class="pp-card-name">{{ $relatedProduct->name }}</h4>
+                                <div class="pp-card-meta">
+                                    <div class="pp-card-location">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span>{{ $relatedProduct->country_of_origin ?? 'Indonesia' }}</span>
+                                    </div>
+                                    @if(!empty($relatedProduct->type))
+                                        <div class="pp-type">{{ $relatedProduct->type }}</div>
+                                    @endif
+                                </div>
+                                <div class="mt-auto pt-2">
+                                    <span class="btn btn-warning btn-sm w-100 text-white" style="background-color: #f78b00; border-color: #f78b00; font-size: 12px; font-weight: 600;">Lihat Detail</span>
+                                </div>
+                            </div>
+                        </article>
+                    </a>
                 @endforeach
             </div>
         </div>
