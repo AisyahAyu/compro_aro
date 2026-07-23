@@ -72,6 +72,12 @@ class ProductController extends Controller
         ]);
 
         $data = $request->all();
+        $data['has_variants'] = $request->boolean('has_variants');
+        $groups = array_values(array_filter($request->input('variant_groups', [])));
+        if (count($groups) > 3) {
+            $groups = array_slice($groups, 0, 3);
+        }
+        $data['variant_groups'] = $groups;
 
         // UPLOAD GAMBAR
         if ($request->hasFile('image')) {
@@ -82,7 +88,33 @@ class ProductController extends Controller
             $data['image'] = 'uploads/products/' . $filename;
         }
 
-        Product::create($data);
+        $product = Product::create($data);
+
+        // Proses Varian
+        if ($product->has_variants) {
+            $submittedVariants = $request->input('variants', []);
+            
+            foreach ($submittedVariants as $index => $varData) {
+                $variantFields = [
+                    'option_1' => $varData['option_1'] ?? null,
+                    'option_2' => $varData['option_2'] ?? null,
+                    'option_3' => $varData['option_3'] ?? null,
+                    'sku' => $varData['sku'] ?? null,
+                    'dimensions' => $varData['dimensions'] ?? null,
+                    'specification' => $varData['specification'] ?? null,
+                ];
+
+                // Upload gambar varian
+                if ($request->hasFile("variants.{$index}.image")) {
+                    $img = $request->file("variants.{$index}.image");
+                    $vFilename = time() . '_' . rand(100,999) . '.' . $img->getClientOriginalExtension();
+                    $img->move(public_path('uploads/products/variants'), $vFilename);
+                    $variantFields['image'] = 'uploads/products/variants/' . $vFilename;
+                }
+
+                $product->variants()->create($variantFields);
+            }
+        }
 
         return redirect()->route('admin.products.index')->with('success', 'Produk berhasil ditambahkan.');
     }
@@ -92,7 +124,7 @@ class ProductController extends Controller
     // ======================
     public function edit(string $id)
     {
-        $data = Product::findOrFail($id);
+        $data = Product::with('variants')->findOrFail($id);
         $categories = Category::where('is_active', true)->orderBy('order')->get();
         $brands = Brand::where('is_active', true)->orderBy('order')->get();
 
@@ -119,6 +151,13 @@ class ProductController extends Controller
 
         $product = Product::findOrFail($id);
         $data = $request->all();
+        
+        $data['has_variants'] = $request->boolean('has_variants');
+        $groups = array_values(array_filter($request->input('variant_groups', [])));
+        if (count($groups) > 3) {
+            $groups = array_slice($groups, 0, 3);
+        }
+        $data['variant_groups'] = $groups;
 
         if ($request->hasFile('image')) {
             // Hapus gambar lama
@@ -135,6 +174,83 @@ class ProductController extends Controller
         }
 
         $product->update($data);
+
+        // Proses Varian
+        if ($product->has_variants) {
+            $submittedVariants = $request->input('variants', []);
+            $keptVariantIds = [];
+
+            foreach ($submittedVariants as $index => $varData) {
+                $variantId = $varData['id'] ?? null;
+                
+                $variantFields = [
+                    'option_1' => $varData['option_1'] ?? null,
+                    'option_2' => $varData['option_2'] ?? null,
+                    'option_3' => $varData['option_3'] ?? null,
+                    'sku' => $varData['sku'] ?? null,
+                    'dimensions' => $varData['dimensions'] ?? null,
+                    'specification' => $varData['specification'] ?? null,
+                ];
+
+                // Upload gambar varian
+                if ($request->hasFile("variants.{$index}.image")) {
+                    $img = $request->file("variants.{$index}.image");
+                    $vFilename = time() . '_' . rand(100,999) . '.' . $img->getClientOriginalExtension();
+                    $img->move(public_path('uploads/products/variants'), $vFilename);
+                    
+                    // Hapus gambar lama jika update
+                    if ($variantId) {
+                        $oldVar = $product->variants()->find($variantId);
+                        if ($oldVar && $oldVar->image && file_exists(public_path($oldVar->image))) {
+                            unlink(public_path($oldVar->image));
+                        }
+                    }
+                    
+                    $variantFields['image'] = 'uploads/products/variants/' . $vFilename;
+                }
+
+                if ($variantId) {
+                    $variant = $product->variants()->find($variantId);
+                    if ($variant) {
+                        $variant->update($variantFields);
+                        $keptVariantIds[] = $variant->id;
+                    }
+                } else {
+                    // Check if exists by options to avoid duplicates if ID was lost
+                    $existingVariant = $product->variants()
+                        ->where('option_1', $variantFields['option_1'])
+                        ->where('option_2', $variantFields['option_2'])
+                        ->where('option_3', $variantFields['option_3'])
+                        ->first();
+                        
+                    if ($existingVariant) {
+                        $existingVariant->update($variantFields);
+                        $keptVariantIds[] = $existingVariant->id;
+                    } else {
+                        $newVariant = $product->variants()->create($variantFields);
+                        $keptVariantIds[] = $newVariant->id;
+                    }
+                }
+            }
+
+            // Hapus varian yang tidak ada di daftar submit
+            $variantsToDelete = $product->variants()->whereNotIn('id', $keptVariantIds)->get();
+            foreach($variantsToDelete as $vDel) {
+                if ($vDel->image && file_exists(public_path($vDel->image))) {
+                    unlink(public_path($vDel->image));
+                }
+                $vDel->delete();
+            }
+        } else {
+            // Jika varian dinonaktifkan, hapus semua varian
+            $variantsToDelete = $product->variants()->get();
+            foreach($variantsToDelete as $vDel) {
+                if ($vDel->image && file_exists(public_path($vDel->image))) {
+                    unlink(public_path($vDel->image));
+                }
+                $vDel->delete();
+            }
+        }
 
         return redirect()->route('admin.products.index')->with('success', 'Produk berhasil diperbarui.');
     }

@@ -148,7 +148,7 @@ class HomeController extends Controller
     {
         $companyProfile = CompanyProfile::first();
         
-        $product = Product::with(['category', 'brand'])->findOrFail($id);
+        $product = Product::with(['category', 'brand', 'variants'])->findOrFail($id);
 
         // Fetch related products from DB
         $relatedProducts = Product::where('id', '!=', $id)->limit(5)->get();

@@ -17,7 +17,22 @@ class Product extends Model
         'brand_name',
         'sku',
         'country_of_origin',
+        'has_variants',
+        'variant_groups',
     ];
+
+    protected $casts = [
+        'has_variants' => 'boolean',
+        'variant_groups' => 'array',
+    ];
+
+    /**
+     * Get the variants for the product.
+     */
+    public function variants()
+    {
+        return $this->hasMany(ProductVariant::class);
+    }
 
     /**
      * Get the category that owns the product.

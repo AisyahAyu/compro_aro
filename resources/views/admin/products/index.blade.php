@@ -112,6 +112,7 @@
                     <td><code>{{ $product->sku ?? '-' }}</code></td>
                     <td>{{ $product->country_of_origin ?? '-' }}</td>
                     <td>
+
                         <a href="{{ route('admin.products.edit', $product->id) }}" 
                            class="btn btn-warning btn-sm">Edit</a>
 

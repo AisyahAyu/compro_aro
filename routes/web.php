@@ -102,6 +102,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::resource('partners', PartnerController::class); // ✅ MITRA TEKNOLOGI
     Route::get('products/download-template', [ProductController::class, 'downloadTemplate'])->name('products.download-template');
     Route::post('products/import', [ProductController::class, 'import'])->name('products.import');
+    Route::get('products/{product}/variants', [\App\Http\Controllers\Admin\ProductVariantController::class, 'index'])->name('products.variants.index');
+    Route::post('products/{product}/variants/groups', [\App\Http\Controllers\Admin\ProductVariantController::class, 'updateGroups'])->name('products.variants.groups');
+    Route::post('products/{product}/variants', [\App\Http\Controllers\Admin\ProductVariantController::class, 'storeVariant'])->name('products.variants.store');
+    Route::delete('products/variants/{variant}', [\App\Http\Controllers\Admin\ProductVariantController::class, 'destroyVariant'])->name('products.variants.destroy');
     Route::resource('products', ProductController::class);
     Route::resource('platforms', PlatformController::class);
     // ======================

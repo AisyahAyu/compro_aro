@@ -67,8 +67,8 @@
     }
     .pd-main-image {
         width: 100%;
-        height: auto;
-        object-fit: contain;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
         border-radius: 4px;
         display: block;
     }
@@ -86,11 +86,17 @@
         padding: 2px;
         cursor: pointer;
         background: #fff;
+        opacity: 0.7;
+        transition: all 0.2s;
+    }
+    .pd-thumb-item:hover, .pd-thumb-item.active {
+        opacity: 1;
+        border-color: #e27d3b;
     }
     .pd-thumb-item img {
         width: 100%;
         height: 100%;
-        object-fit: contain;
+        object-fit: cover;
     }
 
     .pd-details-col {
@@ -364,6 +370,51 @@
             font-size: 0.9rem;
         }
     }
+
+    /* Variant Styles */
+    .pd-variant-group {
+        margin-bottom: 20px;
+    }
+    .pd-variant-title {
+        font-weight: 600;
+        margin-bottom: 8px;
+        font-size: 0.95rem;
+        color: #444;
+    }
+    .pd-variant-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .pd-variant-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid #ddd;
+        padding: 4px 16px 4px 4px; /* padding slightly less on the left for the image */
+        background: #fff;
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        transition: all 0.2s;
+        color: #333;
+    }
+    .pd-variant-btn img {
+        width: 24px;
+        height: 24px;
+        object-fit: cover;
+        border-radius: 2px;
+    }
+    .pd-variant-btn:hover {
+        border-color: #e27d3b;
+        color: #e27d3b;
+    }
+    .pd-variant-btn.active {
+        border-color: #e27d3b;
+        background: #fff8f3;
+        color: #e27d3b;
+        font-weight: 600;
+    }
 </style>
 
 <div class="pd-page">
@@ -389,20 +440,68 @@
                 <div class="pd-image-col">
                     <div class="pd-main-image-wrap">
                         @if($product->image)
-                            <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" class="pd-main-image">
+                            <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" class="pd-main-image" id="pd-main-image" data-default="{{ asset($product->image) }}">
+                        @else
+                            <img src="" alt="{{ $product->name }}" class="pd-main-image" id="pd-main-image" style="display:none;" data-default="">
                         @endif
                     </div>
-                    @if($product->image)
-                    <div class="pd-thumbs">
-                        <div class="pd-thumb-item">
+                    <div class="pd-thumbs" id="pd-thumbs-container">
+                        @if($product->image)
+                        <div class="pd-thumb-item active" onclick="changeMainImage('{{ asset($product->image) }}', this)">
                             <img src="{{ asset($product->image) }}" alt="{{ $product->name }}">
                         </div>
+                        @endif
+                        
+                        @if($product->has_variants && $product->variants)
+                            @foreach($product->variants as $var)
+                                @if($var->image)
+                                <div class="pd-thumb-item variant-thumb" data-variant-id="{{ $var->id }}" onclick="changeMainImage('{{ asset($var->image) }}', this)">
+                                    <img src="{{ asset($var->image) }}" alt="{{ $var->sku }}">
+                                </div>
+                                @endif
+                            @endforeach
+                        @endif
                     </div>
-                    @endif
                 </div>
 
                 <!-- Right: Details -->
                 <div class="pd-details-container">
+                    
+                    @if($product->has_variants && !empty($product->variant_groups))
+                        <div class="pd-variants-section mb-4">
+                            @foreach($product->variant_groups as $index => $groupName)
+                                @php
+                                    $optionKey = 'option_' . ($index + 1);
+                                    $options = $product->variants->pluck($optionKey)->filter()->unique()->values();
+                                    
+                                    // Ambil 1 gambar representatif untuk masing-masing opsi
+                                    $optionImages = [];
+                                    foreach($options as $opt) {
+                                        $variantWithImg = $product->variants->where($optionKey, $opt)->where('image', '!=', null)->first();
+                                        if ($variantWithImg) {
+                                            $optionImages[$opt] = $variantWithImg->image;
+                                        }
+                                    }
+                                @endphp
+                                @if($options->count() > 0)
+                                <div class="pd-variant-group">
+                                    <div class="pd-variant-title">{{ $groupName }}</div>
+                                    <div class="pd-variant-options">
+                                        @foreach($options as $opt)
+                                            <button type="button" class="pd-variant-btn" data-group="{{ $index + 1 }}" data-value="{{ $opt }}" style="{{ !isset($optionImages[$opt]) ? 'padding-left:16px;' : '' }}">
+                                                @if(isset($optionImages[$opt]))
+                                                    <img src="{{ asset($optionImages[$opt]) }}" alt="{{ $opt }}">
+                                                @endif
+                                                <span>{{ $opt }}</span>
+                                            </button>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    @endif
+
                     <div class="pd-details-col">
                         <div class="pd-details-header">
                             <h3>Detail Produk</h3>
@@ -414,15 +513,15 @@
                             </tr>
                             <tr>
                                 <td>Tipe Produk</td>
-                                <td>{{ $product->type ?? '-' }}</td>
+                                <td id="pd-type-val" data-default="{{ $product->type ?? '-' }}">{{ $product->type ?? '-' }}</td>
                             </tr>
                             <tr>
                                 <td>Dimensi</td>
-                                <td>{{ $product->dimensions ?? '-' }}</td>
+                                <td id="pd-dim-val" data-default="{{ $product->dimensions ?? '-' }}">{{ $product->dimensions ?? '-' }}</td>
                             </tr>
                             <tr>
                                 <td>Spesifikasi</td>
-                                <td style="white-space: pre-line;">{{ $product->specification ?? '-' }}</td>
+                                <td id="pd-spec-val" style="white-space: pre-line;" data-default="{{ $product->specification ?? '-' }}">{{ $product->specification ?? '-' }}</td>
                             </tr>
                             <tr>
                                 <td>Merek</td>
@@ -430,7 +529,7 @@
                             </tr>
                             <tr>
                                 <td>SKU</td>
-                                <td>{{ $product->sku ?? '-' }}</td>
+                                <td id="pd-sku-val" data-default="{{ $product->sku ?? '-' }}">{{ $product->sku ?? '-' }}</td>
                             </tr>
                             <tr>
                                 <td>Asal Negara</td>
@@ -449,7 +548,7 @@
                                 }
                             }
                         @endphp
-                        <a href="https://wa.me/{{ $waNumber }}?text=Halo,%20saya%20tertarik%20dengan%20produk%20{{ urlencode($product->name) }}" target="_blank" class="pd-order-btn">
+                        <a href="https://wa.me/{{ $waNumber }}?text=Halo,%20saya%20tertarik%20dengan%20produk%20{{ urlencode($product->name) }}" target="_blank" class="pd-order-btn" id="pd-wa-btn" data-default-text="{{ $product->name }}" data-wa="{{ $waNumber }}">
                             <i class="fab fa-whatsapp"></i> Info Pemesanan
                         </a>
                     </div>
@@ -515,6 +614,133 @@
         if (navbar) {
             navbar.classList.add('scrolled');
         }
+
+        // Variant Logic
+        const variants = @json($product->variants ?? []);
+        const hasVariants = {{ $product->has_variants ? 'true' : 'false' }};
+        const variantGroups = @json($product->variant_groups ?? []);
+        let selectedOptions = {};
+
+        function updateVariantUI() {
+            if (!hasVariants || variants.length === 0) return;
+
+            // Check if all groups have a selected option
+            let isAllSelected = true;
+            for (let i = 0; i < variantGroups.length; i++) {
+                if (!selectedOptions['option_' + (i + 1)]) {
+                    isAllSelected = false;
+                    break;
+                }
+            }
+
+            if (isAllSelected) {
+                // Find the matching variant
+                const matchedVariant = variants.find(v => {
+                    return (!variantGroups[0] || v.option_1 === selectedOptions.option_1) &&
+                           (!variantGroups[1] || v.option_2 === selectedOptions.option_2) &&
+                           (!variantGroups[2] || v.option_3 === selectedOptions.option_3);
+                });
+
+                if (matchedVariant) {
+                    // Update Image
+                    const imgEl = document.getElementById('pd-main-image');
+                    if (imgEl) {
+                        if (matchedVariant.image) {
+                            imgEl.src = '/' + matchedVariant.image;
+                            imgEl.style.display = 'block';
+                            
+                            // Highlight correct thumbnail
+                            document.querySelectorAll('.pd-thumb-item').forEach(item => item.classList.remove('active'));
+                            const thumb = document.querySelector(`.variant-thumb[data-variant-id="${matchedVariant.id}"]`);
+                            if(thumb) thumb.classList.add('active');
+                            
+                        } else {
+                            imgEl.src = imgEl.getAttribute('data-default');
+                            if(!imgEl.src) imgEl.style.display = 'none';
+                            
+                            // Reset thumbnail to default if exists
+                            document.querySelectorAll('.pd-thumb-item').forEach(item => item.classList.remove('active'));
+                            const defaultThumb = document.querySelector('.pd-thumbs .pd-thumb-item:not(.variant-thumb)');
+                            if(defaultThumb) defaultThumb.classList.add('active');
+                        }
+                    }
+                    
+                    // Update Text Details
+                    document.getElementById('pd-type-val').innerText = matchedVariant.type || document.getElementById('pd-type-val').getAttribute('data-default');
+                    document.getElementById('pd-dim-val').innerText = matchedVariant.dimensions || document.getElementById('pd-dim-val').getAttribute('data-default');
+                    document.getElementById('pd-spec-val').innerText = matchedVariant.specification || document.getElementById('pd-spec-val').getAttribute('data-default');
+                    document.getElementById('pd-sku-val').innerText = matchedVariant.sku || document.getElementById('pd-sku-val').getAttribute('data-default');
+
+                    // Update WA link
+                    const waBtn = document.getElementById('pd-wa-btn');
+                    const defaultText = waBtn.getAttribute('data-default-text');
+                    const waNumber = waBtn.getAttribute('data-wa');
+                    let variantNames = [];
+                    if (matchedVariant.option_1) variantNames.push(matchedVariant.option_1);
+                    if (matchedVariant.option_2) variantNames.push(matchedVariant.option_2);
+                    if (matchedVariant.option_3) variantNames.push(matchedVariant.option_3);
+                    
+                    const newText = defaultText + ' (' + variantNames.join(' - ') + ')';
+                    waBtn.href = 'https://wa.me/' + waNumber + '?text=Halo,%20saya%20tertarik%20dengan%20produk%20' + encodeURIComponent(newText);
+                }
+            } else {
+                // Reset to default if not all selected
+                const imgEl = document.getElementById('pd-main-image');
+                if (imgEl) {
+                    imgEl.src = imgEl.getAttribute('data-default');
+                    if(!imgEl.src) imgEl.style.display = 'none';
+                }
+                document.getElementById('pd-type-val').innerText = document.getElementById('pd-type-val').getAttribute('data-default');
+                document.getElementById('pd-dim-val').innerText = document.getElementById('pd-dim-val').getAttribute('data-default');
+                document.getElementById('pd-spec-val').innerText = document.getElementById('pd-spec-val').getAttribute('data-default');
+                document.getElementById('pd-sku-val').innerText = document.getElementById('pd-sku-val').getAttribute('data-default');
+                
+                const waBtn = document.getElementById('pd-wa-btn');
+                const defaultText = waBtn.getAttribute('data-default-text');
+                const waNumber = waBtn.getAttribute('data-wa');
+                waBtn.href = 'https://wa.me/' + waNumber + '?text=Halo,%20saya%20tertarik%20dengan%20produk%20' + encodeURIComponent(defaultText);
+            }
+        }
+
+        document.querySelectorAll('.pd-variant-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const groupIndex = this.getAttribute('data-group');
+                const value = this.getAttribute('data-value');
+                
+                // Toggle logic
+                if (selectedOptions['option_' + groupIndex] === value) {
+                    // Deselect
+                    this.classList.remove('active');
+                    delete selectedOptions['option_' + groupIndex];
+                } else {
+                    // Remove active from siblings
+                    this.parentElement.querySelectorAll('.pd-variant-btn').forEach(b => b.classList.remove('active'));
+                    // Select
+                    this.classList.add('active');
+                    selectedOptions['option_' + groupIndex] = value;
+                }
+
+                updateVariantUI();
+            });
+        });
     });
+
+    window.changeMainImage = function(url, el) {
+        const mainImg = document.getElementById('pd-main-image');
+        if (mainImg) {
+            mainImg.src = url;
+            mainImg.style.display = 'block';
+        }
+        
+        // Remove active class from all thumbs
+        document.querySelectorAll('.pd-thumb-item').forEach(item => {
+            item.classList.remove('active');
+        });
+        
+        // Add active class to clicked thumb
+        if (el) {
+            el.classList.add('active');
+        }
+    };
 </script>
 @endsection
