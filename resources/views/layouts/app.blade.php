@@ -920,8 +920,9 @@
             }
             
             .hero-slide {
-                background-size: 100% auto;
-                background-position: top center;
+                background-size: contain !important;
+                background-position: top center !important;
+                background-repeat: no-repeat !important;
                 background-color: transparent;
             }
             
