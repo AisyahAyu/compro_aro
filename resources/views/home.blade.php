@@ -1336,8 +1336,10 @@
             box-shadow: 0 4px 15px rgba(254, 152, 0, 0.4);
         }
         @media (max-width: 768px) {
-            #platformCarousel .carousel-control-prev { left: -10px; }
-            #platformCarousel .carousel-control-next { right: -10px; }
+            #platformCarousel .carousel-control-prev { left: -15px; width: 35px; height: 35px; }
+            #platformCarousel .carousel-control-next { right: -15px; width: 35px; height: 35px; }
+            #platformCarousel .carousel-indicators { margin-bottom: -25px; }
+            #platformCarousel .carousel-indicators button { width: 8px; height: 8px; margin: 0 4px; }
         }
     </style>
     <div class="platform-section position-relative">

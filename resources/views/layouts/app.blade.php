@@ -915,28 +915,42 @@
         
         @media (max-width: 768px) {
             .hero-slider {
-                height: 500px;
+                height: auto;
+                min-height: 450px;
             }
             
             .hero-content {
-                padding-left: 30px;
-                padding-right: 20px;
-                max-width: 90%;
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+                max-width: 100%;
+                width: 100%;
+                padding: 120px 20px 60px;
+            }
+
+            .hero-content-wrapper {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                z-index: 5;
             }
             
             .hero-title {
                 font-size: 1.8rem;
                 margin-bottom: 15px;
+                line-height: 1.2;
             }
             
             .hero-description {
-                font-size: 0.9rem;
+                font-size: 0.95rem;
                 margin-bottom: 20px;
+                max-width: 100%;
             }
             
             .hero-button {
                 padding: 10px 20px;
-                font-size: 0.8rem;
+                font-size: 0.85rem;
             }
             
             .section-padding {
@@ -948,9 +962,38 @@
             }
             
             .platform-section {
-                padding: 40px 20px;
+                padding: 30px 16px;
                 margin: 0;
-                border-radius: 20px;
+                border-radius: 16px;
+                overflow: visible;
+            }
+
+            .platform-title {
+                font-size: 1.6rem !important;
+                line-height: 1.3;
+                word-break: break-word;
+            }
+
+            .platform-tag {
+                font-size: 0.8rem;
+                padding: 6px 14px;
+                margin-bottom: 15px;
+            }
+
+            .platform-features {
+                margin: 15px 0;
+            }
+
+            .platform-features li {
+                margin-bottom: 10px;
+                font-size: 0.9rem;
+            }
+
+            .btn-platform {
+                padding: 10px 24px;
+                font-size: 0.9rem;
+                width: 100%;
+                text-align: center;
             }
             
             .process-item {
