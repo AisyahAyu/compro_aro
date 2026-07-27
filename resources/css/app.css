@@ -138,17 +138,17 @@
     .hero-title {
         font-size: 2.8rem;
     }
-    
+
     .hero-description {
         font-size: 1.1rem;
     }
-    
+
     .hero-content {
         max-width: 45%;
         left: 10%;
         padding: 1.5rem 1rem;
     }
-    
+
     .hero-overlay {
         clip-path: ellipse(120% 100% at 25% 50%);
     }
@@ -156,21 +156,20 @@
 
 @media (max-width: 768px) {
     .hero-slider {
-        height: 380px !important;
-        min-height: auto !important;
+        height: 480px;
+        min-height: auto;
     }
-    
+
     .hero-slide {
-        background-size: contain !important;
-        background-position: top center !important;
-        background-repeat: no-repeat !important;
+        background-size: 100% auto;
+        background-position: top center;
         background-color: transparent;
     }
-    
+
     .hero-overlay {
         display: none !important;
     }
-    
+
     .hero-content-wrapper {
         position: absolute;
         top: 0;
@@ -181,7 +180,7 @@
         align-items: flex-start;
         z-index: 5;
     }
-    
+
     .hero-content {
         position: relative;
         top: auto;
@@ -189,28 +188,28 @@
         transform: none;
         max-width: 100%;
         width: 100%;
-        margin-top: 40vw !important;
-        padding: 0 15px !important;
+        margin-top: 52vw;
+        padding: 0 20px;
         text-align: center;
     }
-    
+
     .hero-title {
-        font-size: 1.6rem !important;
-        margin-bottom: 0.5rem !important;
+        font-size: 1.8rem;
+        margin-bottom: 0.8rem;
         line-height: 1.2;
         color: var(--primary-blue);
         text-shadow: none;
     }
-    
+
     .hero-description {
-        font-size: 0.95rem !important;
-        margin-bottom: 1.2rem !important;
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
         max-width: 100%;
         line-height: 1.4;
         color: #555;
         text-shadow: none;
     }
-    
+
     .hero-button {
         padding: 0.8rem 2rem;
         font-size: 0.9rem;
@@ -231,44 +230,43 @@
 
 @media (max-width: 480px) {
     .hero-slider {
-        height: 350px !important;
+        height: 450px;
     }
-    
+
     .hero-slide {
-        background-size: contain !important;
-        background-position: top center !important;
-        background-repeat: no-repeat !important;
+        background-size: 100% auto;
+        background-position: top center;
     }
-    
+
     .hero-overlay {
         display: none !important;
     }
-    
+
     .hero-content {
-        margin-top: 40vw !important;
-        padding: 0 10px !important;
+        margin-top: 52vw;
+        padding: 0 15px;
     }
-    
+
     .hero-title {
-        font-size: 1.4rem !important;
-        margin-bottom: 0.4rem !important;
+        font-size: 1.6rem;
+        margin-bottom: 0.6rem;
     }
-    
+
     .hero-description {
-        font-size: 0.85rem !important;
-        margin-bottom: 1rem !important;
-        line-height: 1.3;
+        font-size: 0.95rem;
+        margin-bottom: 1.2rem;
+        line-height: 1.4;
     }
-    
+
     .hero-button {
         padding: 0.7rem 1.8rem;
         font-size: 0.85rem;
     }
-    
+
     .slider-dots {
         bottom: 10px;
     }
-    
+
     .dot {
         width: 10px;
         height: 10px;
