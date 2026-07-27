@@ -67,24 +67,41 @@
                 </p>
             </div>
             
-            <!-- KOLOM 2: TENTANG KAMI / ALAMAT -->
-            <div class="col-lg-3 col-md-6 mb-4">
-                <h5 class="mb-4 footer-heading-dynamic">Tentang Kami</h5>
-                <div class="address-info">
-                    <div class="d-flex mb-3">
-                        <i class="fas fa-map-marker-alt me-3 footer-icon-dynamic" style="font-size: 1.2rem; margin-top: 2px;"></i>
-                        <div style="color: {{ $footerSettings->footer_text_color }}; line-height: 1.6; opacity: 0.9;">
-                            @if($companyProfile && $companyProfile->address)
-                                {!! nl2br(e($companyProfile->address)) !!}
-                            @else
-                                Jl. TM. Slamet Riyadi Raya No. 9 RT.1 RW.4<br>
-                                Kb. Manggis, Kec. Matraman<br>
-                                Daerah Khusus Ibukota Jakarta<br>
-                                13150
-                            @endif
-                        </div>
-                    </div>
-                </div>
+            <!-- KOLOM 2: TAUTAN -->
+            <div class="col-lg-2 col-md-6 mb-4">
+                <h5 class="mb-4 footer-heading-dynamic">Tautan</h5>
+                <ul class="footer-links" style="list-style: none; padding: 0;">
+                    <li class="mb-2">
+                        <a href="{{ url('/') }}" class="footer-link-dynamic" style="display: flex; align-items: center;">
+                            <i class="fas fa-chevron-right me-2 footer-icon-dynamic" style="font-size: 0.8rem;"></i>
+                            Beranda
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="{{ route('about.index') }}" class="footer-link-dynamic" style="display: flex; align-items: center;">
+                            <i class="fas fa-chevron-right me-2 footer-icon-dynamic" style="font-size: 0.8rem;"></i>
+                            Tentang
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="{{ route('products.page') }}" class="footer-link-dynamic" style="display: flex; align-items: center;">
+                            <i class="fas fa-chevron-right me-2 footer-icon-dynamic" style="font-size: 0.8rem;"></i>
+                            Produk
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="{{ route('aktivitas') }}" class="footer-link-dynamic" style="display: flex; align-items: center;">
+                            <i class="fas fa-chevron-right me-2 footer-icon-dynamic" style="font-size: 0.8rem;"></i>
+                            Aktivitas
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="{{ route('faq.page') }}" class="footer-link-dynamic" style="display: flex; align-items: center;">
+                            <i class="fas fa-chevron-right me-2 footer-icon-dynamic" style="font-size: 0.8rem;"></i>
+                            FAQ
+                        </a>
+                    </li>
+                </ul>
             </div>
             
             <!-- KOLOM 3: HUBUNGI KAMI -->
@@ -131,110 +148,56 @@
                 </div>
             </div>
             
-            <!-- KOLOM 4: TAUTAN & LOKASI -->
-            <div class="col-lg-3 col-md-6 mb-4">
-                <!-- A. Tautan Navigasi -->
-                <div class="mb-4">
-                    <h5 class="mb-3 footer-heading-dynamic">Tautan</h5>
-                    <ul class="footer-links" style="list-style: none; padding: 0;">
-                        <li class="mb-2">
-                            <a href="{{ url('/') }}" class="footer-link-dynamic" style="display: flex; align-items: center;">
-                                <i class="fas fa-chevron-right me-2 footer-icon-dynamic" style="font-size: 0.8rem;"></i>
-                                Beranda
-                            </a>
-                        </li>
-                        <li class="mb-2">
-                            <a href="#tentang" class="footer-link-dynamic" style="display: flex; align-items: center;">
-                                <i class="fas fa-chevron-right me-2 footer-icon-dynamic" style="font-size: 0.8rem;"></i>
-                                Tentang
-                            </a>
-                        </li>
-                        <li class="mb-2">
-                            <a href="{{ route('products.page') }}" class="footer-link-dynamic" style="display: flex; align-items: center;">
-                                <i class="fas fa-chevron-right me-2 footer-icon-dynamic" style="font-size: 0.8rem;"></i>
-                                Produk
-                            </a>
-                        </li>
-                        <li class="mb-2">
-                            <a href="#aktivitas" class="footer-link-dynamic" style="display: flex; align-items: center;">
-                                <i class="fas fa-chevron-right me-2 footer-icon-dynamic" style="font-size: 0.8rem;"></i>
-                                Aktivitas
-                            </a>
-                        </li>
-                        <li class="mb-2">
-                            <a href="{{ route('faq.page') }}" class="footer-link-dynamic" style="display: flex; align-items: center;">
-                                <i class="fas fa-chevron-right me-2 footer-icon-dynamic" style="font-size: 0.8rem;"></i>
-                                FAQ
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                
-                <!-- B. Lokasi Kami -->
-                <div>
-                    <h5 class="mb-3 footer-heading-dynamic">Lokasi Kami</h5>
-                    <p class="mb-3" style="color: {{ $footerSettings->footer_text_color }}; opacity: 0.8; font-size: 0.9rem; line-height: 1.5;">
-                        Kunjungi kantor kami di alamat di bawah ini atau temukan kami di peta.
-                    </p>
-                    
-                    <button onclick="openGoogleMaps()" class="btn btn-sm footer-btn-dynamic">
-                        <i class="fas fa-map-marked-alt me-2"></i>
-                        Buka Lokasi
-                    </button>
-                    
-                    <!-- Google Maps Embed -->
-                    @if($footerSettings->footer_google_maps_iframe)
-                    <div class="mt-3 footer-map-border">
-                        <iframe 
-                            src="{{ $footerSettings->footer_google_maps_iframe }}"
-                            width="100%" 
-                            height="150" 
-                            style="border:0;" 
-                            allowfullscreen="" 
-                            loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
+            <!-- KOLOM 4: LOKASI KAMI -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <h5 class="mb-4 footer-heading-dynamic">Lokasi Kami</h5>
+                <p class="mb-2" style="color: {{ $footerSettings->footer_text_color }}; opacity: 0.8; font-size: 0.9rem; line-height: 1.5;">
+                    Kunjungi kantor kami di alamat di bawah ini atau temukan kami di peta.
+                </p>
+
+                <div class="d-flex mb-3">
+                    <i class="fas fa-map-marker-alt me-3 footer-icon-dynamic" style="font-size: 1.2rem; margin-top: 2px;"></i>
+                    <div style="color: {{ $footerSettings->footer_text_color }}; line-height: 1.6; opacity: 0.9; font-size: 0.9rem;">
+                        @if($companyProfile && $companyProfile->address)
+                            {!! nl2br(e($companyProfile->address)) !!}
+                        @else
+                            Jl. TM. Slamet Riyadi Raya No. 9 RT.1 RW.4<br>
+                            Kb. Manggis, Kec. Matraman<br>
+                            Daerah Khusus Ibukota Jakarta<br>
+                            13150
+                        @endif
                     </div>
-                    @endif
                 </div>
+
+                <button onclick="openGoogleMaps()" class="btn btn-sm footer-btn-dynamic mb-3">
+                    <i class="fas fa-map-marked-alt me-2"></i>
+                    Buka Lokasi
+                </button>
+                
+                <!-- Google Maps Embed -->
+                @if($footerSettings->footer_google_maps_iframe)
+                <div class="mt-2 footer-map-border">
+                    <iframe 
+                        src="{{ $footerSettings->footer_google_maps_iframe }}"
+                        width="100%" 
+                        height="150" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                @endif
             </div>
         </div>
         
         <!-- Copyright Section -->
         <hr class="my-4 footer-divider">
         
-        <div class="row align-items-center">
-            <div class="col-md-6 text-center text-md-left">
-                <p style="color: {{ $footerSettings->footer_text_color }}; opacity: 0.7; margin: 0;">
-                    &copy; {{ date('Y') }} {{ $footerSettings->footer_copyright ?? ($companyProfile->company_name ?? 'PT ARO Baskara Esa') }}. All rights reserved.
-                </p>
-            </div>
-            <div class="col-md-6 text-center text-md-right">
-                @if($companyProfile && $companyProfile->social_media)
-                    <div class="social-icons" style="display: flex; justify-content: center; justify-content: flex-end; gap: 15px;">
-                        @if(isset($companyProfile->social_media['facebook']) && $companyProfile->social_media['facebook'])
-                            <a href="{{ $companyProfile->social_media['facebook'] }}" target="_blank" class="footer-social-dynamic" style="font-size: 1.2rem;">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                        @endif
-                        @if(isset($companyProfile->social_media['twitter']) && $companyProfile->social_media['twitter'])
-                            <a href="{{ $companyProfile->social_media['twitter'] }}" target="_blank" class="footer-social-dynamic" style="font-size: 1.2rem;">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                        @endif
-                        @if(isset($companyProfile->social_media['instagram']) && $companyProfile->social_media['instagram'])
-                            <a href="{{ $companyProfile->social_media['instagram'] }}" target="_blank" class="footer-social-dynamic" style="font-size: 1.2rem;">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                        @endif
-                        @if(isset($companyProfile->social_media['linkedin']) && $companyProfile->social_media['linkedin'])
-                            <a href="{{ $companyProfile->social_media['linkedin'] }}" target="_blank" class="footer-social-dynamic" style="font-size: 1.2rem;">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                        @endif
-                    </div>
-                @endif
-            </div>
+        <div class="text-center">
+            <p style="color: {{ $footerSettings->footer_text_color }}; opacity: 0.7; margin: 0;">
+                &copy; {{ date('Y') }} {{ $footerSettings->footer_copyright ?? ($companyProfile->company_name ?? 'PT. ARO Baskara Esa') }}. All rights reserved.
+            </p>
         </div>
     </div>
     
