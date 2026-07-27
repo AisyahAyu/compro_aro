@@ -339,6 +339,19 @@
                 <p>Product Links</p>
               </a>
             </li>
+
+            <li class="nav-item">
+              <a href="{{ route('admin.contact-messages.index') }}" class="nav-link {{ request()->is('admin/contact-messages*') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-envelope"></i>
+                <p>
+                  Pesan Masuk
+                  @php $unreadMessages = \App\Models\ContactMessage::where('is_read', false)->count(); @endphp
+                  @if($unreadMessages > 0)
+                    <span class="badge badge-warning right">{{ $unreadMessages }}</span>
+                  @endif
+                </p>
+              </a>
+            </li>
             
             <li class="nav-item has-treeview {{ request()->is('admin/footer-settings*') ? 'menu-open' : '' }}">
               <a href="#" class="nav-link {{ request()->is('admin/footer-settings*') ? 'active' : '' }}">

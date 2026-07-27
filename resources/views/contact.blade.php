@@ -538,7 +538,7 @@
 
                 <div class="contact-success-box">
                     <div class="line"><i class="fas fa-envelope"></i><div>KONFIRMASI DIKIRIM KE<br><strong>{{ data_get(session('contact_payload'), 'email', '-') }}</strong></div></div>
-                    <div class="line"><i class="fas fa-map-marker-alt"></i><div>NO.REFERENSI<br><strong>#ABE-2026-03-0047</strong></div></div>
+                    <div class="line"><i class="fas fa-map-marker-alt"></i><div>NO.REFERENSI<br><strong>#{{ session('contact_reference', 'ABE-0000-00-0000') }}</strong></div></div>
                     <div class="line"><i class="fab fa-whatsapp"></i><div>HUBUNGI LANGSUNG VIA WHATSAPP<br><strong>{{ $companyProfile->whatsapp ?? '+62 822-8888-6009' }}</strong></div></div>
                 </div>
 

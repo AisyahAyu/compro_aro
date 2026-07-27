@@ -34,6 +34,7 @@ use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\UpcomingEventController;
 use App\Http\Controllers\Admin\ProductLinkController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ContactMessageController;
 
 // ======================
 // FRONTEND
@@ -142,6 +143,14 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     // USERS (ADMINS)
     // ======================
     Route::resource('users', UserController::class);
+
+    // ======================
+    // PESAN MASUK (CONTACT MESSAGES)
+    // ======================
+    Route::get('contact-messages', [ContactMessageController::class, 'index'])->name('contact-messages.index');
+    Route::get('contact-messages/{contact_message}', [ContactMessageController::class, 'show'])->name('contact-messages.show');
+    Route::delete('contact-messages/{contact_message}', [ContactMessageController::class, 'destroy'])->name('contact-messages.destroy');
+    Route::patch('contact-messages/{contact_message}/toggle-read', [ContactMessageController::class, 'toggleRead'])->name('contact-messages.toggle-read');
 
 });
 

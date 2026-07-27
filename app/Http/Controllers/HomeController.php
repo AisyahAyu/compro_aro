@@ -12,6 +12,7 @@ use App\Models\Partner;
 use App\Models\Platform;
 use App\Models\ProductLink;
 use App\Models\Product;
+use App\Models\ContactMessage;
 use App\Models\Brand;
 use App\Models\Footer;
 use Illuminate\Support\Facades\Http;
@@ -219,10 +220,14 @@ class HomeController extends Controller
             'message' => ['required', 'string', 'max:1000'],
         ]);
 
+        // Simpan pesan ke database
+        $contactMessage = ContactMessage::create($validated);
+
         return redirect()
             ->route('contact.page')
             ->with('contact_success', true)
-            ->with('contact_payload', $validated);
+            ->with('contact_payload', $validated)
+            ->with('contact_reference', $contactMessage->reference_number);
     }
 
     public function solusi()
