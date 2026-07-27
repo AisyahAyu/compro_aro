@@ -915,42 +915,36 @@
         
         @media (max-width: 768px) {
             .hero-slider {
-                height: auto;
+                height: 70vh;
                 min-height: 450px;
             }
             
             .hero-content {
-                position: relative;
-                top: auto;
-                left: auto;
-                transform: none;
-                max-width: 100%;
-                width: 100%;
-                padding: 120px 20px 60px;
+                position: absolute;
+                top: 50%;
+                left: 5%;
+                transform: translateY(-50%);
+                max-width: 90%;
+                width: 90%;
+                padding: 1.5rem 1rem;
             }
 
-            .hero-content-wrapper {
-                position: relative;
-                width: 100%;
-                height: 100%;
-                z-index: 5;
-            }
-            
             .hero-title {
-                font-size: 1.8rem;
-                margin-bottom: 15px;
+                font-size: 2rem;
+                margin-bottom: 1rem;
                 line-height: 1.2;
             }
             
             .hero-description {
-                font-size: 0.95rem;
-                margin-bottom: 20px;
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
                 max-width: 100%;
+                line-height: 1.5;
             }
             
             .hero-button {
-                padding: 10px 20px;
-                font-size: 0.85rem;
+                padding: 0.8rem 2rem;
+                font-size: 0.9rem;
             }
             
             .section-padding {
