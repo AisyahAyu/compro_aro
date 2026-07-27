@@ -915,20 +915,18 @@
         
         @media (max-width: 768px) {
             .hero-slider {
-                height: 550px;
+                height: 480px;
                 min-height: auto;
             }
             
             .hero-slide {
                 background-size: 100% auto;
                 background-position: top center;
-                background-color: #f8f9fa;
+                background-color: transparent;
             }
             
             .hero-overlay {
-                background: linear-gradient(to top, #f8f9fa 0%, #f8f9fa 40%, transparent 100%);
-                clip-path: none;
-                transform: none;
+                display: none !important;
             }
             
             .hero-content-wrapper {
@@ -938,7 +936,7 @@
                 width: 100%;
                 height: 100%;
                 display: flex;
-                align-items: flex-end;
+                align-items: flex-start;
                 z-index: 5;
             }
             
@@ -949,13 +947,14 @@
                 transform: none;
                 max-width: 100%;
                 width: 100%;
-                padding: 20px 20px 40px;
+                margin-top: 52vw;
+                padding: 0 20px;
                 text-align: center;
             }
             
             .hero-title {
                 font-size: 1.8rem;
-                margin-bottom: 1rem;
+                margin-bottom: 0.8rem;
                 line-height: 1.2;
                 color: var(--primary-blue);
                 text-shadow: none;
@@ -965,7 +964,7 @@
                 font-size: 1rem;
                 margin-bottom: 1.5rem;
                 max-width: 100%;
-                line-height: 1.5;
+                line-height: 1.4;
                 color: #555;
                 text-shadow: none;
             }
