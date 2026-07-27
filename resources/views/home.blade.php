@@ -7,25 +7,7 @@
 @if($banners->count() > 0)
 <section class="hero-slider">
     <style>
-    @media (max-width: 767.98px) {
-        .hero-title {
-            font-size: 1.3rem !important;
-        }
-        .hero-description {
-            font-size: 1rem !important;
-        }
-        .hero-content {
-            padding: 1.2rem 0.5rem !important;
-        }
-        .section-title {
-            font-size: 1.2rem !important;
-        }
-        .img-fluid.rounded {
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 1rem;
-        }
-    }
+
     
     /* Category card styling */
     .category-card-link {

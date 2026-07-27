@@ -919,9 +919,13 @@
                 min-height: 450px;
             }
             
+            .hero-overlay {
+                background: linear-gradient(to right, rgba(254, 152, 0, 0.95) 0%, rgba(254, 152, 0, 0.6) 100%);
+            }
+            
             .hero-content {
                 position: absolute;
-                top: 50%;
+                top: 58%;
                 left: 5%;
                 transform: translateY(-50%);
                 max-width: 90%;
