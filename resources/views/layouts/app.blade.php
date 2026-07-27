@@ -915,28 +915,50 @@
         
         @media (max-width: 768px) {
             .hero-slider {
-                height: 70vh;
-                min-height: 450px;
+                height: 550px;
+                min-height: auto;
+            }
+            
+            .hero-slide {
+                background-size: 100% auto;
+                background-position: top center;
+                background-color: #f8f9fa;
             }
             
             .hero-overlay {
-                background: linear-gradient(to right, rgba(254, 152, 0, 0.95) 0%, rgba(254, 152, 0, 0.6) 100%);
+                background: linear-gradient(to top, #f8f9fa 0%, #f8f9fa 40%, transparent 100%);
+                clip-path: none;
+                transform: none;
+            }
+            
+            .hero-content-wrapper {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: flex-end;
+                z-index: 5;
             }
             
             .hero-content {
-                position: absolute;
-                top: 58%;
-                left: 5%;
-                transform: translateY(-50%);
-                max-width: 90%;
-                width: 90%;
-                padding: 1.5rem 1rem;
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+                max-width: 100%;
+                width: 100%;
+                padding: 20px 20px 40px;
+                text-align: center;
             }
-
+            
             .hero-title {
-                font-size: 2rem;
+                font-size: 1.8rem;
                 margin-bottom: 1rem;
                 line-height: 1.2;
+                color: var(--primary-blue);
+                text-shadow: none;
             }
             
             .hero-description {
@@ -944,11 +966,25 @@
                 margin-bottom: 1.5rem;
                 max-width: 100%;
                 line-height: 1.5;
+                color: #555;
+                text-shadow: none;
             }
             
             .hero-button {
                 padding: 0.8rem 2rem;
                 font-size: 0.9rem;
+                background-color: var(--primary-orange);
+                border: none;
+                color: white;
+            }
+
+            .hero-button:hover {
+                background-color: #e68900;
+                color: white;
+            }
+            
+            .slider-dots {
+                bottom: 15px;
             }
             
             .section-padding {

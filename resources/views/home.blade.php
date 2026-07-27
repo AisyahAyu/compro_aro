@@ -7,7 +7,7 @@
 @if($banners->count() > 0)
 <section class="hero-slider">
     <style>
-
+    
     
     /* Category card styling */
     .category-card-link {

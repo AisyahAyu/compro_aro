@@ -156,30 +156,50 @@
 
 @media (max-width: 768px) {
     .hero-slider {
-        height: 70vh;
-        min-height: 450px;
+        height: 550px;
+        min-height: auto;
+    }
+    
+    .hero-slide {
+        background-size: 100% auto;
+        background-position: top center;
+        background-color: #f8f9fa;
     }
     
     .hero-overlay {
-        background: linear-gradient(to right, rgba(254, 152, 0, 0.95) 0%, rgba(254, 152, 0, 0.6) 100%);
+        background: linear-gradient(to top, #f8f9fa 0%, #f8f9fa 40%, transparent 100%);
         clip-path: none;
         transform: none;
     }
     
-    .hero-content {
+    .hero-content-wrapper {
         position: absolute;
-        top: 50%;
-        left: 5%;
-        transform: translateY(-50%);
-        max-width: 90%;
-        width: 90%;
-        padding: 1.5rem 1rem;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: flex-end;
+        z-index: 5;
+    }
+    
+    .hero-content {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        max-width: 100%;
+        width: 100%;
+        padding: 20px 20px 40px;
+        text-align: center;
     }
     
     .hero-title {
-        font-size: 2rem;
+        font-size: 1.8rem;
         margin-bottom: 1rem;
         line-height: 1.2;
+        color: var(--primary-blue);
+        text-shadow: none;
     }
     
     .hero-description {
@@ -187,39 +207,48 @@
         margin-bottom: 1.5rem;
         max-width: 100%;
         line-height: 1.5;
+        color: #555;
+        text-shadow: none;
     }
     
     .hero-button {
         padding: 0.8rem 2rem;
         font-size: 0.9rem;
+        background-color: var(--primary-orange);
+        border: none;
+        color: white;
+    }
+
+    .hero-button:hover {
+        background-color: #e68900;
+        color: white;
     }
 
     .slider-dots {
-        bottom: 20px;
+        bottom: 15px;
     }
 }
 
 @media (max-width: 480px) {
     .hero-slider {
-        height: 70vh;
-        min-height: 400px;
+        height: 500px;
+    }
+    
+    .hero-slide {
+        background-size: 100% auto;
+        background-position: top center;
     }
     
     .hero-overlay {
-        background: linear-gradient(to right, rgba(254, 152, 0, 0.95) 0%, rgba(254, 152, 0, 0.7) 100%);
-        clip-path: none;
-        transform: none;
+        background: linear-gradient(to top, #f8f9fa 0%, #f8f9fa 50%, transparent 100%);
     }
     
     .hero-content {
-        left: 5%;
-        max-width: 90%;
-        width: 90%;
-        padding: 1rem 0.5rem;
+        padding: 20px 15px 35px;
     }
     
     .hero-title {
-        font-size: 1.7rem;
+        font-size: 1.6rem;
         margin-bottom: 0.8rem;
     }
     
@@ -230,12 +259,12 @@
     }
     
     .hero-button {
-        padding: 0.7rem 1.5rem;
+        padding: 0.7rem 1.8rem;
         font-size: 0.85rem;
     }
     
     .slider-dots {
-        bottom: 15px;
+        bottom: 10px;
     }
     
     .dot {
