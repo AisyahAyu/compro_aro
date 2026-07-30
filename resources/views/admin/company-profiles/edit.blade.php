@@ -42,12 +42,26 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+                            <div class="form-group mt-2">
+                                <label for="email_desc">Email Description</label>
+                                <input type="text" class="form-control" id="email_desc" name="email_desc" value="{{ old('email_desc', $profile->email_desc) }}" placeholder="e.g. Untuk penawaran & dokumen resmi">
+                                @error('email_desc')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="phone">Phone</label>
                                 <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone', $profile->phone) }}" placeholder="Enter phone number">
                                 @error('phone')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group mt-2">
+                                <label for="phone_desc">Phone Description</label>
+                                <input type="text" class="form-control" id="phone_desc" name="phone_desc" value="{{ old('phone_desc', $profile->phone_desc) }}" placeholder="e.g. Senin-Jumat, 08.00-17.00">
+                                @error('phone_desc')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -61,6 +75,14 @@
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                         <small class="form-text text-muted">This number will be displayed in the footer with a WhatsApp link</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="whatsapp_desc">WhatsApp Description</label>
+                        <input type="text" class="form-control" id="whatsapp_desc" name="whatsapp_desc" value="{{ old('whatsapp_desc', $profile->whatsapp_desc) }}" placeholder="e.g. Respon cepat dalam 2 jam">
+                        @error('whatsapp_desc')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                     
                     <div class="form-group">
