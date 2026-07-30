@@ -486,17 +486,17 @@
 
                     <div class="contact-info-card">
                         <div class="contact-info-label">TELEPON</div>
-                        <div class="contact-info-row"><i class="fas fa-phone-alt"></i><div><strong>{{ $companyProfile->phone ?? '(021) 38835187' }}</strong><br>Senin-Jumat, 08.00-17.00</div></div>
+                        <div class="contact-info-row"><i class="fas fa-phone-alt"></i><div><strong>{{ $companyProfile->phone ?? '(021) 38835187' }}</strong><br>{{ $companyProfile->phone_desc ?? 'Senin-Jumat, 08.00-17.00' }}</div></div>
                     </div>
 
                     <div class="contact-info-card">
                         <div class="contact-info-label">EMAIL</div>
-                        <div class="contact-info-row"><i class="fas fa-envelope"></i><div><strong>{{ $companyProfile->email ?? 'demo@gmail.com' }}</strong><br>Untuk penawaran & dokumen resmi</div></div>
+                        <div class="contact-info-row"><i class="fas fa-envelope"></i><div><strong>{{ $companyProfile->email ?? 'demo@gmail.com' }}</strong><br>{{ $companyProfile->email_desc ?? 'Untuk penawaran & dokumen resmi' }}</div></div>
                     </div>
 
                     <div class="contact-info-card">
                         <div class="contact-info-label">WHATSAPP</div>
-                        <div class="contact-info-row"><i class="fab fa-whatsapp"></i><div><strong>{{ $companyProfile->whatsapp ?? '+62 822-8888-6009' }}</strong><br>Respon cepat dalam 2 jam</div></div>
+                        <div class="contact-info-row"><i class="fab fa-whatsapp"></i><div><strong>{{ $companyProfile->whatsapp ?? '+62 822-8888-6009' }}</strong><br>{{ $companyProfile->whatsapp_desc ?? 'Respon cepat dalam 2 jam' }}</div></div>
                     </div>
 
                     <div class="contact-info-card">
