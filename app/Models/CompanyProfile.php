@@ -13,8 +13,11 @@ class CompanyProfile extends Model
         'logo',
         'logo_dark',
         'email',
+        'email_desc',
         'phone',
+        'phone_desc',
         'whatsapp',
+        'whatsapp_desc',
         'address',
         'operational_hours',
         'social_media'
