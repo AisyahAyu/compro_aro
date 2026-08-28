@@ -750,63 +750,6 @@
 
 </section>
 
-{{-- ===================== TEAM ===================== --}}
-<section class="team-section py-5">
-    <div class="container">
-        <div class="row align-items-center mb-5">
-    
-        <!-- KIRI -->
-        <div class="col-md-6 text-start">
-            <p style="color:#888; font-size:14px; margin-bottom:5px;">
-                Tim Profesional Kami
-            </p>
-
-            <h2 style="font-size:2.5rem; font-weight:800; color:#EE8E0F; font-family: 'Georgia', 'Times New Roman', serif;">
-                Perkenalan Tim
-            </h2>
-
-            <div style="
-                width:50px;
-                height:3px;
-                background: linear-gradient(90deg, #FFA500, #FF8C00, #FFA500);
-                margin-top:10px;
-                border-radius:2px;
-                box-shadow: 0 2px 8px rgba(255, 165, 0, 0.3);
-            "></div>
-        </div>
-
-        <!-- KANAN -->
-        <div class="col-md-6 text-md-end text-start mt-3 mt-md-0">
-            <p style="color:#555; max-width:400px; margin-left:auto;">
-                Didukung oleh tim yang profesional, berpengalaman, dan berdedikasi.
-            </p>
-        </div>
-
-    </div>
-        <div class="row g-4">
-            @forelse($team as $member)
-            <div class="col-lg-4 col-md-6 d-flex">
-                <div class="team-card">
-
-                    <div class="profile-frame">
-                        <img src="{{ $member->photo_url }}" class="profile-img">
-                    </div>
-
-                    <div class="team-info">
-                        <h5 class="team-name">{{ $member->name }}</h5>
-                        <span class="team-role">{{ $member->position }}</span>
-                    </div>
-
-                </div>
-            </div>
-            @empty
-            <p>Belum ada tim</p>
-            @endforelse
-        </div>
-        </div>
-    </div>
-</section>
-
 {{-- ===================== CTA ===================== --}}
 <section style="
     background-image: url('{{ asset('uploads/siap-bekerjasama-tentang.png') }}');
